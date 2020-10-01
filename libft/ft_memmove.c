@@ -6,7 +6,7 @@
 /*   By: hopark <hopark@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/09/28 14:11:53 by hopark            #+#    #+#             */
-/*   Updated: 2020/10/01 17:03:21 by hopark           ###   ########.fr       */
+/*   Updated: 2020/10/01 18:05:45 by hopark           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,22 +14,26 @@
 
 void		*ft_memmove(void *dest, const void *src, size_t n)
 {
-	unsigned char *ptr1;
-	unsigned char *ptr2;
+	unsigned char		*ptr1;
+	unsigned char		*ptr2;
+	size_t				i;
 
 	ptr1 = (unsigned char *)dest;
 	ptr2 = (unsigned char *)src;
-	if (dest <= src)
-	{
-		while (n-- >= 0)
-			*(ptr1++) = *(ptr2++);
-	}
+	i = 0;
+	if (dst == src || n == 0)
+		return (dst);
+	if (dest < src)
+		while (i < n)
+		{
+			ptr1[i] = ptr2[i];
+			i++;
+		}
 	else
-	{
-		ptr1 += n;
-		ptr2 += n;
-		while (n-- >= 0)
-			*(ptr1--) = *(ptr2--);
-	}
+		while (i < n)
+		{
+			ptr1[n - i - 1] = ptr2[n - i - 1];
+			i++;
+		}
 	return (dest);
 }

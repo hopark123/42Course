@@ -6,7 +6,7 @@
 /*   By: hopark <hopark@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/09/28 14:11:51 by hopark            #+#    #+#             */
-/*   Updated: 2020/10/01 13:28:18 by hopark           ###   ########.fr       */
+/*   Updated: 2020/10/01 18:00:39 by hopark           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,10 +23,11 @@ int		ft_memcmp(const void *s1, const void *s2, size_t n)
 	i = 0;
 	if (n == 0)
 		return (0);
-	while (ptr1 == ptr2 && ++i < n)
+	while (i < n)
 	{
-		ptr1++;
-		ptr2++;
+		if (ptr1[i] != ptr2[i])
+			return ((int)(ptr1[i] - ptr2[i]));
+		i++;
 	}
-	return ((int)(*ptr1 - *ptr2));
+	return (0);
 }
