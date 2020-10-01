@@ -6,7 +6,7 @@
 /*   By: hopark <hopark@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/09/28 14:11:53 by hopark            #+#    #+#             */
-/*   Updated: 2020/10/01 18:05:45 by hopark           ###   ########.fr       */
+/*   Updated: 2020/10/01 18:09:05 by hopark           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,8 +21,8 @@ void		*ft_memmove(void *dest, const void *src, size_t n)
 	ptr1 = (unsigned char *)dest;
 	ptr2 = (unsigned char *)src;
 	i = 0;
-	if (dst == src || n == 0)
-		return (dst);
+	if (dest == src || n == 0)
+		return (dest);
 	if (dest < src)
 		while (i < n)
 		{
