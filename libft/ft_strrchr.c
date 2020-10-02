@@ -6,7 +6,7 @@
 /*   By: hopark <hopark@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/09/28 14:12:02 by hopark            #+#    #+#             */
-/*   Updated: 2020/10/02 11:56:18 by hopark           ###   ########.fr       */
+/*   Updated: 2020/10/02 11:58:11 by hopark           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,7 +19,7 @@ char		*ft_strrchr(const char *s, int c)
 	i = ft_strlen(s);
 	while (s[i] != c)
 	{
-		if (s[i] == 0)
+		if (i == 0)
 			return (0);
 		i--;
 	}
