@@ -6,7 +6,7 @@
 /*   By: hopark <hopark@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/09/28 17:35:48 by hopark            #+#    #+#             */
-/*   Updated: 2020/10/03 06:17:58 by hopark           ###   ########.fr       */
+/*   Updated: 2020/10/03 06:40:16 by hopark           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,12 +19,14 @@ static size_t		ft_count(char const *s, char c)
 
 	i = 0;
 	cnt = 0;
+	while (s[i] && s[i] == c)
+		i++;
 	while (s[i])
 	{
 		cnt++;
-		while (s[i] && s[i] == c)
-			i++;
 		while (s[i] && s[i] != c)
+			i++;
+		while (s[i] && s[i] == c)
 			i++;
 	}
 	return (cnt);
@@ -45,13 +47,6 @@ static size_t		ft_wordlen(char const *s, char c)
 	return (len);
 }
 
-static void			ft_free(char **s, int i)
-{
-	while (i--)
-		free(s[i]);
-	free(s);
-}
-
 static char			*ft_strndup(const char *s, size_t n)
 {
 	size_t		i;
@@ -67,6 +62,13 @@ static char			*ft_strndup(const char *s, size_t n)
 	}
 	result[i] = 0;
 	return (result);
+}
+
+static void			ft_free(char **s, int i)
+{
+	while (i--)
+		free(s[i]);
+	free(s);
 }
 
 char				**ft_split(char const *s, char c)
@@ -87,7 +89,7 @@ char				**ft_split(char const *s, char c)
 		len = ft_wordlen(s, c);
 		if (!(result[i] = ft_strndup(s, len)))
 		{
-			ft_free(result, i - 1);
+			ft_free(result, i);
 			return (0);
 		}
 		s += len;
