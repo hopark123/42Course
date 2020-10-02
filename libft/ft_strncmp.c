@@ -6,7 +6,7 @@
 /*   By: hopark <hopark@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/09/28 14:11:59 by hopark            #+#    #+#             */
-/*   Updated: 2020/10/02 11:36:51 by hopark           ###   ########.fr       */
+/*   Updated: 2020/10/02 11:37:53 by hopark           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,7 +21,7 @@ int		ft_strncmp(const char *s1, const char *s2, size_t n)
 	c1 = (unsigned char *)s1;
 	c2 = (unsigned char *)s2;
 	i = 0;
-	while (i < n && c1[i] == c2[i])
+	while (i < n)
 	{
 		if (c1[i] != c2[i])
 			return (c1[i] - c2[i]);
