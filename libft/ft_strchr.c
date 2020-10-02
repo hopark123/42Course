@@ -6,7 +6,7 @@
 /*   By: hopark <hopark@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/09/28 14:11:55 by hopark            #+#    #+#             */
-/*   Updated: 2020/10/02 11:00:48 by hopark           ###   ########.fr       */
+/*   Updated: 2020/10/02 11:03:31 by hopark           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,8 +14,8 @@
 
 char		*ft_strchr(const char *s, int c)
 {
-	size_t			i;
-	unsigned char	c2;
+	size_t	i;
+	char	c2;
 
 	i = 0;
 	while (s[i])
