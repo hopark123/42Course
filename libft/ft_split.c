@@ -6,7 +6,7 @@
 /*   By: hopark <hopark@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/09/28 17:35:48 by hopark            #+#    #+#             */
-/*   Updated: 2020/10/01 17:08:41 by hopark           ###   ########.fr       */
+/*   Updated: 2020/10/03 06:17:58 by hopark           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,9 +22,9 @@ static size_t		ft_count(char const *s, char c)
 	while (s[i])
 	{
 		cnt++;
-		while (s[i] && s[i] != c)
-			i++;
 		while (s[i] && s[i] == c)
+			i++;
+		while (s[i] && s[i] != c)
 			i++;
 	}
 	return (cnt);
