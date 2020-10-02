@@ -6,7 +6,7 @@
 /*   By: hopark <hopark@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/09/28 14:11:53 by hopark            #+#    #+#             */
-/*   Updated: 2020/10/03 06:47:50 by hopark           ###   ########.fr       */
+/*   Updated: 2020/10/03 06:51:00 by hopark           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,7 +26,7 @@ void		*ft_memmove(void *dest, const void *src, size_t n)
 	if (dest < src)
 		while (i < n)
 		{
-			ptr1[i] = ptr2[i];g
+			ptr1[i] = ptr2[i];
 			i++;
 		}
 	else
