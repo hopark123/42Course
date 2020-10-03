@@ -6,7 +6,7 @@
 /*   By: hopark <hopark@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/10/03 18:55:36 by hopark            #+#    #+#             */
-/*   Updated: 2020/10/03 19:54:40 by hopark           ###   ########.fr       */
+/*   Updated: 2020/10/03 20:08:33 by hopark           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,7 +21,7 @@ void	ft_lstclear(t_list **lst, void (*del)(void *))
 	while (*lst)
 	{
 		temp = (*lst)->next;
-		ft_lstdelone(lst, del);
+		ft_lstdelone(*lst, del);
 		*lst = temp;
 	}
 	*lst = 0;
