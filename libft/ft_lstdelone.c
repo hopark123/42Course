@@ -6,11 +6,11 @@
 /*   By: hopark <hopark@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/10/03 18:52:47 by hopark            #+#    #+#             */
-/*   Updated: 2020/10/03 18:55:11 by hopark           ###   ########.fr       */
+/*   Updated: 2020/10/03 19:52:14 by hopark           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#inlcude "libft.h"
+#include "libft.h"
 
 void	ft_lstdelone(t_list *lst, void (*del)(void *))
 {

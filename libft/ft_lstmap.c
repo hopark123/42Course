@@ -6,7 +6,7 @@
 /*   By: hopark <hopark@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/10/03 19:03:37 by hopark            #+#    #+#             */
-/*   Updated: 2020/10/03 19:14:46 by hopark           ###   ########.fr       */
+/*   Updated: 2020/10/03 19:57:01 by hopark           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,7 +22,7 @@ t_list		*ft_lstmap(t_list *lst, void *(*f)(void *), void (*del)(void *))
 	if (!(result = ft_lstnew(f(lst->content))))
 		return (0);
 	temp = result;
-	lst = lst->new;
+	lst = lst->next;
 	while (lst)
 	{
 		if (!((temp->next) = ft_lstnew(f(lst->content))))
