@@ -6,7 +6,7 @@
 /*   By: hopark <hopark@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/10/03 20:34:32 by hopark            #+#    #+#             */
-/*   Updated: 2020/10/03 20:34:58 by hopark           ###   ########.fr       */
+/*   Updated: 2020/10/03 20:41:09 by hopark           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,11 +16,11 @@
 # include <stdlib.h>
 # include <unistd.h>
 
-typedef struct	s_list
+typedef struct			s_list
 {
-	void			*content;
-	struct s_list	*next;
-}				t_list;
+	void				*content;
+	struct s_list		*next;
+}						t_list;
 
 void					*ft_memset(void *s, int c, size_t n);
 void					ft_bzero(void *s, size_t n);
