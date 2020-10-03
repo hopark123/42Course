@@ -6,13 +6,13 @@
 /*   By: hopark <hopark@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/10/03 19:01:55 by hopark            #+#    #+#             */
-/*   Updated: 2020/10/03 19:03:22 by hopark           ###   ########.fr       */
+/*   Updated: 2020/10/03 19:19:37 by hopark           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
 
-void		ft_lstiteer(t_list *lst, void (*f)(void *))
+void		ft_lstiter(t_list *lst, void (*f)(void *))
 {
 	if (lst == 0 || f == 0)
 		return ;
