@@ -6,7 +6,7 @@
 /*   By: hopark <hopark@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/09/28 14:11:56 by hopark            #+#    #+#             */
-/*   Updated: 2020/10/01 13:41:01 by hopark           ###   ########.fr       */
+/*   Updated: 2020/10/06 13:28:28 by hopark           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,8 +20,6 @@ size_t		ft_strlcat(char *dst, const char *src, size_t size)
 
 	dst_len = ft_strlen(dst);
 	src_len = ft_strlen(src);
-	if (size == 0)
-		return (src_len);
 	i = 0;
 	while (src[i] && dst_len + i + 1 < size)
 	{
