@@ -6,7 +6,7 @@
 /*   By: hopark <hopark@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/09/28 14:12:01 by hopark            #+#    #+#             */
-/*   Updated: 2020/10/02 11:52:36 by hopark           ###   ########.fr       */
+/*   Updated: 2020/10/06 13:58:59 by hopark           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,7 +17,7 @@ char		*ft_strnstr(const char *big, const char *little, size_t len)
 	size_t		i;
 	size_t		llen;
 
-	if (*little == '\0')
+	if (little == 0)
 		return ((char *)big);
 	llen = ft_strlen(little);
 	i = 0;
