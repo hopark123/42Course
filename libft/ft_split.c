@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_split.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: hopark <hopark@student.42.fr>              +#+  +:+       +#+        */
+/*   By: hopark <hopark@student.42seoul.kr>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/09/28 17:35:48 by hopark            #+#    #+#             */
-/*   Updated: 2020/10/03 06:44:15 by hopark           ###   ########.fr       */
+/*   Updated: 2020/10/09 01:07:05 by hopark           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,6 +19,8 @@ static size_t		ft_count(char const *s, char c)
 
 	i = 0;
 	cnt = 0;
+	if (s == 0)
+		return (0);
 	while (s[i] && s[i] == c)
 		i++;
 	while (s[i])
@@ -79,7 +81,7 @@ char				**ft_split(char const *s, char c)
 	char		**result;
 
 	cnt = ft_count(s, c);
-	if (!(result = (char **)malloc(sizeof(char *) * (cnt + 1))))
+	if (!(result = (char **)malloc(sizeof(char *) * (cnt + 1))) || s == 0)
 		return (0);
 	i = 0;
 	while (i < cnt)

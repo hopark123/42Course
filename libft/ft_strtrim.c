@@ -6,7 +6,7 @@
 /*   By: hopark <hopark@student.42seoul.kr>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/09/28 16:26:36 by hopark            #+#    #+#             */
-/*   Updated: 2020/10/08 23:23:24 by hopark           ###   ########.fr       */
+/*   Updated: 2020/10/09 00:56:26 by hopark           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,6 +39,8 @@ char				*ft_strtrim(char const *s1, char const *set)
 	size_t		back;
 	char		*result;
 
+	if (s1 == 0)
+		return (0);
 	len = ft_strlen(s1);
 	front = ft_front(s1, set, len);
 	back = ft_back(s1, set, len);
