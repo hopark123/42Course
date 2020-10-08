@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_strnstr.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: hopark <hopark@student.42.fr>              +#+  +:+       +#+        */
+/*   By: hopark <hopark@student.42seoul.kr>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/09/28 14:12:01 by hopark            #+#    #+#             */
-/*   Updated: 2020/10/06 14:12:03 by hopark           ###   ########.fr       */
+/*   Updated: 2020/10/08 23:31:06 by hopark           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,6 +19,8 @@ char		*ft_strnstr(const char *big, const char *little, size_t len)
 
 	llen = ft_strlen(little);
 	i = 0;
+	if (*big == 0)
+		return (0);
 	while (i + llen <= len)
 	{
 		if (ft_strncmp(big + i, little, llen) == 0)

@@ -6,7 +6,7 @@
 /*   By: hopark <hopark@student.42seoul.kr>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/09/28 16:26:36 by hopark            #+#    #+#             */
-/*   Updated: 2020/10/08 19:41:25 by hopark           ###   ########.fr       */
+/*   Updated: 2020/10/08 23:23:24 by hopark           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,7 +42,7 @@ char				*ft_strtrim(char const *s1, char const *set)
 	len = ft_strlen(s1);
 	front = ft_front(s1, set, len);
 	back = ft_back(s1, set, len);
-	if (front >= back)
+	if (front >= back || len == 0)
 		return (ft_calloc(1, sizeof(char)));
 	if (!(result = (char *)malloc(sizeof(char) * (back - front + 2))))
 		return (0);
