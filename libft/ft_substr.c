@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_substr.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: hopark <hopark@student.42.fr>              +#+  +:+       +#+        */
+/*   By: hopark <hopark@student.42seoul.kr>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/09/28 14:28:26 by hopark            #+#    #+#             */
-/*   Updated: 2020/10/01 17:03:54 by hopark           ###   ########.fr       */
+/*   Updated: 2020/10/08 20:18:27 by hopark           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,8 +16,8 @@ char		*ft_substr(char const *s, unsigned int start, size_t len)
 {
 	char		*result;
 
-	if (ft_strlen(s) <= len)
-		return (ft_calloc(1, sizeof(char)));
+	if (ft_strlen(s) < start)
+		return (ft_strdup(""));
 	if (!(result = (char *)malloc(sizeof(char) * (len + 1))))
 		return (0);
 	ft_memcpy(result, s + start, len);
