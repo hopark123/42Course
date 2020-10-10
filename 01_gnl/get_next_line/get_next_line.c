@@ -6,11 +6,11 @@
 /*   By: hopark <hopark@student.42seoul.kr>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/10/08 20:59:49 by hopark            #+#    #+#             */
-/*   Updated: 2020/10/10 21:14:58 by hopark           ###   ########.fr       */
+/*   Updated: 2020/10/10 21:51:48 by hopark           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "get_next_line.h"
+6436#include "get_next_line.h"
 
 static int			read_error(char **remain)
 {
@@ -70,23 +70,24 @@ int					get_next_line(int fd, char **line)
 	static char		*remain[OPEN_MAX];
 	char			buf[BUFFER_SIZE + 1];
 	char			*line_ptr;
-	size_t			readsize;
+	size_t			read_size;
 
 	if (fd < 0 || fd > OPEN_MAX || BUFFER_SIZE <= 0 || !line)
 		return (-1);
-	while ((line_ptr = ft_strchr(remain[fd], '\0')) == 0)
+	while ((line_ptr = ft_strchr(remain[fd], '\n')) == 0)
 	{
-		if (readsize < 0)
+		read_size = read(fd, buf, BUFFER_SIZE);
+		if (read_size < 0)
 			break ;
-		readsize = read(fd, buf, BUFFER_SIZE);
-		if ((remain[fd] = ft_strncat_free(remain[fd], buf, readsize)) == 0)
+		buf[read_size] = 0;
+		if ((remain[fd] = ft_strncat_free(remain[fd], buf, read_size)) == 0)
 			return (read_error(&remain[fd]));
 	}
 	if (line_ptr == 0)
 	{
-		if (readsize == 0)
+		if (read_size == 0)
 			return (read_eof(line, &remain[fd]));
-		else if (readsize < 0)
+		else if (read_size < 0)
 			return (read_error(&remain[fd]));
 	}
 	return (make_line(line, &remain[fd], line_ptr));
