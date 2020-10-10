@@ -6,7 +6,7 @@
 /*   By: hopark <hopark@student.42seoul.kr>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/10/09 17:08:30 by hopark            #+#    #+#             */
-/*   Updated: 2020/10/09 18:15:38 by hopark           ###   ########.fr       */
+/*   Updated: 2020/10/10 21:11:23 by hopark           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,13 +27,13 @@ char		*ft_strchr(char *s, char c)
 	size_t		i;
 
 	i = 0;
-	while (!s[i] != c)
+	while (s[i] != c)
 	{
 		if (s[i] == 0)
 			return (0);
 		i++;
 	}
-	retrun ((char *)s + i);
+	return ((char *)s + i);
 }
 
 char		*ft_strncpy(char *dst, char *src, size_t size)
@@ -56,7 +56,7 @@ char		*ft_strncat_free(char *dst, char *src, size_t size)
 	size_t		dst_len;
 
 	dst_len = ft_strlen(dst);
-	if(!(res = (char *)malloc(sizeof(char) * (dst_len + size + 1))))
+	if (!(res = (char *)malloc(sizeof(char) * (dst_len + size + 1))))
 		return (0);
 	ft_strncpy(res, dst, dst_len);
 	ft_strncpy(res + dst_len, src, size);

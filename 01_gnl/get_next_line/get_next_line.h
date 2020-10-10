@@ -1,29 +1,29 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_memcpy.c                                        :+:      :+:    :+:   */
+/*   get_next_line.h                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: hopark <hopark@student.42seoul.kr>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2020/09/28 14:11:52 by hopark            #+#    #+#             */
-/*   Updated: 2020/10/09 00:21:06 by hopark           ###   ########.fr       */
+/*   Created: 2020/10/10 20:32:23 by hopark            #+#    #+#             */
+/*   Updated: 2020/10/10 21:11:18 by hopark           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "libft.h"
+#ifndef GET_NEXT_LINE_H
+# define GET_NEXT_LINE_H
 
-void	*ft_memcpy(void *dest, const void *src, size_t n)
-{
-	unsigned char *ptr1;
-	unsigned char *ptr2;
+# include <unistd.h>
+# include <stdlib.h>
+# include <limits.h>
 
-	if (!dest && !src)
-		return (0);
-	ptr1 = (unsigned char *)dest;
-	ptr2 = (unsigned char *)src;
-	while (n-- > 0)
-	{
-		*(ptr1++) = *(ptr2++);
-	}
-	return (dest);
-}
+# ifndef BUFFER_SIZE
+#  define BUFFER_SIZE 1024
+# endif
+
+size_t				ft_strlen(char *s);
+char				*ft_strchr(char *s, char c);
+char				*ft_strncpy(char *dst, char *src, size_t size);
+char				*ft_strncat_free(char *dst, char *src, size_t size);
+
+#endif
