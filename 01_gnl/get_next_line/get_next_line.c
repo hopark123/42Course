@@ -6,11 +6,11 @@
 /*   By: hopark <hopark@student.42seoul.kr>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/10/08 20:59:49 by hopark            #+#    #+#             */
-/*   Updated: 2020/10/10 21:51:48 by hopark           ###   ########.fr       */
+/*   Updated: 2020/10/10 22:44:22 by hopark           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-6436#include "get_next_line.h"
+#include "get_next_line.h"
 
 static int			read_error(char **remain)
 {
@@ -25,25 +25,26 @@ static int			read_error(char **remain)
 static int			make_line(char **line, char **remain, char *line_ptr)
 {
 	char		*temp;
-	size_t		remain_s;
-	size_t		line_s;
+	size_t		longremain;
+	size_t		longline;
 
-	remain_s = ft_strlen(*remain);
-	line_s = (line_ptr == 0) ? remain_s : line_ptr - *remain;
-	if (!(temp = (char *)malloc(sizeof(char) * (line_s + 1))))
+	longremain = ft_strlen(*remain);
+	longline = (line_ptr == 0) ? longremain : line_ptr - *remain;
+	if (!(temp = (char *)malloc(sizeof(char) * (longline + 1))))
 		return (read_error(remain));
-	ft_strncpy(temp, *remain, line_s);
-	temp[line_s] = 0;
+	ft_strncpy(temp, *remain, longline);
+	temp[longline] = 0;
 	*line = temp;
 	if (line_ptr == 0)
 	{
-		free(remain);
+		free(*remain);
 		*remain = 0;
 		return (1);
 	}
-	if (!(temp = (char *)malloc(sizeof(char) * (remain_s - (line_s + 1) + 1))))
+	if (!(temp = (char *)malloc(longremain - (longline + 1) + 1)))
 		return (read_error(remain));
-	temp[remain_s - (line_s + 1)] = 0;
+	ft_strncpy(temp, line_ptr + 1, longremain - (longline + 1));
+	temp[longremain - (longline + 1)] = 0;
 	free(*remain);
 	*remain = temp;
 	return (1);
@@ -53,7 +54,7 @@ static int			read_eof(char **line, char **remain)
 {
 	char		*temp;
 
-	if (remain == 0)
+	if (*remain == 0)
 	{
 		if (!(temp = (char *)malloc(1 * sizeof(char))))
 			return (read_error(remain));
@@ -77,9 +78,9 @@ int					get_next_line(int fd, char **line)
 	while ((line_ptr = ft_strchr(remain[fd], '\n')) == 0)
 	{
 		read_size = read(fd, buf, BUFFER_SIZE);
-		if (read_size < 0)
+		if (read_size <= 0)
 			break ;
-		buf[read_size] = 0;
+		buf[read_size] = '\0';
 		if ((remain[fd] = ft_strncat_free(remain[fd], buf, read_size)) == 0)
 			return (read_error(&remain[fd]));
 	}
