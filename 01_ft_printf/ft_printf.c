@@ -6,141 +6,263 @@
 /*   By: hopark <hopark@student.42seoul.kr>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/11/11 17:50:38 by hopark            #+#    #+#             */
-/*   Updated: 2020/11/16 17:29:27 by hopark           ###   ########.fr       */
+/*   Updated: 2020/11/19 04:25:17 by hopark           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <stdarg.h>
+#include <unistd.h>
+#include <stdlib.h>
+#include <stdio.h>
 
-struct		*infor{
+void	ft_putchar_fd(char c, int fd)
+{
+	write(fd, &c, 1);
+}
+
+int		ft_strlen(const char *s)
+{
+	int	i;
+
+	i = 0;
+	while (s[i])
+		i++;
+	return (i);
+}
+
+void	ft_putstr_fd(char *s, int fd)
+{
+	if (s == 0 || fd < 0)
+		return ;
+	write(fd, s, ft_strlen(s));
+}
+
+char		*ft_strchr(const char *s, int c)
+{
+	size_t				i;
+
+	i = 0;
+	while (s[i] != c)
+	{
+		if (s[i] == 0)
+			return (0);
+		i++;
+	}
+	return ((char *)s + i);
+}
+
+typedef struct		s_flag
+{
 	int		left;
 	int		plus;
 	int		blank;
 	int		zero;
-	int		sharp;
+	int		hash;
+}					t_flag;
+
+typedef struct		s_infor
+{
+	t_flag	flag;
+	char	type;
 	int		len;
+	char	i_width;
 	int		width;
+	char	i_precision;
 	int		precision;
 	char	*content;
-}			t_infor;
+}					t_infor;
+
+
+int			ft_parsing(char **format, va_list ap, t_infor *infor);
+void			ft_make_content(char **format, t_infor *infor, va_list ap);
+void			ft_check_precision(char **format, t_infor *infor, va_list ap);
+void			ft_check_width(char **format, t_infor *infor, va_list ap);
+void			ft_check_flag(char **format, t_infor *infor);
+
+void		ft_init_flag(t_flag *flag)
+{
+	flag->left = 0;
+	flag->plus = 0;
+	flag->blank = 0;
+	flag->zero = 0;
+	flag->hash = 0;
+}
+
+t_infor		*ft_init_infor(t_infor *infor)
+{
+	t_infor		*result;
+
+	if (!(result = malloc(sizeof(t_infor))))
+		return (0);
+	ft_init_flag(&(infor->flag));
+	infor->type = 0;
+	infor->len = 0;
+	infor->i_width = 0;
+	infor->width = 0;
+	infor->i_precision = 0;
+	infor->precision = 0;
+	infor->content = 0;
+	return (result);
+}
+
+int			ft_print(char **format, va_list ap)
+{
+	t_infor *infor;
+	int		cnt;
+
+	infor = ft_init_infor(0);
+	cnt = ft_parsing(format, ap, infor);
+	ft_putstr_fd(infor->content, 0);
+	free(infor->content);
+	free(infor);
+	return (cnt);
+}
 
 int			ft_printf(const char *format, ...)
 {
 	int		cnt;
 	int		ctemp;
-	static char *s_format;
-	s_format = (char *)format;
+	char	*a_format;
 	va_list	ap;
+
+	a_format = (char *)format;
 	va_start(ap, format);
-	i = 0;
 	cnt = 0;
-	while (*s_format++)
+	while (*a_format)
 	{
-		if (*s_format == %)
+		if (*a_format == '%')
 		{
-			if (ctmep = ft_parsing(&s_format[i], ap))
-				cnt += ctmep;
+			a_format++;
+			if ((ctemp = ft_print(&a_format, ap)) == -1)
+				return (-1);
+			cnt += ctemp;
 		}
 		else
 		{
-			ft_putchar(s_format,0);
+			ft_putchar_fd(*a_format++, 0);
 			cnt++;
 		}
 	}
 	va_end(ap);
+	return (cnt);
 }
 
-int			ft_parsing(char **format, va_list ap)
+int			ft_parsing(char **format, va_list ap, t_infor *infor)
 {
-	int					cnt;
-	char				*ptr;
-	static t_infor		*inf;
-	ft_init_inf(inf);
-	while (**format++)
+	int			cnt;
+	char		*ptr;
+
+	while (**format)
 	{
 		if (ft_strchr("-+ 0#", **format))
-			ft_check_flag(*format, inf);
-		if (ft_strchr("123456789*", **format))
-			ft_check_width(*format, inf, ap);
-		if (ft_strchr(".", **format))
-			ft_check_precision(*format, inf, ap);
-		if (ft_strchr("cspdiuxXnfge%", **format))
+			ft_check_flag(format, infor);
+		else if (ft_strchr("123456789*", **format))
+			ft_check_width(format, infor, ap);
+		else if (ft_strchr(".", **format))
+			ft_check_precision(format, infor, ap);
+		else
 		{
-			ft_check_specifier(*format, inf);
-			ft_print(inf, ap);
-			break;
+			infor->type = **format;
+			ft_make_content(format, infor, ap);
+			(*format)++;
+			return (ft_strlen(infor->content));
 		}
-
 	}
+	return (0);
 }
 
-void 		ft_check_flag(char **format, s_infor infor)
+void			ft_check_flag(char **format, t_infor *infor)
 {
-	if (*format++ == "-")
-	{
-		infor.left = 1;
-		return ;
-	}
-	if (*format++ == "+")
-	{
-		infor.plus = 1;
-		return ;
-	}
-	if (*format++ == " ")
-	{
-		infor.blank = 1;
-		return ;
-	}
-	if (*format++ == "0")
-	{
-		infor.zero = 1;
-		return ;
-	}
-	if (*format++ == "#")
-	{
-		infor.sharp = 1;
-		return ;
-	}
+	if (**format == '-')
+		infor->flag.left = 1;
+	else if (**format == '+')
+		infor->flag.plus = 1;
+	else if (**format == ' ')
+		infor->flag.blank = 1;
+	else if (**format == '0')
+		infor->flag.zero = 1;
+	else if (**format == '#')
+		infor->flag.hash = 1;
+	(*format)++;
+	return ;
 }
 
-void			ft_check_width(char **format, s_infor infor, va_list ap)
+void			ft_check_width(char **format, t_infor *infor, va_list ap)
 {
-	int width;
+	int temp;
 
-	if (**format == "*")
+	temp = 0;
+	if (**format == '*')
 	{
-		infor.width = va_arg(ap, int);
+		if ((infor->width = va_arg(ap, int)) <= 0)
+		{
+			infor->flag.left = 1;
+			infor->width *= -1;
+		}
+		(*format)++;
 		return ;
 	}
-	width = 0;
-	while (ft_strchr("0123456789", **format++))
+	while (ft_strchr("0123456789", **format))
 	{
-		width += **foramt;
-		width *= 10;
+		temp *= 10;
+		temp += **format - '0';
+		(*format)++;
 	}
-	infor.width = width;
+	infor->width = temp;
 }
 
-void			ft_check_precision(char **format, s_infor infor, va_list ap)
+void			ft_check_precision(char **format, t_infor *infor, va_list ap)
 {
-	int precision;
+	int		temp;
 
-	**format++;
-	if (**format++ == "*")
+	temp = 0;
+	if (**format == '*')
 	{
-		infor.precision = va_arg(ap, int);
+		if ((infor->precision = va_arg(ap, int)) <= 0)
+		{
+			infor->flag.left = 1;
+			infor->precision *= -1;
+		}
+		(*format)++;
 		return ;
 	}
-	precision = 0;
-	while (ft_strchr("0123456789", **format++))
+	while (ft_strchr("0123456789", **format))
 	{
-		precision += **foramt;
-		precision *= 10;
+		temp *= 10;
+		temp += **format - '0';
+		(*format)++;
 	}
-	infor.precision = precision;
+	infor->precision = temp;
 }
 
-void			ft_check_specifier(char **format, s_infor infor)
+void			ft_make_content(char **format, t_infor *infor, va_list ap)
 {
-	l / h 개수 세기;
+	printf("%s", *format);
 }
+// 	if (infor->type == 'c')
+// 		ft_printchar(char **format, t_infor infor, va_list ap);
+// 	else if (infor->type == 's')
+// 		ft_printchar(char **format, t_infor infor, va_list ap);
+// 	else if (infor->type == 'p')
+// 		ft_printchar(char **format, t_infor infor, va_list ap);
+// 	else if (infor->type == 'd' || infor->type ==== 'i')
+// 		ft_printchar(char **format, t_infor infor, va_list ap);
+// 	else if (infor->type == 'u')
+// 		ft_printchar(char **format, t_infor infor, va_list ap);
+// 	else if (infor->type == 'x')
+// 		ft_printchar(char **format, t_infor infor, va_list ap);
+// 	else if (infor->type == 'X')
+// 		ft_printchar(char **format, t_infor infor, va_list ap);
+// 	else if (infor->type == 'n')
+// 		ft_printchar(char **format, t_infor infor, va_list ap);
+// 	else if (infor->type == 'f')
+// 		ft_printchar(char **format, t_infor infor, va_list ap);
+// 	else if (infor->type == 'g')
+// 		ft_printchar(char **format, t_infor infor, va_list ap);
+// 	else if (infor->type == 'e')
+// 		ft_printchar(char **format, t_infor infor, va_list ap);
+// 	else if (infor->type == 'o')
+// 		ft_printchar(char **format, t_infor infor, va_list ap);
+// 	else
+// 		ft_printchar(char **format, t_infor infor, va_list ap);
+// }

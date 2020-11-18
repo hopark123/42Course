@@ -26,13 +26,19 @@ int main()
 				// printf("%010.9f\n",1.23);
 				// printf("%010.10f\n",1.23);
 				// printf("%010.11f\n",1.23);
-	printf("%5.4s", "abcde");
+	// printf("%5.2d",  3,1234);
 
 
-
-
-
-
-
+// printf("%1lf\n",(double)0.12345678);
+// printf("%2lf\n",(double)0.12345678);
+// printf("%3lf\n",(double)0.12345678);
+// printf("%4lf\n",(double)0.12345678);
+// printf("%5lf\n",(double)0.12345678);
+// printf("%6lf\n",(double)0.12345678);
+// printf("%7lf\n",(double)0.12345678);
+// printf("%8lf\n",(double)0.12345678);
+// printf("%9lf\n",(double)0.12345678);
+char *format = "%23*d\n";
+printf("return : %d\n",printf(format, -7, 123));
 
 }
