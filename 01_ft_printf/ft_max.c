@@ -1,18 +1,19 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_putchar_fd.c                                    :+:      :+:    :+:   */
+/*   ft_max.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: hopark <hopark@student.42.fr>              +#+  +:+       +#+        */
+/*   By: hopark <hopark@student.42seoul.kr>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2020/11/23 12:48:31 by hopark            #+#    #+#             */
-/*   Updated: 2020/11/23 14:49:12 by hopark           ###   ########.fr       */
+/*   Created: 2020/11/24 21:25:25 by hopark            #+#    #+#             */
+/*   Updated: 2020/11/24 21:25:31 by hopark           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "ft_putchar_fd.h"
-
-void	ft_putchar_fd(char c, int fd)
+int		max(int a, int b, int c)
 {
-	write(fd, &c, 1);
+	int		temp;
+
+	temp = a >= b ? a : b;
+	return (temp >= c ? temp : c);
 }

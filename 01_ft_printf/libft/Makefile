@@ -3,10 +3,10 @@
 #                                                         :::      ::::::::    #
 #    Makefile                                           :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: hopark <hopark@student.42seoul.kr>         +#+  +:+       +#+         #
+#    By: hopark <hopark@student.42.fr>              +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2020/11/23 13:16:57 by hopark            #+#    #+#              #
-#    Updated: 2020/11/23 14:04:11 by hopark           ###   ########.fr        #
+#    Updated: 2020/11/23 14:47:52 by hopark           ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -45,12 +45,10 @@ fclean : clean
 
 re : fclean all
 
-.c.o : $(SRCS) $(INCLUDES)
-	$(CC) $(CFLAGS) -c $< -o $(<:.c=.o) $(OBJS)
-
-$(OBJ_DIR)/%.o : %.c
+$(OBJ_DIR)/%.o : $(SRC_DIR)/%.c
 	mkdir -p $(OBJ_DIR)
 	$(CC) $(CFLAGS) -I $(INC_DIR) -c $< -o $@
+	
 $(NAME) : $(INCLUDES) $(OBJS)
 	$(AR) $(ARFLAGS) $@ $^
 

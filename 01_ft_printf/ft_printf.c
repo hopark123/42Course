@@ -5,118 +5,10 @@
 /*                                                    +:+ +:+         +:+     */
 /*   By: hopark <hopark@student.42seoul.kr>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2020/11/11 17:50:38 by hopark            #+#    #+#             */
-/*   Updated: 2020/11/19 05:31:53 by hopark           ###   ########.fr       */
+/*   Created: 2020/11/24 21:19:38 by hopark            #+#    #+#             */
+/*   Updated: 2020/11/25 01:33:27 by hopark           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
-
-#include <stdarg.h>
-#include <unistd.h>
-#include <stdlib.h>
-#include <stdio.h>
-
-void	ft_putchar_fd(char c, int fd)
-{
-	write(fd, &c, 1);
-}
-
-int		ft_strlen(const char *s)
-{
-	int	i;
-
-	i = 0;
-	while (s[i])
-		i++;
-	return (i);
-}
-
-void	ft_putstr_fd(char *s, int fd)
-{
-	if (s == 0 || fd < 0)
-		return ;
-	write(fd, s, ft_strlen(s));
-}
-
-char		*ft_strchr(const char *s, int c)
-{
-	size_t				i;
-
-	i = 0;
-	while (s[i] != c)
-	{
-		if (s[i] == 0)
-			return (0);
-		i++;
-	}
-	return ((char *)s + i);
-}
-
-typedef struct		s_flag
-{
-	char		left;
-	char		plus;
-	char		blank;
-	char		zero;
-	char		hash;
-}					t_flag;
-
-typedef struct		s_infor
-{
-	t_flag	flag;
-	char	type;
-	int		len;
-	char	i_width;
-	int		width;
-	char	i_precision;
-	int		precision;
-	char	*content;
-}					t_infor;
-
-
-int			ft_parsing(char **format, va_list ap, t_infor *infor);
-void			ft_make_content(char **format, t_infor *infor, va_list ap);
-void			ft_check_precision(char **format, t_infor *infor, va_list ap);
-void			ft_check_width(char **format, t_infor *infor, va_list ap);
-void			ft_check_flag(char **format, t_infor *infor);
-
-void		ft_init_flag(t_flag *flag)
-{
-	flag->left = 0;
-	flag->plus = 0;
-	flag->blank = 0;
-	flag->zero = 0;
-	flag->hash = 0;
-}
-
-t_infor		*ft_init_infor(t_infor *infor)
-{
-	t_infor		*result;
-
-	if (!(result = malloc(sizeof(t_infor))))
-		return (0);
-	ft_init_flag(&(result->flag));
-	result->type = 0;
-	result->len = 0;
-	result->i_width = 0;
-	result->width = 0;
-	result->i_precision = 0;
-	result->precision = 0;
-	result->content = 0;
-	return (result);
-}
-
-int			ft_print(char **format, va_list ap)
-{
-	t_infor *infor;
-	int		cnt;
-
-	infor = ft_init_infor(0);
-	cnt = ft_parsing(format, ap, infor);
-	ft_putstr_fd(infor->content, 0);
-	free(infor->content);
-	free(infor);
-	return (cnt);
-}
 
 int			ft_printf(const char *format, ...)
 {
@@ -147,137 +39,15 @@ int			ft_printf(const char *format, ...)
 	return (cnt);
 }
 
-int			ft_parsing(char **format, va_list ap, t_infor *infor)
+int			ft_print(char **format, va_list ap)
 {
-	int			cnt;
-	char		*ptr;
+	t_infor	*infor;
+	int		cnt;
 
-	while (**format)
-	{
-		if (ft_strchr("-+ 0#", **format))
-		{
-			ft_check_flag(format, infor);
-		}
-		else if (ft_strchr("123456789*", **format))
-			ft_check_width(format, infor, ap);
-		else if (ft_strchr(".", **format))
-			ft_check_precision(format, infor, ap);
-		else
-		{
-			infor->type = **format;
-			ft_make_content(format, infor, ap);
-			(*format)++;
-			return (ft_strlen(infor->content));
-		}
-	}
-	return (0);
-}
-
-void			ft_check_flag(char **format, t_infor *infor)
-{
-	if (**format == '-')
-		infor->flag.left = 1;
-	else if (**format == '+')
-		infor->flag.plus = 1;
-	else if (**format == ' ')
-		infor->flag.blank = 1;
-	else if (**format == '0')
-		infor->flag.zero = 1;
-	else if (**format == '#')
-		infor->flag.hash = 1;
-	(*format)++;
-	return ;
-}
-
-void			ft_check_width(char **format, t_infor *infor, va_list ap)
-{
-	int temp;
-
-	temp = 0;
-	if (**format == '*')
-	{
-		if ((infor->width = va_arg(ap, int)) <= 0)
-		{
-			infor->flag.left = 1;
-			infor->width *= -1;
-		}
-		(*format)++;
-		return ;
-	}
-	while (ft_strchr("0123456789", **format))
-	{
-		temp *= 10;
-		temp += **format - '0';
-		(*format)++;
-	}
-	infor->width = temp;
-}
-
-void			ft_check_precision(char **format, t_infor *infor, va_list ap)
-{
-	int		temp;
-
-	(*format)++;
-	temp = 0;
-	if (**format == '*')
-	{
-		if ((infor->precision = va_arg(ap, int)) <= 0)
-		{
-			infor->flag.left = 1;
-			infor->precision *= -1;
-		}
-		(*format)++;
-		return ;
-	}
-	while (ft_strchr("0123456789", **format))
-	{
-		temp *= 10;
-		temp += **format - '0';
-		(*format)++;
-	}
-	infor->precision = temp;
-}
-
-void			ft_make_content(char **format, t_infor *infor, va_list ap)
-{
-	infor->content = malloc(sizeof(1));
-	printf("\n flag.minus %d\n", infor->flag.left);
-	printf("\n flag.plus %d\n", infor->flag.plus);
-	printf("\n flag.blank %d\n", infor->flag.blank);
-	printf("\n flag.hash %d\n", infor->flag.hash);
-	printf("\n flag.zero %d\n", infor->flag.zero);
-
-}
-// 	if (infor->type == 'c')
-// 		ft_printchar(char **format, t_infor infor, va_list ap);
-// 	else if (infor->type == 's')
-// 		ft_printchar(char **format, t_infor infor, va_list ap);
-// 	else if (infor->type == 'p')
-// 		ft_printchar(char **format, t_infor infor, va_list ap);
-// 	else if (infor->type == 'd' || infor->type ==== 'i')
-// 		ft_printchar(char **format, t_infor infor, va_list ap);
-// 	else if (infor->type == 'u')
-// 		ft_printchar(char **format, t_infor infor, va_list ap);
-// 	else if (infor->type == 'x')
-// 		ft_printchar(char **format, t_infor infor, va_list ap);
-// 	else if (infor->type == 'X')
-// 		ft_printchar(char **format, t_infor infor, va_list ap);
-// 	else if (infor->type == 'n')
-// 		ft_printchar(char **format, t_infor infor, va_list ap);
-// 	else if (infor->type == 'f')
-// 		ft_printchar(char **format, t_infor infor, va_list ap);
-// 	else if (infor->type == 'g')
-// 		ft_printchar(char **format, t_infor infor, va_list ap);
-// 	else if (infor->type == 'e')
-// 		ft_printchar(char **format, t_infor infor, va_list ap);
-// 	else if (infor->type == 'o')
-// 		ft_printchar(char **format, t_infor infor, va_list ap);
-// 	else
-// 		ft_printchar(char **format, t_infor infor, va_list ap);
-// }
-
-
-int main()
-{
-	ft_printf("%2y-d\n",3);
+	infor = ft_init_infor(0);
+	cnt = ft_parsing(format, ap, infor);
+	ft_putstr_fd((infor->content), 0);
+	free(infor->content);
+	free(infor);
+	return (cnt);
 }
