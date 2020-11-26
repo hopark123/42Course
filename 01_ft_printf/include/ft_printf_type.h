@@ -1,27 +1,39 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_strchr.c                                        :+:      :+:    :+:   */
+/*   ft_printf_type.h                                   :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: hopark <hopark@student.42seoul.kr>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2020/11/23 12:50:21 by hopark            #+#    #+#             */
-/*   Updated: 2020/11/26 18:24:49 by hopark           ###   ########.fr       */
+/*   Created: 2020/11/24 21:17:20 by hopark            #+#    #+#             */
+/*   Updated: 2020/11/27 01:11:52 by hopark           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "libft.h"
+#ifndef FT_PRINTF_TYPE_H
+# define FT_PRINTF_TYPE_H
 
-char		*ft_strchr(const char *s, int c)
+typedef struct		s_flag
 {
-	size_t				i;
+	char		left;
+	char		plus;
+	char		blank;
+	char		zero;
+	char		hash;
+}					t_flag;
 
-	i = 0;
-	while (s[i] != c)
-	{
-		if (s[i] == 0)
-			return (0);
-		i++;
-	}
-	return ((char *)s + i);
-}
+typedef struct		s_infor
+{
+	t_flag	flag;
+	int		nega;
+	int		len;
+	int		width;
+	int		precision;
+	int		size;
+	char	type;
+	char	*content;
+	int		hcount;
+	int		lcount;
+}					t_infor;
+
+#endif

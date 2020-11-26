@@ -122,4 +122,8 @@ printf("return : %d\n",printf(format, -7, -13));
 	// printf("@%+4.9d@\n", -123456);
 	// printf("@% 4.9d@\n", -123456);
 
+
+
+	 printf ("Decimals: %lld %d\n", 1977, 650000L);
+
 }

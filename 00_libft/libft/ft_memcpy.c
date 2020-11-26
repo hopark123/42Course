@@ -6,7 +6,7 @@
 /*   By: hopark <hopark@student.42seoul.kr>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/09/28 14:11:52 by hopark            #+#    #+#             */
-/*   Updated: 2020/10/09 00:21:06 by hopark           ###   ########.fr       */
+/*   Updated: 2020/11/26 23:53:56 by hopark           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,6 +16,7 @@ void	*ft_memcpy(void *dest, const void *src, size_t n)
 {
 	unsigned char *ptr1;
 	unsigned char *ptr2;
+
 
 	if (!dest && !src)
 		return (0);

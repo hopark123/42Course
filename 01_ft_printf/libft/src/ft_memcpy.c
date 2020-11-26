@@ -1,27 +1,29 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_strchr.c                                        :+:      :+:    :+:   */
+/*   ft_memcpy.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: hopark <hopark@student.42seoul.kr>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2020/11/23 12:50:21 by hopark            #+#    #+#             */
-/*   Updated: 2020/11/26 18:24:49 by hopark           ###   ########.fr       */
+/*   Created: 2020/11/24 21:22:39 by hopark            #+#    #+#             */
+/*   Updated: 2020/11/26 23:55:09 by hopark           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
 
-char		*ft_strchr(const char *s, int c)
+void	*ft_memcpy(void *dest, const void *src, int n)
 {
-	size_t				i;
+	unsigned char *ptr1;
+	unsigned char *ptr2;
 
-	i = 0;
-	while (s[i] != c)
+	if (!dest && !src)
+		return (0);
+	ptr1 = (unsigned char *)dest;
+	ptr2 = (unsigned char *)src;
+	while (n-- > 0)
 	{
-		if (s[i] == 0)
-			return (0);
-		i++;
+		*(ptr1++) = *(ptr2++);
 	}
-	return ((char *)s + i);
+	return (dest);
 }

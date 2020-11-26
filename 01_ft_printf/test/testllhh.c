@@ -11,6 +11,6 @@ int main()
 	a-= 3;
 
 	printf(format, LONG_MAX);
-	printf("%ld\n", LONG_MAX);
+	printf("%d\n", (char)280);
 	printf("%lld\n", a);
 }

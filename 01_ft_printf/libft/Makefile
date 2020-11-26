@@ -3,10 +3,10 @@
 #                                                         :::      ::::::::    #
 #    Makefile                                           :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: hopark <hopark@student.42.fr>              +#+  +:+       +#+         #
+#    By: hopark <hopark@student.42seoul.kr>         +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2020/11/23 13:16:57 by hopark            #+#    #+#              #
-#    Updated: 2020/11/23 14:47:52 by hopark           ###   ########.fr        #
+#    Updated: 2020/11/27 03:12:55 by hopark           ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -16,7 +16,7 @@ AR = ar
 ARFLAGS = crs
 
 CC = gcc
-CFLAG = -Wall -Wextra -Werror
+CFLAGS = -Wall -Wextra -Werror
 
 RM = rm
 RMFLAG = -f
@@ -26,30 +26,44 @@ SRC_DIR = ./src
 OBJ_DIR = ./obj
 
 INCLUDES = $(addprefix $(INC_DIR)/, \
-		ft_putchar_fd.h \
+		libft.h \
 )
 
-SRCS = $(addprefix $(SRC_DIR)/, \
+SRC = $(addprefix $(SRC_DIR)/, \
+	ft_bzero_c.c \
+	ft_calloc_c.c \
+	ft_int_len.c \
+	ft_uint_len.c \
+	ft_itoa.c \
+	ft_uitoa.c \
+	ft_max.c \
+	ft_memcpy.c \
 	ft_putchar_fd.c \
+	ft_putstr_fd.c \
+	ft_strchr.c \
+	ft_strlen.c \
 )
 
-OBJS = $(addprefix $(OBJ_DIR)/, $(notdir $(SRCS:.c=.o)))
+vpath %.c \
+	$(SRC_DIR)
+
+OBJS = $(addprefix $(OBJ_DIR)/, $(notdir $(SRC:.c=.o)))
 
 all : $(NAME)
 
 clean :
-	$(RM) $(RMFLAG) $(OBJS)
+	@$(RM) $(RMFLAG) $(OBJS)
 
 fclean : clean
-	$(RM) $(RMFLAG) $(NAME)
+	@$(RM) $(RMFLAG) $(NAME)
 
 re : fclean all
 
-$(OBJ_DIR)/%.o : $(SRC_DIR)/%.c
-	mkdir -p $(OBJ_DIR)
-	$(CC) $(CFLAGS) -I $(INC_DIR) -c $< -o $@
-	
+$(OBJ_DIR)/%.o : %.c
+	@mkdir -p $(OBJ_DIR)
+	@$(CC) $(CFLAGS) -I $(INC_DIR) -c $< -o $@
+
 $(NAME) : $(INCLUDES) $(OBJS)
-	$(AR) $(ARFLAGS) $@ $^
+	@$(AR) $(ARFLAGS) $@ $(OBJS)
 
 .PHONY: all clean fclean re

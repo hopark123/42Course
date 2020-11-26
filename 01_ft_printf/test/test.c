@@ -1,27 +1,18 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_strchr.c                                        :+:      :+:    :+:   */
+/*   test.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: hopark <hopark@student.42seoul.kr>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2020/11/23 12:50:21 by hopark            #+#    #+#             */
-/*   Updated: 2020/11/26 18:24:49 by hopark           ###   ########.fr       */
+/*   Created: 2020/11/26 19:49:02 by hopark            #+#    #+#             */
+/*   Updated: 2020/11/26 22:41:06 by hopark           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "libft.h"
+#include "ft_printf.h"
 
-char		*ft_strchr(const char *s, int c)
+int main()
 {
-	size_t				i;
-
-	i = 0;
-	while (s[i] != c)
-	{
-		if (s[i] == 0)
-			return (0);
-		i++;
-	}
-	return ((char *)s + i);
+	printf("1");ft_printf("%-6d\n", -3);
 }

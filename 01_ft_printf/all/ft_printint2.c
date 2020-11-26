@@ -1,0 +1,104 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   ft_printint2.c                                     :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: hopark <hopark@student.42seoul.kr>         +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2020/11/26 18:50:23 by hopark            #+#    #+#             */
+/*   Updated: 2020/11/26 20:03:56 by hopark           ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
+#include "ft_printf.h"
+
+void		ft_int_nz_wl(t_infor *infor, int number, char c)
+{
+	char		*temp;
+	char		*out;
+	int			i;
+	int			j;
+
+	i = 0;
+	j = 0;
+	out = ft_calloc_c(infor->size + 1, sizeof(char), c);
+	temp = ft_itoa(number);
+	if (infor->nega)
+		out[i++] = '-';
+	else if (infor->flag.plus)
+		out[i++] = '+';
+	else if (infor->flag.blank)
+		out[i++] = ' ';
+	while (j++ < infor->precision - infor->len)
+		out[i++] = '0';
+	ft_memcpy(&out[i], temp, ft_strlen(temp));
+	infor->content = out;
+	free(temp);
+}
+
+void		ft_int_nz_wr(t_infor *infor, int number, char c)
+{
+	char		*temp;
+	char		*out;
+	int			i;
+	int			j;
+
+	i = infor->width - ft_max(infor->precision, infor->len, 0) + 1;
+	j = 0;
+	out = ft_calloc_c(infor->size + 1, sizeof(char), c);
+	temp = ft_itoa(number);
+	if (infor->nega)
+		out[i++] = '-';
+	else if (infor->flag.plus)
+		out[i++] = '+';
+	else
+		out[i++] = ' ';
+	while (j++ < infor->precision - infor->len)
+		out[i++] = '0';
+	ft_memcpy(&out[i], temp, ft_strlen(temp));
+	infor->content = out;
+	free(temp);
+}
+
+void		ft_int_nz_nsign(t_infor *infor, int number, char c)
+{
+	char		*temp;
+	char		*out;
+	int			i;
+	int			j;
+
+	i = 0;
+	j = 0;
+	temp = ft_itoa(number);
+	out = ft_calloc_c(infor->size + 1, sizeof(char), c);
+	while (j++ < infor->precision - infor->len)
+		out[i++] = '0';
+	ft_memcpy(&out[i], temp, ft_strlen(temp));
+	infor->content = out;
+	free(temp);
+}
+
+void		ft_int_nz_sign(t_infor *infor, int number, char c)
+{
+	char		*temp;
+	char		*out;
+	int			i;
+	int			j;
+
+	i = 0;
+	j = 0;
+	infor->size++;
+	temp = ft_itoa(number);
+	out = ft_calloc_c(infor->size + 1, sizeof(char), c);
+	if (infor->nega)
+		out[i++] = '-';
+	else if (infor->flag.plus)
+		out[i++] = '+';
+	else
+		out[i++] = ' ';
+	while (j++ < infor->precision - infor->len)
+		out[i++] = '0';
+	ft_memcpy(&out[i], temp, ft_strlen(temp));
+	infor->content = out;
+	free(temp);
+}

@@ -1,27 +1,21 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_strchr.c                                        :+:      :+:    :+:   */
+/*   ft_max.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: hopark <hopark@student.42seoul.kr>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2020/11/23 12:50:21 by hopark            #+#    #+#             */
-/*   Updated: 2020/11/26 18:24:49 by hopark           ###   ########.fr       */
+/*   Created: 2020/11/24 21:25:25 by hopark            #+#    #+#             */
+/*   Updated: 2020/11/26 20:02:48 by hopark           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
 
-char		*ft_strchr(const char *s, int c)
+int		ft_max(int a, int b, int c)
 {
-	size_t				i;
+	int		temp;
 
-	i = 0;
-	while (s[i] != c)
-	{
-		if (s[i] == 0)
-			return (0);
-		i++;
-	}
-	return ((char *)s + i);
+	temp = a >= b ? a : b;
+	return (temp >= c ? temp : c);
 }

@@ -1,20 +1,38 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_putstr_fd.c                                     :+:      :+:    :+:   */
+/*   ft_check_precision.c                               :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: hopark <hopark@student.42seoul.kr>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2020/11/23 12:49:53 by hopark            #+#    #+#             */
-/*   Updated: 2020/11/26 18:24:47 by hopark           ###   ########.fr       */
+/*   Created: 2020/11/24 21:21:03 by hopark            #+#    #+#             */
+/*   Updated: 2020/11/26 19:39:53 by hopark           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "libft.h"
+#include "ft_printf_parse.h"
 
-void	ft_putstr_fd(char *s, int fd)
+void			ft_check_precision(char **format, t_infor *infor, va_list ap)
 {
-	if (s == 0 || fd < 0)
+	int		temp;
+
+	(*format)++;
+	temp = 0;
+	if (**format == '*')
+	{
+		if ((infor->precision = va_arg(ap, int)) < 0)
+		{
+			infor->flag.left = 1;
+			infor->precision *= -1;
+		}
+		(*format)++;
 		return ;
-	write(fd, s, ft_strlen(s));
+	}
+	while (ft_strchr("0123456789", **format))
+	{
+		temp *= 10;
+		temp += **format - '0';
+		(*format)++;
+	}
+	infor->precision = temp;
 }

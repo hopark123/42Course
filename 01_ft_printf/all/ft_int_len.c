@@ -1,27 +1,33 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_strchr.c                                        :+:      :+:    :+:   */
+/*   ft_int_len.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: hopark <hopark@student.42seoul.kr>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2020/11/23 12:50:21 by hopark            #+#    #+#             */
-/*   Updated: 2020/11/26 18:24:49 by hopark           ###   ########.fr       */
+/*   Created: 2020/11/26 18:27:59 by hopark            #+#    #+#             */
+/*   Updated: 2020/11/26 18:29:15 by hopark           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
 
-char		*ft_strchr(const char *s, int c)
+int				ft_int_len(int n)
 {
-	size_t				i;
+	int			len;
+	long long	n2;
 
-	i = 0;
-	while (s[i] != c)
+	len = 0;
+	n2 = (long long)n;
+	if (n2 < 0)
 	{
-		if (s[i] == 0)
-			return (0);
-		i++;
+		len++;
+		n2 *= -1;
 	}
-	return ((char *)s + i);
+	while (n2 >= 10)
+	{
+		len++;
+		n2 /= 10;
+	}
+	return (++len);
 }

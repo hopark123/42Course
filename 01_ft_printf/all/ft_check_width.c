@@ -1,27 +1,37 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_strchr.c                                        :+:      :+:    :+:   */
+/*   ft_check_width.c                                   :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: hopark <hopark@student.42seoul.kr>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2020/11/23 12:50:21 by hopark            #+#    #+#             */
-/*   Updated: 2020/11/26 18:24:49 by hopark           ###   ########.fr       */
+/*   Created: 2020/11/24 21:20:46 by hopark            #+#    #+#             */
+/*   Updated: 2020/11/26 18:53:25 by hopark           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "libft.h"
+#include "ft_printf_parse.h"
 
-char		*ft_strchr(const char *s, int c)
+void			ft_check_width(char **format, t_infor *infor, va_list ap)
 {
-	size_t				i;
+	int		temp;
 
-	i = 0;
-	while (s[i] != c)
+	temp = 0;
+	if (**format == '*')
 	{
-		if (s[i] == 0)
-			return (0);
-		i++;
+		if ((infor->width = va_arg(ap, int)) <= 0)
+		{
+			infor->flag.left = 1;
+			infor->width *= -1;
+		}
+		(*format)++;
+		return ;
 	}
-	return ((char *)s + i);
+	while (ft_strchr("0123456789", **format))
+	{
+		temp *= 10;
+		temp += **format - '0';
+		(*format)++;
+	}
+	infor->width = temp;
 }

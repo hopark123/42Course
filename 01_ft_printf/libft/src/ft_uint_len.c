@@ -1,27 +1,26 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_strchr.c                                        :+:      :+:    :+:   */
+/*   ft_uint_len.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: hopark <hopark@student.42seoul.kr>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2020/11/23 12:50:21 by hopark            #+#    #+#             */
-/*   Updated: 2020/11/26 18:24:49 by hopark           ###   ########.fr       */
+/*   Created: 2020/11/26 18:27:59 by hopark            #+#    #+#             */
+/*   Updated: 2020/11/27 03:02:05 by hopark           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
 
-char		*ft_strchr(const char *s, int c)
+int				ft_uint_len(unsigned long long n)
 {
-	size_t				i;
+	int			len;
 
-	i = 0;
-	while (s[i] != c)
+	len = 0;
+	while (n >= 10)
 	{
-		if (s[i] == 0)
-			return (0);
-		i++;
+		len++;
+		n /= 10;
 	}
-	return ((char *)s + i);
+	return (++len);
 }

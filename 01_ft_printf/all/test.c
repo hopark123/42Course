@@ -1,27 +1,21 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_strchr.c                                        :+:      :+:    :+:   */
+/*   test.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: hopark <hopark@student.42seoul.kr>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2020/11/23 12:50:21 by hopark            #+#    #+#             */
-/*   Updated: 2020/11/26 18:24:49 by hopark           ###   ########.fr       */
+/*   Created: 2020/11/26 19:49:02 by hopark            #+#    #+#             */
+/*   Updated: 2020/11/26 20:59:10 by hopark           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "libft.h"
+#include "ft_printf.h"
+#include <stdio.h>
+#include <unistd.h>
 
-char		*ft_strchr(const char *s, int c)
+int main(void)
 {
-	size_t				i;
-
-	i = 0;
-	while (s[i] != c)
-	{
-		if (s[i] == 0)
-			return (0);
-		i++;
-	}
-	return ((char *)s + i);
+	ft_printf("@%6.6d@\n", -323);
+	return (0);
 }
