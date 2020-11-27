@@ -6,14 +6,14 @@
 #    By: hopark <hopark@student.42seoul.kr>         +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2020/11/23 13:16:57 by hopark            #+#    #+#              #
-#    Updated: 2020/11/27 03:01:37 by hopark           ###   ########.fr        #
+#    Updated: 2020/11/27 19:03:50 by hopark           ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
 NAME = libftprintf.a
 
 AR = ar
-ARFLAGS = rcs
+ARFLAGS = crs
 
 CC = gcc
 CFLAGS = -Wall -Wextra -Werror
@@ -26,9 +26,9 @@ LIBFT_DIR = ./libft
 LIBFT_FILE = $(LIBFT_DIR)/$(LIBFT)
 LIBFT_INC_DIR = $(LIBFT_DIR)/include
 
-INC_DIR = include
-SRC_DIR = src
-OBJ_DIR = obj
+INC_DIR = ./include
+SRC_DIR = ./src
+OBJ_DIR = ./obj
 
 INCLUDES = $(addprefix $(INC_DIR)/, \
 		ft_printf_parse.h \
@@ -44,13 +44,15 @@ SRC_PARSE = $(addprefix $(SRC_PARSE_DIR)/, \
 		ft_check_width.c \
 		ft_init_infor.c \
 		ft_parsing.c \
-		ft_printf.c \
 )
 
 SRC_PRINTF_DIR = $(SRC_DIR)/printf
 SRC_PRINTF = $(addprefix $(SRC_PRINTF_DIR)/, \
+		ft_hexa.c \
 		ft_make_content.c \
 		ft_print_char.c \
+		ft_print_hexa.c \
+		ft_print_hexa2.c \
 		ft_print_int.c \
 		ft_print_int2.c \
 		ft_print_uint.c \
@@ -65,8 +67,8 @@ vpath %.c \
 
 SRCS = \
 	$(SRC_PRINTF) \
-	$(SRC_PARSE)
-
+	$(SRC_PARSE) \
+	ft_printf.c
 
 
 OBJS = $(addprefix $(OBJ_DIR)/, $(notdir $(SRCS:.c=.o)))
@@ -84,9 +86,9 @@ re : fclean all
 
 $(OBJ_DIR)/%.o : %.c
 	@mkdir -p $(OBJ_DIR)
-	$(CC) $(CFLAGS) -I $(INC_DIR) -I $(LIBFT_INC_DIR) -c $< -o $@
+	$(CC) $(CFLAGS) -I $(INC_DIR) -I $(INC_DIR) -c $< -o $@
 
-$(NAME) : $(LIBFT_FILE) $(INCLUDES) $(OBJS)
+$(NAME) : $(INCLUDES) $(OBJS)
 	$(AR) $(ARFLAGS) $@ $(OBJS)
 
 #libft
