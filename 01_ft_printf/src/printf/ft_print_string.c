@@ -6,7 +6,7 @@
 /*   By: hopark <hopark@student.42seoul.kr>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/11/25 02:34:10 by hopark            #+#    #+#             */
-/*   Updated: 2020/11/27 15:57:29 by hopark           ###   ########.fr       */
+/*   Updated: 2020/11/27 19:51:04 by hopark           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,7 +26,6 @@ void		ft_printf_string(t_infor *infor, va_list ap, char c)
 	char	*temp;
 	char	*out;
 	int		i;
-
 	i = 0;
 	temp = va_arg(ap, char *);
 	if (temp == 0)
@@ -45,7 +44,6 @@ void		ft_printf_string(t_infor *infor, va_list ap, char c)
 		i = infor->size - strlen;
 	ft_memcpy(&out[i], temp, strlen);
 	infor->content = out;
-	free(temp);
 }
 
 char		*ft_put_null(char *temp)

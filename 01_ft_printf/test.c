@@ -6,7 +6,7 @@
 /*   By: hopark <hopark@student.42seoul.kr>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/11/26 19:49:02 by hopark            #+#    #+#             */
-/*   Updated: 2020/11/27 18:40:18 by hopark           ###   ########.fr       */
+/*   Updated: 2020/11/27 19:48:48 by hopark           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,36 +37,38 @@ int main()
 	// printf(format,c);
 
 	// // -------string------
-	// char *format = "*%.12s*\n";
-	// char *c = 0;
-	// printf("ft\n");
-	// ft_printf(format,c);
-	// printf("\n");
-	// printf("pf\n");
-	// printf(format,c);
+	char *format = "hello, %s.\n";
+	char *c = "gavin";
+	printf("pf\n");
+	printf(format,c);
+	printf("ft\n");
+	ft_printf(format,c);
+	printf("\n");
+
 
 
 	// -------point------
-	char *format = "@%hllhx@\n";
-	unsigned long long c = 1212313132;
+	// char *format = "hello, %s.";
+	// char *c = "gavin";
+	// // long long c = -9223372036854775808;
+	// // long long c = LLONG_MIN;
+	// // printf("AAAA : %lld\n", LLONG_MIN);
+	// printf("ft : %d\n" , ft_printf(format,c));
+	// printf("\n");
+	// printf("pf : %d\n",	printf(format, c));
+
+
+
+
+
+
+	// char *format = "@%.lld@\n";
 	// long long c = -9223372036854775808;
-	// long long c = LLONG_MIN;
-	// printf("AAAA : %lld\n", LLONG_MIN);
-	printf("ft : %d\n" , ft_printf(format,c));
-	printf("\n");
-	printf("pf : %d\n",	printf(format, c));
-
-
-}
-
-
-
-	// char *format = "@%5.d@\n";
-	// long long c = -9223372036854775808;
-	// long long c = LLONG_MIN;
+	// // long long c = LLONG_MIN;
 	// printf("AAAA : %lld\n", LLONG_MIN);
 	// printf("ft\n");
 	// ft_printf(format,c);
 	// printf("\n");
 	// printf("pf\n");
 	// printf(format,c);
+}

@@ -6,7 +6,7 @@
 #    By: hopark <hopark@student.42seoul.kr>         +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2020/11/23 13:16:57 by hopark            #+#    #+#              #
-#    Updated: 2020/11/27 19:03:50 by hopark           ###   ########.fr        #
+#    Updated: 2020/11/27 19:08:40 by hopark           ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -86,9 +86,9 @@ re : fclean all
 
 $(OBJ_DIR)/%.o : %.c
 	@mkdir -p $(OBJ_DIR)
-	$(CC) $(CFLAGS) -I $(INC_DIR) -I $(INC_DIR) -c $< -o $@
+	$(CC) $(CFLAGS) -I $(INC_DIR) -I $(LIBFT_INC_DIR) -c $< -o $@
 
-$(NAME) : $(INCLUDES) $(OBJS)
+$(NAME) : $(LIBFT_FILE) $(INCLUDES) $(OBJS)
 	$(AR) $(ARFLAGS) $@ $(OBJS)
 
 #libft
