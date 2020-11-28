@@ -6,7 +6,7 @@
 /*   By: hopark <hopark@student.42seoul.kr>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/11/23 13:37:17 by hopark            #+#    #+#             */
-/*   Updated: 2020/11/27 03:33:37 by hopark           ###   ########.fr       */
+/*   Updated: 2020/11/29 02:37:25 by hopark           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,7 +32,7 @@ unsigned long long	ft_umax(unsigned long long a, unsigned long long b, unsigned 
 unsigned long long	ft_umin(unsigned long long a, unsigned long long b, unsigned long long c);
 void				*ft_memcpy(void *dest, const void *src, int n);
 void				ft_putchar_fd(char c, int fd);
-void				ft_putstr_fd(char *s, int fd);
+void				ft_putstr_fd(char *s, int fd, int num);
 char				*ft_strchr(const char *s, int c);
 int					ft_strlen(const char *s);
 

@@ -6,7 +6,7 @@
 #    By: hopark <hopark@student.42seoul.kr>         +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2020/11/23 13:16:57 by hopark            #+#    #+#              #
-#    Updated: 2020/11/27 18:51:47 by hopark           ###   ########.fr        #
+#    Updated: 2020/11/28 20:37:54 by hopark           ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -20,6 +20,10 @@ CFLAGS = -Wall -Wextra -Werror
 
 RM = rm
 RMFLAG = -f
+
+ifeq ($(DEBUG),true)
+	CDEBUG = -g
+endif
 
 INC_DIR = ./include
 SRC_DIR = ./src
@@ -61,7 +65,7 @@ re : fclean all
 
 $(OBJ_DIR)/%.o : %.c
 	@mkdir -p $(OBJ_DIR)
-	@$(CC) $(CFLAGS) -I $(INC_DIR) -c $< -o $@
+	@$(CC) $(CDEBUG) $(CFLAGS) -I $(INC_DIR) -c $< -o $@
 
 $(NAME) : $(INCLUDES) $(OBJS)
 	@$(AR) $(ARFLAGS) $@ $(OBJS)

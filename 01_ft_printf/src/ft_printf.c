@@ -6,7 +6,7 @@
 /*   By: hopark <hopark@student.42seoul.kr>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/11/24 21:19:38 by hopark            #+#    #+#             */
-/*   Updated: 2020/11/27 19:44:10 by hopark           ###   ########.fr       */
+/*   Updated: 2020/11/29 04:39:43 by hopark           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,7 +33,7 @@ int			ft_printf(const char *format, ...)
 		}
 		else
 		{
-			ft_putchar_fd(*a_format++, 0);
+			ft_putchar_fd(*a_format++, 1);
 			cnt++;
 		}
 	}
@@ -45,11 +45,12 @@ int			ft_print(char **format, va_list ap)
 {
 	t_infor	*infor;
 	int		cnt;
+
 	infor = ft_init_infor(0);
 	cnt = ft_parsing(format, ap, infor);
 	if (infor->content)
 	{
-		ft_putstr_fd((infor->content), 0);
+		ft_putstr_fd((infor->content), 1, infor->size);
 		free(infor->content);
 	}
 	free(infor);

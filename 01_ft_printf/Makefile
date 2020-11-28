@@ -6,7 +6,7 @@
 #    By: hopark <hopark@student.42seoul.kr>         +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2020/11/23 13:16:57 by hopark            #+#    #+#              #
-#    Updated: 2020/11/27 19:08:40 by hopark           ###   ########.fr        #
+#    Updated: 2020/11/29 02:33:24 by hopark           ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -20,6 +20,10 @@ CFLAGS = -Wall -Wextra -Werror
 
 RM = rm
 RMFLAGS = -f
+
+ifeq ($(DEBUG),true)
+	CDEBUG = -g
+endif
 
 LIBFT = libft.a
 LIBFT_DIR = ./libft
@@ -56,7 +60,6 @@ SRC_PRINTF = $(addprefix $(SRC_PRINTF_DIR)/, \
 		ft_print_int.c \
 		ft_print_int2.c \
 		ft_print_uint.c \
-		ft_print_uint2.c \
 		ft_print_string.c \
 )
 
@@ -86,7 +89,7 @@ re : fclean all
 
 $(OBJ_DIR)/%.o : %.c
 	@mkdir -p $(OBJ_DIR)
-	$(CC) $(CFLAGS) -I $(INC_DIR) -I $(LIBFT_INC_DIR) -c $< -o $@
+	$(CC) $(CDEBUG) $(CFLAGS) -I $(INC_DIR) -I $(LIBFT_INC_DIR) -c $< -o $@
 
 $(NAME) : $(LIBFT_FILE) $(INCLUDES) $(OBJS)
 	$(AR) $(ARFLAGS) $@ $(OBJS)
@@ -116,6 +119,9 @@ test : $(NAME) $(TEST_FILE)
 	@./$(TEST_FILE:.c=.out)
 	@rm $(TEST_FILE:.c=.out)
 	@rm -rf $(TEST_FILE:.c=.out.dSYM)
+
+debug_make : $(NAME) $(TEST_FILE)
+	$(CC) -g -I $(INC_DIR) -I $(LIBFT_INC_DIR) $(TEST_FILE) -o $(TEST_FILE:.c=.out) -L. -lftprintf
 
 .PHONY : \
 	all clean fclean re \

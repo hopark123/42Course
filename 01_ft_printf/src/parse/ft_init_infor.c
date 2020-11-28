@@ -6,7 +6,7 @@
 /*   By: hopark <hopark@student.42seoul.kr>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/11/24 21:19:08 by hopark            #+#    #+#             */
-/*   Updated: 2020/11/27 01:12:54 by hopark           ###   ########.fr       */
+/*   Updated: 2020/11/29 04:01:52 by hopark           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,8 +35,6 @@ t_infor		*ft_init_infor(t_infor *infor)
 	result->type = 0;
 	result->hcount = 0;
 	result->lcount = 0;
-	if (!(result->content = malloc(sizeof(char))))
-		return (0);
 	result->content = 0;
 	infor = result;
 	return (result);

@@ -6,7 +6,7 @@
 /*   By: hopark <hopark@student.42seoul.kr>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/11/27 15:30:07 by hopark            #+#    #+#             */
-/*   Updated: 2020/11/27 18:13:11 by hopark           ###   ########.fr       */
+/*   Updated: 2020/11/29 04:28:09 by hopark           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,7 +15,7 @@
 char		*ft_hexa_itoa(t_infor *infor, char *base,\
 						unsigned long long num, int i)
 {
-	if (num > 16)
+	if (num >= 16)
 		ft_hexa_itoa(infor, base, num / 16, i + 1);
 	infor->content[infor->len - i] = base[num % 16];
 	return (infor->content);

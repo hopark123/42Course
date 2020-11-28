@@ -38,9 +38,9 @@ int main()
 // printf("%7lf\n",(double)0.12345678);
 // printf("%8lf\n",(double)0.12345678);
 // printf("%9lf\n",(double)0.12345678);
-char *format = "%0d@\n";
+// char *format = "%09.5d@\n";
 // char *a = "abc";
-printf("return : %d\n",printf(format, -7, -13));
+// printf("return : %d\n",printf(format, -7));
 // printf("@%09.10d@\n", -1234);
 // printf("@%- 9.10d@\n", 1234);
 // printf("@%-9.10d@\n", 1234);
@@ -99,6 +99,11 @@ printf("return : %d\n",printf(format, -7, -13));
 	// printf("@%-+8.4d@\n", -123);
 	// printf("@%- 8.4d@\n", -123);
 
+	char *format = "@%-+5.0d@\n";
+	long long c = 0;
+	printf("\n");
+	printf("pf : %d\n",	printf(format,c));
+
 	//p >= w > len
 	// printf("@%5.9d@\n", 123);
 	// printf("@%+5.9d@\n", 123);
@@ -122,8 +127,13 @@ printf("return : %d\n",printf(format, -7, -13));
 	// printf("@%+4.9d@\n", -123456);
 	// printf("@% 4.9d@\n", -123456);
 
+// printf("@%+08d@\n", -12345);
+// printf("@%08d@\n", 12345);
+// printf("@% 08d@\n", -12345);
+// printf("@%+03d@\n", -12345);
+// printf("@%03d@\n", -12345);
+// printf("@% .0d@\n", 0);
 
 
-	 printf ("Decimals: %lld %d\n", 1977, 650000L);
 
 }

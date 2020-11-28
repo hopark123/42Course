@@ -6,7 +6,7 @@
 /*   By: hopark <hopark@student.42seoul.kr>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/11/27 15:09:41 by hopark            #+#    #+#             */
-/*   Updated: 2020/11/27 18:40:23 by hopark           ###   ########.fr       */
+/*   Updated: 2020/11/29 04:35:59 by hopark           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,19 +14,36 @@
 
 void			ft_print_hexa(t_infor *infor, va_list ap)
 {
+	unsigned long long number;
+
+	number = ft_hexa_size(infor, ap);
+	if (number == 0 && infor->precision == 0)
+	{
+		ft_hexa_null(infor);
+		return ;
+	}
+	infor->len = ft_hexa_len("0123456789abcdef", number);
+	infor->size = ft_max(infor->len, infor->precision, 0);
+	infor->content = ft_calloc_c(infor->len + 1, sizeof(char), ' ');
 	if (infor->type == 'X')
-		ft_printf_hexa(infor, ap, "0123456789ABCDEF");
-	else if (infor->type == 'x')
-		ft_printf_hexa(infor, ap, "0123456789abcdef");
+	{
+		infor->content = ft_hexa_itoa(infor, "0123456789ABCDEF", number, 1);
+		ft_printf_hexa(infor);
+	}
 	else
-		ft_printf_hexa(infor, ap, "0123456789abcdef");
+	{
+		infor->content = ft_hexa_itoa(infor, "0123456789abcdef", number, 1);
+		ft_printf_hexa(infor);
+	}
 }
 
 unsigned long long		ft_hexa_size(t_infor *infor, va_list ap)
 {
 	unsigned long long number;
 
-	if ((infor->lcount > 0 && infor->lcount % 2 == 0) || infor->type == 'p')
+	if (infor->type == 'p')
+		return (number = (unsigned long long)va_arg(ap, void *));
+	else if ((infor->lcount > 0 && infor->lcount % 2 == 0))
 		return (number = va_arg(ap, unsigned long long));
 	else if (infor->lcount > 0 && infor->lcount % 2 == 1)
 		return (number = va_arg(ap, unsigned long));
@@ -38,30 +55,64 @@ unsigned long long		ft_hexa_size(t_infor *infor, va_list ap)
 		return (number = va_arg(ap, unsigned int));
 }
 
-void			ft_printf_hexa(t_infor *infor, va_list ap, char *base)
+void		ft_hexa_null(t_infor *infor)
 {
-	unsigned long long number;
+	char		*out;
+	int			i;
 
-	number = ft_hexa_size(infor, ap);
-
-	infor->len = ft_hexa_len(base, number);
-	infor->size = ft_max(infor->len, infor->precision, 0);
-	infor->content = ft_calloc_c(infor->len + 1, sizeof(char), ' ');
-	infor->content = ft_hexa_itoa(infor, base, number, 1);
-	if (infor->flag.hash == 1 || infor->type == 'p')
-	{
-		infor->size += 2;
-		if (infor->flag.left)
-			ft_hexa_hl(infor);
-		else
-			ft_hexa_hr(infor);
-	}
+	infor->len = 0;
+	infor->size = ft_max(infor->len, infor->width, infor->precision);
+	if (infor->flag.left)
+		i = 0;
 	else
-	{
-		if (infor->flag.left)
-			ft_hexa_nhl(infor);
-		else
-			ft_hexa_nhr(infor);
-	}
+		i = infor->width - ft_max(infor->precision, infor->len, 0) - 1;
+	out = ft_calloc_c(infor->size + 1, sizeof(char), ' ');
+	while (i < infor->width - infor->len)
+		out[i++] = ' ';
+	ft_memcpy(&out[i], infor->content, ft_strlen(infor->content));
+	infor->content = out;
 }
 
+void		ft_hexa_hz(t_infor *infor)
+{
+	char		*out;
+	int			i;
+	int			j;
+
+	i = 0;
+	j = 0;
+	if (infor->width > infor->size)
+	{
+		i = infor->width - infor->size;
+		infor->size = infor->width;
+	}
+	out = ft_calloc_c(infor->size + 1, sizeof(char), '0');
+	out[i++] = '0';
+	out[i++] = (infor->type == 'X' ? 'X' : 'x');
+	while (j++ < infor->precision - infor->len)
+		out[i++] = '0';
+	ft_memcpy(&out[i], infor->content, ft_strlen(infor->content));
+	free(infor->content);
+	infor->content = out;
+}
+
+void		ft_hexa_z(t_infor *infor)
+{
+	char		*out;
+	int			i;
+	int			j;
+
+	i = 0;
+	j = 0;
+	if (infor->width > infor->size)
+	{
+		i = infor->width - infor->size;
+		infor->size = infor->width;
+	}
+	out = ft_calloc_c(infor->size + 1, sizeof(char), '0');
+	while (j++ < infor->precision - infor->len)
+		out[i++] = '0';
+	ft_memcpy(&out[i], infor->content, ft_strlen(infor->content));
+	free(infor->content);
+	infor->content = out;
+}

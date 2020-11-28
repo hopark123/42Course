@@ -6,15 +6,15 @@
 /*   By: hopark <hopark@student.42seoul.kr>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/11/23 12:49:53 by hopark            #+#    #+#             */
-/*   Updated: 2020/11/26 18:24:47 by hopark           ###   ########.fr       */
+/*   Updated: 2020/11/29 02:36:34 by hopark           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
 
-void	ft_putstr_fd(char *s, int fd)
+void	ft_putstr_fd(char *s, int fd, int num)
 {
 	if (s == 0 || fd < 0)
 		return ;
-	write(fd, s, ft_strlen(s));
+	write(fd, s, num);
 }

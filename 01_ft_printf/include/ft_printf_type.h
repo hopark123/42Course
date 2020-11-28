@@ -6,7 +6,7 @@
 /*   By: hopark <hopark@student.42seoul.kr>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/11/24 21:17:20 by hopark            #+#    #+#             */
-/*   Updated: 2020/11/27 16:32:10 by hopark           ###   ########.fr       */
+/*   Updated: 2020/11/28 23:15:18 by hopark           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,11 +25,11 @@ typedef struct		s_flag
 typedef struct		s_infor
 {
 	t_flag	flag;
-	int		nega;
 	int		len;
 	int		width;
 	int		precision;
 	int		size;
+	char	nega;
 	char	type;
 	char	*content;
 	int		hcount;
