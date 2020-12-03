@@ -6,7 +6,7 @@
 /*   By: hopark <hopark@student.42seoul.kr>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/11/24 21:19:57 by hopark            #+#    #+#             */
-/*   Updated: 2020/12/03 22:53:18 by hopark           ###   ########.fr       */
+/*   Updated: 2020/11/29 04:38:38 by hopark           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,7 +30,7 @@ int			ft_parsing(char **format, va_list ap, t_infor *infor)
 			infor->type = **format;
 			ft_make_content(infor, ap);
 			(*format)++;
-			return (infor->size);
+			return (ft_strlen(infor->content));
 		}
 	}
 	return (0);

@@ -1,28 +1,28 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_check_precision.c                               :+:      :+:    :+:   */
+/*   ft_check_width.c                                   :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: hopark <hopark@student.42seoul.kr>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2020/11/24 21:21:03 by hopark            #+#    #+#             */
-/*   Updated: 2020/12/03 23:13:56 by hopark           ###   ########.fr       */
+/*   Created: 2020/11/24 21:20:46 by hopark            #+#    #+#             */
+/*   Updated: 2020/11/26 18:53:25 by hopark           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "ft_printf_parse.h"
 
-void			ft_check_precision(char **format, t_infor *infor, va_list ap)
+void			ft_check_width(char **format, t_infor *infor, va_list ap)
 {
 	int		temp;
 
-	(*format)++;
 	temp = 0;
 	if (**format == '*')
 	{
-		if ((infor->precision = va_arg(ap, int)) < 0)
+		if ((infor->width = va_arg(ap, int)) <= 0)
 		{
-			infor->precision = -1;
+			infor->flag.left = 1;
+			infor->width *= -1;
 		}
 		(*format)++;
 		return ;
@@ -33,5 +33,5 @@ void			ft_check_precision(char **format, t_infor *infor, va_list ap)
 		temp += **format - '0';
 		(*format)++;
 	}
-	infor->precision = temp;
+	infor->width = temp;
 }

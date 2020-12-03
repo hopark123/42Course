@@ -1,33 +1,60 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_print_int2.c                                    :+:      :+:    :+:   */
+/*   ft_print_hexa2.c                                   :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: hopark <hopark@student.42seoul.kr>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2020/11/26 18:50:23 by hopark            #+#    #+#             */
-/*   Updated: 2020/12/03 23:28:30 by hopark           ###   ########.fr       */
+/*   Created: 2020/11/27 18:06:21 by hopark            #+#    #+#             */
+/*   Updated: 2020/11/29 04:20:39 by hopark           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "ft_printf.h"
 
-void		ft_printf_int(t_infor *infor)
+void		ft_hexa_hl(t_infor *infor)
 {
-	if (infor->size > infor->len && infor->size > infor->precision)
+	char		*out;
+	int			i;
+	int			j;
+
+	i = 0;
+	j = 0;
+	infor->size = ft_max(infor->size, infor->width, 0);
+	out = ft_calloc_c(infor->size + 1, sizeof(char), ' ');
+	out[i++] = '0';
+	out[i++] = (infor->type == 'X' ? 'X' : 'x');
+	while (j++ < infor->precision - infor->len)
+		out[i++] = '0';
+	ft_memcpy(&out[i], infor->content, ft_strlen(infor->content));
+	free(infor->content);
+	infor->content = out;
+}
+
+void		ft_hexa_hr(t_infor *infor)
+{
+	char		*out;
+	int			i;
+	int			j;
+
+	i = 0;
+	j = 0;
+	if (infor->width > infor->size)
 	{
-		if (infor->flag.left)
-			ft_int_nz_wl(infor);
-		else
-			ft_int_nz_wr(infor);
+		i = infor->width - infor->size;
+		infor->size = infor->width;
 	}
-	else if (infor->flag.plus || infor->flag.blank || infor->nega)
-		ft_int_nz_sign(infor);
-	else
-		ft_int_nz_nsign(infor);
+	out = ft_calloc_c(infor->size + 1, sizeof(char), ' ');
+	out[i++] = '0';
+	out[i++] = (infor->type == 'X' ? 'X' : 'x');
+	while (j++ < infor->precision - infor->len - 1)
+		out[i++] = '0';
+	ft_memcpy(&out[i], infor->content, ft_strlen(infor->content));
+	free(infor->content);
+	infor->content = out;
 }
 
-void		ft_int_nz_wl(t_infor *infor)
+void		ft_hexa_nhl(t_infor *infor)
 {
 	char		*out;
 	int			i;
@@ -35,13 +62,8 @@ void		ft_int_nz_wl(t_infor *infor)
 
 	i = 0;
 	j = 0;
+	infor->size = ft_max(infor->size, infor->width, 0);
 	out = ft_calloc_c(infor->size + 1, sizeof(char), ' ');
-	if (infor->nega)
-		out[i++] = '-';
-	else if (infor->flag.plus)
-		out[i++] = '+';
-	else if (infor->flag.blank)
-		out[i++] = ' ';
 	while (j++ < infor->precision - infor->len)
 		out[i++] = '0';
 	ft_memcpy(&out[i], infor->content, ft_strlen(infor->content));
@@ -49,23 +71,20 @@ void		ft_int_nz_wl(t_infor *infor)
 	infor->content = out;
 }
 
-void		ft_int_nz_wr(t_infor *infor)
+void		ft_hexa_nhr(t_infor *infor)
 {
 	char		*out;
 	int			i;
 	int			j;
 
-	i = infor->width - ft_max(infor->precision, infor->len, 0) - 1;
+	i = 0;
 	j = 0;
+	if (infor->width > infor->size)
+	{
+		i = infor->width - infor->size;
+		infor->size = infor->width;
+	}
 	out = ft_calloc_c(infor->size + 1, sizeof(char), ' ');
-	if (infor->nega)
-		out[i++] = '-';
-	else if (infor->flag.plus)
-		out[i++] = '+';
-	else if (infor->flag.blank)
-		out[i++] = ' ';
-	else
-		i++;
 	while (j++ < infor->precision - infor->len)
 		out[i++] = '0';
 	ft_memcpy(&out[i], infor->content, ft_strlen(infor->content));
@@ -73,43 +92,25 @@ void		ft_int_nz_wr(t_infor *infor)
 	infor->content = out;
 }
 
-void		ft_int_nz_nsign(t_infor *infor)
+void			ft_printf_hexa(t_infor *infor)
 {
-	char		*out;
-	int			i;
-	int			j;
-
-	i = 0;
-	j = 0;
-	out = ft_calloc_c(infor->size + 1, sizeof(char), ' ');
-	while (j++ < infor->precision - infor->len)
-		out[i++] = '0';
-	ft_memcpy(&out[i], infor->content, infor->size);
-	free(infor->content);
-	infor->content = out;
-}
-
-void		ft_int_nz_sign(t_infor *infor)
-{
-	char		*out;
-	int			i;
-	int			j;
-
-	i = 0;
-	j = 0;
-	infor->size++;
-	out = ft_calloc_c(infor->size + 1, sizeof(char), ' ');
-	if (infor->nega)
-		out[i++] = '-';
-	else if (infor->flag.plus)
-		out[i++] = '+';
-	else if (infor->flag.blank)
-		out[i++] = ' ';
+	if (infor->flag.hash == 1 || infor->type == 'p')
+	{
+		infor->size += 2;
+		if (!infor->flag.left && infor->precision < 0 && infor->flag.zero)
+			ft_hexa_hz(infor);
+		else if (infor->flag.left)
+			ft_hexa_hl(infor);
+		else
+			ft_hexa_hr(infor);
+	}
 	else
-		i++;
-	while (j++ < infor->precision - infor->len)
-		out[i++] = '0';
-	ft_memcpy(&out[i], infor->content, infor->size);
-	free(infor->content);
-	infor->content = out;
+	{
+		if (!infor->flag.left && infor->precision < 0 && infor->flag.zero)
+			ft_hexa_z(infor);
+		else if (infor->flag.left)
+			ft_hexa_nhl(infor);
+		else
+			ft_hexa_nhr(infor);
+	}
 }

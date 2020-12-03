@@ -6,7 +6,7 @@
 /*   By: hopark <hopark@student.42seoul.kr>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/11/24 21:21:30 by hopark            #+#    #+#             */
-/*   Updated: 2020/12/03 22:54:28 by hopark           ###   ########.fr       */
+/*   Updated: 2020/11/29 02:54:35 by hopark           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,6 +14,7 @@
 
 void			ft_make_content(t_infor *infor, va_list ap)
 {
+
 	if (infor->type == 's')
 		ft_print_string(infor, ap);
 	else if (infor->type == 'd' || infor->type == 'i')

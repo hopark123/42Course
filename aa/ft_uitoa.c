@@ -1,37 +1,33 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_check_precision.c                               :+:      :+:    :+:   */
+/*   ft_uitoa.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: hopark <hopark@student.42seoul.kr>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2020/11/24 21:21:03 by hopark            #+#    #+#             */
-/*   Updated: 2020/12/03 23:13:56 by hopark           ###   ########.fr       */
+/*   Created: 2020/11/24 21:30:41 by hopark            #+#    #+#             */
+/*   Updated: 2020/11/27 03:50:36 by hopark           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "ft_printf_parse.h"
+#include "libft.h"
 
-void			ft_check_precision(char **format, t_infor *infor, va_list ap)
+char			*ft_uitoa(unsigned long long n)
 {
-	int		temp;
+	int			len;
+	int			i;
+	char		*result;
 
-	(*format)++;
-	temp = 0;
-	if (**format == '*')
+	len = ft_uint_len(n);
+	if (!(result = (char *)malloc(sizeof(char) * (len + 1))))
+		return (0);
+	result[len] = 0;
+	i = 0;
+	while (i < len)
 	{
-		if ((infor->precision = va_arg(ap, int)) < 0)
-		{
-			infor->precision = -1;
-		}
-		(*format)++;
-		return ;
+		result[len - i - 1] = n % 10 + '0';
+		n /= 10;
+		i++;
 	}
-	while (ft_strchr("0123456789", **format))
-	{
-		temp *= 10;
-		temp += **format - '0';
-		(*format)++;
-	}
-	infor->precision = temp;
+	return (result);
 }

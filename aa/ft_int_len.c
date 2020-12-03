@@ -1,37 +1,35 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_check_precision.c                               :+:      :+:    :+:   */
+/*   ft_int_len.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: hopark <hopark@student.42seoul.kr>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2020/11/24 21:21:03 by hopark            #+#    #+#             */
-/*   Updated: 2020/12/03 23:13:56 by hopark           ###   ########.fr       */
+/*   Created: 2020/11/26 18:27:59 by hopark            #+#    #+#             */
+/*   Updated: 2020/11/27 18:25:38 by hopark           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "ft_printf_parse.h"
+#include "libft.h"
 
-void			ft_check_precision(char **format, t_infor *infor, va_list ap)
+int				ft_int_len(long long n)
 {
-	int		temp;
+	int			len;
+	long long	n2;
 
-	(*format)++;
-	temp = 0;
-	if (**format == '*')
+	len = 0;
+	n2 = (long long)n;
+	if (n2 < 0)
 	{
-		if ((infor->precision = va_arg(ap, int)) < 0)
-		{
-			infor->precision = -1;
-		}
-		(*format)++;
-		return ;
+		len++;
+		n2 *= -1;
 	}
-	while (ft_strchr("0123456789", **format))
+	while (n2 >= 10)
 	{
-		temp *= 10;
-		temp += **format - '0';
-		(*format)++;
+		len++;
+		n2 /= 10;
 	}
-	infor->precision = temp;
+	if (n == LLONG_MIN)
+		return (18);
+	return (++len);
 }
