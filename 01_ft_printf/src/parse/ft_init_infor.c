@@ -6,7 +6,7 @@
 /*   By: hopark <hopark@student.42seoul.kr>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/11/24 21:19:08 by hopark            #+#    #+#             */
-/*   Updated: 2020/12/04 00:09:19 by hopark           ###   ########.fr       */
+/*   Updated: 2020/12/04 01:20:13 by hopark           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,7 +31,9 @@ t_infor		*ft_init_infor(t_infor *infor)
 	result->nega = 0;
 	result->len = 0;
 	result->width = 0;
-	result->precision = -1;
+	result->size = 0;
+	result->precision = 1;
+	result->inprec = 0;
 	result->type = 0;
 	result->hcount = 0;
 	result->lcount = 0;

@@ -6,7 +6,7 @@
 /*   By: hopark <hopark@student.42seoul.kr>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/11/24 21:25:44 by hopark            #+#    #+#             */
-/*   Updated: 2020/11/29 02:33:19 by hopark           ###   ########.fr       */
+/*   Updated: 2020/12/04 01:40:13 by hopark           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,7 +25,7 @@ void		ft_print_uint(t_infor *infor, va_list ap)
 	infor->len = ft_uint_len(number);
 	infor->content = ft_uitoa(number);
 	infor->size = ft_max(infor->len, infor->width, infor->precision);
-	if (!infor->flag.left && infor->precision < 0 && infor->flag.zero)
+	if (!infor->flag.left && infor->flag.zero)
 	{
 		if (infor->size > infor->len && infor->size > infor->precision)
 		{

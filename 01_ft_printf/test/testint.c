@@ -99,10 +99,10 @@ int main()
 	// printf("@%-+8.4d@\n", -123);
 	// printf("@%- 8.4d@\n", -123);
 
-	char *format = "@%-+5.0d@\n";
-	long long c = 0;
-	printf("\n");
-	printf("pf : %d\n",	printf(format,c));
+	// char *format = "@%-+5.0d@\n";
+	// long long c = 0;
+	// printf("\n");
+	// printf("pf : %d\n",	printf(format,c));
 
 	//p >= w > len
 	// printf("@%5.9d@\n", 123);
@@ -133,6 +133,18 @@ int main()
 // printf("@%+03d@\n", -12345);
 // printf("@%03d@\n", -12345);
 // printf("@% .0d@\n", 0);
+
+char *f1= "1\n%d#\n";
+char *f2= "2\n%.d#\n";
+char *f3= "3\n%.*d#\n";
+char *f4= "4\n%d#\n";
+
+int c = 0;
+printf("p : %d\n",printf(f1,c));
+printf("p : %d\n",printf(f2,c));
+printf("p : %d\n",printf(f3,0,c));
+printf("p : %d\n",printf(f4,c));
+
 
 
 

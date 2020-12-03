@@ -6,7 +6,7 @@
 /*   By: hopark <hopark@student.42seoul.kr>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/11/24 21:17:20 by hopark            #+#    #+#             */
-/*   Updated: 2020/11/28 23:15:18 by hopark           ###   ########.fr       */
+/*   Updated: 2020/12/04 01:15:15 by hopark           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,6 +28,7 @@ typedef struct		s_infor
 	int		len;
 	int		width;
 	int		precision;
+	int		inprec;
 	int		size;
 	char	nega;
 	char	type;
