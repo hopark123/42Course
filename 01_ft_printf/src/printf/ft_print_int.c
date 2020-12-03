@@ -6,7 +6,7 @@
 /*   By: hopark <hopark@student.42seoul.kr>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/11/24 21:25:44 by hopark            #+#    #+#             */
-/*   Updated: 2020/12/04 01:38:56 by hopark           ###   ########.fr       */
+/*   Updated: 2020/12/04 02:00:53 by hopark           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -60,6 +60,7 @@ void		ft_int_null(t_infor *infor)
 {
 	char		*out;
 	int			i;
+
 	infor->len = 0;
 	infor->size = ft_max(infor->len, infor->width, infor->precision);
 	if (infor->flag.left)

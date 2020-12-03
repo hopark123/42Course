@@ -6,7 +6,7 @@
 /*   By: hopark <hopark@student.42seoul.kr>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/11/27 18:06:21 by hopark            #+#    #+#             */
-/*   Updated: 2020/12/04 01:43:41 by hopark           ###   ########.fr       */
+/*   Updated: 2020/12/04 02:42:46 by hopark           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,8 +24,9 @@ void		ft_hexa_hl(t_infor *infor)
 	out = ft_calloc_c(infor->size + 1, sizeof(char), ' ');
 	out[i++] = '0';
 	out[i++] = (infor->type == 'X' ? 'X' : 'x');
-	while (j++ < infor->precision - infor->len)
-		out[i++] = '0';
+	if (infor->inprec == 1)
+		while (j++ < infor->precision - infor->len)
+			out[i++] = '0';
 	ft_memcpy(&out[i], infor->content, ft_strlen(infor->content));
 	free(infor->content);
 	infor->content = out;
@@ -44,10 +45,11 @@ void		ft_hexa_hr(t_infor *infor)
 		i = infor->width - infor->size;
 		infor->size = infor->width;
 	}
+
 	out = ft_calloc_c(infor->size + 1, sizeof(char), ' ');
 	out[i++] = '0';
 	out[i++] = (infor->type == 'X' ? 'X' : 'x');
-	while (j++ < infor->precision - infor->len - 1)
+	while (j++ < infor->precision - infor->len)
 		out[i++] = '0';
 	ft_memcpy(&out[i], infor->content, ft_strlen(infor->content));
 	free(infor->content);
@@ -97,7 +99,7 @@ void			ft_printf_hexa(t_infor *infor)
 	if (infor->flag.hash == 1 || infor->type == 'p')
 	{
 		infor->size += 2;
-		if (!infor->flag.left && infor->precision < 0 && infor->flag.zero)
+		if (!infor->flag.left && infor->flag.zero)
 			ft_hexa_hz(infor);
 		else if (infor->flag.left)
 			ft_hexa_hl(infor);
@@ -106,7 +108,7 @@ void			ft_printf_hexa(t_infor *infor)
 	}
 	else
 	{
-		if (!infor->flag.left && infor->precision < 0 && infor->flag.zero)
+		if (!infor->flag.left && infor->flag.zero)
 			ft_hexa_z(infor);
 		else if (infor->flag.left)
 			ft_hexa_nhl(infor);
