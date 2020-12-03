@@ -6,7 +6,7 @@
 /*   By: hopark <hopark@student.42seoul.kr>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/11/25 01:48:06 by hopark            #+#    #+#             */
-/*   Updated: 2020/12/03 22:21:30 by hopark           ###   ########.fr       */
+/*   Updated: 2020/12/04 03:56:17 by hopark           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,7 +25,7 @@ void		ft_print_char(t_infor *infor, va_list ap)
 		return ;
 	}
 	infor->size = ft_max(infor->width, 1, 0);
-	if (!infor->flag.left && infor->precision < 0 && infor->flag.zero)
+	if (!infor->flag.left && infor->flag.zero)
 		ft_char_z(infor);
 	else
 		ft_printf_char(infor);
@@ -38,7 +38,7 @@ void		ft_char_z(t_infor *infor)
 
 	i = 0;
 	out = ft_calloc_c(infor->size + 1, sizeof(char), ' ');
-	while (i < infor->width - infor->len - 1)
+	while (i < infor->width - 1)
 		out[i++] = '0';
 	ft_memcpy(&out[i], infor->content, 1);
 	free(infor->content);

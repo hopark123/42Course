@@ -6,7 +6,7 @@
 /*   By: hopark <hopark@student.42seoul.kr>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/11/27 15:09:41 by hopark            #+#    #+#             */
-/*   Updated: 2020/12/04 03:14:02 by hopark           ###   ########.fr       */
+/*   Updated: 2020/12/04 03:53:12 by hopark           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -60,15 +60,21 @@ void		ft_hexa_null(t_infor *infor)
 	char		*out;
 	int			i;
 
-	infor->len = 0;
+	infor->len = (infor->type == 'p' ? 2 : 0);
 	infor->size = ft_max(infor->len, infor->width, infor->precision);
 	if (infor->flag.left)
 		i = 0;
 	else
-		i = infor->width - ft_max(infor->precision, infor->len, 0) - 1;
+		i = infor->size - infor->len;
 	out = ft_calloc_c(infor->size + 1, sizeof(char), ' ');
+	if (infor->type == 'p')
+	{
+		out[i++] = '0';
+		out[i++] = (infor->type == 'X' ? 'X' : 'x');
+	}
 	while (i < infor->width - infor->len)
 		out[i++] = ' ';
+
 	ft_memcpy(&out[i], infor->content, ft_strlen(infor->content));
 	infor->content = out;
 }
