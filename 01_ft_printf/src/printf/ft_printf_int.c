@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_print_int.c                                     :+:      :+:    :+:   */
+/*   ft_printf_int.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: hopark <hopark@student.42seoul.kr>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/11/24 21:25:44 by hopark            #+#    #+#             */
-/*   Updated: 2020/12/10 20:16:40 by hopark           ###   ########.fr       */
+/*   Updated: 2020/12/10 20:34:07 by hopark           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -60,27 +60,20 @@ void		ft_int_null(t_infor *infor)
 {
 	char		*out;
 	int			i;
-	int			j;
 
-	j = 0;
-	i = 0;
-	if(infor->nega || infor->flag.plus || infor->flag.blank)
-		infor->len = 1;
-	else
-		infor->len = 0;
+	infor->len = 0;
 	infor->size = ft_max(infor->len, infor->width, infor->precision);
+	if (infor->nega || infor->flag.plus || infor->flag.blank)
+		infor->size++;
+	i = 0;
 	out = ft_calloc_c(infor->size + 1, sizeof(char), 0);
-	if (!infor->flag.left)
-		while (j++ < infor->width - infor->len)
-			out[i++] = ' ';
 	if (infor->nega)
 		out[i++] = '-';
 	else if (infor->flag.plus)
 		out[i++] = '+';
 	else if (infor->flag.blank)
 		out[i++] = ' ';
-	j = 0;
-	while (j++ <= infor->width - infor->len)
+	while (i < infor->width - infor->len)
 		out[i++] = ' ';
 	ft_memcpy(&out[i], infor->content, ft_strlen(infor->content));
 	infor->content = out;

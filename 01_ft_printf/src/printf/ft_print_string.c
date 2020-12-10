@@ -6,7 +6,7 @@
 /*   By: hopark <hopark@student.42seoul.kr>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/11/25 02:34:10 by hopark            #+#    #+#             */
-/*   Updated: 2020/12/04 01:21:38 by hopark           ###   ########.fr       */
+/*   Updated: 2020/12/10 20:17:05 by hopark           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,7 +34,7 @@ void		ft_printf_string(t_infor *infor, va_list ap, char c)
 		temp = ft_put_null(temp);
 		infor->precision = ft_min(infor->precision, 6, 6);
 	}
-	if (infor->inprec)
+	if (infor->inprec == 1)
 		strlen = ft_min(ft_strlen(temp), infor->precision, INT_MAX);
 	else
 		strlen = ft_strlen(temp);

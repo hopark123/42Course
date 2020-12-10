@@ -6,7 +6,7 @@
 /*   By: hopark <hopark@student.42seoul.kr>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/11/24 21:21:03 by hopark            #+#    #+#             */
-/*   Updated: 2020/12/04 02:26:25 by hopark           ###   ########.fr       */
+/*   Updated: 2020/12/10 20:16:51 by hopark           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,7 +22,7 @@ void			ft_check_precision(char **format, t_infor *infor, va_list ap)
 	if (**format == '*')
 	{
 		if ((infor->precision = va_arg(ap, int)) < 0)
-			infor->inprec = 0;
+			infor->inprec = 2;
 		(*format)++;
 		return ;
 	}

@@ -6,7 +6,7 @@
 /*   By: hopark <hopark@student.42seoul.kr>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/11/27 15:09:41 by hopark            #+#    #+#             */
-/*   Updated: 2020/12/04 03:53:12 by hopark           ###   ########.fr       */
+/*   Updated: 2020/12/10 20:16:49 by hopark           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,6 +22,8 @@ void			ft_print_hexa(t_infor *infor, va_list ap)
 		ft_hexa_null(infor);
 		return ;
 	}
+	if ((infor->inprec == 2 && number == 0) || number == 0)
+		infor->flag.hash = 0;
 	infor->len = ft_hexa_len("0123456789abcdef", number);
 	infor->content = ft_calloc_c(infor->len + 1, sizeof(char), ' ');
 	infor->size = ft_max(infor->len, infor->precision, 0);
@@ -59,22 +61,24 @@ void		ft_hexa_null(t_infor *infor)
 {
 	char		*out;
 	int			i;
+	int			j;
 
 	infor->len = (infor->type == 'p' ? 2 : 0);
 	infor->size = ft_max(infor->len, infor->width, infor->precision);
-	if (infor->flag.left)
-		i = 0;
-	else
-		i = infor->size - infor->len;
-	out = ft_calloc_c(infor->size + 1, sizeof(char), ' ');
+	out = ft_calloc_c(infor->size + 1, sizeof(char), 0);
+	i = 0;
+	j = infor->len == 2 ? 2 : 0;
+	if (!infor->flag.left)
+		while (j++ < infor->width - infor->precision)
+			out[i++] = ' ';
 	if (infor->type == 'p')
 	{
 		out[i++] = '0';
 		out[i++] = (infor->type == 'X' ? 'X' : 'x');
 	}
-	while (i < infor->width - infor->len)
+	j = infor->len == 2 ? 2 : 0 ;
+	while (j++ <= infor->width - infor->len)
 		out[i++] = ' ';
-
 	ft_memcpy(&out[i], infor->content, ft_strlen(infor->content));
 	infor->content = out;
 }
@@ -87,21 +91,20 @@ void		ft_hexa_hz(t_infor *infor)
 
 	i = 0;
 	j = 0;
-
+	infor->size = ft_max(infor->size, infor->width, 0);
 	out = ft_calloc_c(infor->size + 1, sizeof(char), '0');
+	if (infor->inprec == 2)
+		infor->precision = infor->width;
+	if (infor->inprec == 1)
+	while (j++ < infor->size - ft_max(infor->precision, infor->len, 0) - 2)
+		out[i++] = ' ';
 	out[i++] = '0';
 	out[i++] = (infor->type == 'X' ? 'X' : 'x');
-	if (infor->inprec == 1)
-	{
-		while (j++ < infor->width - ft_max(infor->precision, infor->len, 0))
-			out[i++] = ' ';
-		j = 0;
-		while (j++ < ft_max(infor->precision, infor->len, 0) - infor->len)
+	if (infor->inprec != 2)
+		while (i + j < infor->width - ft_max(infor->precision, infor->len, 0))
 			out[i++] = '0';
-	}
-	else
-		while (i < infor->width - infor->len)
-			out[i++] = 'b';
+	while (i < infor->size - infor->len)
+			out[i++] = '0';
 	ft_memcpy(&out[i], infor->content, ft_strlen(infor->content));
 	free(infor->content);
 	infor->content = out;

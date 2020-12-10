@@ -6,11 +6,34 @@
 /*   By: hopark <hopark@student.42seoul.kr>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/11/27 18:06:21 by hopark            #+#    #+#             */
-/*   Updated: 2020/12/04 03:55:29 by hopark           ###   ########.fr       */
+/*   Updated: 2020/12/10 20:16:47 by hopark           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "ft_printf.h"
+
+void			ft_printf_hexa(t_infor *infor)
+{
+	if (infor->flag.hash == 1 || infor->type == 'p')
+	{
+		infor->size += 2;
+		if (!infor->flag.left && infor->flag.zero)
+			ft_hexa_hz(infor);
+		else if (infor->flag.left)
+			ft_hexa_hl(infor);
+		else
+			ft_hexa_hr(infor);
+	}
+	else
+	{
+		if (!infor->flag.left && infor->flag.zero)
+			ft_hexa_z(infor);
+		else if (infor->flag.left)
+			ft_hexa_nhl(infor);
+		else
+			ft_hexa_nhr(infor);
+	}
+}
 
 void		ft_hexa_hl(t_infor *infor)
 {
@@ -92,27 +115,4 @@ void		ft_hexa_nhr(t_infor *infor)
 	ft_memcpy(&out[i], infor->content, ft_strlen(infor->content));
 	free(infor->content);
 	infor->content = out;
-}
-
-void			ft_printf_hexa(t_infor *infor)
-{
-	if (infor->flag.hash == 1 || infor->type == 'p')
-	{
-		infor->size += 2;
-		if (!infor->flag.left && infor->flag.zero)
-			ft_hexa_hz(infor);
-		else if (infor->flag.left)
-			ft_hexa_hl(infor);
-		else
-			ft_hexa_hr(infor);
-	}
-	else
-	{
-		if (!infor->flag.left && infor->flag.zero)
-			ft_hexa_z(infor);
-		else if (infor->flag.left)
-			ft_hexa_nhl(infor);
-		else
-			ft_hexa_nhr(infor);
-	}
 }
