@@ -6,7 +6,7 @@
 /*   By: hopark <hopark@student.42seoul.kr>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/11/26 19:49:02 by hopark            #+#    #+#             */
-/*   Updated: 2020/12/10 21:09:26 by hopark           ###   ########.fr       */
+/*   Updated: 2020/12/10 21:11:49 by hopark           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,10 +24,10 @@ int main()
 	// -------int------%
 	int c = 42323;
 
-	char *format ="#%2d";
+	char *format ="%2d";
 	ft_printf(format,c);
-	// ft_printf("\nft : %d\n" , ft_printf(format,c));
-	// printf("\npf : %d\n",	printf(format,c));
+	ft_printf("\nft : %d\n" , ft_printf(format,c));
+	printf("\npf : %d\n",	printf(format,c));
 	// char *format2 ="#%.x#";
 	// ft_printf("ft : %x\n" , ft_printf(format2,c));
 	// printf("pf : %x\n",	printf(format2,c));
