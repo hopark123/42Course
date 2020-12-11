@@ -6,7 +6,7 @@
 /*   By: hopark <hopark@student.42seoul.kr>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/11/23 13:37:17 by hopark            #+#    #+#             */
-/*   Updated: 2020/11/29 02:37:25 by hopark           ###   ########.fr       */
+/*   Updated: 2020/12/11 18:01:36 by hopark           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,8 +28,6 @@ char				*ft_llmin(char *result);
 char				*ft_uitoa(unsigned long long n);
 long long			ft_max(long long a, long long b, long long c);
 long long			ft_min(long long a, long long b, long long c);
-unsigned long long	ft_umax(unsigned long long a, unsigned long long b, unsigned long long c);
-unsigned long long	ft_umin(unsigned long long a, unsigned long long b, unsigned long long c);
 void				*ft_memcpy(void *dest, const void *src, int n);
 void				ft_putchar_fd(char c, int fd);
 void				ft_putstr_fd(char *s, int fd, int num);

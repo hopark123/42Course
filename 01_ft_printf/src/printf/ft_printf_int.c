@@ -6,7 +6,7 @@
 /*   By: hopark <hopark@student.42seoul.kr>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/11/24 21:25:44 by hopark            #+#    #+#             */
-/*   Updated: 2020/12/10 20:34:07 by hopark           ###   ########.fr       */
+/*   Updated: 2020/12/11 18:17:11 by hopark           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -79,8 +79,6 @@ void		ft_int_null(t_infor *infor)
 	infor->content = out;
 }
 
-
-
 void		ft_int_z(t_infor *infor)
 {
 	char		*out;
@@ -126,7 +124,7 @@ void		ft_int_z_w(t_infor *infor)
 		while (i < infor->width - ft_max(infor->precision, infor->len, 0))
 			out[i++] = ' ';
 	while (i < infor->width - infor->len)
-			out[i++] = '0';
+		out[i++] = '0';
 	ft_memcpy(&out[i], infor->content, ft_strlen(infor->content));
 	free(infor->content);
 	infor->content = out;

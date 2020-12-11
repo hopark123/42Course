@@ -6,13 +6,13 @@
 /*   By: hopark <hopark@student.42seoul.kr>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/11/24 21:25:44 by hopark            #+#    #+#             */
-/*   Updated: 2020/12/10 20:16:40 by hopark           ###   ########.fr       */
+/*   Updated: 2020/12/11 18:16:04 by hopark           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "ft_printf.h"
 
-void		ft_print_int(t_infor *infor, va_list ap)
+void			ft_print_int(t_infor *infor, va_list ap)
 {
 	long long	number;
 
@@ -40,7 +40,7 @@ void		ft_print_int(t_infor *infor, va_list ap)
 		ft_printf_int(infor);
 }
 
-long long	ft_int_size(t_infor *infor, va_list ap)
+long long		ft_int_size(t_infor *infor, va_list ap)
 {
 	long long	number;
 
@@ -56,7 +56,7 @@ long long	ft_int_size(t_infor *infor, va_list ap)
 		return (number = va_arg(ap, int));
 }
 
-void		ft_int_null(t_infor *infor)
+void			ft_int_null(t_infor *infor)
 {
 	char		*out;
 	int			i;
@@ -64,10 +64,9 @@ void		ft_int_null(t_infor *infor)
 
 	j = 0;
 	i = 0;
-	if(infor->nega || infor->flag.plus || infor->flag.blank)
+	infor->len = 0;
+	if (infor->nega || infor->flag.plus || infor->flag.blank)
 		infor->len = 1;
-	else
-		infor->len = 0;
 	infor->size = ft_max(infor->len, infor->width, infor->precision);
 	out = ft_calloc_c(infor->size + 1, sizeof(char), 0);
 	if (!infor->flag.left)
@@ -86,9 +85,7 @@ void		ft_int_null(t_infor *infor)
 	infor->content = out;
 }
 
-
-
-void		ft_int_z(t_infor *infor)
+void			ft_int_z(t_infor *infor)
 {
 	char		*out;
 	int			i;
@@ -111,7 +108,7 @@ void		ft_int_z(t_infor *infor)
 	infor->content = out;
 }
 
-void		ft_int_z_w(t_infor *infor)
+void			ft_int_z_w(t_infor *infor)
 {
 	char		*out;
 	int			i;
@@ -133,7 +130,7 @@ void		ft_int_z_w(t_infor *infor)
 		while (i < infor->width - ft_max(infor->precision, infor->len, 0))
 			out[i++] = ' ';
 	while (i < infor->width - infor->len)
-			out[i++] = '0';
+		out[i++] = '0';
 	ft_memcpy(&out[i], infor->content, ft_strlen(infor->content));
 	free(infor->content);
 	infor->content = out;

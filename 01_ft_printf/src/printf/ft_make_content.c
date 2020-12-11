@@ -6,7 +6,7 @@
 /*   By: hopark <hopark@student.42seoul.kr>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/11/24 21:21:30 by hopark            #+#    #+#             */
-/*   Updated: 2020/12/10 21:19:08 by hopark           ###   ########.fr       */
+/*   Updated: 2020/12/11 18:00:20 by hopark           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,14 +22,6 @@ void			ft_make_content(t_infor *infor, va_list ap)
 		ft_print_uint(infor, ap);
 	else if (infor->type == 'x' || infor->type == 'X' || infor->type == 'p')
 		ft_print_hexa(infor, ap);
-	// else if (infor->type == 'n')
-	// 	ft_printn(infor, ap);
-	// else if (infor->type == 'f')
-	// 	ft_printfloat(infor, ap);
-	// else if (infor->type == 'g')
-	// 	ft_printg(infor, ap);
-	// else if (infor->type == 'e')
-	// 	ft_printe(infor, ap);
 	else
 		ft_print_char(infor, ap);
 }

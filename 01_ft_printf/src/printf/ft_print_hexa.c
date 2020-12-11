@@ -6,13 +6,13 @@
 /*   By: hopark <hopark@student.42seoul.kr>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/11/27 15:09:41 by hopark            #+#    #+#             */
-/*   Updated: 2020/12/10 20:16:49 by hopark           ###   ########.fr       */
+/*   Updated: 2020/12/11 18:14:43 by hopark           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "ft_printf.h"
 
-void			ft_print_hexa(t_infor *infor, va_list ap)
+void					ft_print_hexa(t_infor *infor, va_list ap)
 {
 	unsigned long long number;
 
@@ -57,7 +57,7 @@ unsigned long long		ft_hexa_size(t_infor *infor, va_list ap)
 		return (number = va_arg(ap, unsigned int));
 }
 
-void		ft_hexa_null(t_infor *infor)
+void					ft_hexa_null(t_infor *infor)
 {
 	char		*out;
 	int			i;
@@ -76,14 +76,14 @@ void		ft_hexa_null(t_infor *infor)
 		out[i++] = '0';
 		out[i++] = (infor->type == 'X' ? 'X' : 'x');
 	}
-	j = infor->len == 2 ? 2 : 0 ;
+	j = infor->len == 2 ? 2 : 0;
 	while (j++ <= infor->width - infor->len)
 		out[i++] = ' ';
 	ft_memcpy(&out[i], infor->content, ft_strlen(infor->content));
 	infor->content = out;
 }
 
-void		ft_hexa_hz(t_infor *infor)
+void					ft_hexa_hz(t_infor *infor)
 {
 	char		*out;
 	int			i;
@@ -96,25 +96,25 @@ void		ft_hexa_hz(t_infor *infor)
 	if (infor->inprec == 2)
 		infor->precision = infor->width;
 	if (infor->inprec == 1)
-	while (j++ < infor->size - ft_max(infor->precision, infor->len, 0) - 2)
-		out[i++] = ' ';
+		while (j++ < infor->size - ft_max(infor->precision, infor->len, 0) - 2)
+			out[i++] = ' ';
 	out[i++] = '0';
 	out[i++] = (infor->type == 'X' ? 'X' : 'x');
 	if (infor->inprec != 2)
 		while (i + j < infor->width - ft_max(infor->precision, infor->len, 0))
 			out[i++] = '0';
 	while (i < infor->size - infor->len)
-			out[i++] = '0';
+		out[i++] = '0';
 	ft_memcpy(&out[i], infor->content, ft_strlen(infor->content));
 	free(infor->content);
 	infor->content = out;
 }
 
-void		ft_hexa_z(t_infor *infor)
+void					ft_hexa_z(t_infor *infor)
 {
 	char		*out;
 	int			i;
-	int 		j;
+	int			j;
 
 	i = 0;
 	j = 0;
@@ -126,7 +126,7 @@ void		ft_hexa_z(t_infor *infor)
 		while (i < infor->width - ft_max(infor->precision, infor->len, 0))
 			out[i++] = ' ';
 		while (j++ < ft_max(infor->precision, infor->len, 0) - infor->len)
-				out[i++] = '0';
+			out[i++] = '0';
 	}
 	else
 		while (i < infor->width - infor->len)

@@ -6,7 +6,7 @@
 /*   By: hopark <hopark@student.42seoul.kr>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/11/23 12:50:21 by hopark            #+#    #+#             */
-/*   Updated: 2020/11/26 18:24:49 by hopark           ###   ########.fr       */
+/*   Updated: 2020/12/11 17:40:27 by hopark           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,11 +17,11 @@ char		*ft_strchr(const char *s, int c)
 	size_t				i;
 
 	i = 0;
-	while (s[i] != c)
+	while (s[i])
 	{
-		if (s[i] == 0)
-			return (0);
+		if (s[i] == c)
+			return ((char *)s + i);
 		i++;
 	}
-	return ((char *)s + i);
+	return (0);
 }

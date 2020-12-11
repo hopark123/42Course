@@ -6,7 +6,7 @@
 /*   By: hopark <hopark@student.42seoul.kr>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/11/27 18:06:21 by hopark            #+#    #+#             */
-/*   Updated: 2020/12/10 20:16:47 by hopark           ###   ########.fr       */
+/*   Updated: 2020/12/11 18:06:56 by hopark           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,7 +35,7 @@ void			ft_printf_hexa(t_infor *infor)
 	}
 }
 
-void		ft_hexa_hl(t_infor *infor)
+void			ft_hexa_hl(t_infor *infor)
 {
 	char		*out;
 	int			i;
@@ -55,7 +55,7 @@ void		ft_hexa_hl(t_infor *infor)
 	infor->content = out;
 }
 
-void		ft_hexa_hr(t_infor *infor)
+void			ft_hexa_hr(t_infor *infor)
 {
 	char		*out;
 	int			i;
@@ -68,7 +68,6 @@ void		ft_hexa_hr(t_infor *infor)
 		i = infor->width - infor->size;
 		infor->size = infor->width;
 	}
-
 	out = ft_calloc_c(infor->size + 1, sizeof(char), ' ');
 	out[i++] = '0';
 	out[i++] = (infor->type == 'X' ? 'X' : 'x');
@@ -79,7 +78,7 @@ void		ft_hexa_hr(t_infor *infor)
 	infor->content = out;
 }
 
-void		ft_hexa_nhl(t_infor *infor)
+void			ft_hexa_nhl(t_infor *infor)
 {
 	char		*out;
 	int			i;
@@ -96,7 +95,7 @@ void		ft_hexa_nhl(t_infor *infor)
 	infor->content = out;
 }
 
-void		ft_hexa_nhr(t_infor *infor)
+void			ft_hexa_nhr(t_infor *infor)
 {
 	char		*out;
 	int			i;

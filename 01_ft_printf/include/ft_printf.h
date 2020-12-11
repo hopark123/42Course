@@ -6,10 +6,9 @@
 /*   By: hopark <hopark@student.42seoul.kr>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/11/26 18:51:17 by hopark            #+#    #+#             */
-/*   Updated: 2020/12/03 20:51:48 by hopark           ###   ########.fr       */
+/*   Updated: 2020/12/11 18:01:00 by hopark           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
-
 
 #ifndef FT_PRINTF_H
 # define FT_PRINTF_H
@@ -50,8 +49,6 @@ void				ft_print_uint(t_infor *infor, va_list ap);
 unsigned long long	ft_uint_size(t_infor *infor, va_list ap);
 void				ft_print_string(t_infor *infor, va_list ap);
 void				ft_printf_string(t_infor *infor, va_list ap, char c);
-char				*ft_put_null(char *temp);
-
-
+char				*ft_put_null(t_infor *infor);
 
 #endif

@@ -6,13 +6,13 @@
 /*   By: hopark <hopark@student.42seoul.kr>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/11/24 21:25:44 by hopark            #+#    #+#             */
-/*   Updated: 2020/12/04 01:40:13 by hopark           ###   ########.fr       */
+/*   Updated: 2020/12/11 18:09:07 by hopark           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "ft_printf.h"
 
-void		ft_print_uint(t_infor *infor, va_list ap)
+void					ft_print_uint(t_infor *infor, va_list ap)
 {
 	unsigned long long	number;
 
@@ -38,7 +38,7 @@ void		ft_print_uint(t_infor *infor, va_list ap)
 		ft_printf_int(infor);
 }
 
-unsigned long long	ft_uint_size(t_infor *infor, va_list ap)
+unsigned long long		ft_uint_size(t_infor *infor, va_list ap)
 {
 	unsigned long long	number;
 
@@ -53,5 +53,3 @@ unsigned long long	ft_uint_size(t_infor *infor, va_list ap)
 	else
 		return (number = (unsigned int)va_arg(ap, unsigned int));
 }
-
-

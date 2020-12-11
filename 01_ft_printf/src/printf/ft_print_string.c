@@ -6,7 +6,7 @@
 /*   By: hopark <hopark@student.42seoul.kr>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/11/25 02:34:10 by hopark            #+#    #+#             */
-/*   Updated: 2020/12/10 20:17:05 by hopark           ###   ########.fr       */
+/*   Updated: 2020/12/11 18:11:28 by hopark           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,8 +31,8 @@ void		ft_printf_string(t_infor *infor, va_list ap, char c)
 	temp = va_arg(ap, char *);
 	if (temp == 0)
 	{
-		temp = ft_put_null(temp);
-		infor->precision = ft_min(infor->precision, 6, 6);
+		temp = ft_put_null(infor);
+		infor->precision = ft_min(infor->precision, 7, 7);
 	}
 	if (infor->inprec == 1)
 		strlen = ft_min(ft_strlen(temp), infor->precision, INT_MAX);
@@ -44,9 +44,11 @@ void		ft_printf_string(t_infor *infor, va_list ap, char c)
 		i = infor->size - strlen;
 	ft_memcpy(&out[i], temp, strlen);
 	infor->content = out;
+	if (infor->len == 1)
+		free(temp);
 }
 
-char		*ft_put_null(char *temp)
+char		*ft_put_null(t_infor *infor)
 {
 	char *nullstring;
 
@@ -57,6 +59,6 @@ char		*ft_put_null(char *temp)
 	nullstring[3] = 'l';
 	nullstring[4] = 'l';
 	nullstring[5] = ')';
-	free(temp);
+	infor->len = 1;
 	return (nullstring);
 }
