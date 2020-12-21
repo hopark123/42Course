@@ -6,7 +6,7 @@
 #    By: hopark <hopark@student.42seoul.kr>         +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2020/11/23 13:16:57 by hopark            #+#    #+#              #
-#    Updated: 2020/11/28 20:37:54 by hopark           ###   ########.fr        #
+#    Updated: 2020/12/17 13:23:38 by hopark           ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -54,6 +54,8 @@ vpath %.c \
 OBJS = $(addprefix $(OBJ_DIR)/, $(notdir $(SRC:.c=.o)))
 
 all : $(NAME)
+
+bonus : $(NAME)
 
 clean :
 	@$(RM) $(RMFLAG) $(OBJS)

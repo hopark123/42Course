@@ -6,7 +6,7 @@
 /*   By: hopark <hopark@student.42seoul.kr>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/11/26 19:49:02 by hopark            #+#    #+#             */
-/*   Updated: 2020/12/11 17:22:22 by hopark           ###   ########.fr       */
+/*   Updated: 2020/12/17 16:35:40 by hopark           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,9 +22,11 @@ int main()
 // ---
 // > 8, -12, 123456789, , -12345678, 97, -2147483648, 2147483647 --- Return : 59
 	// -------int------%
-	int c = 42;
+	int c = 0;
 
-	char *format ="%-2c";
+	// printf("% d", 13,'c');
+
+	char *format ="#%.4s";
 	// ft_printf(format,c);
 	ft_printf("\nft : %d\n" , ft_printf(format,c));
 	printf("\npf : %d\n",	printf(format,c));

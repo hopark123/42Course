@@ -6,7 +6,7 @@
 /*   By: hopark <hopark@student.42seoul.kr>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/11/24 21:20:46 by hopark            #+#    #+#             */
-/*   Updated: 2020/12/11 17:20:17 by hopark           ###   ########.fr       */
+/*   Updated: 2020/12/11 19:11:07 by hopark           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,7 +19,7 @@ void			ft_check_width(char **format, t_infor *infor, va_list ap)
 	temp = 0;
 	if (**format == '*')
 	{
-		if ((infor->width = va_arg(ap, int)) <= 0)
+		if ((infor->width = va_arg(ap, int)) < 0)
 		{
 			infor->flag.left = 1;
 			infor->width *= -1;

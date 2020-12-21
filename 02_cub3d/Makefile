@@ -6,7 +6,7 @@
 #    By: hopark <hopark@student.42seoul.kr>         +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2020/11/23 13:16:57 by hopark            #+#    #+#              #
-#    Updated: 2020/12/17 13:23:52 by hopark           ###   ########.fr        #
+#    Updated: 2020/11/29 02:33:24 by hopark           ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -78,8 +78,6 @@ OBJS = $(addprefix $(OBJ_DIR)/, $(notdir $(SRCS:.c=.o)))
 
 
 all : $(NAME)
-
-bonus : $(NAME)
 
 clean : $(LIBFT)_clean
 	@$(RM) $(RMFLAGS) $(OBJS)
