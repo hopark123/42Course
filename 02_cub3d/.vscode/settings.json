@@ -1,0 +1,13 @@
+{
+	"files.associations": {
+		"mlx.h": "c",
+		"stdio.h": "c",
+		"algorithm": "c",
+		"array": "c",
+		"string": "c",
+		"string_view": "c",
+		"vector": "c",
+		"__node_handle": "c",
+		"math.h": "c"
+	}
+}
