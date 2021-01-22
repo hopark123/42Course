@@ -24,6 +24,7 @@
 # define KEY_D			2
 
 int minimap = 5;
+int TILESIZE = 32;
 int mapx = 8, mapy = 8;
 int map[] = {
 	1,1,1,1,1,1,1,1,
@@ -36,11 +37,17 @@ int map[] = {
 	1,1,1,1,1,1,1,1,
 };
 
-typedef struct s_vector
+typedef struct s_fvector
 {
-	int		x;
-	int		y;
-}				t_vector;
+	float		x;
+	float		y;
+}				t_fvector;
+
+typedef struct s_ivector
+{
+	int			x;
+	int			y;
+}				t_ivector;
 
 typedef struct	s_img
 {
@@ -56,14 +63,13 @@ typedef struct	s_game
 	void		*mlx;
 	void		*win;
 	t_img		img;
-	t_vector	position;
+	t_fvector	position;
 	float		angle;
-	t_vector	dirction;
-	t_vector	turn;
-	t_vector	move;
-	t_vector	side;
-	t_vector	wall;
-	t_vector	map;
+	t_fvector	dirction;
+	t_fvector	turn;
+	t_fvector	move;
+	t_fvector	side;
+	t_ivector	map;
 }				t_game;
 
 
@@ -96,21 +102,21 @@ int				key_release(int keycode, t_game *game)
 
 
 
-float		vecotr_len(t_vector v1, t_vector v2)
-{
-	float tempx;
-	float tempy;
+// float		vecotr_len(t_fvector v1, t_fvector v2)
+// {
+// 	float tempx;
+// 	float tempy;
 
-	if (v2.x == 0 && v2.y == 0)
-	{
-		tempx = sqrt(v1.x * v1.x + v2.y * v2.y);
-		return (tempx);
-	}
-	tempx = abs(v1.x - v2.x) * abs(v1.x - v2.x);
-	tempy = abs(v1.y - v2.y) * abs(v1.x - v2.x);
-	tempx = sqrt(tempx + tempy);
-	return (tempx);
-}
+// 	if (v2.x == 0 && v2.y == 0)
+// 	{
+// 		tempx = sqrt(v1.x * v1.x + v2.y * v2.y);
+// 		return (tempx);
+// 	}
+// 	tempx = abs(v1.x - v2.x) * abs(v1.x - v2.x);
+// 	tempy = abs(v1.y - v2.y) * abs(v1.x - v2.x);
+// 	tempx = sqrt(tempx + tempy);
+// 	return (tempx);
+// }
 
 
 void	window_init(t_game *game)
@@ -125,18 +131,18 @@ void		map_check(t_game *game, char *map)
 	game->map.y = 8;
 }
 
-void		draw_square(t_game *game, t_vector pt, t_vector size)
+void		draw_square(t_game *game, t_ivector pt, int size)
 {
 	int 	i;
 	int 	j;
 
 	i = 0;
-	while(i < size.y)
+	while(i < size)
 	{
 		j = 0;
-		while(j < size.x)
+		while(j < size)
 		{
-			game->img.data[(size.y * pt.y + i)*IMG_WIDTH  + size.x * pt.x + j] = 0x868e96;
+			game->img.data[(size * pt.y + i)*IMG_WIDTH  + size * pt.x + j] = 0x868e96;
 			j++;
 		}
 	i++;
@@ -156,22 +162,24 @@ void		map_draw(t_game *game)
 		{
 			if(map[(i * (int)game->map.x + j)])
 			{
-				t_vector pt = {j,i};
-				t_vector pt2 = {IMG_WIDTH/minimap/game->map.x, IMG_HEIGHT/minimap/game->map.y};
-				draw_square(game, pt, pt2);
+				t_ivector pt = {j,i};
+				draw_square(game, pt, TILESIZE);
 			}
 		j++;
 		}
 		i++;
 	}
-
-	for(i = 0; i <= IMG_HEIGHT/minimap; i++)
+	i = 0;
+	while (i <= game->map.y * TILESIZE)
 	{
-		for(j = 0; j <= IMG_WIDTH/minimap; j++)
+		j = 0;
+		while (j <= game->map.x * TILESIZE)
 		{
-			if(i % ((int)IMG_HEIGHT/minimap/game->map.y) == 0 || j % ((int)IMG_WIDTH/minimap/game->map.x) == 0)
+			if(i % TILESIZE == 0 || j % TILESIZE == 0)
 				game->img.data[i *IMG_WIDTH + j] = 0xFFFFFF;
+			j++;
 		}
+		i++;
 	}
 }
 
@@ -188,25 +196,10 @@ void		img_init(t_game *game)
 
 int		update_image(t_game *game)
 {
-	for(int j = -100; j < 100; j++)
+	for(int j = 0; j < 1; j++)
 	{
-		for(int i = 0; i < 5000; i++)
+		for(int i = 0; i < 50; i++)
 		{
-			if (map[(int)(game->position.y + i*cos(game->angle + 0.01 * j)) / 100 * mapy + (int)(game->position.x + i*sin(game->angle + 0.01 *j)) / 100] == 1)
-			{
-				game->wall.x = i*cos(game->angle + 0.01 * j);
-				game->wall.y = i*sin(game->angle + 0.01 * j);
-
-				t_vector zero = {0,0};
-				int len = (int)(100 / (vecotr_len(game->wall, zero)) + cos(j/200 *M_PI) + 20);
-
-				// printf("%d\n", len);
-				for(int k = 0; k < len; k++)
-					for(int m = 0; m < 1; m++)
-						game->img.data[IMG_WIDTH + k*WIN_WIDTH + m + j + 200] = 0xFF0F00 + j;
-
-				break;
-			}
 			game->img.data[(int)(game->position.y + i*cos(game->angle + 0.01 * j)) * IMG_WIDTH + (int)(game->position.x + i*sin(game->angle + 0.01 *j))] = 0xFF0F00 + j;
 		}
 	}
@@ -219,83 +212,53 @@ int		update_image(t_game *game)
 	return(0);
 }
 
-int		check_wall_x(t_game *game, int a)
+int		check_wall(t_game *game, t_fvector pt, int a)
 {
-	int 	x;
-	int 	y;
-	int		dx;
-	int		dy;
-	int		flag;
+	int		mapx;
+	int		mpay;
 
-	flag = 1;
-	x = (int)(game->position.x / 100);
-	y = (int)(game->position.y / 100);
-	dx = game->dirction.x * a > 0 ? 1 : -1;
-	dy = game->dirction.y *a > 0 ? 1 : -1;
-
-	if (dx < 0 && map[y * mapy + x + dx] == 1 && (int)game->position.x % 100 < 5)
-		flag = 0;
-	if (dx > 0 && map[y * mapy + x + dx] == 1 && (int)game->position.x % 100 > 95)
-		flag = 0;
-	if (dy < 0 && map[(y + dy) * mapy + x] == 1 && (int)game->position.y % 100 < 5)
-		flag = 0;
-	if (dy > 0 && map[(y + dy) * mapy + x] == 1 && (int)game->position.y % 100 > 95)
-		flag = 0;
-	return (flag);
-}
-
-int		check_wall_y(t_game *game, int a)
-{
-	int 	x;
-	int 	y;
-	int		dx;
-	int		dy;
-	int		flag;
-
-	flag = 1;
-	x = (int)(game->position.x / 100);
-	y = (int)(game->position.y / 100);
-	dx = game->dirction.x * a > 0 ? 1 : -1;
-	dy = game->dirction.y * a> 0 ? 1 : -1;
-
-	if (dy < 0 && map[(y + dy) * mapy + x] == 1 && (int)game->position.y % 100 < 5)
-		flag = 0;
-	if (dy > 0 && map[(y + dy) * mapy + x] == 1 && (int)game->position.y % 100 > 95)
-		flag = 0;
-	return (flag);
+	if (pt.x < 0 || pt.x > game->map.x * TILESIZE || pt.y < 0 || pt.y > game->map.y * TILESIZE)
+		return (0);
+	mapx = (int)floor(pt.x / TILESIZE);
+	mapy = (int)floor(pt.y / TILESIZE);
+	return (map[mapy * game->map.x + mapx] == 0);
 }
 
 int		player_move(t_game *game)
 {
 	if (game->move.x == 1)
 	{
-		if (game->position.x + game->dirction.x + 5.1 < IMG_WIDTH  && game->position.x + game->dirction.x > 5.1 && check_wall_x(game, 1))
-			game->position.x += game->dirction.x;
-		if (game->position.y + game->dirction.y + 5.1 < IMG_HEIGHT && game->position.y + game->dirction.y > 5.1 && check_wall_y(game, 1))
-			game->position.y += game->dirction.y;
+		t_fvector next_pt;
+		next_pt.x = game->position.x + game->dirction.x;
+		next_pt.y = game->position.y + game->dirction.y;
+		if (check_wall(game, next_pt, 1))
+			game->position = next_pt;
 	}
 	else if (game->move.y == 1)
 	{
-		if (game->position.x - game->dirction.x + 5.1 < IMG_WIDTH  && game->position.x - game->dirction.x > 5.1 && check_wall_x(game, -1))
-			game->position.x -= game->dirction.x;
-		if (game->position.y - game->dirction.y + 5.1 < IMG_HEIGHT && game->position.y - game->dirction.y > 5.1 && check_wall_y(game, -1))
-			game->position.y -= game->dirction.y;
+		t_fvector next_pt;
+		next_pt.x = game->position.x - game->dirction.x;
+		next_pt.y = game->position.y - game->dirction.y;
+		if (check_wall(game, next_pt, 1))
+			game->position = next_pt;
 	}
 	return(1);
 }
 
 int		player_turn(t_game *game)
 {
+	int		speed;
+	speed = 2;
 	if (game->turn.x == 1)
-		game->angle -= 0.05;
+		game->angle -= M_PI/180;
 	else if (game->turn.y == 1)
-		game->angle += 0.05;
+		game->angle += M_PI/180;
 	if (game->angle < 0)
 		game->angle += 2*M_PI;
 	if (game->angle > 2*M_PI)
 		game->angle -= 2*M_PI;
-	game->dirction.x = (int)(5 * sin(game->angle));
-	game->dirction.y = (int)(5 * cos(game->angle));
+	game->dirction.x = speed * sin(game->angle);
+	game->dirction.y = speed * cos(game->angle);
 	return(1);
 }
 
@@ -318,8 +281,8 @@ int		main_loop(t_game *game)
 int		main(void)
 {
 	t_game		game;
-	game.position.x = 200;
-	game.position.y = 250;
+	game.position.x = 100;
+	game.position.y = 150;
 	game.angle = M_PI;
 	window_init(&game);
 	img_init(&game);
