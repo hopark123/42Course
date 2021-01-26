@@ -109,21 +109,21 @@ int				key_release(int keycode, t_game *game)
 
 
 
-// float		vecotr_len(t_fvector v1, t_fvector v2)
-// {
-// 	float tempx;
-// 	float tempy;
+float		vector_len(t_fvector v1, t_fvector v2)
+{
+	float tempx;
+	float tempy;
 
-// 	if (v2.x == 0 && v2.y == 0)
-// 	{
-// 		tempx = sqrt(v1.x * v1.x + v2.y * v2.y);
-// 		return (tempx);
-// 	}
-// 	tempx = abs(v1.x - v2.x) * abs(v1.x - v2.x);
-// 	tempy = abs(v1.y - v2.y) * abs(v1.x - v2.x);
-// 	tempx = sqrt(tempx + tempy);
-// 	return (tempx);
-// }
+	if (v2.x == 0 && v2.y == 0)
+	{
+		tempx = sqrt(v1.x * v1.x + v2.y * v2.y);
+		return (tempx);
+	}
+	tempx = abs(v1.x - v2.x) * abs(v1.x - v2.x);
+	tempy = abs(v1.y - v2.y) * abs(v1.x - v2.x);
+	tempx = sqrt(tempx + tempy);
+	return (tempx);
+}
 
 
 void	window_init(t_game *game)
@@ -138,16 +138,23 @@ void		map_check(t_game *game, char *map)
 	game->map.y = 8;
 }
 
-void	darw_line(t_game *game, t_fvector pt1, t_fvector pt2)
+void	draw_line(t_game *game, float x1, float y1, float x2, float y2)
 {
-	// float y_step = (pt2.y - pt1.y) / (pt2.x - pt1.x);
-	// for(int i = 0; i < abs(pt2.x-pt1.x); i++)
-	// 	game->img.data[(int)(pt1.y + i) * IMG_WIDTH + (int)(pt1.x + i)] = 0xFFFF00;
-	float angle = (pt2.y-pt1.y) / (pt2.x - pt1.x);
-	for(int i = 0; i < 50; i++)
-		{
-			game->img.data[(int)(pt1.y + i*cos(angle)) * IMG_WIDTH + (int)(pt1.x + i*sin(angle))] = 0xFFFF00;
-		}
+	float	deltaX;
+	float	deltaY;
+	float	step;
+
+	deltaX = x2 - x1;
+	deltaY = y2 - y1;
+	step = (fabs(deltaX) > fabs(deltaY)) ? fabs(deltaX) : fabs(deltaY);
+	deltaX /= step;
+	deltaY /= step;
+	while (fabs(x2 - x1) > 0.01 || fabs(y2 - y1) > 0.01)
+	{
+		game->img.data[(int)y1 * IMG_WIDTH + (int)x1] = 0xb3b3b3;
+		x1 += deltaX;
+		y1 += deltaY;
+	}
 }
 
 void		draw_square(t_game *game, t_ivector pt, int size)
@@ -171,99 +178,104 @@ void		draw_square(t_game *game, t_ivector pt, int size)
 void	hit_horztal(t_game *game)
 {
 	int		face_up;
-	int		face_right;
+	int		face_left;
 	t_fvector		intercept;
 	t_fvector		step;
 	t_fvector		next;
 
+	game->hit.y = 0;
+
 	face_up = 1;
 	if (game->angle > 0 && game->angle < M_PI)
 		face_up = -1;
-	face_right = -1;
+	face_left = 1;
 	if (game->angle < 0.5 * M_PI || game->angle > 1.5 * M_PI)
-		face_right = 1;
-	intercept.y = floor(game->position.y / TILESIZE) * TILESIZE;
-	intercept.y += (face_up == 1) ? 0 : TILESIZE;
-	intercept.x = game->position.x + (intercept.y - game->position.y) / tan(game->angle);
+		face_left = -1;
+	intercept.x = floor(game->position.y / TILESIZE) * TILESIZE;
+	intercept.x += (face_up == 1) ? 0 : TILESIZE;
+	intercept.y = game->position.x + (intercept.x - game->position.y) / tan(game->angle);
 
 	step.y = TILESIZE;
 	step.y *= (face_up  == 1) ? -1 : 1;
 
 	step.x = TILESIZE / tan(game->angle);
-	step.x *= (face_right == -1 && step.x > 0) ? -1 : 1;
-	step.x *= (face_right == 1 && step.x < 0) ? -1 : 1;
+	step.x *= (face_left == 1 && step.x > 0) ? -1 : 1;
+	step.x *= (face_left == -1 && step.x < 0) ? -1 : 1;
 
-	next.y = (face_up == 1) ? intercept.y - 1 : intercept.y;
-	next.x = intercept.x;
+	next.y = (face_up == 1) ? intercept.x - 1 : intercept.x;
+	next.x = intercept.y;
 	// printf("angle : %f   tan : %f\n", game->angle, tan(game->angle));
-	// printf("angle : %f right : %d up  :%d \n",  game->angle, face_right, face_up);
+	// printf("angle : %f left : %d up  :%d \n",  game->angle, face_left, face_up);
 	// printf("step x : %f y : %f\n\n", step.x, step.y);
 
-	while (next.x >= 0 && next.x <= WIN_WIDTH && next.y >= 0 && next.y <= WIN_HEIGHT)
-		if (!check_wall(game, next))
+	while (next.x >= 0 && next.x <= game->map.x * TILESIZE && next.y >= 0 && next.y <= game->map.y * TILESIZE)
+	{
+		if (check_wall(game, next))
 		{
 			game->hit.y = 1;
 			game->wall_h.y = next.y;
 			game->wall_h.x = next.x;
-			// printf("wall_h x : %f y : %f\n",game->wall_h.x, game->wall_h.y);
-			game->img.data[(int)(game->wall_h.y) * IMG_WIDTH + (int)(game->wall_h.x)] = 0xFF000F;
+			printf("wall_h x : %f y : %f\n",game->wall_h.x, game->wall_h.y);
+			game->img.data[(int)(game->wall_h.y) * IMG_WIDTH + (int)(game->wall_h.x)] = 0xFF00FF;
 
-			// darw_line(game, game->position, game->wall_h);
 			break;
 		}
 		else{
 			next.y += step.y;
 			next.x += step.x;
 		}
+	}
 }
 
 void	hit_vertical(t_game *game)
 {
 	int		face_up;
-	int		face_right;
+	int		face_left;
 	t_fvector		intercept;
 	t_fvector		step;
 	t_fvector		next;
 
+	game->hit.x = 0;
 	face_up = 1;
 	if (game->angle > 0 && game->angle < M_PI)
 		face_up = -1;
-	face_right = -1;
+	face_left = 1;
 	if (game->angle < 0.5 * M_PI || game->angle > 1.5 * M_PI)
-		face_right = 1;
-	intercept.y = floor(game->position.y / TILESIZE) * TILESIZE;
-	intercept.y += (face_up == 1) ? 0 : TILESIZE;
-	intercept.x = game->position.x + (intercept.y - game->position.y) / tan(game->angle);
+		face_left = -1;
+	intercept.x = floor(game->position.x / TILESIZE) * TILESIZE;
+	intercept.x += (face_left == 1) ? 0 : TILESIZE;
+	intercept.y = game->position.y + (intercept.x - game->position.x) * tan(game->angle);
 
-	step.y = TILESIZE;
-	step.y *= (face_up  == 1) ? -1 : 1;
+	step.x = TILESIZE;
+	step.x *= (face_left == 1) ? -1 : 1;
 
-	step.x = TILESIZE / tan(game->angle);
-	step.x *= (face_right == -1 && step.x > 0) ? -1 : 1;
-	step.x *= (face_right == 1 && step.x < 0) ? -1 : 1;
+	step.y = TILESIZE * tan(game->angle);
+	step.y *= (face_up == 1 && step.y > 0) ? -1 : 1;
+	step.y *= (face_up == -1 && step.y < 0) ? -1 : 1;
 
-	next.y = (face_up == 1) ? intercept.y - 1 : intercept.y;
-	next.x = intercept.x;
+	next.x = (face_left == 1) ? intercept.x - 1 : intercept.x;
+	next.y = intercept.y;
 	// printf("angle : %f   tan : %f\n", game->angle, tan(game->angle));
-	// printf("angle : %f right : %d up  :%d \n",  game->angle, face_right, face_up);
+	// printf("angle : %f left : %d up  :%d \n",  game->angle, face_left, face_up);
 	// printf("step x : %f y : %f\n\n", step.x, step.y);
 
-	while (next.x >= 0 && next.x <= WIN_WIDTH && next.y >= 0 && next.y <= WIN_HEIGHT)
-		if (!check_wall(game, next))
+	while (next.x >= 0 && next.x <= game->map.x * TILESIZE && next.y >= 0 && next.y <= game->map.x * TILESIZE)
+	{
+		if (check_wall(game, next))
 		{
 			game->hit.x = 1;
 			game->wall_v.y = next.y;
 			game->wall_v.x = next.x;
-			// printf("wall_v x : %f y : %f\n",game->wall_v.x, game->wall_v.y);
-			game->img.data[(int)(game->wall_v.y) * IMG_WIDTH + (int)(game->wall_v.x)] = 0xFF000F;
-
-			// darw_line(game, game->position, game->wall_v);
+			game->img.data[(int)(game->wall_v.y) * IMG_WIDTH + (int)(game->wall_v.x)] = 0xFF00FF;
+			// printf("wall_v.x : %f  y : %f\n", game->wall_v.x, game->wall_v.y);
 			break;
 		}
 		else{
 			next.y += step.y;
 			next.x += step.x;
 		}
+	}
+	
 }
 
 void		map_draw(t_game *game)
@@ -312,14 +324,26 @@ void		img_init(t_game *game)
 
 int		update_image(t_game *game)
 {
-	for(int j = 0; j < 1; j++)
-	{
-		for(int i = 0; i < 50; i++)
-		{
-			game->img.data[(int)(game->position.y + i*sin(game->angle + 0.01 * j)) * IMG_WIDTH + (int)(game->position.x + i*cos(game->angle + 0.01 *j))] = 0xFF0F00 + j;
-		}
-	}
+	// for(int j = 0; j < 1; j++)
+	// {
+	// 	for(int i = 0; i < 50; i++)
+	// 	{
+	// 		game->img.data[(int)(game->position.y + i*sin(game->angle + 0.01 * j)) * IMG_WIDTH + (int)(game->position.x + i*cos(game->angle + 0.01 *j))] = 0xFF0F00 + j;
+	// 	}
+	// }
 	hit_horztal(game);
+	hit_vertical(game);
+	t_fvector v;
+	if (game->hit.x == 1 && game->hit.y == 1)
+		v = vector_len(game->position, game->wall_v) < vector_len(game->position, game->wall_h) ? game->wall_v : game->wall_h;
+	else if (game->hit.x == 1)
+		v = game->wall_v;
+	else
+		v = game->wall_h;
+	// printf("vx : %2f vy : %2f len : %2f |", game->wall_v.x, game->wall_v.y, vector_len(game->position, game->wall_v));
+	// printf("hx : %2f hy : %2f len : %2f |", game->wall_h.x, game->wall_h.y, vector_len(game->position, game->wall_h));
+	// printf("x : %2f y : %2f\n", v.x, v.y);
+	draw_line(game, game->position.x, game->position.y, v.x, v.y);
 	for(int i = -5; i <5; i++)
 		for(int j = -5; j < 5; j++)
 			game->img.data[((int)game->position.y + i) * IMG_WIDTH + ((int)game->position.x + j)] = 0xFF00FF;
@@ -337,10 +361,10 @@ int		check_wall(t_game *game, t_fvector pt)
 	int		mpay;
 
 	if (pt.x < 0 || pt.x > game->map.x * TILESIZE || pt.y < 0 || pt.y > game->map.y * TILESIZE)
-		return (0);
+		return (1);
 	mapx = (int)floor(pt.x / TILESIZE);
 	mapy = (int)floor(pt.y / TILESIZE);
-	return (map[mapy * game->map.x + mapx] == 0);
+	return (map[mapy * game->map.x + mapx] != 0);
 }
 
 int		player_move(t_game *game)
@@ -350,7 +374,7 @@ int		player_move(t_game *game)
 		t_fvector next_pt;
 		next_pt.x = game->position.x + game->dirction.x;
 		next_pt.y = game->position.y + game->dirction.y;
-		if (check_wall(game, next_pt))
+		if (!check_wall(game, next_pt))
 			game->position = next_pt;
 	}
 	else if (game->move.y == 1)
@@ -358,7 +382,7 @@ int		player_move(t_game *game)
 		t_fvector next_pt;
 		next_pt.x = game->position.x - game->dirction.x;
 		next_pt.y = game->position.y - game->dirction.y;
-		if (check_wall(game, next_pt))
+		if (!check_wall(game, next_pt))
 			game->position = next_pt;
 	}
 	return(1);
