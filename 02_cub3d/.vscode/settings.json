@@ -8,6 +8,8 @@
 		"string_view": "c",
 		"vector": "c",
 		"__node_handle": "c",
-		"math.h": "c"
+		"math.h": "c",
+		"__locale": "c",
+		"__string": "c"
 	}
 }

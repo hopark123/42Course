@@ -64,6 +64,13 @@ typedef struct	s_img
 	int			endian;
 }				t_img;
 
+typedef struct s_ray
+{
+	float		x;
+	float		y;
+	float		q;
+}				t_ray;
+
 typedef struct	s_game
 {
 	void		*mlx;
@@ -73,7 +80,7 @@ typedef struct	s_game
 	t_ivector	map_pos;
 	t_ivector	map;
 	t_fvector	dir;
-	t_fvector	ray_dir;
+	t_ray	ray_dir;
 	t_fvector	plane;
 	t_fvector	turn;
 	t_fvector	move;
@@ -104,6 +111,7 @@ float	ft_max(float a, float b)
 }
 
 float	ft_min(float a, float b)
+
 {
 	return (a < b ? a : b);
 }
@@ -133,8 +141,6 @@ int				key_release(int keycode, t_game *game)
 	return (0);
 }
 
-
-
 float		vector_len(t_fvector v1, t_fvector v2)
 {
 	float tempx;
@@ -151,7 +157,6 @@ float		vector_len(t_fvector v1, t_fvector v2)
 	return (tempx);
 }
 
-
 void	window_init(t_game *game)
 {
 	game->mlx = mlx_init();
@@ -164,7 +169,7 @@ void		map_check(t_game *game, char *map)
 	game->map.y = 8;
 }
 
-void	draw_line(t_game *game, t_fvector v1, t_fvector v2, unsigned int color)
+void	draw_line(t_game *game, t_fvector v1, t_fvector v2, int color)
 {
 	float	dx;
 	float	dy;
@@ -172,7 +177,7 @@ void	draw_line(t_game *game, t_fvector v1, t_fvector v2, unsigned int color)
 
 	dx = (v2.x - v1.x);
 	dy = (v2.y - v1.y);
-	step = (fabs(dx) > fabs(dy)) ? fabs(dx) : fabs(dy);
+	step = ft_max(fabs(dx), fabs(dy));
 	dx /= step;
 	dy /= step;
 	while (fabs(v2.x - v1.x) > 1 || fabs(v2.y - v1.y) > 1)
@@ -201,19 +206,20 @@ void		draw_square(t_game *game, t_ivector pt, int size)
 	}
 }
 
-int		check_fwall(t_game *game, t_fvector pt)
+int			check_fwall(t_game *game, t_fvector pt)
 {
 	if (pt.x < 0 || pt.x > game->map.x || pt.y < 0 || pt.y > game->map.y)
 		return (1);
 	return (map[(int)pt.y * game->map.x + (int)pt.x] != 0);
 }
 
-int		check_iwall(t_game *game, t_ivector pt)
+int			check_iwall(t_game *game, t_ivector pt)
 {
 	if (pt.x < 0 || pt.x > game->map.x || pt.y < 0 || pt.y > game->map.y)
 		return (1);
 	return (map[pt.y * game->map.x + pt.x] != 0);
 }
+
 void		map_draw(t_game *game)
 {
 	int		i;
@@ -255,33 +261,45 @@ void		img_init(t_game *game)
 	map_check(game, 0);
 }
 
+void		ray_quadrant(t_ray *ray)
+{
+	if (ray->x >= 0 && ray->y < 0)
+		ray->q = 1;
+	else if (ray->x < 0 && ray->y < 0)
+		ray->q = 2;
+	else if (ray->x < 0 && ray->y >= 0)
+		ray->q = 3;
+	else if (ray->x >= 0 && ray->y >= 0)
+		ray->q = 4;
+}
+
 int		update_image(t_game *game)
 {
-	float	camera;
-	
-	int s = 0;
-	int w = IMG_WIDTH;
-
-	for (int i = 0; i <=w; i++)
+	for (int i = 0; i <= NUM_RAYS; i++)
 	{
 		t_fvector	sideDist;
 		t_fvector	deltaDist;
 		t_ivector	step;
-
+		float		camera;
 		int			hit = 0;
 		int			side = 0;
 		float		perpWallDist;
+
 		game->map_pos.x = (int)game->pos.x;
 		game->map_pos.y = (int)game->pos.y;
 
 		camera = 2 * i / (float) NUM_RAYS - 1;
 		game->ray_dir.x = game->dir.x + game->plane.x * camera;
 		game->ray_dir.y = game->dir.y + game->plane.y * camera;
+		ray_quadrant(&game->ray_dir);
 		deltaDist.x = fabs(1 / game->ray_dir.x);
 		deltaDist.y = fabs(1 / game->ray_dir.y);
-		// printf("i %d x : %f y : %f\n", i, game->ray_dir.x, game->ray_dir.y);
-		// printf("x : %f y : %f\n", deltaDist.x, deltaDist.y);
-		if (game->ray_dir.x < 0)
+		// printf("d i %3d x %f | y %f ||", i, game->dir.x, game->dir.y);
+		// printf("c i %3d x %f  ||", i, camera);
+		// printf("p i %3d x %f | y %f ||", i, game->plane.x, game->plane.y);
+		// printf("r i %3d x %f | y %f\n", i, game->ray_dir.x, game->ray_dir.y);
+
+		if (game->ray_dir.q == 2 || game->ray_dir.q == 3)
 		{
 			step.x = -1;
 			sideDist.x = (game->pos.x - game->map_pos.x) * deltaDist.x;
@@ -291,7 +309,7 @@ int		update_image(t_game *game)
 			step.x = 1;
 			sideDist.x = (game->map_pos.x + 1.0 - game->pos.x) * deltaDist.x;
 		}
-		if (game->ray_dir.y < 0)
+		if (game->ray_dir.q == 1 || game->ray_dir.q == 2)
 		{
 			step.y = -1;
 			sideDist.y = (game->pos.y - game->map_pos.y) * deltaDist.y;
@@ -303,63 +321,62 @@ int		update_image(t_game *game)
 		}
 		while (hit == 0)
 		{
-			int k = 0;
 			if (sideDist.x < sideDist.y)
 			{
 				sideDist.x += deltaDist.x;
 				game->map_pos.x += step.x;
-				side = 0;
-				k++;
-		// printf("i : %d  x : %d   y : %d\n", k, game->map_pos.x, game->map_pos.y);
-				
+				if (game->ray_dir.q == 2  || game->ray_dir.q == 3)
+					side = 0;
+				else
+					side = 1;
 			}
 			else
 			{
 				sideDist.y += deltaDist.y;
 				game->map_pos.y += step.y;
-				side = 1;
+				if (game->ray_dir.q == 1 || game->ray_dir.q == 2)
+					side = 2;
+				else
+					side = 3;
 			}
 			if (check_iwall(game, game->map_pos))
-			{
-			// printf("i : %d  x : %d   y : %d\n", i, game->map_pos.x, game->map_pos.y);
 				hit = 1;
-			}
 		}
-		// printf("k : %d  x : %d   y : %d\n", i, game->map_pos.x, game->map_pos.y);
-
-		if (side == 0)
-			perpWallDist = (game->map_pos.x - game->pos.x + (1 - step.x) / 2) / game->ray_dir.x;
+		if (side == 0 || side == 1)
+			perpWallDist = (game->map_pos.x - game->pos.x + (1 - step.x) / 2) / game->ray_dir.x * 3;
 		else
-			perpWallDist = (game->map_pos.y - game->pos.y + (1 - step.y) / 2) / game->ray_dir.y;
-		// printf("i : %d  x : %d   y : %d\n", i, game->map_pos.x, game->map_pos.y);
-		
-		t_fvector vv1 = {i, IMG_HEIGHT/2 - ft_min(IMG_HEIGHT / perpWallDist, IMG_HEIGHT/3)};
-		t_fvector vv2 = {i, IMG_HEIGHT/2 + ft_min(IMG_HEIGHT / perpWallDist, IMG_HEIGHT/3)};
-		// printf("x %d %f\n",i, IMG_HEIGHT/2 - ft_min(IMG_HEIGHT / perpWallDist, IMG_HEIGHT/ 2));
-		// printf("x : %d perp %f\n", i,perpWallDist);
-		// printf("x1 : %f y1 : %f  || x2 : %f y2 %f\n",vv1.x,vv1.y,vv2.x,vv2.y);
+			perpWallDist = (game->map_pos.y - game->pos.y + (1 - step.y) / 2) / game->ray_dir.y * 3;
+		t_fvector vv1 = {IMG_HEIGHT - i, IMG_HEIGHT/2 - ft_min(IMG_HEIGHT / perpWallDist, IMG_HEIGHT/3)};
+		t_fvector vv2 = {IMG_HEIGHT - i, IMG_HEIGHT/2 + ft_min(IMG_HEIGHT / perpWallDist, IMG_HEIGHT/3)};
+		// t_fvector vv1 = {i, IMG_HEIGHT/2 - ft_min(IMG_HEIGHT / perpWallDist, IMG_HEIGHT/3)};
+		// t_fvector vv2 = {i, IMG_HEIGHT/2 + ft_min(IMG_HEIGHT / perpWallDist, IMG_HEIGHT/3)};
+		// t_fvector vv1 = {i, IMG_HEIGHT/2 - IMG_HEIGHT / perpWallDist};
+		// t_fvector vv2 = {i, IMG_HEIGHT/2 + IMG_HEIGHT / perpWallDist};
 
-		// t_fvector vv3 = {200, 40};
-		// t_fvector vv4 = {200, 80};
-		// draw_line(game, vv3, vv4);
-		// printf("x %d,x : %f|y :%f|pre %f|\n",i,game->map_pos.x, game->map_pos.y, perpWallDist);
-		draw_line(game, vv1, vv2, 0xFFFFFF);
+		// printf("i %d  | y1  %f | y2 %f  p  %f\n", i, vv1.y, vv2.y, perpWallDist);
+		if (side == 0)
+			draw_line(game, vv1, vv2, 0xFF0000);
+		else if (side == 1)
+			draw_line(game, vv1, vv2, 0x0000FF);
+		else if (side == 2)
+			draw_line(game, vv1, vv2, 0xFFFF00);
+		else if (side == 3)
+			draw_line(game, vv1, vv2, 0x00FF00);
+		else
+			draw_line(game, vv1, vv2, 0xFFFFFF);
+
 	}
-
 
 	{
 	map_draw(game);
-	 
 	//player, line
 	for(int i = -5; i < 5; i++)
 		for(int j = -5; j < 5; j++)
 			game->img.data[((int)((game->pos.y * TILESIZE + i)) * IMG_WIDTH + (int)(game->pos.x * TILESIZE + j))] = 0xFF000F;
-	
 	t_fvector v1 = {TILESIZE * game->pos.x + TILESIZE * game->dir.x, TILESIZE * game->pos.y + TILESIZE *game->dir.y};
 	t_fvector v2 = {TILESIZE * game->pos.x, TILESIZE * game->pos.y};
 	draw_line(game, v1, v2, 0xFF00FF);
 	}
-
 	mlx_put_image_to_window(game->mlx, game->win, game->img.img, 0, 0);
 	return(0);
 }
@@ -370,7 +387,7 @@ int		player_move(t_game *game)
 {
 	float		speed;
 	
-	speed = 0.05;
+	speed = 0.03;
 	if (game->move.x == 1)
 	{
 		t_fvector next_pt;
@@ -390,19 +407,17 @@ int		player_move(t_game *game)
 			game->pos = next_pt;
 		}
 	}
-
-	// printf("pos : x : %f y : %f\n", game->pos.x, game->pos.y);
 	return(1);
-}
 
+}
 
 int		player_turn(t_game *game)
 {
-	
 	if (game->turn.x == 1)
-		game->dir = roation(game->dir, M_PI/180);
+		game->dir = roation(game->dir, M_PI / 120);
 	else if (game->turn.y == 1)
-		game->dir = roation(game->dir, -M_PI/180);
+		game->dir = roation(game->dir, -M_PI / 120);
+	game->plane = roation(game->dir, -M_PI / 2);
 	// printf("dir : x : %f y : %f\n", game->dir.x, game->dir.y);
 	return(1);
 }
@@ -416,7 +431,6 @@ int		main_loop(t_game *game)
 		update = player_turn(game);
 	if (game->move.x || game->move.y)
 		update = player_move(game);
-
 	if (update)
 		update_image(game);
 	update = 0;
@@ -427,13 +441,14 @@ int		main_loop(t_game *game)
 int		main(void)
 {
 	t_game		game;
-	game.pos.x = 2;
+	game.pos.x = 6;
 	game.pos.y = 2;
 	game.dir.x = -1;
-	game.dir.y = 0;	
+	game.dir.y = 0;
+
 	game.plane.x = 0;
 	game.plane.y = 0.66;
-	
+
 	window_init(&game);
 	img_init(&game);
 	mlx_hook(game.win, X_EVENT_KEY_PRESS, 0, &key_press, &game);
@@ -441,5 +456,4 @@ int		main(void)
 	mlx_loop_hook(game.mlx, &main_loop, &game);
 	mlx_loop(game.mlx);
 	return (0);
-
 }
