@@ -279,10 +279,29 @@ void map_draw(t_game *game)
 	}
 }
 
+void	swap(char *a, char *b)
+{
+	char	*temp;
+	temp = a;
+	a = b;
+	b = temp; 
+}
 void	tex_init(t_game *game, int num, char *path)
 {
 	game->tex[num].ptr = mlx_xpm_file_to_image(game->mlx, path, &game->tex[num].width, &game->tex[num].height);
 	game->tex[num].data = (int *)mlx_get_data_addr(game->tex[num].ptr, &game->tex[num].bpp, &game->tex[num].size_l, &game->tex[num].endian);
+	int i;
+	int j;
+	i = 0;
+	// while (i < TEXTURE_SIZE)
+	// {
+	// 	j = 0;
+	// 	while (j < i)
+	// 	{
+	// 		color = game->tex[tex_num].data[(int)(draw.tex.y * TEXTURE_SIZE) * TEXTURE_SIZE + (int)draw.tex.x];
+	// 		swap(game->tex[num].data)
+	// 	}
+	// }
 }
 void img_init(t_game *game)
 {
@@ -290,10 +309,10 @@ void img_init(t_game *game)
 	game->img.ptr = mlx_new_image(game->mlx, IMG_WIDTH, IMG_HEIGHT);
 	game->img.data = (int *)mlx_get_data_addr(game->img.ptr, &game->img.bpp, &game->img.size_l, &game->img.endian);
 	i = 0;
-	tex_init(game, 0, "img/E.xpm");
-	tex_init(game, 1, "img/W.xpm");
-	tex_init(game, 2, "img/S.xpm");
-	tex_init(game, 3, "img/N.xpm");
+	tex_init(game, 0, "img/wall_e.xpm");
+	tex_init(game, 1, "img/wall_w.xpm");
+	tex_init(game, 2, "img/wall_s.xpm");
+	tex_init(game, 3, "img/wall_n.xpm");
 
 			for (int i = 0; i < IMG_WIDTH; i++)
 				for (int j = 0; j < IMG_HEIGHT; j++)
