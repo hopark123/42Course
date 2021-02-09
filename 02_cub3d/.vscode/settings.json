@@ -10,6 +10,7 @@
 		"__node_handle": "c",
 		"math.h": "c",
 		"__locale": "c",
-		"__string": "c"
+		"__string": "c",
+		"iterator": "c"
 	}
 }
