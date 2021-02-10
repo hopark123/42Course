@@ -11,6 +11,8 @@
 		"math.h": "c",
 		"__locale": "c",
 		"__string": "c",
-		"iterator": "c"
+		"iterator": "c",
+		"ratio": "c",
+		"cub3d_type.h": "c"
 	}
 }

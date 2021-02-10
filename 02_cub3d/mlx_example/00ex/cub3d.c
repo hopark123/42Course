@@ -11,6 +11,9 @@
 #define IMG_HEIGHT 600
 
 #define TEXTURE_SIZE 64
+#define SPRITE_SIZE 64
+#define SPRITE_WIDTH 64
+
 
 #define X_EVENT_KEY_PRESS 2
 #define X_EVENT_KEY_RELEASE 3
@@ -41,6 +44,23 @@ int map[] = {
 	1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1,
 	1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1,
 	1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,
+};
+typedef struct s_sprite
+{
+	double x;
+	double y;
+	int num;
+}		t_sprite;
+#define numSprites 10
+float ZBUFFER[800];
+t_sprite sprite[numSprites] = {
+	{7, 5 ,4},
+	{2.5, 3.5 ,4},
+	{3, 3 ,4},
+	{5, 3 ,5},
+	{5, 3.2 ,5},
+	{6, 3.5 ,5},
+	{4, 3.7 ,5},
 };
 
 typedef struct s_fvector
@@ -86,12 +106,21 @@ typedef struct s_draw
 {
 	t_fvector	put;
 	t_fvector	tex;
-	float		start;
-	float		end;
-	float		step;
-	float		pixel;
+	t_fvector	start;
+	t_fvector	end;
+	t_fvector	step;
+	t_fvector	pixel;
 	unsigned int	color;
 }				t_draw;
+typedef struct s_sprites
+{
+	t_fvector	temp;
+	t_fvector	trans;
+	t_fvector	sprite;
+	float		screenX;
+	int			num;
+	int			*order;
+}				t_sprites;
 
 typedef struct s_game
 {
@@ -130,6 +159,17 @@ float ft_max(float a, float b)
 float ft_min(float a, float b)
 {
 	return (a < b ? a : b);
+}
+
+t_fvector i_matrix_mulit(t_fvector m1, t_fvector m2, t_fvector v)
+{
+	t_fvector 	res;
+	float		invert;
+
+	invert = 1.0 / (m1.x * m2.y - m1.y * m2.x);
+	res.x = invert * (m2.y * v.x - m2.x * v.y);
+	res.y = invert * (-m1.y * v.x + m1.x * v.y);
+	return(res);
 }
 
 int key_press(int keycode, t_game *game)
@@ -279,9 +319,18 @@ void map_draw(t_game *game)
 	}
 }
 
-void	ft_swap(int *a,  int *b)
+
+void	ft_iswap(int *a, int *b)
 {
 	int		temp;
+	temp = *a;
+	*a = *b;
+	*b = temp; 
+}
+
+void	ft_fswap(float *a, float *b)
+{
+	float		temp;
 	temp = *a;
 	*a = *b;
 	*b = temp; 
@@ -291,19 +340,22 @@ void	tex_init(t_game *game, int num, char *path)
 {
 	game->tex[num].ptr = mlx_xpm_file_to_image(game->mlx, path, &game->tex[num].width, &game->tex[num].height);
 	game->tex[num].data = (int *)mlx_get_data_addr(game->tex[num].ptr, &game->tex[num].bpp, &game->tex[num].size_l, &game->tex[num].endian);
-	int i;
-	int j;
-	i = 0;
-	// while (i < TEXTURE_SIZE)
-	// {
-	// 	j = 0;
-	// 	while (j < i)
-	// 	{
-	// 		ft_swap(&game->tex[num].data[j * TEXTURE_SIZE + i], &game->tex[num].data[i * TEXTURE_SIZE + j]);
-	// 		j++;
-	// 	}
-	// 	i++;
-	// }
+}
+
+unsigned int	choice_tex(t_game *game, t_draw draw, char dir)
+{
+	unsigned int color;
+	int			tex_num;
+	if (dir == 'E')
+		tex_num = 0;
+	else if (dir == 'W')
+		tex_num = 1;
+	else if (dir == 'S')
+		tex_num = 2;
+	else if (dir == 'N')
+		tex_num = 3;
+	color = game->tex[tex_num].data[(int)(draw.tex.y * TEXTURE_SIZE) * TEXTURE_SIZE + (int)draw.tex.x];
+	return (color);
 }
 
 void img_init(t_game *game)
@@ -316,6 +368,9 @@ void img_init(t_game *game)
 	tex_init(game, 1, "img/wall_w.xpm");
 	tex_init(game, 2, "img/wall_s.xpm");
 	tex_init(game, 3, "img/wall_n.xpm");
+	tex_init(game, 4, "img/bird.xpm");
+	tex_init(game, 5, "img/tree.xpm");
+
 
 				for (int i = 0; i < IMG_WIDTH; i++)
 					for (int j = 0; j < IMG_HEIGHT /2 ; j++)
@@ -419,51 +474,104 @@ void ray_dda(t_game *game, t_ray *ray)
 	}
 }
 
-unsigned int	choice_tex(t_game *game, t_draw draw, char dir)
-{
-	unsigned int color;
-	int			tex_num;
-	if (dir == 'E')
-		tex_num = 0;
-	else if (dir == 'W')
-		tex_num = 1;
-	else if (dir == 'S')
-		tex_num = 2;
-	else if (dir == 'N')
-		tex_num = 3;
-	color = game->tex[tex_num].data[(int)(draw.tex.y * TEXTURE_SIZE) * TEXTURE_SIZE + (int)draw.tex.x];
-	return (color);
-}
-
 void ray_draw(t_game *game, t_ray *ray, int i)
 {
 	t_draw		draw;
 
 	ray->len = IMG_WIDTH / 3 / ray->dis / tan(FOV_ANGLE / 2);
-	draw.pixel = ray->len > IMG_HEIGHT ? (ray->len - IMG_HEIGHT) / 2: 0;
-	draw.step = (ray->len > IMG_HEIGHT) ? (ray->len -  IMG_HEIGHT) / ray->len : 1;
-	draw.start = ft_max((IMG_HEIGHT - ray->len) / 2, 0);
-	draw.end = ft_min((IMG_HEIGHT + ray->len) / 2, IMG_HEIGHT);
-	draw.put.x = i;
-	while (draw.start < draw.end)
+	draw.pixel.y = ray->len > IMG_HEIGHT ? (ray->len - IMG_HEIGHT) / 2: 0;
+	// draw.step.y = (ray->len > IMG_HEIGHT) ? (ray->len -  IMG_HEIGHT) / ray->len : 1;
+	draw.start.y = ft_max((IMG_HEIGHT - ray->len) / 2, 0);
+	draw.end.y = ft_min((IMG_HEIGHT + ray->len) / 2, IMG_HEIGHT - 1);
+	draw.start.x = i;
+	while (draw.start.y < draw.end.y)
 	{
-	draw.tex.x = (ray->point - floor(ray->point)) * 64;
-
-		draw.put.y = draw.start;
+		draw.tex.x = (ray->point - floor(ray->point)) * TEXTURE_SIZE;
 		if (ray->dir == 'W' || ray->dir == 'S')
 			draw.tex.x = TEXTURE_SIZE - draw.tex.x - 1;
-		draw.tex.y = draw.pixel / ray->len;
+		draw.tex.y = draw.pixel.y / ray->len;
 		draw.color = choice_tex(game, draw, ray->dir);
-		draw_pixel(game, draw.put, draw.color);
-		draw.start++;
-		draw.pixel++;
+		draw_pixel(game, draw.start, draw.color);
+		draw.start.y++;
+		draw.pixel.y++;
+	}
+}
+
+int		*sort_sprite(t_game *game, t_sprite *sprite)
+{
+	float	distance[numSprites];
+	int		*order;
+	int i;
+	int	j;
+
+	if (!(order = malloc(sizeof(int) * (numSprites + 1))))
+		return (0);
+	i = 0;
+	while (i < numSprites)
+	{
+		distance[i] = sqrt((game->pos.x - sprite[i].x) * (game->pos.x - sprite[i].x) + (game->pos.y - sprite[i].y) * (game->pos.y- sprite[i].y)); 
+		order[i] = i;
+		i++;
+	}
+	i = 0;
+	while (i < numSprites)
+	{
+		j = i;
+		while (j < numSprites)
+		{
+
+			if (distance[i] < distance[j])
+			{
+				ft_fswap(&distance[i], &distance[j]);
+				ft_iswap(&order[i], &order[j]);
+			}
+			j++;
+		}
+		i++;
+	}
+	i = 0;
+	return (order);
+}
+
+void	sprite_init (t_game *game, t_sprites *spr, int	order)
+{
+	spr->temp.x = sprite[order].x - game->pos.x;
+	spr->temp.y = sprite[order].y - game->pos.y;
+	spr->num = sprite[order].num;
+	spr->trans = i_matrix_mulit(game->plane, game->dir, spr->temp);
+	spr->screenX = (WIN_WIDTH/2) * (1 + spr->trans.x / spr->trans.y);
+	spr->sprite.y = fabs((IMG_HEIGHT / spr->trans.y));
+	spr->sprite.x = fabs((IMG_WIDTH / spr->trans.y));
+}
+
+void		sprite_draw(t_game *game, t_sprites *spr)
+{
+	t_draw draw;
+	draw.start.x = ft_max(spr->screenX - spr->sprite.x / 2 , 0);
+	draw.end.x =  ft_min(spr->screenX + spr->sprite.x / 2, IMG_WIDTH - 1) ;
+	while (draw.start.x < draw.end.x)
+	{
+		draw.start.y = ft_max((IMG_HEIGHT- spr->sprite.y) / 2, 0);
+		draw.end.y = ft_min((IMG_HEIGHT + spr->sprite.y)/ 2, IMG_HEIGHT - 1);
+		draw.pixel.x = (int)(256 * (draw.start.x - (spr->screenX - spr->sprite.x / 2)) * SPRITE_SIZE / spr->sprite.x  / 256);
+		if (spr->trans.y > 0 && spr->trans.y < ZBUFFER[(int)draw.start.x])
+			while (draw.start.y < draw.end.y)
+			{
+				draw.step.y = draw.start.y * 256 - IMG_HEIGHT * 128 + spr->sprite.y * 128;
+				draw.pixel.y = (int)(draw.step.y * SPRITE_SIZE / spr->sprite.y / 256);
+				draw.color = game->tex[spr->num].data[(int)(draw.pixel.y * SPRITE_SIZE) + (int)draw.pixel.x];
+				if ((draw.color & 0x00FFFFFF) != 0)
+					draw_pixel(game, draw.start, draw.color);
+				draw.start.y++;
+			}
+		draw.start.x++;
 	}
 }
 
 void ray_casting(t_game *game)
 {
-	int i;
-
+	int 	i;
+	int		*order;
 	i = 0;
 	while (i < NUM_RAYS)
 	{
@@ -472,6 +580,18 @@ void ray_casting(t_game *game)
 		ray_dda_init(game, &ray);
 		ray_dda(game, &ray);
 		ray_draw(game, &ray, i);
+		ZBUFFER[i] = ray.dis;
+		i++;
+	}
+		i = 0;
+	order = sort_sprite(game, sprite);
+	while (i < numSprites)
+	{	
+		t_sprites	spr;
+
+		sprite_init(game, &spr, order[i]);
+		sprite_draw(game, &spr);
+		
 		i++;
 	}
 }
@@ -479,17 +599,17 @@ void ray_casting(t_game *game)
 int update_image(t_game *game)
 {
 	ray_casting(game);
-	{
-		map_draw(game);
-		//player, line
-		for (int i = -5; i < 5; i++)
-			for (int j = -5; j < 5; j++)
-				game->img.data[((int)((game->pos.y * TILESIZE + i)) * IMG_WIDTH + (int)(game->pos.x * TILESIZE + j))] = 0xFF000F;
-		t_fvector v1 = {TILESIZE * game->pos.x + TILESIZE * game->dir.x, TILESIZE * game->pos.y + TILESIZE * game->dir.y};
-		t_fvector v2 = {TILESIZE * game->pos.x, TILESIZE * game->pos.y};
-		draw_line(game, v1, v2, 0xFF00FF);
-	}
+	map_draw(game);
+
+				//player, line
+				for (int i = -5; i < 5; i++)
+					for (int j = -5; j < 5; j++)
+						game->img.data[((int)((game->pos.y * TILESIZE + i)) * IMG_WIDTH + (int)(game->pos.x * TILESIZE + j))] = 0xFF000F;
+				t_fvector v1 = {TILESIZE * game->pos.x + TILESIZE * game->dir.x, TILESIZE * game->pos.y + TILESIZE * game->dir.y};
+				t_fvector v2 = {TILESIZE * game->pos.x, TILESIZE * game->pos.y};
+				draw_line(game, v1, v2, 0xFF00FF);
 	mlx_put_image_to_window(game->mlx, game->win, game->img.ptr, 0, 0);
+	mlx_do_sync(game->mlx);
 	return (0);
 }
 
@@ -497,7 +617,7 @@ int player_move(t_game *game)
 {
 	float speed;
 
-	speed = 0.03;
+	speed = 0.1;
 	if (game->move.x == 1)
 	{
 		t_fvector next_pt;
@@ -523,9 +643,9 @@ int player_move(t_game *game)
 int player_turn(t_game *game)
 {
 	if (game->turn.x == 1)
-		game->dir = roation(game->dir, M_PI / 120);
+		game->dir = roation(game->dir, M_PI / 60);
 	else if (game->turn.y == 1)
-		game->dir = roation(game->dir, -M_PI / 120);
+		game->dir = roation(game->dir, -M_PI / 60);
 	game->plane = roation(game->dir, M_PI / 2);
 	return (1);
 }
@@ -533,7 +653,6 @@ int player_turn(t_game *game)
 int main_loop(t_game *game)
 {
 	img_init(game);
-
 	static int update = 1;
 	if (game->turn.x || game->turn.y)
 		update = player_turn(game);
@@ -552,10 +671,8 @@ int main(void)
 	game.pos.y = 4;
 	game.dir.x = 1;
 	game.dir.y = 0;
-
-	game.plane.x = 0;
-	game.plane.y = 0.66;
-
+	game.plane = roation(game.dir, M_PI / 2);
+	
 	window_init(&game);
 	img_init(&game);
 	mlx_hook(game.win, X_EVENT_KEY_PRESS, 0, &key_press, &game);
