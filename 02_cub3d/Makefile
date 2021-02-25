@@ -5,8 +5,8 @@
 #                                                     +:+ +:+         +:+      #
 #    By: hopark <hopark@student.42seoul.kr>         +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
-#    Created: 2020/11/23 13:16:57 by hopark            #+#    #+#              #
-#    Updated: 2021/01/03 11:58:43 by hopark           ###   ########.fr        #
+#    Created: 2021/02/10 14:50:20 by hopark            #+#    #+#              #
+#    Updated: 2021/02/25 18:14:16 by hopark           ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -14,67 +14,99 @@ NAME = cub3D
 
 CC = gcc
 CFLAGS = -Wall -Wextra -Werror
-
-LIBFT = libft.a
-LIBFT_DIR = ./libft
-LIBFT_FILE = $(LIBFT_DIR)/$(LIBFT)
-LIBFT_INC_DIR = $(LIBFT_DIR)/include
+RM = rm
+RMFLAGS = -f
 
 MLX = libmlx.a
-MLX_DIR = minilibx_opengl_20191021
-MLX_FLAGS = -L $(MLX_DIR) -lmlx -framework OpenGL -framework AppKit
+MLX_DIR = ./minilibx_opengl_20191021
 MLX_FILE = $(MLX_DIR)/$(MLX)
+MLX_FLAGS = -L $(MLX_DIR) -lmlx -framework OpenGl -framework Appkit
 
-INC_DIR = ./include
-SRC_DIR = ./src
-OBJ_DIR = ./obj
 
-INCLUDES = $(addprefix $(INC_DIR)/, \
+SRC_DIR = src
+INC_DIR = include
+ENGINE_DIR = $(SRC_DIR)/engine
+GNL_DIR = $(SRC_DIR)/gnl
+UTILS_DIR = $(SRC_DIR)/utils
+PASSING_DIR = $(SRC_DIR)/passing
+OBJ_DIR = obj
 
-)
+INCLUDES = $(wildcard $(INC_DIR)/*.h)
+ENGINE = $(wildcard $(ENGINE_DIR)/*.c)
+GNL = $(wildcard $(GNL_DIR)/*.c)
+PASSING = $(wildcard $(PASSING_DIR)/*.c)
+UTILS = $(wildcard $(UTILS_DIR)/*.c)
 
-SRCS = $(SRC_DIR)
+SRC_DIR_B = src_B
+INC_DIR_B = include_B
+ENGINE_DIR_B = $(SRC_DIR_B)/engine_B
+GNL_DIR_B = $(SRC_DIR_B)/gnl_B
+UTILS_DIR_B = $(SRC_DIR_B)/utils_B
+PASSING_DIR_B = $(SRC_DIR_B)/passing_B
+
+INCLUDES_B = $(wildcard $(INC_DIR_B)/*.h)
+ENGINE_B = $(wildcard $(ENGINE_DIR_B)/*.c)
+GNL_B = $(wildcard $(GNL_DIR_B)/*.c)
+PASSING_B = $(wildcard $(PASSING_DIR_B)/*.c)
+UTILS_B = $(wildcard $(UTILS_DIR_B)/*.c)
+
 
 vpath %.c \
 	$(SRC_DIR) \
+	$(ENGINE_DIR) \
+	$(GNL_DIR) \
+	$(PASSING_DIR) \
+	$(UTILS_DIR) \
+	$(SRC_DIR_B) \
+	$(ENGINE_DIR_B) \
+	$(GNL_DIR_B) \
+	$(PASSING_DIR_B) \
+	$(UTILS_DIR_B) \
+	
 
+SRCS = \
+	$(ENGINE) \
+	$(GNL) \
+	$(PASSING) \
+	$(UTILS) \
+	$(wildcard $(SRC_DIR)/*.c)
+
+SRCS_B = \
+	$(ENGINE_B) \
+	$(GNL_B) \
+	$(PASSING_B) \
+	$(UTILS_B) \
+	$(wildcard $(SRC_DIR_B)/*.c)
 
 OBJS = $(addprefix $(OBJ_DIR)/, $(notdir $(SRCS:.c=.o)))
+OBJS_B = $(addprefix $(OBJ_DIR)/, $(notdir $(SRCS_B:.c=.o)))
 
 all : $(NAME)
 
-clean : $(LIBFT)_clean
-	@$(RM) $(RMFLAGS) $(OBJS)
+clean :
+	$(RM) $(RMFLAGS) $(OBJS)
 
-fclean : $(LIBFT)_fclean clean
-	@$(RM) $(RMFLAGS) $(NAME)
+fclean : clean
+	$(RM) $(RMFLAGS) $(NAME) $(MLX)
 
 re : fclean all
 
-$(OBJ_DIR)/%.o : %.c
+bonus :  $(MLX_FILE) $(INCLUDES_B) $(OBJS_B)
+		$(CC) $(CFLAGS) -o $(NAME) $(OBJS_B) $(MLX_FLAGS)
+
+test : all
+	./cub3D "./map.cub"
+
+$(OBJ_DIR) :
 	@mkdir -p $(OBJ_DIR)
-	$(CC) $(CFLAGS) -I $(INC_DIR) -I $(LIBFT_INC_DIR) -c $< -o $@
 
-$(NAME) : cub3d.c $(MLX_FILES) $(LIBFT_FILE) $(INCLUDES) $(OBJS)
-	$(CC) $(CDEBUG) $(CFLAGS) -I $(INC_DIR) -I $(LIBFT_INC_DIR) cub3d.c -o $(NAME) $(LIBFT_FLAGS) $(MLX_FLAGS)
+$(OBJ_DIR)/%.o : %.c | $(OBJ_DIR)
+	$(CC) -I $(INC_DIR) -c $< -o $@
+$(NAME) : $(MLX_FILE) $(INCLUDES) $(OBJS)
+		$(CC) $(CFLAGS) -o $(NAME) $(OBJS) $(MLX_FLAGS)
+$(MLX) : $(MLX_FILE)
+$(MLX_FILE) :
+	make -C $(MLX_DIR)
+	cp $(MLX_FILE) $(NAME)
 
-
-#libft
-
-$(LIBFT) : $(LIBFT_FILE)
-
-$(LIBFT_FILE) :
-	@make --no-print-directory -C $(LIBFT_DIR)
-	@cp $(LIBFT_FILE) $(NAME)
-
-$(LIBFT)_clean :
-	@make --no-print-directory -C $(LIBFT_DIR) clean
-
-$(LIBFT)_fclean :
-	@make --no-print-directory -C $(LIBFT_DIR) fclean
-
-
-.PHONY : \
-	all clean fclean re \
-	$(LIBFT) $(LIBFT)_clean $(LIBFT)_fclean \
-	$(MLX) $(MLX)_clean
+.PHONY: all clean fclean re test\

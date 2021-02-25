@@ -6,25 +6,18 @@
 /*   By: hopark <hopark@student.42seoul.kr>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/02/09 22:06:31 by hopark            #+#    #+#             */
-/*   Updated: 2021/02/25 18:20:35 by hopark           ###   ########.fr       */
+/*   Updated: 2021/02/25 13:54:28 by hopark           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef CUB3D_H
 # define CUB3D_H
-# include <stdio.h>
-# include <stdlib.h>
-# include <unistd.h>
-# include <math.h>
-# include <fcntl.h>
-# include "cub3d.h"
+# include "utils.h"
+# include "../minilibx_opengl_20191021/mlx.h"
 # include "cub3d_type.h"
 # include "get_next_line.h"
-# include "utils.h"
 # include "passing.h"
-# include "../minilibx_opengl_20191021/mlx.h"
-
-# define X_EVENT_KEY_PRESS		    2
+# define X_EVENT_KEY_PRESS		2
 # define X_EVENT_KEY_RELEASE		3
 # define X_EVENT_KEY_EXI			17
 # define KEY_ESC					53
@@ -88,7 +81,9 @@ void			ft_sprite_draw(t_game *g, t_sprites *spr);
 # define BITMAPFILEHEADER 14
 # define BITMAPINFOHEADER 40
 
-float g_ZBUFFER[800];
+float ZBUFFER[800];
+
+
 
 #define _USE_MATH_DEFINES
 
