@@ -6,7 +6,7 @@
 /*   By: hopark <hopark@student.42seoul.kr>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/02/09 21:34:11 by hopark            #+#    #+#             */
-/*   Updated: 2021/02/25 13:59:53 by hopark           ###   ########.fr       */
+/*   Updated: 2021/02/26 15:34:04 by hopark           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -65,13 +65,6 @@ static char			*ft_strndup(const char *s, int n)
 	}
 	result[i] = 0;
 	return (result);
-}
-
-static void			ft_free2(char **s, int i)
-{
-	while (i--)
-		free(s[i]);
-	free(s);
 }
 
 char				**ft_split(char const *s, char c)

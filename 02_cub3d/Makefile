@@ -6,7 +6,7 @@
 #    By: hopark <hopark@student.42seoul.kr>         +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2021/02/10 14:50:20 by hopark            #+#    #+#              #
-#    Updated: 2021/02/25 18:14:16 by hopark           ###   ########.fr        #
+#    Updated: 2021/03/01 15:46:36 by hopark           ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -95,8 +95,8 @@ bonus :  $(MLX_FILE) $(INCLUDES_B) $(OBJS_B)
 		$(CC) $(CFLAGS) -o $(NAME) $(OBJS_B) $(MLX_FLAGS)
 
 test : all
-	./cub3D "./map.cub"
-
+	./cub3D ./map.cub
+	
 $(OBJ_DIR) :
 	@mkdir -p $(OBJ_DIR)
 

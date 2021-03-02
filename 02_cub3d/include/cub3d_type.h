@@ -6,7 +6,7 @@
 /*   By: hopark <hopark@student.42seoul.kr>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/02/09 21:55:27 by hopark            #+#    #+#             */
-/*   Updated: 2021/02/25 18:17:29 by hopark           ###   ########.fr       */
+/*   Updated: 2021/03/01 15:33:51 by hopark           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,7 +28,7 @@ typedef struct s_ivector
 typedef struct s_list
 {
 	char				*content;
-	t_ivector			pt;
+	t_fvector			pt;
 	float				dis;
 	struct s_list		*next;
 }				t_list;
@@ -76,27 +76,33 @@ typedef struct s_map
 	float		floor;
 	float		ceiling;
 	char		**m;
+	char		*NO;
+	char		*EA;
+	char		*SO;
+	char		*WE;
+	char		*S;
+	int			flag;
 	int			cnt_sprite;
 }				t_map;
 
 typedef struct s_img
 {
-	void *ptr;
-	int *data;
-	int width;
-	int height;
-	int size_l;
-	int bpp;
-	int endian;
+	void		*ptr;
+	int			*data;
+	int			width;
+	int			height;
+	int			size_l;
+	int			bpp;
+	int			endian;
+	int			line;
 }				t_img;
 
 typedef struct s_game
 {
 	void		*mlx;
 	void		*win;
-	t_ivector	size;
 	t_img		img;
-	t_img		tex[7];
+	t_img		tex[5];
 	t_map		map;
 	t_fvector	pos;
 	t_fvector	dir;
@@ -105,7 +111,8 @@ typedef struct s_game
 	t_fvector	move;
 	t_fvector	side;
 	t_list		*spr;
-	t_ray		ray;
+	int			inpos;
+
 }				t_game;
 
 #endif

@@ -6,7 +6,7 @@
 /*   By: hopark <hopark@student.42seoul.kr>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/02/19 12:25:47 by hopark            #+#    #+#             */
-/*   Updated: 2021/02/25 18:33:37 by hopark           ###   ########.fr       */
+/*   Updated: 2021/02/26 14:49:29 by hopark           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,6 +15,7 @@
 void	*ft_memset(void *s, int c, int n)
 {
 	unsigned char	*ptr;
+	
 
 	ptr = (unsigned char *)s;
 	while (n-- > 0)

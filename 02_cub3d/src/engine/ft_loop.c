@@ -6,7 +6,7 @@
 /*   By: hopark <hopark@student.42seoul.kr>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/02/09 21:50:55 by hopark            #+#    #+#             */
-/*   Updated: 2021/02/21 18:00:22 by hopark           ###   ########.fr       */
+/*   Updated: 2021/03/01 15:51:51 by hopark           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,8 +26,8 @@ int				ft_main_loop(t_game *g)
 {
 	static int update;
 
-	update = 1;
 	ft_img_init(g);
+	update = 1;
 	if (g->turn.x || g->turn.y)
 		update = ft_player_turn(g);
 	if (g->move.x || g->move.y)

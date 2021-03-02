@@ -6,7 +6,7 @@
 /*   By: hopark <hopark@student.42seoul.kr>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/02/19 12:26:12 by hopark            #+#    #+#             */
-/*   Updated: 2021/02/19 13:05:25 by hopark           ###   ########.fr       */
+/*   Updated: 2021/02/27 15:22:54 by hopark           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,6 +49,8 @@ int				ft_atoi(const char *nptr)
 		num = num * 10 + nptr[i] - '0';
 		i++;
 	}
+	if (nptr[i] != 0)
+		return (-1);
 	if (i - cnt >= 20)
 		return (sign > 0 ? -1 : 0);
 	return (num * sign);

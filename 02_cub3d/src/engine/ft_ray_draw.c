@@ -6,7 +6,7 @@
 /*   By: hopark <hopark@student.42seoul.kr>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/02/09 21:40:30 by hopark            #+#    #+#             */
-/*   Updated: 2021/02/21 18:00:12 by hopark           ###   ########.fr       */
+/*   Updated: 2021/03/01 15:29:26 by hopark           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,7 +29,7 @@ void			ft_ray_init(t_game *g, t_ray *ray, int i)
 	ray->check = 0;
 	ray->map_pos.x = (int)g->pos.x;
 	ray->map_pos.y = (int)g->pos.y;
-	ray->cam = 2 * i / (float)g->size.x - 1;
+	ray->cam = 2 * i / (float)g->img.width - 1;
 	ray->x = g->dir.x + g->plane.x * ray->cam;
 	ray->y = g->dir.y + g->plane.y * ray->cam;
 	ft_ray_quadrant(ray);
@@ -59,10 +59,10 @@ void			ft_ray_draw(t_game *g, t_ray *ray, int i)
 {
 	t_draw			draw;
 
-	ray->len = g->size.x / 3 / ray->dis / tan(FOV_ANGLE / 2);
-	draw.pixel.y = ray->len > g->size.y ? (ray->len - g->size.y) / 2 : 0;
-	draw.start.y = ft_max((g->size.y - ray->len) / 2, 0);
-	draw.end.y = ft_min((g->size.y + ray->len) / 2, g->size.y - 1);
+	ray->len = g->img.width / 3 / ray->dis / tan(FOV_ANGLE / 2);
+	draw.pixel.y = ray->len > g->img.height ? (ray->len - g->img.height) / 2 : 0;
+	draw.start.y = ft_max((g->img.height - ray->len) / 2, 0);
+	draw.end.y = ft_min((g->img.height + ray->len) / 2, g->img.height - 1);
 	draw.start.x = i;
 	while (draw.start.y < draw.end.y)
 	{

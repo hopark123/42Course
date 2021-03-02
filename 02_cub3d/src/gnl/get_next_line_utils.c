@@ -6,7 +6,7 @@
 /*   By: hopark <hopark@student.42seoul.kr>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/11/10 12:13:54 by hopark            #+#    #+#             */
-/*   Updated: 2021/02/19 12:25:23 by hopark           ###   ########.fr       */
+/*   Updated: 2021/02/27 16:02:57 by hopark           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,6 +21,7 @@ int		ft_strlen(const char *s)
 		len++;
 	return (len);
 }
+
 
 void		*ft_memcpy(void *dst, const void *src, int n)
 {

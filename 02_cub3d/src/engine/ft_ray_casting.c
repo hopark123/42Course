@@ -6,7 +6,7 @@
 /*   By: hopark <hopark@student.42seoul.kr>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/02/09 21:44:45 by hopark            #+#    #+#             */
-/*   Updated: 2021/02/25 18:17:00 by hopark           ###   ########.fr       */
+/*   Updated: 2021/03/01 15:29:17 by hopark           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -69,11 +69,11 @@ void			ft_ray_casting(t_game *g)
 	t_ray			ray;
 	t_list			*cur;
 	t_sprites		spr;
+
 	ft_draw_floor(g, g->map.floor);
 	ft_draw_ceiling(g, g->map.ceiling);
 	i = 0;
-
-	while (i < g->size.x)
+	while (i < g->img.width)
 	{
 		ft_ray_init(g, &ray, i);
 		ft_ray_dda_init(g, &ray);
