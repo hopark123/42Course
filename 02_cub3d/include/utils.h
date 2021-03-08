@@ -6,7 +6,7 @@
 /*   By: hopark <hopark@student.42seoul.kr>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/02/09 22:14:31 by hopark            #+#    #+#             */
-/*   Updated: 2021/02/27 15:30:15 by hopark           ###   ########.fr       */
+/*   Updated: 2021/03/08 16:57:28 by hopark           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,5 +35,10 @@ void				ft_lstclear(t_list **lst);
 int					ft_memcmp(const void *s1, const void *s2, int n);
 void				*ft_memset(void *s, int c, int n);
 float				ft_vector_len(t_fvector v1, t_fvector v2);
+void				*ft_memmove(void *dest, const void *src, size_t n);
+int					ft_strncmp(const char *s1, const char *s2, size_t n);
+int					extention_check(char *path);
+int					ft_split_check(char **split, int num);
+int					ft_strlen2(char **s);
 
 #endif

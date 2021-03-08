@@ -6,7 +6,7 @@
 /*   By: hopark <hopark@student.42seoul.kr>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/02/19 12:38:09 by hopark            #+#    #+#             */
-/*   Updated: 2021/03/01 16:04:36 by hopark           ###   ########.fr       */
+/*   Updated: 2021/03/08 17:01:39 by hopark           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,7 +21,6 @@ void			ft_map_init(t_game *g)
 	int		j;
 
 	i = -1;
-
 	g->inpos = 0;
 	while (++i < g->map.size.y)
 	{
@@ -37,22 +36,19 @@ void			ft_map_init(t_game *g)
 					ft_exit_msg(g, "not surrand wall");
 			}
 			else if (ft_strchr("2", g->map.m[i][j]))
-			{
 				ft_sprite_store(g, i, j);
-				g->map.cnt_sprite++;
-			}
 		}
 	}
 	if (g->inpos != -1)
-		ft_exit_msg(g, "map error2");
+		ft_exit_msg(g, "map error");
 }
 
-int			ft_dfs(t_game *g, int i, int j, char **dfs)
+int				ft_dfs(t_game *g, int i, int j, char **dfs)
 {
 	int			k;
 	int			tx;
 	int			ty;
-	
+
 	if (g->map.m[i][j] == ' ')
 	{
 		return (-1);
@@ -75,34 +71,34 @@ int			ft_dfs(t_game *g, int i, int j, char **dfs)
 int				ft_dfs_check(t_game *g, char **dfs)
 {
 	int			k;
-	
+
 	k = 0;
 	while (k < g->map.size.x)
 	{
 		if (dfs[0][k] == '2' || dfs[g->map.size.y - 1][k] == '2')
 			return (-1);
 		k++;
-	}	
+	}
 	k = 0;
 	while (k < g->map.size.y)
-	{	
+	{
 		if (dfs[k][0] == '2' || dfs[k][g->map.size.x - 1] == '2')
 			return (-1);
 		k++;
 	}
-	return(0);
+	return (0);
 }
 
-int					ft_map_valid(t_game *g, int i, int j)
+int				ft_map_valid(t_game *g, int i, int j)
 {
 	int			k;
 	char		**dfs;
-	
+
 	if (!(dfs = malloc(sizeof(char *) * g->map.size.y + 1)))
 		ft_exit_msg(g, "malloc error");
 	k = 0;
 	while (k < g->map.size.y)
-	{	
+	{
 		if (!(dfs[k] = malloc(sizeof(char) * g->map.size.x + 1)))
 			ft_exit_msg(g, "malloc error");
 		ft_memset(dfs[k], '0', g->map.size.x);

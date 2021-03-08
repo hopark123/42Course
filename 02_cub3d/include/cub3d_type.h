@@ -6,26 +6,26 @@
 /*   By: hopark <hopark@student.42seoul.kr>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/02/09 21:55:27 by hopark            #+#    #+#             */
-/*   Updated: 2021/03/01 15:33:51 by hopark           ###   ########.fr       */
+/*   Updated: 2021/03/08 16:00:34 by hopark           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef CUB3D_TYPE_H
 # define CUB3D_TYPE_H
 
-typedef struct s_fvector
+typedef struct	s_fvector
 {
 	float x;
 	float y;
 }				t_fvector;
 
-typedef struct s_ivector
+typedef struct	s_ivector
 {
 	int x;
 	int y;
 }				t_ivector;
 
-typedef struct s_list
+typedef struct	s_list
 {
 	char				*content;
 	t_fvector			pt;
@@ -33,7 +33,7 @@ typedef struct s_list
 	struct s_list		*next;
 }				t_list;
 
-typedef struct s_ray
+typedef struct	s_ray
 {
 	float		x;
 	float		y;
@@ -50,42 +50,42 @@ typedef struct s_ray
 	float		point;
 }				t_ray;
 
-typedef struct s_draw
+typedef struct	s_draw
 {
-	t_fvector	put;
-	t_fvector	tex;
-	t_fvector	start;
-	t_fvector	end;
-	t_fvector	step;
-	t_fvector	pixel;
+	t_fvector		put;
+	t_fvector		tex;
+	t_fvector		start;
+	t_fvector		end;
+	t_fvector		step;
+	t_fvector		pixel;
 	unsigned int	color;
 }				t_draw;
 
-typedef struct s_sprites
+typedef struct	s_sprites
 {
 	t_fvector	temp;
 	t_fvector	trans;
 	t_fvector	sprite;
-	float		screenX;
+	float		scx;
 	int			*order;
 }				t_sprites;
 
-typedef struct s_map
+typedef struct	s_map
 {
 	t_ivector	size;
 	float		floor;
 	float		ceiling;
 	char		**m;
-	char		*NO;
-	char		*EA;
-	char		*SO;
-	char		*WE;
-	char		*S;
+	char		*no;
+	char		*ea;
+	char		*so;
+	char		*we;
+	char		*s;
 	int			flag;
 	int			cnt_sprite;
 }				t_map;
 
-typedef struct s_img
+typedef struct	s_img
 {
 	void		*ptr;
 	int			*data;
@@ -97,7 +97,7 @@ typedef struct s_img
 	int			line;
 }				t_img;
 
-typedef struct s_game
+typedef struct	s_game
 {
 	void		*mlx;
 	void		*win;

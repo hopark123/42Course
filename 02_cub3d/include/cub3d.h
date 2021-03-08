@@ -6,7 +6,7 @@
 /*   By: hopark <hopark@student.42seoul.kr>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/02/09 22:06:31 by hopark            #+#    #+#             */
-/*   Updated: 2021/02/28 14:21:49 by hopark           ###   ########.fr       */
+/*   Updated: 2021/03/08 16:01:08 by hopark           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,7 +49,8 @@ void			ft_draw_dir(t_game *g, unsigned int color);
 void			ft_draw_pixel(t_game *g, t_fvector pt, unsigned int color);
 
 void			ft_draw_line(t_game *g, t_fvector v1, t_fvector v2, int color);
-void			ft_draw_square(t_game *g, t_ivector pt, int size, unsigned int color);
+void			ft_draw_square(t_game *g, t_ivector pt,\
+								int size, unsigned int color);
 void			ft_free(void *memory);
 void			ft_free2(char **s, int i);
 void			ft_exit_msg(t_game *g, char *msg);
@@ -74,32 +75,26 @@ void			ft_ray_draw(t_game *g, t_ray *ray, int i);
 void			ft_sort_sprite(t_game *g);
 void			ft_sprite_init(t_game *g, t_list *cur, t_sprites *spr);
 void			ft_sprite_draw(t_game *g, t_sprites *spr);
-
-int				ft_strlen2(char **s);
-
+int				ft_save_bmp(t_game *g);
 int				ft_split_check(char **split, int num);
-
-
-
-
 
 # ifndef TILESIZE
 #  define TILESIZE 10
 # endif
 
 # ifndef FOV_ANGLE
-#  define FOV_ANGLE 60 * (M_PI / 180)
+#  define FOV_ANGLE 66
 # endif
 
 # define BITMAPFILEHEADER 14
 # define BITMAPINFOHEADER 40
 
-float g_ZBUFFER[800];
+float	g_zbuffer[800];
 
 # define _USE_MATH_DEFINES
 
 # define TEXTURE_SIZE 64
-# define SPRITE_SIZE 64
-# define SPRITE_WIDTH 64
+# define SPR_SIZE 64
+# define SPR_WIDTH 64
 
 #endif

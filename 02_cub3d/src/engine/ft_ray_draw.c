@@ -6,7 +6,7 @@
 /*   By: hopark <hopark@student.42seoul.kr>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/02/09 21:40:30 by hopark            #+#    #+#             */
-/*   Updated: 2021/03/01 15:29:26 by hopark           ###   ########.fr       */
+/*   Updated: 2021/03/08 15:17:57 by hopark           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,7 +41,7 @@ unsigned int	ft_choice_tex(t_game *g, t_draw draw, char dir)
 {
 	unsigned int	color;
 	int				tex_num;
-	
+
 	if (dir == 'N')
 		tex_num = 0;
 	else if (dir == 'S')
@@ -60,7 +60,8 @@ void			ft_ray_draw(t_game *g, t_ray *ray, int i)
 	t_draw			draw;
 
 	ray->len = g->img.width / 3 / ray->dis / tan(FOV_ANGLE / 2);
-	draw.pixel.y = ray->len > g->img.height ? (ray->len - g->img.height) / 2 : 0;
+	draw.pixel.y = ray->len > g->img.height ?\
+				(ray->len - g->img.height) / 2 : 0;
 	draw.start.y = ft_max((g->img.height - ray->len) / 2, 0);
 	draw.end.y = ft_min((g->img.height + ray->len) / 2, g->img.height - 1);
 	draw.start.x = i;

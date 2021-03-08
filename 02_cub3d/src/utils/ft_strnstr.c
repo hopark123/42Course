@@ -1,24 +1,33 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_sprite_store.c                                  :+:      :+:    :+:   */
+/*   ft_strnstr.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: hopark <hopark@student.42seoul.kr>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2021/03/08 15:33:26 by hopark            #+#    #+#             */
-/*   Updated: 2021/03/08 17:02:43 by hopark           ###   ########.fr       */
+/*   Created: 2021/03/08 14:57:57 by hopark            #+#    #+#             */
+/*   Updated: 2021/03/08 15:30:04 by hopark           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "cub3d.h"
 
-void		ft_sprite_store(t_game *g, int i, int j)
+char		*ft_strnstr(const char *big, const char *little, size_t len)
 {
-	t_list	*cur;
+	size_t		i;
+	size_t		llen;
 
-	if ((cur = ft_lstnew(0)) == 0)
-		ft_exit_msg(g, "sprite error");
-	cur->pt.x = j + 0.5;
-	cur->pt.y = i + 0.5;
-	ft_lstadd_back(&g->spr, cur);
+	if (*little == 0)
+		return ((char *)big);
+	llen = ft_strlen(little);
+	i = 0;
+	if (*big == 0)
+		return (0);
+	while (i + llen <= len)
+	{
+		if (ft_strncmp(big + i, little, llen) == 0)
+			return ((char *)big + i);
+		i++;
+	}
+	return (0);
 }

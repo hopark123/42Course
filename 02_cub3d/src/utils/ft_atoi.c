@@ -6,7 +6,7 @@
 /*   By: hopark <hopark@student.42seoul.kr>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/02/19 12:26:12 by hopark            #+#    #+#             */
-/*   Updated: 2021/02/27 15:22:54 by hopark           ###   ########.fr       */
+/*   Updated: 2021/03/08 15:45:32 by hopark           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,7 +18,8 @@ static int		ft_isspace(char c)
 		return (1);
 	return (0);
 }
-int		ft_isdigit(int c)
+
+int				ft_isdigit(int c)
 {
 	if (c >= '0' && c <= '9')
 		return (1);
@@ -38,11 +39,8 @@ int				ft_atoi(const char *nptr)
 	while (ft_isspace(nptr[i]))
 		i++;
 	if (nptr[i] == '+' || nptr[i] == '-')
-	{
-		if (nptr[i] == '-')
+		if (nptr[i++] == '-')
 			sign = -1;
-		i++;
-	}
 	cnt = i;
 	while (ft_isdigit(nptr[i]))
 	{

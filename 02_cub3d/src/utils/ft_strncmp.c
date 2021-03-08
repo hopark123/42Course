@@ -1,24 +1,35 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_sprite_store.c                                  :+:      :+:    :+:   */
+/*   ft_strncmp.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: hopark <hopark@student.42seoul.kr>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2021/03/08 15:33:26 by hopark            #+#    #+#             */
-/*   Updated: 2021/03/08 17:02:43 by hopark           ###   ########.fr       */
+/*   Created: 2021/03/08 14:58:35 by hopark            #+#    #+#             */
+/*   Updated: 2021/03/08 15:29:39 by hopark           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "cub3d.h"
 
-void		ft_sprite_store(t_game *g, int i, int j)
+int		ft_strncmp(const char *s1, const char *s2, size_t n)
 {
-	t_list	*cur;
+	size_t			i;
+	unsigned char	*c1;
+	unsigned char	*c2;
 
-	if ((cur = ft_lstnew(0)) == 0)
-		ft_exit_msg(g, "sprite error");
-	cur->pt.x = j + 0.5;
-	cur->pt.y = i + 0.5;
-	ft_lstadd_back(&g->spr, cur);
+	c1 = (unsigned char *)s1;
+	c2 = (unsigned char *)s2;
+	i = 0;
+	if (n == 0)
+		return (0);
+	while (i + 1 < n)
+	{
+		if (c1[i] != c2[i])
+			break ;
+		if (c1[i] * c2[i] == 0)
+			break ;
+		i++;
+	}
+	return (c1[i] - c2[i]);
 }

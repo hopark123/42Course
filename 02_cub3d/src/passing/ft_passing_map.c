@@ -6,7 +6,7 @@
 /*   By: hopark <hopark@student.42seoul.kr>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/02/19 12:38:29 by hopark            #+#    #+#             */
-/*   Updated: 2021/03/01 15:45:28 by hopark           ###   ########.fr       */
+/*   Updated: 2021/03/08 15:37:15 by hopark           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,7 +24,7 @@ void			ft_txt_reading(t_game *g, int fd)
 		if (ft_strlen(line) == 0)
 			free(line);
 		else
-			break;
+			break ;
 	}
 	if (temp < 0)
 		ft_exit_msg(g, "gnl error");
@@ -38,7 +38,7 @@ void			ft_map_component(t_game *g, int fd)
 	char	*line;
 	char	**split;
 	int		temp;
-	
+
 	i = 0;
 	g->map.flag = 0;
 	while (i < 8)
@@ -47,7 +47,7 @@ void			ft_map_component(t_game *g, int fd)
 		{
 			temp = get_next_line(fd, &line);
 			if (ft_strlen(line) != 0)
-				break;
+				break ;
 		}
 		split = ft_split(line, ' ');
 		free(line);
@@ -56,7 +56,6 @@ void			ft_map_component(t_game *g, int fd)
 	}
 	if (temp < 0)
 		ft_exit_msg(g, "gnl error");
-	
 }
 
 void			ft_map_passing(t_game *g, int fd, t_list *list)
@@ -75,7 +74,7 @@ void			ft_map_passing(t_game *g, int fd, t_list *list)
 		max = ft_max(max, ft_strlen(line));
 		g->map.size.y++;
 		if (temp == 0)
-			break;
+			break ;
 	}
 	if (temp < 0)
 		ft_exit_msg(g, "gnl error");
@@ -83,9 +82,7 @@ void			ft_map_passing(t_game *g, int fd, t_list *list)
 	ft_map_making(g, list);
 }
 
-
-
-void		ft_map_making(t_game *g, t_list *list)
+void			ft_map_making(t_game *g, t_list *list)
 {
 	int			i;
 
@@ -95,12 +92,12 @@ void		ft_map_making(t_game *g, t_list *list)
 	i = -1;
 	while (i++ < g->map.size.y)
 	{
-		if(!(g->map.m[i] = malloc(sizeof(char) * (g->map.size.x + 1))))
+		if (!(g->map.m[i] = malloc(sizeof(char) * (g->map.size.x + 1))))
 			ft_exit_msg(g, "malloc error");
 		ft_memset(g->map.m[i], 'x', g->map.size.x);
 		ft_memcpy(g->map.m[i], list->content, ft_strlen(list->content));
 		if (list->next == 0)
-			break;
+			break ;
 		list = list->next;
 	}
 	ft_lstclear(&(list));

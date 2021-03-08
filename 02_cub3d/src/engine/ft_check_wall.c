@@ -6,12 +6,11 @@
 /*   By: hopark <hopark@student.42seoul.kr>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/02/09 21:39:54 by hopark            #+#    #+#             */
-/*   Updated: 2021/02/20 12:41:04 by hopark           ###   ########.fr       */
+/*   Updated: 2021/03/08 15:31:23 by hopark           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "cub3d.h"
-
 
 int				ft_check_fwall(t_game *g, t_fvector pt)
 {

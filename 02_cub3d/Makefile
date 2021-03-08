@@ -6,7 +6,7 @@
 #    By: hopark <hopark@student.42seoul.kr>         +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2021/02/10 14:50:20 by hopark            #+#    #+#              #
-#    Updated: 2021/03/01 15:46:36 by hopark           ###   ########.fr        #
+#    Updated: 2021/03/08 17:19:16 by hopark           ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -50,6 +50,9 @@ GNL_B = $(wildcard $(GNL_DIR_B)/*.c)
 PASSING_B = $(wildcard $(PASSING_DIR_B)/*.c)
 UTILS_B = $(wildcard $(UTILS_DIR_B)/*.c)
 
+ifeq ($(DEBUG),true)
+	CDEBUG = -g
+endif
 
 vpath %.c \
 	$(SRC_DIR) \

@@ -6,7 +6,7 @@
 /*   By: hopark <hopark@student.42seoul.kr>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/02/09 21:46:19 by hopark            #+#    #+#             */
-/*   Updated: 2021/03/01 15:29:17 by hopark           ###   ########.fr       */
+/*   Updated: 2021/03/08 17:00:06 by hopark           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,6 +14,8 @@
 
 void			ft_draw_pixel(t_game *g, t_fvector pt, unsigned int color)
 {
+	if ((color & 0x00FFFFFF) == 0)
+		return ;
 	g->img.data[(int)pt.y * g->img.width + (int)pt.x] = color;
 }
 

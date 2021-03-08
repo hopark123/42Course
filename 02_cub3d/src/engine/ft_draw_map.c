@@ -6,7 +6,7 @@
 /*   By: hopark <hopark@student.42seoul.kr>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/02/09 21:46:42 by hopark            #+#    #+#             */
-/*   Updated: 2021/03/01 15:29:26 by hopark           ###   ########.fr       */
+/*   Updated: 2021/03/08 15:21:18 by hopark           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -61,7 +61,7 @@ void			ft_draw_floor(t_game *g, unsigned int color)
 	int			i;
 	int			j;
 	t_fvector	v;
-	
+
 	i = 0;
 	while (i < g->img.width)
 	{
@@ -82,7 +82,7 @@ void			ft_draw_ceiling(t_game *g, unsigned int color)
 	int			i;
 	int			j;
 	t_fvector	v;
-	
+
 	i = 0;
 	while (i < g->img.width)
 	{
@@ -100,15 +100,22 @@ void			ft_draw_ceiling(t_game *g, unsigned int color)
 
 void			ft_draw_dir(t_game *g, unsigned int color)
 {
-	t_fvector v1;
-	t_fvector v2;
+	t_fvector	v1;
+	t_fvector	v2;
+	int			i;
+	int			j;
 
-	for (int i = -5; i < 5; i++)
-		for (int j = -5; j < 5; j++)
-			g->img.data[((int)((g->pos.y * TILESIZE + i)) * g->img.width + (int)(g->pos.x * TILESIZE + j))] = 0xFF000F;
+	i = -6;
+	while (i++ < 5)
+	{
+		j = -6;
+		while (j++ < 5)
+			g->img.data[((int)((g->pos.y * TILESIZE + i)) * g->img.width\
+					+ (int)(g->pos.x * TILESIZE + j))] = 0xFF000F;
+	}
 	v1.x = TILESIZE * g->pos.x + TILESIZE * g->dir.x;
 	v1.y = TILESIZE * g->pos.y + TILESIZE * g->dir.y;
 	v2.x = TILESIZE * g->pos.x;
-	v2.y =  TILESIZE * g->pos.y;
+	v2.y = TILESIZE * g->pos.y;
 	ft_draw_line(g, v1, v2, color);
 }

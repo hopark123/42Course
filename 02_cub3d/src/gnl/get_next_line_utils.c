@@ -6,13 +6,13 @@
 /*   By: hopark <hopark@student.42seoul.kr>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/11/10 12:13:54 by hopark            #+#    #+#             */
-/*   Updated: 2021/02/27 16:02:57 by hopark           ###   ########.fr       */
+/*   Updated: 2021/03/08 15:30:28 by hopark           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "get_next_line.h"
 
-int		ft_strlen(const char *s)
+int			ft_strlen(const char *s)
 {
 	int		len;
 
@@ -21,7 +21,6 @@ int		ft_strlen(const char *s)
 		len++;
 	return (len);
 }
-
 
 void		*ft_memcpy(void *dst, const void *src, int n)
 {
@@ -43,7 +42,7 @@ char		*ft_strjoin(const char *s1, const char *s2)
 {
 	int		len1;
 	int		len2;
-	char		*result;
+	char	*result;
 
 	len1 = ft_strlen(s1);
 	len2 = ft_strlen(s2);
