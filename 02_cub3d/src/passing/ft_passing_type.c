@@ -6,7 +6,7 @@
 /*   By: hopark <hopark@student.42seoul.kr>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/02/19 12:28:07 by hopark            #+#    #+#             */
-/*   Updated: 2021/03/08 17:02:02 by hopark           ###   ########.fr       */
+/*   Updated: 2021/03/08 20:05:56 by hopark           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,10 +28,16 @@ void				ft_img_check(t_game *g, char **target,\
 								char **split, int num)
 {
 	if (ft_component_check(g, num) == -1)
+	{
+		ft_free2(split, ft_strlen2(split));
 		ft_exit_msg(g, "component error");
+	}
 	if (ft_split_check(split, 2) == -1)
+	{
+		ft_free2(split, ft_strlen2(split));
 		ft_exit_msg(g, "component error");
-	*target = split[1];
+	}
+	*target = ft_strndup2(split[1], ft_strlen(split[1]));
 }
 
 int					ft_component_check(t_game *g, int num)
@@ -61,5 +67,8 @@ void				ft_passing_type(t_game *g, char **split)
 	else if (ft_memcmp(split[0], "C", 2) == 0)
 		g->map.ceiling = ft_rgb_check(g, split, 7);
 	else
+	{
+		ft_free2(split, ft_strlen2(split));
 		ft_exit_msg(g, "component error");
+	}
 }

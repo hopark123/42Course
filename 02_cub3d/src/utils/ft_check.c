@@ -6,7 +6,7 @@
 /*   By: hopark <hopark@student.42seoul.kr>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/03/08 15:01:57 by hopark            #+#    #+#             */
-/*   Updated: 2021/03/08 15:38:00 by hopark           ###   ########.fr       */
+/*   Updated: 2021/03/08 19:39:43 by hopark           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,7 +15,10 @@
 int				ft_split_check(char **split, int num)
 {
 	if (ft_strlen2(split) != num)
+	{
+		ft_free2(split, ft_strlen2(split));
 		return (-1);
+	}
 	return (1);
 }
 

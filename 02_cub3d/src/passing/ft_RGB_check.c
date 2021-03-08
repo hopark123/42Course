@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_RGB_check.c                                     :+:      :+:    :+:   */
+/*   ft_rgb_check.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: hopark <hopark@student.42seoul.kr>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/02/19 12:27:35 by hopark            #+#    #+#             */
-/*   Updated: 2021/03/08 17:02:16 by hopark           ###   ########.fr       */
+/*   Updated: 2021/03/08 19:44:49 by hopark           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,7 +19,10 @@ unsigned int	ft_rgb_check(t_game *g, char **split, int num)
 	int				i;
 
 	if (ft_component_check(g, num) == -1)
+	{
+		ft_free2(split, ft_strlen2(split));
 		ft_exit_msg(g, "component error");
+	}
 	if (ft_split_check(split, 2) == -1)
 		ft_exit_msg(g, "not valid color");
 	rgb = ft_split(split[1], ',');
@@ -31,9 +34,13 @@ unsigned int	ft_rgb_check(t_game *g, char **split, int num)
 	{
 		color = color << 8;
 		if (ft_atoi(rgb[i]) < 0 || ft_atoi(rgb[i]) > 255)
+		{
+			ft_free2(split, ft_strlen2(split));
 			ft_exit_msg(g, "notvalid color");
+		}
 		color += ft_atoi(rgb[i]);
 		i++;
 	}
+	ft_free2(rgb, ft_strlen2(rgb));
 	return (color);
 }

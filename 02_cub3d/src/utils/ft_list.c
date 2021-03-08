@@ -6,7 +6,7 @@
 /*   By: hopark <hopark@student.42seoul.kr>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/02/19 12:29:20 by hopark            #+#    #+#             */
-/*   Updated: 2021/03/08 14:55:45 by hopark           ###   ########.fr       */
+/*   Updated: 2021/03/08 21:01:30 by hopark           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,8 +46,8 @@ void			ft_lstdelone(t_list *lst)
 {
 	if (lst == 0)
 		return ;
-	free(lst->content);
-	free(lst);
+	ft_free(lst->content);
+	ft_free(lst);
 }
 
 void			ft_lstclear(t_list **lst)
@@ -56,9 +56,10 @@ void			ft_lstclear(t_list **lst)
 
 	if (lst == 0)
 		return ;
+		int i = 0;
 	while (*lst)
 	{
-		if (!(*lst)->next)
+		if (((*lst)->next))
 			temp = (*lst)->next;
 		else
 			temp = 0;

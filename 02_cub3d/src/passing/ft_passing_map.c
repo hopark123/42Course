@@ -6,7 +6,7 @@
 /*   By: hopark <hopark@student.42seoul.kr>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/02/19 12:38:29 by hopark            #+#    #+#             */
-/*   Updated: 2021/03/08 15:37:15 by hopark           ###   ########.fr       */
+/*   Updated: 2021/03/08 21:01:13 by hopark           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,7 +22,7 @@ void			ft_txt_reading(t_game *g, int fd)
 	while ((temp = get_next_line(fd, &line)) >= 0)
 	{
 		if (ft_strlen(line) == 0)
-			free(line);
+			ft_free(line);
 		else
 			break ;
 	}
@@ -50,8 +50,9 @@ void			ft_map_component(t_game *g, int fd)
 				break ;
 		}
 		split = ft_split(line, ' ');
-		free(line);
+		ft_free(line);
 		ft_passing_type(g, split);
+		ft_free2(split, ft_strlen2(split));
 		i++;
 	}
 	if (temp < 0)
@@ -85,20 +86,23 @@ void			ft_map_passing(t_game *g, int fd, t_list *list)
 void			ft_map_making(t_game *g, t_list *list)
 {
 	int			i;
+	t_list		*cur;
 
+	cur = list;
 	if (!(g->map.m = malloc(sizeof(char *) * (g->map.size.y + 1))))
 		ft_exit_msg(g, "malloc error");
 	g->map.m[g->map.size.y] = 0;
-	i = -1;
-	while (i++ < g->map.size.y)
+	i = 0;
+	while (i < g->map.size.y)
 	{
 		if (!(g->map.m[i] = malloc(sizeof(char) * (g->map.size.x + 1))))
 			ft_exit_msg(g, "malloc error");
 		ft_memset(g->map.m[i], 'x', g->map.size.x);
-		ft_memcpy(g->map.m[i], list->content, ft_strlen(list->content));
-		if (list->next == 0)
+		ft_memcpy(g->map.m[i], cur->content, ft_strlen(cur->content));
+		if (cur->next == 0)
 			break ;
-		list = list->next;
+		cur = cur->next;
+		i++;
 	}
 	ft_lstclear(&(list));
 }

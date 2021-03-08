@@ -6,7 +6,7 @@
 /*   By: hopark <hopark@student.42seoul.kr>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/02/25 11:18:49 by hopark            #+#    #+#             */
-/*   Updated: 2021/03/08 15:12:25 by hopark           ###   ########.fr       */
+/*   Updated: 2021/03/08 21:00:41 by hopark           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,6 +14,7 @@
 
 void				ft_free(void *memory)
 {
+	printf("free %s\n", memory);
 	if (memory)
 		free(memory);
 }
@@ -21,7 +22,10 @@ void				ft_free(void *memory)
 void				ft_free2(char **s, int i)
 {
 	while (i--)
+	{
+		printf("free %s\n", s[i]);
 		free(s[i]);
+	}
 	free(s);
 }
 
@@ -47,7 +51,13 @@ void				ft_exit(t_game *g)
 		(g->tex[i].ptr ? mlx_destroy_image(g->mlx, g->tex[i].ptr) : 0);
 	i = -1;
 	ft_free2(g->map.m, g->map.size.y);
+	ft_free(g->map.no);
+	ft_free(g->map.so);
+	ft_free(g->map.we);
+	ft_free(g->map.ea);
+	ft_free(g->map.s);
 	(g->img.ptr ? mlx_destroy_image(g->mlx, g->img.ptr) : 0);
 	(g->win ? mlx_destroy_window(g->mlx, g->win) : 0);
+	while(1);
 	exit(0);
 }
