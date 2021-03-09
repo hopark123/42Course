@@ -6,7 +6,7 @@
 /*   By: hopark <hopark@student.42seoul.kr>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/02/09 22:06:31 by hopark            #+#    #+#             */
-/*   Updated: 2021/03/08 16:01:08 by hopark           ###   ########.fr       */
+/*   Updated: 2021/03/09 11:20:22 by hopark           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -83,7 +83,7 @@ int				ft_split_check(char **split, int num);
 # endif
 
 # ifndef FOV_ANGLE
-#  define FOV_ANGLE 66
+#  define FOV_ANGLE 1.15192
 # endif
 
 # define BITMAPFILEHEADER 14

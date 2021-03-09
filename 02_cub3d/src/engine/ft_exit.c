@@ -6,7 +6,7 @@
 /*   By: hopark <hopark@student.42seoul.kr>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/02/25 11:18:49 by hopark            #+#    #+#             */
-/*   Updated: 2021/03/08 21:00:41 by hopark           ###   ########.fr       */
+/*   Updated: 2021/03/09 11:09:45 by hopark           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,6 @@
 
 void				ft_free(void *memory)
 {
-	printf("free %s\n", memory);
 	if (memory)
 		free(memory);
 }
@@ -23,7 +22,6 @@ void				ft_free2(char **s, int i)
 {
 	while (i--)
 	{
-		printf("free %s\n", s[i]);
 		free(s[i]);
 	}
 	free(s);

@@ -6,7 +6,7 @@
 /*   By: hopark <hopark@student.42seoul.kr>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/02/09 21:55:27 by hopark            #+#    #+#             */
-/*   Updated: 2021/03/08 20:55:52 by hopark           ###   ########.fr       */
+/*   Updated: 2021/03/09 11:10:49 by hopark           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -111,6 +111,7 @@ typedef struct	s_game
 	t_fvector	move;
 	t_fvector	side;
 	int			inpos;
+	t_list		*spr;
 
 }				t_game;
 
