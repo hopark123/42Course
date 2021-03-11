@@ -6,7 +6,7 @@
 /*   By: hopark <hopark@student.42seoul.kr>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/02/20 12:14:35 by hopark            #+#    #+#             */
-/*   Updated: 2021/03/08 20:50:53 by hopark           ###   ########.fr       */
+/*   Updated: 2021/03/09 13:32:37 by hopark           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,6 +30,7 @@ int			main(int ac, char **av)
 	ft_txt_reading(&g, fd);
 	ft_map_init(&g);
 	ft_window_init(&g);
+	
 	ft_img_init(&g);
 	if (flag == 1)
 		return (ft_save_bmp(&g));
@@ -37,5 +38,7 @@ int			main(int ac, char **av)
 	mlx_hook(g.win, X_EVENT_KEY_RELEASE, 0, &ft_key_release, &g);
 	mlx_loop_hook(g.mlx, &ft_main_loop, &g);
 	mlx_loop(g.mlx);
+	free(g.mlx);
+	//while(1);
 	return (0);
 }
