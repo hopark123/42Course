@@ -4,7 +4,7 @@ LABEL   maintainer="hopark@student.42seoul.kr"
 
 RUN     apt-get update && apt-get upgrade && apt-get install -y \
         nginx \
-        mariabd-sever \
+        mariadb-server \
         php-mysql \
         php-mbstring \
         openssl \
@@ -20,7 +20,3 @@ COPY    ./srcs/config.inc.php ./tmp
 EXPOSE  80  443
 
 CMD bash run.sh
-
-
-
-

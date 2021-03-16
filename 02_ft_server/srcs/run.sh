@@ -5,7 +5,7 @@ service mysql start
 
 # SSl
 mkdir /etc/nginx/ssl
-openssl req -newkey rsa:4096 -x509 -sha256 -days 365 -nodes -out /etc/nginx/ssl/localhost.pem -keyout /etc/nginx/ssl/localhost.key -subj "/C=KR/ST=SEOUL/L=Gaepo-dong/O=42Seoul/OU=hopark/CN=localhost"
+openssl req -newkey rsa:4096 -x509 -sha256 -days 365 -nodes -out /etc/nginx/ssl/html.pem -keyout /etc/nginx/ssl/html.key -subj "/C=KR/ST=SEOUL/L=Gaepo-dong/O=42Seoul/OU=hopark/CN=html"
 
 # NGINX
 mkdir var/www/html
@@ -23,7 +23,7 @@ echo "FLUSH PRIVILEGES;" | mysql -u root --skip-password
 # PHPMYADMIN
 wget https://files.phpmyadmin.net/phpMyAdmin/5.0.2/phpMyAdmin-5.0.2-all-languages.tar.gz
 tar -xvf phpMyAdmin-5.0.2-all-languages.tar.gz  -C /var/www/html/
-mv phpMyAdmin-5.0.2-all-languages phpmyadmin
+mv /var/www/html/phpMyAdmin-5.0.2-all-languages phpmyadmin
 mv phpmyadmin /var/www/html/
 mv ./tmp/config.inc.php /var/www/html/phpmyadmin/config.inc.php
 
