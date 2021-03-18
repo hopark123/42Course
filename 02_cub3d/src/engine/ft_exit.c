@@ -27,9 +27,10 @@ void				ft_free2(char **s, int i)
 	free(s);
 }
 
-void				ft_exit_msg(t_game *g, char *msg)
+void				ft_exit_msg(t_game *g, char *msg, int code)
 {
-	write(1, "ERROR\n", 6);
+	if (code == 0)
+		write(1, "ERROR\n", 6);
 	write(1, msg, ft_strlen(msg));
 	write(1, "\n", 1);
 	ft_exit(g);
@@ -57,6 +58,5 @@ void				ft_exit(t_game *g)
 	(g->img.ptr ? mlx_destroy_image(g->mlx, g->img.ptr) : 0);
 	(g->win ? mlx_destroy_window(g->mlx, g->win) : 0);
 	(g->mlx ? mlx_destroy_display(g->mlx) : 0);
-	while(1);
 	exit(0);
 }

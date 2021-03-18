@@ -44,6 +44,12 @@ int				ft_key_release(int keycode, t_game *g)
 	else if (keycode == KEY_LEFT)
 		g->turn.y = 0;
 	if (keycode == KEY_ESC)
-		ft_exit_msg(g, "press ESC");
+		ft_exit_msg(g, "press ESC", 1);
+	return (0);
+}
+
+int				ft_exit_window(t_game *g)
+{
+	ft_exit_msg(g, "click x", 1);
 	return (0);
 }

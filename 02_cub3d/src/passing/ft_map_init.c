@@ -28,19 +28,19 @@ void			ft_map_init(t_game *g)
 		while (++j < g->map.size.x)
 		{
 			if (ft_strchr(" 012NSWEx", g->map.m[i][j]) == 0)
-				ft_exit_msg(g, "strange map value");
+				ft_exit_msg(g, "strange map value", 0);
 			else if (ft_strchr("NSWE", g->map.m[i][j]))
 			{
 				ft_player_init(g, i, j, g->map.m[i][j]);
 				if (ft_map_valid(g, i, j) == -1)
-					ft_exit_msg(g, "not surrand wall");
+					ft_exit_msg(g, "not surrand wall", 0);
 			}
 			else if (ft_strchr("2", g->map.m[i][j]))
 				ft_sprite_store(g, i, j);
 		}
 	}
 	if (g->inpos != -1)
-		ft_exit_msg(g, "map error");
+		ft_exit_msg(g, "map error", 0);
 }
 
 int				ft_dfs(t_game *g, int i, int j, char **dfs)
@@ -62,7 +62,7 @@ int				ft_dfs(t_game *g, int i, int j, char **dfs)
 		if (ty >= 0 && ty < g->map.size.y && tx >= 0 && tx < g->map.size.x)
 			if (g->map.m[ty][tx] != '1' && dfs[ty][tx] == '0')
 				if (ft_dfs(g, ty, tx, dfs) == -1)
-					ft_exit_msg(g, "not surrand wall");
+					ft_exit_msg(g, "not surrand wall", 0);
 		k++;
 	}
 	return (0);
@@ -95,18 +95,18 @@ int				ft_map_valid(t_game *g, int i, int j)
 	char		**dfs;
 
 	if (!(dfs = malloc(sizeof(char *) * g->map.size.y + 1)))
-		ft_exit_msg(g, "malloc error");
+		ft_exit_msg(g, "malloc error", 0);
 	k = 0;
 	while (k < g->map.size.y)
 	{
 		if (!(dfs[k] = malloc(sizeof(char) * g->map.size.x + 1)))
-			ft_exit_msg(g, "malloc error");
+			ft_exit_msg(g, "malloc error", 0);
 		ft_memset(dfs[k], '0', g->map.size.x);
 		dfs[k][g->map.size.x] = 0;
 		k++;
 	}
 	if (ft_dfs(g, i, j, dfs) == -1)
-		ft_exit_msg(g, "not surrand wall");
+		ft_exit_msg(g, "not surrand wall", 0);
 	k = ft_dfs_check(g, dfs);
 	ft_free2(dfs, g->map.size.y);
 	return (k);

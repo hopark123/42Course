@@ -27,7 +27,7 @@ void			ft_txt_reading(t_game *g, int fd)
 			break ;
 	}
 	if (temp < 0)
-		ft_exit_msg(g, "gnl error");
+		ft_exit_msg(g, "gnl error", 0);
 	list = ft_lstnew(line);
 	ft_map_passing(g, fd, list);
 }
@@ -56,7 +56,7 @@ void			ft_map_component(t_game *g, int fd)
 		i++;
 	}
 	if (temp < 0)
-		ft_exit_msg(g, "gnl error");
+		ft_exit_msg(g, "gnl error", 0);
 }
 
 void			ft_map_passing(t_game *g, int fd, t_list *list)
@@ -78,7 +78,7 @@ void			ft_map_passing(t_game *g, int fd, t_list *list)
 			break ;
 	}
 	if (temp < 0)
-		ft_exit_msg(g, "gnl error");
+		ft_exit_msg(g, "gnl error", 0);
 	g->map.size.x = max;
 	ft_map_making(g, list);
 }
@@ -90,13 +90,13 @@ void			ft_map_making(t_game *g, t_list *list)
 
 	cur = list;
 	if (!(g->map.m = malloc(sizeof(char *) * (g->map.size.y + 1))))
-		ft_exit_msg(g, "malloc error");
+		ft_exit_msg(g, "malloc error", 0);
 	g->map.m[g->map.size.y] = 0;
 	i = 0;
 	while (i < g->map.size.y)
 	{
 		if (!(g->map.m[i] = malloc(sizeof(char) * (g->map.size.x + 1))))
-			ft_exit_msg(g, "malloc error");
+			ft_exit_msg(g, "malloc error", 0);
 		ft_memset(g->map.m[i], 'x', g->map.size.x);
 		ft_memcpy(g->map.m[i], cur->content, ft_strlen(cur->content));
 		if (cur->next == 0)

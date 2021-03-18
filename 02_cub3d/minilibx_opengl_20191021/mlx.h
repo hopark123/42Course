@@ -50,7 +50,7 @@
 void	*mlx_init();
 /*
 **  needed before everything else.
-**  return (void *)0 if failed
+**  return (void *)0 if fail
 */
 
 
@@ -60,7 +60,7 @@ void	*mlx_init();
 
 void	*mlx_new_window(void *mlx_ptr, int size_x, int size_y, char *title);
 /*
-**  return void *0 if failed
+**  return void *0 if fail
 */
 int	mlx_clear_window(void *mlx_ptr, void *win_ptr);
 int	mlx_pixel_put(void *mlx_ptr, void *win_ptr, int x, int y, int color);
@@ -77,7 +77,7 @@ int	mlx_pixel_put(void *mlx_ptr, void *win_ptr, int x, int y, int color);
 
 void	*mlx_new_image(void *mlx_ptr,int width,int height);
 /*
-**  return void *0 if failed
+**  return void *0 if fail
 */
 char	*mlx_get_data_addr(void *img_ptr, int *bits_per_pixel,
 			   int *size_line, int *endian);

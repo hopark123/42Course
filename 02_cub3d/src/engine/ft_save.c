@@ -56,7 +56,7 @@ int				ft_save_bmp(t_game *g)
 	int		fd;
 
 	if ((fd = open("./image.bmp", O_CREAT | O_RDWR)) == -1)
-		ft_exit_msg(g, "can't (create | open) image.bmp file");
+		ft_exit_msg(g, "can't (create | open) image.bmp file", 0);
 	ft_img_init(g);
 	ft_update_image(g);
 	bmp_header(g, fd);

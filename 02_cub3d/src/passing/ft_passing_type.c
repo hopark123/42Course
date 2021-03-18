@@ -15,13 +15,13 @@
 void				ft_win_size(t_game *g, char **split)
 {
 	if (ft_component_check(g, 8) == -1)
-		ft_exit_msg(g, "not valid render size");
+		ft_exit_msg(g, "not valid render size", 0);
 	if (ft_split_check(split, 3) == -1)
-		ft_exit_msg(g, "not valid render size");
+		ft_exit_msg(g, "not valid render size", 0);
 	if ((g->img.width = ft_atoi(split[1])) < 0)
-		ft_exit_msg(g, "not valid render size");
+		ft_exit_msg(g, "not valid render size", 0);
 	if ((g->img.height = ft_atoi(split[2])) < 0)
-		ft_exit_msg(g, "not valid render size");
+		ft_exit_msg(g, "not valid render size", 0);
 }
 
 void				ft_img_check(t_game *g, char **target,\
@@ -30,12 +30,12 @@ void				ft_img_check(t_game *g, char **target,\
 	if (ft_component_check(g, num) == -1)
 	{
 		ft_free2(split, ft_strlen2(split));
-		ft_exit_msg(g, "component error");
+		ft_exit_msg(g, "component error", 0);
 	}
 	if (ft_split_check(split, 2) == -1)
 	{
 		ft_free2(split, ft_strlen2(split));
-		ft_exit_msg(g, "component error");
+		ft_exit_msg(g, "component error", 0);
 	}
 	*target = ft_strndup2(split[1], ft_strlen(split[1]));
 }
@@ -69,6 +69,6 @@ void				ft_passing_type(t_game *g, char **split)
 	else
 	{
 		ft_free2(split, ft_strlen2(split));
-		ft_exit_msg(g, "component error");
+		ft_exit_msg(g, "component error", 0);
 	}
 }

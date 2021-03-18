@@ -16,19 +16,20 @@ void			ft_tex_init(t_game *g, int num, char *path)
 {
 	(!(g->tex[num].ptr = mlx_xpm_file_to_image(g->mlx, path,\
 					&g->tex[num].width, &g->tex[num].height)) ? \
-					ft_exit_msg(g, "failed to texture init") : 0);
+					ft_exit_msg(g, "fail to texture init", 0) : 0);
 	(!(g->tex[num].data = (int *)mlx_get_data_addr(g->tex[num].ptr,\
 					&g->tex[num].bpp, &g->tex[num].size_l,\
 					&g->tex[num].endian)) ? \
-					ft_exit_msg(g, "failed to texture init") : 0);
+					ft_exit_msg(g, "fail to texture init", 0) : 0);
 }
 
 void			ft_window_init(t_game *g)
 {
 	(!(g->mlx = mlx_init()) ?\
-							ft_exit_msg(g, "failed mlx init") : 0);
+							ft_exit_msg(g, "fail mlx init", 0) : 0);
 	(!(g->win = mlx_new_window(g->mlx, g->img.width, g->img.height,\
-							"mlx 42")) ? ft_exit_msg(g, "failed win init") : 0);
+							"mlx 42")) ?\
+							ft_exit_msg(g, "fail win init", 0) : 0);
 	ft_tex_init(g, 0, g->map.no);
 	ft_tex_init(g, 1, g->map.ea);
 	ft_tex_init(g, 2, g->map.so);

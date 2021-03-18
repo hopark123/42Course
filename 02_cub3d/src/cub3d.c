@@ -20,11 +20,11 @@ int			main(int ac, char **av)
 
 	ft_memset(&g, 0, sizeof(t_game));
 	if (ac < 2)
-		ft_exit_msg(&g, "input map file");
+		ft_exit_msg(&g, "input map file", 0);
 	if (extention_check(av[1]) == -1)
-		ft_exit_msg(&g, "input |.cub| file");
+		ft_exit_msg(&g, "input |.cub| file", 0);
 	if ((fd = open(av[1], O_RDONLY)) == -1)
-		ft_exit_msg(&g, "open error");
+		ft_exit_msg(&g, "open error", 0);
 	if (ac > 2)
 		flag = !ft_memcmp(av[2], "--save", 6);
 	ft_txt_reading(&g, fd);
@@ -36,9 +36,8 @@ int			main(int ac, char **av)
 		return (ft_save_bmp(&g));
 	mlx_hook(g.win, X_EVENT_KEY_PRESS, 0, &ft_key_press, &g);
 	mlx_hook(g.win, X_EVENT_KEY_RELEASE, 0, &ft_key_release, &g);
+	mlx_hook(g.win, X_EVENT_KEY_EXIT, 0, &ft_exit_window, &g);
 	mlx_loop_hook(g.mlx, &ft_main_loop, &g);
 	mlx_loop(g.mlx);
-	free(g.mlx);
-	//while(1);
 	return (0);
 }

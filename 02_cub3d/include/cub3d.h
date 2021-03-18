@@ -24,9 +24,9 @@
 # include "passing.h"
 # include "../minilibx_opengl_20191021/mlx.h"
 
-# define X_EVENT_KEY_PRESS		    2
+# define X_EVENT_KEY_PRESS			2
 # define X_EVENT_KEY_RELEASE		3
-# define X_EVENT_KEY_EXI			17
+# define X_EVENT_KEY_EXIT			17
 # define KEY_ESC					53
 # define KEY_Q						12
 # define KEY_W						13
@@ -53,13 +53,14 @@ void			ft_draw_square(t_game *g, t_ivector pt,\
 								int size, unsigned int color);
 void			ft_free(void *memory);
 void			ft_free2(char **s, int i);
-void			ft_exit_msg(t_game *g, char *msg);
+void			ft_exit_msg(t_game *g, char *msg, int code);
 void			ft_exit(t_game *g);
 void			ft_tex_init(t_game *g, int num, char *path);
 void			ft_window_init(t_game *g);
 void			ft_img_init(t_game *g);
 int				ft_key_press(int keycode, t_game *g);
 int				ft_key_release(int keycode, t_game *g);
+int				ft_exit_window(t_game *g);
 int				ft_update_image(t_game *g);
 int				ft_main_loop(t_game *g);
 int				ft_player_move(t_game *g);

@@ -15,7 +15,7 @@
 void		ft_player_init(t_game *g, int i, int j, char c)
 {
 	if (g->inpos == -1)
-		ft_exit_msg(g, "map error");
+		ft_exit_msg(g, "map error", 0);
 	g->pos.x = j;
 	g->pos.y = i;
 	g->dir.x = 1;
