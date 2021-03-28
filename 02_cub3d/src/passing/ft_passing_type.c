@@ -14,13 +14,18 @@
 
 void				ft_win_size(t_game *g, char **split)
 {
+	int		x;
+	int		y;
+
 	if (ft_component_check(g, 8) == -1)
 		ft_exit_msg(g, "not valid render size", 0);
 	if (ft_split_check(split, 3) == -1)
 		ft_exit_msg(g, "not valid render size", 0);
-	if ((g->img.width = ft_atoi(split[1])) < 0)
+	g->img.width = ft_min(ft_atoi(split[1]), windowx);
+	g->img.height = ft_min(ft_atoi(split[2]), windowy);
+	if (g->img.width < 0)
 		ft_exit_msg(g, "not valid render size", 0);
-	if ((g->img.height = ft_atoi(split[2])) < 0)
+	if (g->img.height < 0)
 		ft_exit_msg(g, "not valid render size", 0);
 }
 

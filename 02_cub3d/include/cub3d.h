@@ -89,7 +89,8 @@ int				ft_split_check(char **split, int num);
 
 # define BITMAPFILEHEADER 14
 # define BITMAPINFOHEADER 40
-
+# define windowx 2400
+# define windowy 1200
 float	g_zbuffer[800];
 
 # define _USE_MATH_DEFINES

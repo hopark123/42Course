@@ -44,9 +44,9 @@ unsigned int	ft_choice_tex(t_game *g, t_draw draw, char dir)
 
 	if (dir == 'N')
 		tex_num = 0;
-	else if (dir == 'S')
+	else if (dir == 'E')
 		tex_num = 1;
-	else if (dir == 'W')
+	else if (dir == 'S')
 		tex_num = 2;
 	else
 		tex_num = 3;
