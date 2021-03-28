@@ -30,7 +30,6 @@ int			main(int ac, char **av)
 	ft_txt_reading(&g, fd);
 	ft_map_init(&g);
 	ft_window_init(&g);
-	
 	ft_img_init(&g);
 	if (flag == 1)
 		return (ft_save_bmp(&g));

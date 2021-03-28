@@ -12,22 +12,11 @@
 
 #include "cub3d.h"
 
-unsigned int	ft_rgb_check(t_game *g, char **split, int num)
+unsigned int	ft_makecolor(t_game *g, char **split, char **rgb)
 {
 	unsigned int	color;
-	char			**rgb;
 	int				i;
 
-	if (ft_component_check(g, num) == -1)
-	{
-		ft_free2(split, ft_strlen2(split));
-		ft_exit_msg(g, "component error", 0);
-	}
-	if (ft_split_check(split, 2) == -1)
-		ft_exit_msg(g, "not valid color", 0);
-	rgb = ft_split(split[1], ',');
-	if (ft_split_check(rgb, 3) == -1)
-		ft_exit_msg(g, "not valid color", 0);
 	i = 0;
 	color = 0;
 	while (i < 3)
@@ -41,6 +30,26 @@ unsigned int	ft_rgb_check(t_game *g, char **split, int num)
 		color += ft_atoi(rgb[i]);
 		i++;
 	}
+	return (color);
+}
+
+unsigned int	ft_rgb_check(t_game *g, char **split, int num)
+{
+	char			**rgb;
+	unsigned int	color;
+
+	if (ft_component_check(g, num) == -1)
+	{
+		ft_free2(split, ft_strlen2(split));
+		ft_exit_msg(g, "component error", 0);
+	}
+	rgb = ft_split(split[1], ',');
+	if (ft_split_check(rgb, 3) == -1 || ft_split_check(split, 2) == -1)
+	{
+		ft_exit_msg(g, "not valid color", 0);
+		ft_free2(rgb, ft_strlen2(rgb));
+	}
+	color = ft_makecolor(g, split, rgb);
 	ft_free2(rgb, ft_strlen2(rgb));
 	return (color);
 }

@@ -56,7 +56,6 @@ void			ft_lstclear(t_list **lst)
 
 	if (lst == 0)
 		return ;
-		int i = 0;
 	while (*lst)
 	{
 		if (((*lst)->next))
