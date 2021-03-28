@@ -43,8 +43,13 @@ unsigned int	ft_rgb_check(t_game *g, char **split, int num)
 		ft_free2(split, ft_strlen2(split));
 		ft_exit_msg(g, "component error", 0);
 	}
+	if (ft_split_check(split, 2) == -1)
+	{
+		ft_exit_msg(g, "not valid color", 0);
+		ft_free2(rgb, ft_strlen2(rgb));
+	}
 	rgb = ft_split(split[1], ',');
-	if (ft_split_check(rgb, 3) == -1 || ft_split_check(split, 2) == -1)
+	if (ft_split_check(rgb, 3) == -1)
 	{
 		ft_exit_msg(g, "not valid color", 0);
 		ft_free2(rgb, ft_strlen2(rgb));

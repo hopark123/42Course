@@ -50,10 +50,6 @@ GNL_B = $(wildcard $(GNL_DIR_B)/*.c)
 PASSING_B = $(wildcard $(PASSING_DIR_B)/*.c)
 UTILS_B = $(wildcard $(UTILS_DIR_B)/*.c)
 
-ifeq ($(DEBUG),true)
-	CDEBUG = -g
-endif
-
 vpath %.c \
 	$(SRC_DIR) \
 	$(ENGINE_DIR) \

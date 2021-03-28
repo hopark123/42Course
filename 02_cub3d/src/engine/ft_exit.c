@@ -22,9 +22,10 @@ void				ft_free2(char **s, int i)
 {
 	while (i--)
 	{
-		free(s[i]);
+		if (s[i])
+			ft_free(s[i]);
 	}
-	free(s);
+	ft_free(s);
 }
 
 void				ft_exit_msg(t_game *g, char *msg, int code)

@@ -28,15 +28,9 @@ void				ft_img_check(t_game *g, char **target,\
 								char **split, int num)
 {
 	if (ft_component_check(g, num) == -1)
-	{
-		ft_free2(split, ft_strlen2(split));
 		ft_exit_msg(g, "component error", 0);
-	}
 	if (ft_split_check(split, 2) == -1)
-	{
-		ft_free2(split, ft_strlen2(split));
 		ft_exit_msg(g, "component error", 0);
-	}
 	*target = ft_strndup2(split[1], ft_strlen(split[1]));
 }
 

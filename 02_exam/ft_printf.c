@@ -269,7 +269,3 @@ int	ft_printf(const char *s, ...)
 	va_end(ap);
 	return (ret);
 }
-
-int main(){
-    ft_printf("%3.4d", -12345);
-}
