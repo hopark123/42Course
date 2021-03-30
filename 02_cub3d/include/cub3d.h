@@ -6,7 +6,7 @@
 /*   By: hopark <hopark@student.42seoul.kr>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/02/09 22:06:31 by hopark            #+#    #+#             */
-/*   Updated: 2021/03/09 13:38:35 by hopark           ###   ########.fr       */
+/*   Updated: 2021/03/29 13:55:45 by hopark           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -89,8 +89,8 @@ int				ft_split_check(char **split, int num);
 
 # define BITMAPFILEHEADER 14
 # define BITMAPINFOHEADER 40
-# define windowx 2400
-# define windowy 1200
+# define windowx 1440
+# define windowy 900
 float	g_zbuffer[800];
 
 # define _USE_MATH_DEFINES

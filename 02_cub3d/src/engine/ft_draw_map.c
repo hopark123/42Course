@@ -6,7 +6,7 @@
 /*   By: hopark <hopark@student.42seoul.kr>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/02/09 21:46:42 by hopark            #+#    #+#             */
-/*   Updated: 2021/03/08 15:21:18 by hopark           ###   ########.fr       */
+/*   Updated: 2021/03/20 20:33:50 by hopark           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,7 +24,7 @@ void			ft_map_draw2(t_game *g)
 		while (j <= g->map.size.x * TILESIZE)
 		{
 			if (i % TILESIZE == 0 || j % TILESIZE == 0)
-				g->img.data[i * g->img.width + j] = 0xFFFFFF;
+				g->img.data[i * g->img.width + j] = 0x000000;
 			j++;
 		}
 		i++;
@@ -46,7 +46,7 @@ void			ft_map_draw(t_game *g)
 			pt.x = j;
 			pt.y = i;
 			if (g->map.m[i][j] == '1')
-				ft_draw_square(g, pt, TILESIZE, 0x88FF70);
+				ft_draw_square(g, pt, TILESIZE, 0x888888);
 			else
 				ft_draw_square(g, pt, TILESIZE, 0x000000);
 			j++;
@@ -105,11 +105,11 @@ void			ft_draw_dir(t_game *g, unsigned int color)
 	int			i;
 	int			j;
 
-	i = -6;
-	while (i++ < 5)
+	i = -3;
+	while (i++ < 4)
 	{
-		j = -6;
-		while (j++ < 5)
+		j = -3;
+		while (j++ < 4)
 			g->img.data[((int)((g->pos.y * TILESIZE + i)) * g->img.width\
 					+ (int)(g->pos.x * TILESIZE + j))] = 0xFF000F;
 	}
