@@ -32,8 +32,7 @@ int	ft_numlen(int num)
 	int	i;
 
 	i = 1;
-	while (num /= 10)
-		i++;
+	while (num /= 10)i++;
 	return (i);
 }
 
@@ -208,14 +207,11 @@ char	*findsdx(char *s)
 	i = 0;
 	while (s[i] && ((s[i] >= '0' && s[i] <= '9') || s[i] == '.'))
 		i++;
-	if (s[i] >= 32 && s[i] <= 126)
-	{
 		//printf("s[i] = %c\n", s[i]);
 		if (s[i] == 's' || s[i] == 'd' || s[i] == 'x')
 			return (s + i);
 		else
 			return (NULL);
-	}
 	return (NULL);
 }	
 

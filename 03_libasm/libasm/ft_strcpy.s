@@ -11,7 +11,7 @@ _copy_helper:
 	jne _copy_helper
 	ret
 
-_ft_strcpy
+_ft_strcpy:
 	mov rdx, 0
 	call _copy_helper
 	sub rdi, rdx

@@ -5,9 +5,10 @@ _ft_strlen:
 	xor rax, rax
 
 loop:
-	cmp BYTE [rdi + rax], 0
+	cmp [rdi], rax
 	je  return
 	inc rax
+	inc rdi
 	jmp loop
 
 return:
