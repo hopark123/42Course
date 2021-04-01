@@ -59,6 +59,5 @@ void				ft_exit(t_game *g)
 	(g->img.ptr ? mlx_destroy_image(g->mlx, g->img.ptr) : 0);
 	(g->win ? mlx_destroy_window(g->mlx, g->win) : 0);
 	(g->mlx ? mlx_destroy_display(g->mlx) : 0);
-	while(1);
 	exit(0);
 }

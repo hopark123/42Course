@@ -25,9 +25,8 @@ int			main(int ac, char **av)
 		ft_exit_msg(&g, "input |.cub| file", 0);
 	if ((fd = open(av[1], O_RDONLY)) == -1)
 		ft_exit_msg(&g, "open error", 0);
-	if (ac > 2)
-		if ((flag = !ft_memcmp(av[2], "--save", 6)) != 1)
-			ft_exit_msg(&g, "input error", 0);
+	if (ac > 2 && (flag = !ft_memcmp(av[2], "--save", 6)) != 1)
+		ft_exit_msg(&g, "input error", 0);
 	ft_txt_reading(&g, fd);
 	ft_map_init(&g);
 	ft_window_init(&g);
