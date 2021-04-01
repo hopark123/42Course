@@ -6,7 +6,7 @@
 /*   By: hopark <hopark@student.42seoul.kr>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/02/25 11:18:49 by hopark            #+#    #+#             */
-/*   Updated: 2021/03/09 13:34:13 by hopark           ###   ########.fr       */
+/*   Updated: 2021/03/31 16:17:51 by hopark           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -59,5 +59,6 @@ void				ft_exit(t_game *g)
 	(g->img.ptr ? mlx_destroy_image(g->mlx, g->img.ptr) : 0);
 	(g->win ? mlx_destroy_window(g->mlx, g->win) : 0);
 	(g->mlx ? mlx_destroy_display(g->mlx) : 0);
+	while(1);
 	exit(0);
 }
