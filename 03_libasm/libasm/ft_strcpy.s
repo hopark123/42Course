@@ -1,19 +1,27 @@
 section .text
 	global _ft_strcpy
-
-_copy_helper:
-	mov cl, [rsi]
-	mov [rdi], cl
-	inc rdx
-	inc rdi
-	inc rsi
-	cmp cl, 0
-	jne _copy_helper
-	ret
+	extern _ft_strlen
 
 _ft_strcpy:
-	mov rdx, 0
-	call _copy_helper
-	sub rdi, rdx
+	push rcx
+	xor rcx, rcx
+
+loop:
+	mov al, BYTE[rsi + rcx]
+	mov BYTE[rdi + rcx], al
+	inc rcx
+	cmp al, 0
+	je end
+	jmp loop
+
+end :
+	pop rcx
 	mov rax, rdi
 	ret
+
+
+
+
+
+
+

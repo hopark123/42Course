@@ -6,7 +6,7 @@
 #    By: hopark <hopark@student.42seoul.kr>         +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2021/03/30 13:24:29 by hopark            #+#    #+#              #
-#    Updated: 2021/03/31 18:37:55 by hopark           ###   ########.fr        #
+#    Updated: 2021/04/02 11:38:18 by hopark           ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -41,14 +41,17 @@ $(NAME):
 	ar rcs $(NAME) $(OBJ)
 	ranlib $(NAME)
 	
-test : $(NAME)
-	$(CC) $(CFLAGS) main.c -o $(NAME)
-
-
+test : re
+	$(CC) $(CFLAGS) main.c $(NAME)
+	./a.out
 clean:
 	rm -f $(OBJ)
 
 fclean: clean
 	rm -f $(NAME)
+
+ffclean : fclean
+	rm -f a.out
+	rm -f ft_read_output ft_write_output linux_read_output linux_write_output
 
 re: fclean all

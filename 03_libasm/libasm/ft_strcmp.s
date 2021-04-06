@@ -1,20 +1,26 @@
 section .text
 	global _ft_strcmp
 
-_cmp_exit:
-	sub rax, rbx
-	ret
-
 _ft_strcmp:
-	mov rax, 0
-	mov al, [rdi]
-	mov bl, [rsi]
-	cmp al, 0
-	je _cmp_exit
-	cmp bl, 0
-	je _cmp_exit
-	inc rdi
-	inc rsi
+	push rcx
+	xor rcx, rcx
+	jmp loop
+
+loop_inc:
+	inc rcx
+
+loop:
+	cmp BYTE[rdi+rcx], 0
+	je end
+	cmp BYTE[rsi+rcx], 0
+	je end
+	mov al, BYTE[rdi+rcx]
+	mov bl, BYTE[rsi+rcx]
 	cmp al, bl
-	jne _cmp_exit
-	je _ft_strcmp
+	je loop_inc
+
+end:
+	mov al, BYTE[rdi+rcx]
+	sub al, BYTE[rsi+rcx]
+	pop rcx
+	ret

@@ -11,7 +11,6 @@ _ft_strdup:
 	mov rax, 0
 	push rdi
 	call _ft_strlen
-	inc rax
 	mov rdi, rax
 	call _malloc
 	cmp rax, 0
@@ -19,4 +18,4 @@ _ft_strdup:
 	mov rdi, rax
 	pop rsi
 	call _ft_strcpy
-	ret
+	ret 

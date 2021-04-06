@@ -243,7 +243,7 @@ void	test_strcpy_changing_char(char *case_name, const char *test_case_str)
 void	test_strcpy()
 {
 	const char *title = "strcpy";
-	const char *basic = "a\nb\nc";
+	const char *basic = "abc";
 
 	put_test_title(title);
 	test_strcpy_case("basic (with new lines)", "a\nb\nc");
@@ -659,9 +659,9 @@ void	test_strdup(void)
 int main(void)
 {
 	test_strlen();
-	test_strcpy();
-	test_strcmp();
-	test_write();
 	test_read();
+	test_write();
+	test_strcmp();
+	test_strcpy();
 	test_strdup();
 }

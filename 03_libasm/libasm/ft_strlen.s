@@ -2,14 +2,16 @@ section .text
 	global _ft_strlen
 
 _ft_strlen:
-	xor rax, rax
+	push rcx
+	xor rcx, rcx
 
 loop:
-	cmp [rdi], rax
-	je  return
-	inc rax
-	inc rdi
+	cmp BYTE[rdi + rcx], 0
+	je  end
+	inc rcx
 	jmp loop
 
-return:
+end :
+	pop rcx
 	ret
+	
