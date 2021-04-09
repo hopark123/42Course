@@ -659,9 +659,9 @@ void	test_strdup(void)
 int main(void)
 {
 	test_strlen();
-	//test_read();
-	//test_write();
-	//test_strcmp();
-	//test_strcpy();
-	//test_strdup();
+	test_read();
+	test_write();
+	test_strcmp();
+	test_strcpy();
+	test_strdup();
 }

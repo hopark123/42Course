@@ -6,7 +6,7 @@
 #    By: hopark <hopark@student.42seoul.kr>         +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2021/03/30 13:24:29 by hopark            #+#    #+#              #
-#    Updated: 2021/04/09 10:15:56 by hopark           ###   ########.fr        #
+#    Updated: 2021/04/09 15:29:41 by hopark           ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -41,9 +41,13 @@ $(NAME):
 	ar rcs $(NAME) $(OBJ)
 	ranlib $(NAME)
 	
-test : re
+test1 : re
 	$(CC) $(CFLAGS) main.c $(NAME)
 	./a.out
+test2 : re
+	$(CC) $(CFLAGS) main2.c $(NAME)
+	./a.out
+
 clean:
 	rm -f $(OBJ)
 
