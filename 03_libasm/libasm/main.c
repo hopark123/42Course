@@ -76,8 +76,8 @@ void	test_strcmp(void)
 	printf("\n@@@@@@@@@@@@@@@@@- Tests strcmp -@@@@@@@@@@@@@@@@@\n\n");
 	printf("--------------------------------------\n");
 	printf("|test|testa|\n");
-	printf("%d\n", strcmp("test", "testa"));
-	printf("%d\n", ft_strcmp("test", "testa"));
+	printf("|%d|\n", strcmp("test", "testa"));
+	printf("|%d|\n", ft_strcmp("test", "testa"));
 	printf("--------------------------------------\n");
 	printf("|testa|test|\n");
 	printf("|%d|\n", strcmp("testa", "test"));
