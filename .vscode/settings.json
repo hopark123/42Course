@@ -20,6 +20,8 @@
 		"utils.h": "c",
 		"passing.h": "c",
 		"get_next_line.h": "c",
-		"libft.h": "c"
+		"libft.h": "c",
+		"head.h": "c",
+		"limits.h": "c"
 	}
 }

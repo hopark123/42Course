@@ -6,11 +6,11 @@
 /*   By: hopark <hopark@student.42seoul.kr>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/02/19 12:26:12 by hopark            #+#    #+#             */
-/*   Updated: 2021/03/08 15:45:32 by hopark           ###   ########.fr       */
+/*   Updated: 2021/04/28 18:03:41 by hopark           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "cub3d.h"
+#include "head.h"
 
 static int		ft_isspace(char c)
 {

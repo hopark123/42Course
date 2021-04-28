@@ -1,37 +1,35 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_strncmp.c                                       :+:      :+:    :+:   */
+/*   ft_make_list.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: hopark <hopark@student.42seoul.kr>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2021/03/08 14:58:35 by hopark            #+#    #+#             */
-/*   Updated: 2021/04/28 18:48:28 by hopark           ###   ########.fr       */
+/*   Created: 2021/04/28 18:47:18 by hopark            #+#    #+#             */
+/*   Updated: 2021/04/28 19:38:24 by hopark           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "head.h"
 
-int		ft_strncmp(const char *s1, const char *s2, size_t n)
+void			ft_make_list(int ac, char **av, t_inf *inf)
 {
-	size_t			i;
-	unsigned char	*c1;
-	unsigned char	*c2;
-
-	c1 = (unsigned char *)s1;
-	c2 = (unsigned char *)s2;
+	t_list		*old;
+	t_list		*new;
+	int			i;
+	int			num;
+	
+	old = 0;
+	inf->a_h = old;
 	i = 0;
-	if (n == 0)
-		return (0);
-	if (ft_strlen(s1) != n || ft_strlen(s2) !=n)
-		return (0);
-	while (i + 1 < n)
+	while (av[++i])
 	{
-		if (c1[i] != c2[i])
-			break ;
-		if (c1[i] * c2[i] == 0)
-			break ;
-		i++;
+		num = ft_atoi(av[++i]);
+		new = ft_listnew(num);
+		ft_listadd_back(&old, &new);
+		old = new;
+		inf->b_h = new;
 	}
-	return (c1[i] - c2[i]);
+	inf->b_h->next = inf->a_h;
+	inf->a_h->prev = inf->b_h;
 }
