@@ -22,6 +22,16 @@
 		"get_next_line.h": "c",
 		"libft.h": "c",
 		"head.h": "c",
-		"limits.h": "c"
+		"limits.h": "c",
+		"__functional_base": "c",
+		"__functional_base_03": "c",
+		"__hash_table": "c",
+		"__tree": "c",
+		"__tuple": "c",
+		"array": "c",
+		"cstddef": "c",
+		"type_traits": "c",
+		"tuple": "c",
+		"utility": "c"
 	}
 }

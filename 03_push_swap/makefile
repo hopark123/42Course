@@ -6,7 +6,7 @@
 #    By: hopark <hopark@student.42seoul.kr>         +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2021/04/28 18:03:34 by hopark            #+#    #+#              #
-#    Updated: 2021/04/28 18:03:35 by hopark           ###   ########.fr        #
+#    Updated: 2021/04/29 13:16:19 by hopark           ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -21,7 +21,7 @@ RMFLAGS = -f
 
 SRC_DIR = src
 INC_DIR = include
-UTIL_DIR = $(SRC_DIR)/utils
+UTIL_DIR = $(SRC_DIR)/util
 ENGINE_DIR = $(SRC_DIR)/engine
 PUSH_SWAP_DIR = $(SRC_DIR)/push_swap
 CHECKER_DIR = $(SRC_DIR)/checker
@@ -55,14 +55,13 @@ SRC2 = \
 OBJ1 = $(addprefix $(OBJ_DIR1)/, $(notdir $(SRC1:.c=.o)))
 OBJ2 = $(addprefix $(OBJ_DIR2)/, $(notdir $(SRC2:.c=.o)))
 
-all : $(NAME1) $(NAME2)
+all : $(NAME1)
 
 clean :
 	$(RM) $(RMFLAGS) $(OBJS)
 
 fclean : clean
 	$(RM) $(RMFLAGS) $(NAME)
-
 re : fclean all
 
 test : all
