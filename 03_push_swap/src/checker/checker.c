@@ -208,82 +208,104 @@ int				ft_sort_b(t_inf *inf, int chunk)
 }
 
 
-int				main(int ac, char **av)
-{
-	static t_inf *inf;
-	
-	if (!(inf = malloc(sizeof(t_inf))))
-		return (ERROR);
-	ft_make_list(ac, av, inf);
-	ft_show(inf, "start");
-	ft_sort_a(inf, 0);
-	//get_next_line()
-}
-// int			main()
+// int				main(int ac, char **av)
 // {
-// 	t_list	*list1;
-// 	t_list	*list2;
-// 	t_list	*list3;
-// 	t_list	*list4;
-// 	t_list	*list5;
-// 	t_list	*list6;
+// 	static t_inf *inf;
+	
+// 	if (!(inf = malloc(sizeof(t_inf))))
+// 		return (ERROR);
+// 	ft_make_list(ac, av, inf);
+// 	ft_show(inf, "start");
+// 	ft_sort_a(inf, 0);
+// 	//get_next_line()
+// }
+int			main()
+{
+	t_list	*list1;
+	t_list	*list2;
+	t_list	*list3;
+	t_list	*list4;
+	t_list	*list5;
+	t_list	*list6;
 
 	
-// 	int			i = 1;
-// 	list1 = ft_listnew(1);
-// 	list2 = ft_listnew(2);
-// 	list3 = ft_listnew(3);
-// 	list4 = ft_listnew(4);
-// 	list5 = ft_listnew(5);
+	int			i = 1;
+	list1 = ft_listnew(1);
+	list2 = ft_listnew(2);
+	list3 = ft_listnew(3);
+	list4 = ft_listnew(4);
+	list5 = ft_listnew(5);
 
-// 	ft_listadd_back(&list4, &list3);
-// 	ft_listadd_back(&list4, &list5);
-// 	ft_listadd_front(&list3, &list2);
-// 	ft_listadd_front(&list2, &list1);
+	ft_listadd_back(&list4, &list3);
+	ft_listadd_back(&list4, &list5);
+	ft_listadd_front(&list3, &list2);
+	ft_listadd_front(&list2, &list1);
 
-// 	t_list *temp = list1;
-// 	while (temp&& i < 7)
-// 	{
-// 		printf("now  : %d | ", temp->num);
-// 		if (temp->prev)
-// 			printf("prev : %d | ", temp->prev->num);
-// 		else
-// 			printf("prev : %d | ", 0);
+	t_list *temp = list1;
+	while (temp&& i < 7)
+	{
+		printf("now  : %d | ", temp->num);
+		if (temp->prev)
+			printf("prev : %d | ", temp->prev->num);
+		else
+			printf("prev : %d | ", 0);
 
-// 		if (temp->next)
-// 			{
-// 				printf("next : %d | ", temp->next->num);
-// 			}
-// 		else
-// 			printf("next : %d | ", 0);
-// 		printf("\n");
-// 		temp = temp->next;
-// 		if (temp == list1)
-// 			break;
-// 		i++;
-// 	}
-// 	printf("----------\n");
-// 	temp = list1;
-// 	ft_listexcpet(&list2);
-// 	i = 0;
-// 	while (temp && i < 7)
-// 	{
-// 		printf("now  : %d | ", temp->num);
-// 		if (temp->prev)
-// 			printf("prev : %d | ", temp->prev->num);
-// 		else
-// 			printf("prev : %d | ", 0);
+		if (temp->next)
+			{
+				printf("next : %d | ", temp->next->num);
+			}
+		else
+			printf("next : %d | ", 0);
+		printf("\n");
+		temp = temp->next;
+		if (temp == list1)
+			break;
+		i++;
+	}
+	printf("----------\n");
+	t_list	*lit1;
+	t_list	*lit2;
+	t_list	*lit3;
+	t_list	*lit4;
+	t_list	*lit5;
+	t_list	*lit6;
 
-// 		if (temp->next)
-// 			{
-// 				printf("next : %d | ", temp->next->num);
-// 			}
-// 		else
-// 			printf("next : %d | ", 0);
-// 			temp = temp->next;
-// 		printf("\n");
-// 		if (temp == list1)
-// 			break;
-// 		i++;
-// 	}
-// }
+	
+	lit1 = ft_listnew(6);
+	lit2 = ft_listnew(7);
+	lit3 = ft_listnew(8);
+	lit4 = ft_listnew(9);
+	lit5 = ft_listnew(0);
+
+	ft_listadd_back(&lit4, &lit3);
+	ft_listadd_back(&lit4, &lit5);
+	ft_listadd_front(&lit3, &lit2);
+	ft_listadd_front(&lit2, &lit1);
+
+	// ft_swap_tool(&lit1);
+	// ft_listexcpet(&lit2);
+	ft_push_tool(&lit1, &list1);
+	ft_revrotate_tool(&lit1, &lit5);
+	temp = lit1;
+	i = 0;
+	while (temp && i < 7)
+	{
+		printf("now  : %d | ", temp->num);
+		if (temp->prev)
+			printf("prev : %d | ", temp->prev->num);
+		else
+			printf("prev : %d | ", 0);
+
+		if (temp->next)
+			{
+				printf("next : %d | ", temp->next->num);
+			}
+		else
+			printf("next : %d | ", 0);
+			temp = temp->next;
+		printf("\n");
+		if (temp == lit1)
+			break;
+		i++;
+	}
+}

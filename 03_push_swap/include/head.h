@@ -62,8 +62,8 @@ typedef struct	s_inf
 void			ft_action(t_inf *inf, char *com);
 int				ft_swap_tool(t_list **type);
 int				ft_push_tool(t_list **dest, t_list **src);
-int				ft_rotate_tool(t_inf *inf, char *com);
-int				ft_revrotate_tool(t_inf *inf, char *com);
+int				ft_rotate_tool(t_list *head, t_list *tail);
+int				ft_revrotate_tool(t_list *head, t_list *tail);
 int				ft_htsetting(t_inf *inf);
 
 void			ft_make_list(int ac, char **av, t_inf *inf);
