@@ -6,7 +6,7 @@
 /*   By: hopark <hopark@student.42seoul.kr>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/04/28 18:06:13 by hopark            #+#    #+#             */
-/*   Updated: 2021/04/28 19:36:45 by hopark           ###   ########.fr       */
+/*   Updated: 2021/04/28 20:09:07 by hopark           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,6 +18,17 @@
 # include <stdlib.h>
 # include <stdarg.h>
 # include <limits.h>
+
+# define ERROR					0
+# define SUCESS					1
+
+# ifndef BUFFER_SIZE
+#  define BUFFER_SIZE 1
+# endif
+
+# ifndef OPEN_MAX
+#  define OPEN_MAX	10240
+# endif
 
 typedef struct	s_list
 {
@@ -52,12 +63,14 @@ void			ft_action(t_inf *inf, char *com);
 int				ft_swap_tool(t_list **type);
 int				ft_push_tool(t_list **dest, t_list **src);
 int				ft_rotate_tool(t_inf *inf, char *com);
-int				ft_r_rotate_tool(t_inf *inf, char *com);
+int				ft_revrotate_tool(t_inf *inf, char *com);
 
 void			ft_make_list(int ac, char **av, t_inf *inf);
 
 void			ft_three_a(t_inf *inf);
 void			ft_three_b(t_inf *inf);
+void			ft_two_a(t_inf *inf);
+void			ft_two_b(t_inf *inf);
 
 
 int				ft_is_ascending(t_list *list);
@@ -73,5 +86,21 @@ void			ft_listdelone(t_list **list);
 void			ft_listexcpet(t_list **list);
 void			ft_listclear(t_list **list);
 
+int				ft_atoi(const char *nptr);
+void			ft_free(void *memory);
+void			ft_free2(char **s, int i);
+int				ft_max(int n, ...);
+int				ft_min(int n, ...);
+int				ft_strncmp(const char *s1, const char *s2, size_t n);
+int				ft_strlen(const char *s);
+void			*ft_memcpy(void *dst, const void *src, size_t n);
+char			*ft_strjoin(const char *s1, const char *s2);
+char			*ft_strndup(const char *s, size_t len);
+char			*ft_strchr(const char *s, char c);
+int				get_next_line(int fd, char **line);
+
+///////////////////////////
+int				ft_sort_a(t_inf *inf, int chunk);
+int				ft_sort_b(t_inf *inf, int chunk);
 
 #endif

@@ -6,7 +6,7 @@
 /*   By: hopark <hopark@student.42seoul.kr>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/04/28 19:09:17 by hopark            #+#    #+#             */
-/*   Updated: 2021/04/28 19:38:21 by hopark           ###   ########.fr       */
+/*   Updated: 2021/04/28 20:08:30 by hopark           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -68,7 +68,7 @@ void			ft_three_b(t_inf *inf)
 	n2 = inf->b_h->next->num;
 	n3 = inf->b_h->next->next->num;
 
-	min = ft_min(3, n1, n2, n3)
+	min = ft_min(3, n1, n2, n3);
 	if (min == n3)
 	{
 		if (n1 < n2)
@@ -86,7 +86,7 @@ void			ft_three_b(t_inf *inf)
 	{
 		if (n2 < n3)
 			ft_three_b5(inf);
-		else (n2 > n3)
+		else if (n2 > n3)
 			ft_three_b6(inf);
 	}
 }

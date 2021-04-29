@@ -6,39 +6,32 @@
 /*   By: hopark <hopark@student.42seoul.kr>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/04/28 18:45:48 by hopark            #+#    #+#             */
-/*   Updated: 2021/04/28 19:38:12 by hopark           ###   ########.fr       */
+/*   Updated: 2021/04/28 20:07:17 by hopark           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "head.h"
 
-void			ft_n_pa(t_inf *inf, int n)
-{
-	while (n--)
-		ft_action(inf, "pa");
-}
 
 void			ft_action(t_inf *inf, char *com)
 {
-	int			flag;
 
-	flag = 0;
 	if (ft_strncmp(com, "sa", 2) || ft_strncmp(com, "ss", 2))
-		flag = ft_swap_tool(&(inf->a_h));
+		ft_swap_tool(&(inf->a_h));
 	if (ft_strncmp(com, "sb", 2) || ft_strncmp(com, "ss", 2))
-		flag = ft_swap_tool(&(inf->b_h));
+		ft_swap_tool(&(inf->b_h));
 	if (ft_strncmp(com, "pa", 2))
-		flag = ft_push_tool(&(inf->a_h), &(inf->a_h));
+		ft_push_tool(&(inf->a_h), &(inf->a_h));
 	if (ft_strncmp(com, "pb", 2))
-		flag = ft_push_tool(&(inf->b_h) , &(inf->a_h));
+		ft_push_tool(&(inf->b_h) , &(inf->a_h));
 	if (ft_strncmp(com, "rra", 3) || ft_strncmp(com, "rrr", 3))
-		flag = ft_revrotate(inf, com);
+		ft_revrotate_tool(inf, com);
 	if (ft_strncmp(com, "rrb", 3) || ft_strncmp(com, "rrr", 3))
-		flag = ft_revrotate(inf, com);
+		ft_revrotate_tool(inf, com);
 	if (ft_strncmp(com, "ra", 2) || ft_strncmp(com, "rr", 2))
-		flag = ft_rotate(inf , com);
+		ft_rotate_tool(inf , com);
 	if (ft_strncmp(com, "rb", 2) || ft_strncmp(com, "rr", 2))
-		flag = ft_rotate(inf, com);
+		ft_rotate_tool(inf, com);
 	
 }
 
@@ -47,7 +40,7 @@ int				ft_swap_tool(t_list **type)
 	int			temp;
 
 	if (*type == 0 || (*type)->next == 0)
-		return ;
+		return (0);
 	temp = (*type)->num;
 	(*type)->num = (*type)->next->num;
 	(*type)->next->num = temp;
@@ -58,7 +51,7 @@ int				ft_push_tool(t_list **dest, t_list **src)
 	t_list		**temp;
 
 	if ((*src) == 0)
-		return ;
+		return (0);
 	temp = src;
 	ft_listexcpet(src);
 	(*src) = (*src)->next;
@@ -73,7 +66,7 @@ int				ft_rotate_tool(t_inf *inf, char *com)
 		(inf->b_h) = inf->b_h->next;
 }
 
-int				ft_r_rotate_tool(t_inf *inf, char *com)
+int				ft_revrotate_tool(t_inf *inf, char *com)
 {
 	if (ft_strncmp(com, "rra", 3) || ft_strncmp(com, "rrr", 3)) 
 		(inf->a_h) = inf->a_h->prev;
