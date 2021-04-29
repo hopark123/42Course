@@ -1,36 +1,34 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_make_list.c                                     :+:      :+:    :+:   */
+/*   ft_print_int.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: hopark <hopark@student.42seoul.kr>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2021/04/28 18:47:18 by hopark            #+#    #+#             */
-/*   Updated: 2021/04/28 19:38:24 by hopark           ###   ########.fr       */
+/*   Created: 2020/11/24 21:25:44 by hopark            #+#    #+#             */
+/*   Updated: 2020/12/17 16:40:16 by hopark           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "head.h"
 
-void			ft_make_list(int ac, char **av, t_inf *inf)
+void	ft_putchar_fd(char c, int fd)
 {
-	t_list		*old;
-	t_list		*new;
-	int			i;
-	int			num;
-	num = ft_atoi(av[++i]);
-	old = ft_listnew(num);
-	inf->a_h = old;
-	i = 1;
-	while (av[++i])
-	{
-		num = ft_atoi(av[i]);
-		new = ft_listnew(num);
-		ft_listadd_back(&old, &new);
-		old = new;
-		inf->a_t = new;
+	write(fd, &c, 1);
+}
 
+void	ft_putnbr_fd(int n, int fd)
+{
+	unsigned int n2;
+
+	if (n < 0)
+	{
+		ft_putchar_fd('-', fd);
+		n2 = (unsigned int)n * (-1);
 	}
-	inf->a_t->next = inf->a_h;
-	inf->a_h->prev = inf->a_t;
+	else
+		n2 = (unsigned int)n;
+	if (n2 >= 10)
+		ft_putnbr_fd((int)(n2 / 10), fd);
+	ft_putchar_fd((int)(n2 % 10 + '0'), fd);
 }

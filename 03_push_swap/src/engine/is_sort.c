@@ -16,7 +16,7 @@ int				ft_is_ascending(t_list *list)
 {
 	t_list		*temp;
 
-	if (list)
+	if (!list)
 		return (1);
 	temp = list;
 	while (temp->next != list)
@@ -25,6 +25,7 @@ int				ft_is_ascending(t_list *list)
 			return (0);
 		temp = temp->next;
 	}
+
 	return (1);
 }
 

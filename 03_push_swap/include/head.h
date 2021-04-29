@@ -64,6 +64,7 @@ int				ft_swap_tool(t_list **type);
 int				ft_push_tool(t_list **dest, t_list **src);
 int				ft_rotate_tool(t_inf *inf, char *com);
 int				ft_revrotate_tool(t_inf *inf, char *com);
+int				ft_htsetting(t_inf *inf);
 
 void			ft_make_list(int ac, char **av, t_inf *inf);
 
@@ -92,6 +93,9 @@ void			ft_free2(char **s, int i);
 int				ft_max(int n, ...);
 int				ft_min(int n, ...);
 int				ft_strncmp(const char *s1, const char *s2, size_t n);
+void			ft_putchar_fd(char c, int fd);
+void	        ft_putnbr_fd(int n, int fd);
+
 int				ft_strlen(const char *s);
 void			*ft_memcpy(void *dst, const void *src, size_t n);
 char			*ft_strjoin(const char *s1, const char *s2);
@@ -102,5 +106,6 @@ int				get_next_line(int fd, char **line);
 ///////////////////////////
 int				ft_sort_a(t_inf *inf, int chunk);
 int				ft_sort_b(t_inf *inf, int chunk);
+int				ft_show(t_inf *inf, char *com);
 
 #endif

@@ -32,7 +32,10 @@ void			ft_action(t_inf *inf, char *com)
 		ft_rotate_tool(inf , com);
 	if (ft_strncmp(com, "rb", 2) || ft_strncmp(com, "rr", 2))
 		ft_rotate_tool(inf, com);
-	
+	write(1,"O",1);
+	ft_htsetting(inf);
+	write(1,"P",1);
+	ft_show(inf, com);
 }
 
 int				ft_swap_tool(t_list **type)
@@ -60,9 +63,9 @@ int				ft_push_tool(t_list **dest, t_list **src)
 
 int				ft_rotate_tool(t_inf *inf, char *com)
 {
-	if (ft_strncmp(com, "ra", 2) || ft_strncmp(com, "rr", 2)) 
+	if (ft_strncmp(com, "ra", 2) || ft_strncmp(com, "rr", 2) && inf->a_h)
 		(inf->a_h) = inf->a_h->next;
-	if (ft_strncmp(com, "rb", 2) || ft_strncmp(com, "rr", 2))
+	if (ft_strncmp(com, "rb", 2) || ft_strncmp(com, "rr", 2) && inf->b_h)
 		(inf->b_h) = inf->b_h->next;
 }
 
@@ -72,4 +75,18 @@ int				ft_revrotate_tool(t_inf *inf, char *com)
 		(inf->a_h) = inf->a_h->prev;
 	if (ft_strncmp(com, "rrb", 3) || ft_strncmp(com, "rrr", 3))
 		(inf->b_h) = inf->b_h->prev;
+}
+
+int				ft_htsetting(t_inf *inf)
+{
+	if (inf->a_h)
+	{
+		inf->a_h->next = inf->a_t;
+		inf->a_t->prev = inf->a_h;
+	}
+	if (inf->b_h)
+	{
+		inf->b_h->next = inf->b_t;
+		inf->b_t->prev = inf->b_h;
+	}
 }

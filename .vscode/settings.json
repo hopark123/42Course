@@ -32,6 +32,8 @@
 		"cstddef": "c",
 		"type_traits": "c",
 		"tuple": "c",
-		"utility": "c"
+		"utility": "c",
+		"stdarg.h": "c",
+		"ft_printf.h": "c"
 	}
 }
