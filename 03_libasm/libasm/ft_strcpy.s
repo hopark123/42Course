@@ -5,7 +5,9 @@ section .text
 _ft_strcpy:
 	push rcx
 	xor rcx, rcx
-
+	
+strcpy(dest, src)
+rdi rsi
 loop:
 	mov al, BYTE[rsi + rcx]
 	mov BYTE[rdi + rcx], al

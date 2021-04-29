@@ -1,0 +1,27 @@
+{
+	"C_Cpp.errorSquiggles": "Disabled",
+	"files.associations": {
+		"bitset": "c",
+		"functional": "c",
+		"iterator": "c",
+		"memory": "c",
+		"random": "c",
+		"string.h": "c",
+		"algorithm": "c",
+		"chrono": "c",
+		"limits": "c",
+		"ratio": "c",
+		"cub3d.h": "c",
+		"unistd.h": "c",
+		"stdlib.h": "c",
+		"math.h": "c",
+		"stdio.h": "c",
+		"cub3d_type.h": "c",
+		"utils.h": "c",
+		"passing.h": "c",
+		"get_next_line.h": "c",
+		"libft.h": "c",
+		"head.h": "c",
+		"limits.h": "c"
+	}
+}
