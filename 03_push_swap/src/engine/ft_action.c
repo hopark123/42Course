@@ -79,14 +79,19 @@ int				ft_revrotate_tool(t_inf *inf, char *com)
 
 int				ft_htsetting(t_inf *inf)
 {
+	write(1,"T",1);
 	if (inf->a_h)
 	{
 		inf->a_h->next = inf->a_t;
 		inf->a_t->prev = inf->a_h;
 	}
+
 	if (inf->b_h)
 	{
+	write(1,"T",1);
 		inf->b_h->next = inf->b_t;
+	write(1,"T",1);
 		inf->b_t->prev = inf->b_h;
 	}
+
 }
