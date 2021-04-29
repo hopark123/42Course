@@ -12,16 +12,6 @@
 
 #include "head.h"
 
-int				ft_strlen(const char *s)
-{
-	size_t		len;
-
-	len = 0;
-	while (s[len])
-		len++;
-	return (len);
-}
-
 static int		storejoin(char **store, char *buf, ssize_t readsize)
 {
 	char		*temp;

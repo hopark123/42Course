@@ -18,18 +18,26 @@ void			ft_make_list(int ac, char **av, t_inf *inf)
 	t_list		*new;
 	int			i;
 	int			num;
-	
-	old = 0;
+	num = ft_atoi(av[++i]);
+	old = ft_listnew(num);
 	inf->a_h = old;
 	i = 0;
 	while (av[++i])
 	{
-		num = ft_atoi(av[++i]);
+		num = ft_atoi(av[i]);
+		printf("%d\n", num);
 		new = ft_listnew(num);
 		ft_listadd_back(&old, &new);
 		old = new;
-		inf->b_h = new;
+		inf->a_t = new;
+
 	}
-	inf->b_h->next = inf->a_h;
-	inf->a_h->prev = inf->b_h;
+	inf->a_t->next = inf->a_h;
+	inf->a_h->prev = inf->a_t;
+	t_list *temp = inf->a_t;
+	while (temp->next != inf->a_t)
+	{
+		printf("%d\n", temp->num);
+		temp = temp->next;
+	}
 }

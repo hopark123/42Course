@@ -26,8 +26,8 @@ t_list			*ft_listnew(int num)
 	if (!(res = malloc(sizeof(t_list))))
 		return (0);
 	res->num = num;
-	res->next = 0;
-	res->prev = 0;
+	res->next = res;
+	res->prev = res;
 	res->chunk = 0;
 	return (res);
 }

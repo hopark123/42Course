@@ -54,7 +54,7 @@ SRC2 = \
 
 OBJ1 = $(addprefix $(OBJ_DIR1)/, $(notdir $(SRC1:.c=.o)))
 OBJ2 = $(addprefix $(OBJ_DIR2)/, $(notdir $(SRC2:.c=.o)))
-
+OBJS = $(OBJ1) $(OBJ2) 
 all : $(NAME1)
 
 clean :
@@ -62,6 +62,7 @@ clean :
 
 fclean : clean
 	$(RM) $(RMFLAGS) $(NAME)
+
 re : fclean all
 
 test : all

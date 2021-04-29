@@ -15,31 +15,33 @@
 int				ft_max(int n, ...)
 {
 	int				max;
-	va_list 		ap;
+	int				new;
+	va_list			ap;
 
 	max = INT_MIN;
-	
 	va_start(ap, n);
 	while (n--)
 	{
-		ap = va_arg(ap, int);
-		max = max > ap ? max : ap;
+		new = va_arg(ap, int);
+		max = max > new ? max : new;
 	}
+	va_end(ap);
 	return (max);
 }
 
 int				ft_min(int n, ...)
 {
 	int				min;
+	int				new;
 	va_list 		ap;
 
 	min = INT_MIN;
-	
 	va_start(ap, n);
 	while (n--)
 	{
-		ap = va_arg(ap, int);
-		min = min < ap ? min : ap;
+		new = va_arg(ap, int);
+		min = min < new ? min : new;
 	}
+	va_end(ap);
 	return (min);
 }
