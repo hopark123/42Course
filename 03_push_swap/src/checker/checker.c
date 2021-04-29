@@ -17,24 +17,53 @@ int				ft_show(t_inf *inf, char *com)
 {
 	t_list		*tempa;
 	t_list		*tempb;
-
+	int			flag1;
+	int			flag2;
 	// system("clear");
 	write(1, com, ft_strlen(com));
 	write(1,"\n",1);
+	flag1 = 0;
+	flag2 = 0;
+	if (inf->a_h)
+		flag1 = 1;
+	if (inf->b_h)
+		flag2 = 1;
 	tempa = inf->a_h;
-	while (tempa->next != inf->a_h)
+	tempb = inf->b_h;
+	int j = 0;
+	while ((flag1 || flag2) && j++ < 7)
 	{
-		ft_putnbr_fd(tempa->num, 1);
-		write(1, ":", 1);
-		ft_putnbr_fd(tempa->chunk, 1);
-		write(1, "\n", 1);
+		if (flag1)
+		{
+			ft_putnbr_fd(tempa->num, 1);
+			write(1, ":", 1);
+			ft_putnbr_fd(tempa->chunk, 1);
+			tempa = tempa->next;
+			if (tempa == inf->a_h)
+				flag1 = 0; 
+		}
+		else
+		{
+			write(1, "no a ", 4);
+		}
+		write(1, "---", 3);
+		if (flag2)
+		{
 
-		tempa = tempa->next;
+			ft_putnbr_fd(tempb->num, 1);
+			write(1, ":", 1);
+			ft_putnbr_fd(tempb->chunk, 1);
+			tempb = tempb->next;
+			if (tempb == inf->b_h)
+				flag2 = 0; 
+		}
+		else
+		{
+			write(1, "no b", 4);
+		}
+		write(1, "\n", 1);
 	}
-	ft_putnbr_fd(tempa->num, 1);
-	write(1, ":", 1);
-	ft_putnbr_fd(tempa->chunk, 1);
-	write(1, "\n", 1);
+		
 }
 int				ft_cnt_chunk(t_list *list)
 {
@@ -56,21 +85,23 @@ int				ft_cnt_chunk(t_list *list)
 
 t_list			*ft_find_mid(t_list *list)
 {
-	t_list		*temp1;
-	t_list		*temp2;
+	t_list			*temp1;
+	t_list			*temp2;
 	int				i;
 	int				j;
 	int				flag;
-
+	int				cnt_chunk;
 	i = 0;
 	flag = 0;
 	if (!list)
 		return (0);
-	while (list->chunk == ft_n_next(list, i)->chunk)
+	cnt_chunk = ft_cnt_chunk(list);
+	while (i < cnt_chunk)
 	{
 		temp1 = ft_n_next(list, i);
 		j = 0;
-		while (list->chunk == ft_n_next(list, j)->chunk)
+		flag = 0;
+		while (j < cnt_chunk)
 		{
 			temp2 = ft_n_next(list, j);
 			if (temp1->num - temp2->num > 0)
@@ -78,8 +109,7 @@ t_list			*ft_find_mid(t_list *list)
 			else if (temp1->num - temp2->num < 0)
 				flag--;
 			j++;
-			if (temp2 == list)
-				break;
+
 		}
 		i++;
 		if (flag == 0 || flag == -1)
@@ -109,30 +139,21 @@ int				ft_sort_a(t_inf *inf, int chunk)
 		ft_sort_b(inf, chunk);
 		return (0);
 	}
-
 	mid = ft_find_mid(inf->a_h)->num;
 	cnt_chunk = ft_cnt_chunk(inf->a_h);
 	if (cnt_chunk > 3)
 	{
 		while (cnt_chunk--)
 		{
-			write(1,"(",1);
 			if (inf->a_h->num < mid)
 			{
-				write(1,"[",1);
-
 				ft_action(inf, "pb");
-				write(1,"]",1);
-
 			}
 			else
 			{
-				write(1,"{",1);
 				ft_action(inf, "ra");
-				write(1,"}",1);
-
 			}
-			write(1,")",1);
+
 			
 		}
 	}
@@ -198,3 +219,71 @@ int				main(int ac, char **av)
 	ft_sort_a(inf, 0);
 	//get_next_line()
 }
+// int			main()
+// {
+// 	t_list	*list1;
+// 	t_list	*list2;
+// 	t_list	*list3;
+// 	t_list	*list4;
+// 	t_list	*list5;
+// 	t_list	*list6;
+
+	
+// 	int			i = 1;
+// 	list1 = ft_listnew(1);
+// 	list2 = ft_listnew(2);
+// 	list3 = ft_listnew(3);
+// 	list4 = ft_listnew(4);
+// 	list5 = ft_listnew(5);
+
+// 	ft_listadd_back(&list4, &list3);
+// 	ft_listadd_back(&list4, &list5);
+// 	ft_listadd_front(&list3, &list2);
+// 	ft_listadd_front(&list2, &list1);
+
+// 	t_list *temp = list1;
+// 	while (temp&& i < 7)
+// 	{
+// 		printf("now  : %d | ", temp->num);
+// 		if (temp->prev)
+// 			printf("prev : %d | ", temp->prev->num);
+// 		else
+// 			printf("prev : %d | ", 0);
+
+// 		if (temp->next)
+// 			{
+// 				printf("next : %d | ", temp->next->num);
+// 			}
+// 		else
+// 			printf("next : %d | ", 0);
+// 		printf("\n");
+// 		temp = temp->next;
+// 		if (temp == list1)
+// 			break;
+// 		i++;
+// 	}
+// 	printf("----------\n");
+// 	temp = list1;
+// 	ft_listexcpet(&list2);
+// 	i = 0;
+// 	while (temp && i < 7)
+// 	{
+// 		printf("now  : %d | ", temp->num);
+// 		if (temp->prev)
+// 			printf("prev : %d | ", temp->prev->num);
+// 		else
+// 			printf("prev : %d | ", 0);
+
+// 		if (temp->next)
+// 			{
+// 				printf("next : %d | ", temp->next->num);
+// 			}
+// 		else
+// 			printf("next : %d | ", 0);
+// 			temp = temp->next;
+// 		printf("\n");
+// 		if (temp == list1)
+// 			break;
+// 		i++;
+// 	}
+// }

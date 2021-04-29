@@ -53,9 +53,14 @@ void			ft_listadd_back(t_list **list, t_list **new)
 	if ((*list) == 0 && (*new) == 0)
 		return ;
 	if ((*list) == 0)
+	{
 		(*list) = (*new);
+		(*list)->next = (*list);
+		(*list)->prev = (*list);
+	}
 	else
 	{
+		(*list)->next->prev = (*new);
 		(*new)->prev = (*list);
 		(*new)->next = (*list)->next;
 		(*list)->next = (*new);

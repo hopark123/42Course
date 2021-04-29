@@ -32,10 +32,8 @@ void			ft_action(t_inf *inf, char *com)
 		ft_rotate_tool(inf , com);
 	if (ft_strncmp(com, "rb", 2) || ft_strncmp(com, "rr", 2))
 		ft_rotate_tool(inf, com);
-	write(1,"O",1);
-	ft_htsetting(inf);
-	write(1,"P",1);
 	ft_show(inf, com);
+	ft_htsetting(inf);
 }
 
 int				ft_swap_tool(t_list **type)
@@ -56,42 +54,49 @@ int				ft_push_tool(t_list **dest, t_list **src)
 	if ((*src) == 0)
 		return (0);
 	temp = src;
-	ft_listexcpet(src);
+	ft_listexcpet(temp);
 	(*src) = (*src)->next;
 	ft_listadd_back(dest, temp);
 }
 
 int				ft_rotate_tool(t_inf *inf, char *com)
 {
-	if (ft_strncmp(com, "ra", 2) || ft_strncmp(com, "rr", 2) && inf->a_h)
-		(inf->a_h) = inf->a_h->next;
-	if (ft_strncmp(com, "rb", 2) || ft_strncmp(com, "rr", 2) && inf->b_h)
-		(inf->b_h) = inf->b_h->next;
+	if ((ft_strncmp(com, "ra", 2) || ft_strncmp(com, "rr", 2)) && inf->a_h)
+	{
+		inf->a_h = inf->a_h->next;
+		inf->a_t = inf->a_t->next;
+	}
+	if ((ft_strncmp(com, "rb", 2) || ft_strncmp(com, "rr", 2)) && inf->b_h)
+	{
+		inf->b_h = inf->b_h->next;
+		inf->b_t = inf->b_t->next;
+	}
+	ft_htsetting(inf);
 }
 
 int				ft_revrotate_tool(t_inf *inf, char *com)
 {
-	if (ft_strncmp(com, "rra", 3) || ft_strncmp(com, "rrr", 3)) 
+	if ((ft_strncmp(com, "rra", 3) || ft_strncmp(com, "rrr", 3)) && inf->a_h) 
 		(inf->a_h) = inf->a_h->prev;
-	if (ft_strncmp(com, "rrb", 3) || ft_strncmp(com, "rrr", 3))
+	if ((ft_strncmp(com, "rrb", 3) || ft_strncmp(com, "rrr", 3) )  && inf->b_h)
 		(inf->b_h) = inf->b_h->prev;
+	ft_htsetting(inf);
+
 }
 
 int				ft_htsetting(t_inf *inf)
 {
-	write(1,"T",1);
 	if (inf->a_h)
 	{
-		inf->a_h->next = inf->a_t;
+		inf->a_t = inf->a_h->prev;
 		inf->a_t->prev = inf->a_h;
+		inf->a_t->next = inf->a_h;
 	}
-
 	if (inf->b_h)
 	{
-	write(1,"T",1);
-		inf->b_h->next = inf->b_t;
-	write(1,"T",1);
-		inf->b_t->prev = inf->b_h;
+		inf->b_t = inf->b_h->prev;
+		inf->b_h->prev = inf->b_t;
+		inf->b_t->next = inf->b_h;
 	}
 
 }

@@ -23,15 +23,13 @@ int				ft_strncmp(const char *s1, const char *s2, size_t n)
 	i = 0;
 	if (n == 0)
 		return (0);
-	if (ft_strlen(s1) != n || ft_strlen(s2) !=n)
+	if (ft_strlen(s1) != n || ft_strlen(s2) != n)
 		return (0);
-	while (i + 1 < n)
+	while (i < n)
 	{
 		if (c1[i] != c2[i])
-			break ;
-		if (c1[i] * c2[i] == 0)
-			break ;
+			return (0);
 		i++;
 	}
-	return (c1[i] - c2[i]);
+	return (1);
 }

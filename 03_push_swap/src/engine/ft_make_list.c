@@ -29,10 +29,8 @@ void			ft_make_list(int ac, char **av, t_inf *inf)
 		ft_listadd_back(&old, &new);
 		old = new;
 		inf->a_t = new;
-
 	}
-	inf->a_t->next = inf->a_h;
-	inf->a_h->prev = inf->a_t;
 	inf->b_h = 0;
 	inf->b_t = 0;
+	ft_htsetting(inf);
 }

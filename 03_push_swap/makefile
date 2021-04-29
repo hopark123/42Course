@@ -66,7 +66,7 @@ fclean : clean
 re : fclean all
 
 test : all
-	./checker 1 4 5 6 7 8
+	./checker 1 2 3 4 5 6 7 8
 
 $(OBJ_DIR1)/%.o : %.c | $(OBJ_DIR1)
 	$(CC) -I $(INC_DIR) -c $< -o $@
