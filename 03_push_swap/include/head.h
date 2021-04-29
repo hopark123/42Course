@@ -6,7 +6,7 @@
 /*   By: hopark <hopark@student.42seoul.kr>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/04/28 18:06:13 by hopark            #+#    #+#             */
-/*   Updated: 2021/04/28 20:09:07 by hopark           ###   ########.fr       */
+/*   Updated: 2021/04/29 16:01:27 by hopark           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -94,7 +94,7 @@ int				ft_max(int n, ...);
 int				ft_min(int n, ...);
 int				ft_strncmp(const char *s1, const char *s2, size_t n);
 void			ft_putchar_fd(char c, int fd);
-void	        ft_putnbr_fd(int n, int fd);
+void			ft_putnbr_fd(int n, int fd);
 
 int				ft_strlen(const char *s);
 void			*ft_memcpy(void *dst, const void *src, size_t n);

@@ -6,7 +6,7 @@
 /*   By: hopark <hopark@student.42seoul.kr>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/04/28 18:47:18 by hopark            #+#    #+#             */
-/*   Updated: 2021/04/28 19:38:24 by hopark           ###   ########.fr       */
+/*   Updated: 2021/04/29 15:58:29 by hopark           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,4 +33,6 @@ void			ft_make_list(int ac, char **av, t_inf *inf)
 	}
 	inf->a_t->next = inf->a_h;
 	inf->a_h->prev = inf->a_t;
+	inf->b_h = 0;
+	inf->b_t = 0;
 }

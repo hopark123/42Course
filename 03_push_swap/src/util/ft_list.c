@@ -6,7 +6,7 @@
 /*   By: hopark <hopark@student.42seoul.kr>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/04/28 18:05:23 by hopark            #+#    #+#             */
-/*   Updated: 2021/04/28 18:31:15 by hopark           ###   ########.fr       */
+/*   Updated: 2021/04/29 15:55:09 by hopark           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -78,7 +78,6 @@ void			ft_listexcpet(t_list **list)
 		return ;
 	((*list)->next)->prev = (*list)->prev;
 	((*list)->prev)->next = (*list)->next;
-		
 }
 
 void			ft_listclear(t_list **list)
