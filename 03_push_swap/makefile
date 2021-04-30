@@ -6,7 +6,7 @@
 #    By: hopark <hopark@student.42seoul.kr>         +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2021/04/28 18:03:34 by hopark            #+#    #+#              #
-#    Updated: 2021/04/29 13:16:19 by hopark           ###   ########.fr        #
+#    Updated: 2021/04/30 15:56:24 by hopark           ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -66,7 +66,7 @@ fclean : clean
 re : fclean all
 
 test : all
-	./checker 1 2 3 4 5 6 7 8
+	./checker 2 9 25 6 20 7 10 17 5 27 19 26 13 29 21 28 8 4 18 22 12 14 15 16 3 11 30 24 1 23
 
 $(OBJ_DIR1)/%.o : %.c | $(OBJ_DIR1)
 	$(CC) -I $(INC_DIR) -c $< -o $@

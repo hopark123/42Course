@@ -6,7 +6,7 @@
 /*   By: hopark <hopark@student.42seoul.kr>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/04/28 19:03:06 by hopark            #+#    #+#             */
-/*   Updated: 2021/04/28 19:47:30 by hopark           ###   ########.fr       */
+/*   Updated: 2021/04/30 15:55:16 by hopark           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,7 +35,7 @@ int				ft_min(int n, ...)
 	int				new;
 	va_list 		ap;
 
-	min = INT_MIN;
+	min = INT_MAX;
 	va_start(ap, n);
 	while (n--)
 	{

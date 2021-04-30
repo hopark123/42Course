@@ -6,7 +6,7 @@
 /*   By: hopark <hopark@student.42seoul.kr>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/04/28 18:06:13 by hopark            #+#    #+#             */
-/*   Updated: 2021/04/29 16:01:27 by hopark           ###   ########.fr       */
+/*   Updated: 2021/04/30 16:07:24 by hopark           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,6 +29,8 @@
 # ifndef OPEN_MAX
 #  define OPEN_MAX	10240
 # endif
+
+static int cnt = 0;
 
 typedef struct	s_list
 {
@@ -62,8 +64,8 @@ typedef struct	s_inf
 void			ft_action(t_inf *inf, char *com);
 int				ft_swap_tool(t_list **type);
 int				ft_push_tool(t_list **dest, t_list **src);
-int				ft_rotate_tool(t_list *head, t_list *tail);
-int				ft_revrotate_tool(t_list *head, t_list *tail);
+int				ft_rotate_tool(t_list **head, t_list **tail);
+int				ft_revrotate_tool(t_list **head, t_list **tail);
 int				ft_htsetting(t_inf *inf);
 
 void			ft_make_list(int ac, char **av, t_inf *inf);
@@ -86,6 +88,7 @@ void			ft_listadd_back(t_list **list, t_list **new);
 void			ft_listdelone(t_list **list);
 void			ft_listexcpet(t_list **list);
 void			ft_listclear(t_list **list);
+t_list			*ft_listndup(t_list *list);
 
 int				ft_atoi(const char *nptr);
 void			ft_free(void *memory);
@@ -107,5 +110,4 @@ int				get_next_line(int fd, char **line);
 int				ft_sort_a(t_inf *inf, int chunk);
 int				ft_sort_b(t_inf *inf, int chunk);
 int				ft_show(t_inf *inf, char *com);
-
 #endif

@@ -6,7 +6,7 @@
 /*   By: hopark <hopark@student.42seoul.kr>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/04/28 18:05:23 by hopark            #+#    #+#             */
-/*   Updated: 2021/04/29 15:55:09 by hopark           ###   ########.fr       */
+/*   Updated: 2021/04/30 15:35:03 by hopark           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,19 +32,40 @@ t_list			*ft_listnew(int num)
 	return (res);
 }
 
+t_list			*ft_listndup(t_list *list)
+{
+	t_list		*res;
+
+	if (!(res = malloc(sizeof(t_list))))
+		return (0);
+	res->num = list->num;
+	res->next = list->next;
+	res->prev = list->prev;
+	res->chunk = list->chunk;
+	return (res);
+}
+
+
 void			ft_listadd_front(t_list **list, t_list **new)
 {
 	if ((*list) == 0 && (*new) == 0)
 		return ;
-	if ((*list) == 0 && (*new) != 0)
+	if ((*list) == 0)
+	{
+		(*new)->next = (*new);
+		(*new)->prev = (*new);
 		(*list) = (*new);
+	}
 	else
 	{
-		if ((*list)->prev)
-			(*list)->prev->next = (*new);
+		//if ((*list)->prev)
+		//{
+		(*list)->prev->next = (*new);
 		(*new)->prev = (*list)->prev;
-		(*new)->next = *list;
 		(*list)->prev = (*new);
+		(*new)->next = *list;
+		(*list) = (*new);
+		//}
 	}
 }
 
@@ -72,7 +93,6 @@ void			ft_listdelone(t_list **list)
 	if ((*list) == 0)
 		return ;
 	ft_free(*list);
-	
 }
 
 void			ft_listexcpet(t_list **list)
@@ -81,8 +101,11 @@ void			ft_listexcpet(t_list **list)
 	
 	if ((*list) == 0)
 		return ;
-	((*list)->next)->prev = (*list)->prev;
-	((*list)->prev)->next = (*list)->next;
+	if (((*list)->next))
+		((*list)->next)->prev = (*list)->prev;
+	if ((*list)->prev)
+		((*list)->prev)->next = (*list)->next;
+
 }
 
 void			ft_listclear(t_list **list)

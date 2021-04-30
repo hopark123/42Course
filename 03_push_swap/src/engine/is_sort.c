@@ -6,7 +6,7 @@
 /*   By: hopark <hopark@student.42seoul.kr>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/04/28 18:44:28 by hopark            #+#    #+#             */
-/*   Updated: 2021/04/28 18:47:35 by hopark           ###   ########.fr       */
+/*   Updated: 2021/04/30 13:42:53 by hopark           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,11 +21,11 @@ int				ft_is_ascending(t_list *list)
 	temp = list;
 	while (temp->next != list)
 	{
-		if (temp->num - temp->next->num < 0)
+		if (temp->num - temp->next->num > 0)
 			return (0);
 		temp = temp->next;
 	}
-
+	//printf("ascending\n");
 	return (1);
 }
 
@@ -33,15 +33,16 @@ int				ft_is_descending(t_list *list)
 {
 	t_list		*temp;
 
-	if (list)
+	if (!list)
 		return (1);
 	temp = list;
 	while (temp->next != list)
 	{
-		if (temp->num - temp->next->num > 0)
+		if (temp->num - temp->next->num < 0)
 			return (0);
 		temp = temp->next;
 	}
+	//printf("descending\n");
 	return (1);
 }
 
@@ -49,7 +50,7 @@ int				ft_chunk_is_descending(t_list *list)
 {
 	t_list		*temp;
 
-	if (list)
+	if (!list)
 		return (1);
 	temp = list;
 	while (temp->next != list)
@@ -58,5 +59,7 @@ int				ft_chunk_is_descending(t_list *list)
 			return (0);
 		temp = temp->next;
 	}
+	//printf("chunk descending\n");
+	
 	return (1);
 }
