@@ -6,7 +6,7 @@
 /*   By: hopark <hopark@student.42seoul.kr>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/04/28 18:45:48 by hopark            #+#    #+#             */
-/*   Updated: 2021/04/30 16:09:47 by hopark           ###   ########.fr       */
+/*   Updated: 2021/05/05 18:09:11 by hopark           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,6 +35,7 @@ void			ft_action(t_inf *inf, char *com)
 	ft_htsetting(inf);
 	cnt++;
 	ft_show(inf, com);
+	system("clear");
 }
 
 int				ft_swap_tool(t_list **type)

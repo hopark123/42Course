@@ -6,7 +6,7 @@
 /*   By: hopark <hopark@student.42seoul.kr>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/04/28 18:06:13 by hopark            #+#    #+#             */
-/*   Updated: 2021/04/30 16:07:24 by hopark           ###   ########.fr       */
+/*   Updated: 2021/05/05 14:29:00 by hopark           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,12 +30,12 @@
 #  define OPEN_MAX	10240
 # endif
 
-static int cnt = 0;
+int		cnt;
 
 typedef struct	s_list
 {
 	int				num;
-	int				chunk;
+	float			chunk;
 	struct s_list	*prev;
 	struct s_list	*next;
 
@@ -49,6 +49,11 @@ typedef struct	s_inf
 	struct s_list	*b_t;
 }				t_inf;
 
+typedef struct	s_pivot
+{
+	int				first;
+	int				second;
+}				t_pivot;
 
 /////////////////////////////////////
 
@@ -70,10 +75,10 @@ int				ft_htsetting(t_inf *inf);
 
 void			ft_make_list(int ac, char **av, t_inf *inf);
 
-void			ft_three_a(t_inf *inf);
-void			ft_three_b(t_inf *inf);
-void			ft_two_a(t_inf *inf);
-void			ft_two_b(t_inf *inf);
+void			ft_three_a(t_inf *inf, float chunk);
+void			ft_three_b(t_inf *inf, float chunk);
+void			ft_two_a(t_inf *inf, float chunk);
+void			ft_two_b(t_inf *inf, float chunk);
 
 
 int				ft_is_ascending(t_list *list);
@@ -81,7 +86,7 @@ int				ft_is_descending(t_list *list);
 int				ft_chunk_is_descending(t_list *list);
 
 ///////////////////////////////////ft_list
-t_list			*ft_n_next(t_list *list, int n);
+t_list			*ft_n_next_list(t_list *list, int n);
 t_list			*ft_listnew(int num);
 void			ft_listadd_front(t_list **list, t_list **new);
 void			ft_listadd_back(t_list **list, t_list **new);
@@ -91,6 +96,7 @@ void			ft_listclear(t_list **list);
 t_list			*ft_listndup(t_list *list);
 
 int				ft_atoi(const char *nptr);
+int				*ft_bubblesort(int arr[], int size);
 void			ft_free(void *memory);
 void			ft_free2(char **s, int i);
 int				ft_max(int n, ...);
@@ -107,7 +113,7 @@ char			*ft_strchr(const char *s, char c);
 int				get_next_line(int fd, char **line);
 
 ///////////////////////////
-int				ft_sort_a(t_inf *inf, int chunk);
-int				ft_sort_b(t_inf *inf, int chunk);
+int				ft_sort_a(t_inf *inf, float chunk);
+int				ft_sort_b(t_inf *inf, float chunk);
 int				ft_show(t_inf *inf, char *com);
 #endif

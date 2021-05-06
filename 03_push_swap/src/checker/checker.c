@@ -6,7 +6,7 @@
 /*   By: hopark <hopark@student.42seoul.kr>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/04/12 15:35:56 by hopark            #+#    #+#             */
-/*   Updated: 2021/04/30 16:14:55 by hopark           ###   ########.fr       */
+/*   Updated: 2021/05/06 12:13:45 by hopark           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,97 +30,81 @@ int				ft_cnt_chunk(t_list *list)
 	return (cnt);
 }
 
-t_list			*ft_find_mid(t_list *list)
+t_pivot			ft_find_pivot(t_list *list)
 {
-	t_list			*temp1;
-	t_list			*temp2;
 	int				i;
-	int				j;
-	int				flag;
 	int				cnt_chunk;
+	int				*arr;
+	t_pivot			res;
 	i = 0;
-	flag = 0;
 	if (!list)
-		return (0);
+		return (res);
 	cnt_chunk = ft_cnt_chunk(list);
+	if (!(arr = malloc(sizeof(int) * cnt_chunk)))
+		return	(res);
+	
 	while (i < cnt_chunk)
 	{
-		temp1 = ft_n_next(list, i);
-		j = 0;
-		flag = 0;
-		while (j < cnt_chunk)
-		{
-			temp2 = ft_n_next(list, j);
-			if (temp1->num - temp2->num > 0)
-				flag++;
-			else if (temp1->num - temp2->num < 0)
-				flag--;
-			j++;
-
-		}
+		arr[i] = ft_n_next_list(list, i)->num;
 		i++;
-		if (flag == 0 || flag == 1)
-			return (temp1);
+	}
+	ft_bubblesort(arr, cnt_chunk);
+
+	i = (int)(cnt_chunk / 3);
+	res.first = arr[cnt_chunk / 3];
+	i = (int)(cnt_chunk / 3 * 2);
+	res.second = arr[cnt_chunk / 3 * 2];
+	return (res);
+}
+
+void			ft_back_a(t_inf *inf, float chunk)
+{
+	float			temp;
+
+	temp = inf->a_t->chunk;
+	if (!inf->b_h)
+		return ;
+	if (inf->a_h->chunk != -5 && !ft_is_ascending(inf->a_h) && inf->a_t->chunk > inf->b_h->chunk)
+	{
+		while (1)
+		{
+				write(1,"GGG\n",4);
+
+			ft_action(inf, "rra");
+			inf->a_h->chunk = temp;
+			if (temp != inf->a_t->chunk)
+				return ;
+		}
 	}
 }
 
-
-int				ft_sort_a(t_inf *inf, int chunk)
+int				ft_sort_a(t_inf *inf, float chunk)
 {
-	int			mid;
+	t_pivot		pivot;
 	int			cnt_chunk;
+	float		temp;
+	write(1, "-------astart--------------------------------------------------------------------\n",83);
+	ft_show(inf, "a");
 
-
-	//write(1, "-------astart-----\n",20);
 	if (!inf->a_h)
 		return (0);
-	while (!ft_chunk_is_descending(inf->a_h))
-		ft_action(inf, "rra");
-	if (ft_is_ascending(inf->a_h) && ft_is_descending(inf->b_h))
+	if (inf->a_h->chunk == -5)
 	{
-		while (inf->b_h)
-			ft_action(inf, "pa");
-		return (0);
-	}
-	mid = ft_find_mid(inf->a_h)->num;
-	cnt_chunk = ft_cnt_chunk(inf->a_h);
-	if (cnt_chunk > 3)
-	{
-		while (cnt_chunk--)
+		if (inf->a_t->chunk > inf->b_h->chunk)
 		{
-				//printf("# a  now : %d mid : %d #\n",inf->a_h->num, mid);
-			if (inf->a_h->num < mid)
+			temp = inf->a_t->chunk;
+
+			while (1)
 			{
-				inf->a_h->chunk = chunk;
-				ft_action(inf, "pb");
-			}
-			else
-			{
-				inf->a_h->chunk = chunk;
-				ft_action(inf, "ra");
+				ft_action(inf, "rra");
+				inf->a_h->chunk = temp;
+				if (temp != inf->a_t->chunk)
+					break;
 			}
 		}
+		else
+			ft_sort_b(inf, chunk);
 	}
-	else if (cnt_chunk  == 3)
-		ft_three_a(inf);
-	else if (cnt_chunk == 2)
-		ft_two_a(inf);
-	if (!ft_is_ascending(inf->a_h))
-		ft_sort_a(inf, chunk + 1);
-	if (!ft_is_descending(inf->b_h))
-		ft_sort_b(inf, chunk + 1);
-
-}
-
-int				ft_sort_b(t_inf *inf, int chunk)
-{
-	int			mid;
-	int			cnt_chunk;
-
-	//write(1, "-------bstart-----\n",20);
-
-	if (!inf->b_h)
-		return (0);
 	while (!ft_chunk_is_descending(inf->b_h))
 		ft_action(inf, "rrb");
 	if (ft_is_ascending(inf->a_h) && ft_is_descending(inf->b_h))
@@ -129,135 +113,190 @@ int				ft_sort_b(t_inf *inf, int chunk)
 			ft_action(inf, "pa");
 		return (0);
 	}
-	mid = ft_find_mid(inf->b_h)->num;
+	int i = 0;
+	t_list		*temp2;
+
+	pivot = ft_find_pivot(inf->a_h);
+	cnt_chunk = ft_cnt_chunk(inf->a_h);
+	if (cnt_chunk > 3)
+	{
+		while (cnt_chunk--)
+		{
+			i = 0;
+				printf("# a  now : %d pivot : %d %d  chunk : %f#\n",inf->a_h->num, pivot.first, pivot.second, chunk);
+			if (inf->a_h->num < pivot.second)
+			{
+				inf->a_h->chunk = chunk;
+				ft_action(inf, "pb");
+				if (chunk == 0 && inf->b_h->num < pivot.first)
+				{
+					inf->b_h->chunk = chunk - 1;
+					ft_action(inf, "rb");
+				}
+				else if (chunk != 0 && inf->b_h->num > pivot.first)
+				{
+					inf->b_h->chunk = chunk + 1;
+					ft_action(inf, "rb");
+				}
+			}
+			else
+			{
+				inf->a_h->chunk = chunk;
+				ft_action(inf, "ra");
+				i++;
+			}
+		}
+		if (inf->a_h->chunk == -5 && inf->a_t->chunk >= inf->b_h->chunk)
+		{
+			temp = inf->a_t->chunk;
+			while (inf->a_t->chunk == temp)
+			{
+				write(1,"^^^^^^^^\n",10);
+				ft_action(inf, "rra");
+			}
+		}
+		if (!ft_is_ascending(inf->a_h))
+			ft_sort_a(inf, chunk + 2);
+		else
+			ft_sort_b(inf, chunk + 2);
+		while (!ft_chunk_is_descending(inf->b_h))
+			ft_action(inf, "rrb");
+	}
+	else if (cnt_chunk  == 3)
+	{	
+		ft_three_a(inf, -5);
+		ft_back_a(inf, chunk);
+	}
+	else if (cnt_chunk == 2)
+	{
+		ft_two_a(inf, -5);
+		ft_back_a(inf, chunk);
+
+	}
+	else
+	{
+			ft_back_a(inf, chunk);
+	}
+	
+	//if (inf->a_h->chunk != -5)
+	//{
+	//	temp2 = inf->a_t;
+	//	while (temp == inf->a_t->chunk)
+	//	{
+	//		ft_action(inf, "rra");
+	//		inf->a_h->chunk = chunk + 2;
+	//		temp2 = temp2->next;
+	//		return (0);
+	//	}
+	//}	
+
+	temp2 = inf->a_h;
+	if (ft_is_ascending(inf->a_h))
+	{
+		write(1,"@@@@@@\n",8);
+		while (1)
+		{
+			temp2->chunk = -5;
+			temp2 = temp2->next;
+			if (temp2->chunk == -5)
+				break;
+		}
+	}
+	if (!ft_is_ascending(inf->a_h))
+		ft_sort_a(inf, chunk + 2);
+	else
+		ft_sort_b(inf, chunk + 2);
+}
+
+int				ft_sort_b(t_inf *inf, float chunk)
+{
+	t_pivot		pivot;
+	int			cnt_chunk;
+	int			a_sort;
+	int			b_sort;
+
+	write(1, "-------bstart--------------------------------------------------\n",65);
+	ft_show(inf, "b");
+	if (!inf->b_h)
+		return (0);
+	while (!ft_chunk_is_descending(inf->b_h))
+		ft_action(inf, "rrb");
+	t_list		*temp2;
+	temp2 = inf->a_h;
+	if (ft_is_ascending(inf->a_h))
+	{
+		write(1,"@@@@@@\n",8);
+
+		while (1)
+		{
+			temp2->chunk = -5;
+			temp2 = temp2->next;
+			if (temp2->chunk == -5)
+				break;
+		}
+	}
+	if (ft_is_ascending(inf->a_h) && ft_is_descending(inf->b_h))
+	{
+		while (inf->b_h)
+			ft_action(inf, "pa");
+		return (0);
+	}
+	pivot = ft_find_pivot(inf->b_h);
 	cnt_chunk = ft_cnt_chunk(inf->b_h);
 	if (cnt_chunk > 3)
 	{
 		while (cnt_chunk--)
 		{
-				//printf("# b now : %d mid : %d #\n",inf->a_h->num, mid);
-			if (inf->b_h->num > mid)
+				printf("# b now : %d pivot : %d %d chunk %f#\n",inf->b_h->num, pivot.first, pivot. second, chunk);
+			if (inf->b_h->num >= pivot.first)
 			{
 				inf->b_h->chunk = chunk + 1;
 				ft_action(inf, "pa");
+				if (inf->a_h->num <= pivot.second)
+				{
+					inf->a_h->chunk = chunk + 1;
+					ft_action(inf, "ra");
+				}
 			}
 			else
 			{
-				inf->b_h->chunk = chunk + 1;
+				inf->b_h->chunk = chunk;
 				ft_action(inf, "rb");
 			}
 		}
+		if (!ft_is_ascending(inf->a_h))
+			ft_sort_a(inf, chunk + 2);
+		//while (!ft_chunk_is_descending(inf->a_h))
+		//{
+		//		write(1,"GGG\n",4);
+		//	ft_action(inf, "rra");
+		//}
 	}
 	else if (cnt_chunk  == 3)
-		ft_three_b(inf);
+		ft_three_b(inf, -5);
 	else if (cnt_chunk == 2)
-		ft_two_b(inf);
+		ft_two_b(inf, -5);
+	else
+	{
+		ft_action(inf, "pa");
+		inf->a_h->chunk = -5;
+	}
 	if (!ft_is_ascending(inf->a_h))
-		ft_sort_a(inf, chunk + 1);
-	if (!ft_is_descending(inf->b_h))
-		ft_sort_b(inf, chunk + 1);
+		ft_sort_a(inf, chunk + 2);
+	else
+		ft_sort_b(inf, chunk + 2);
 }
 
 
  int				main(int ac, char **av)
  {
- 	static t_inf *inf;
-	
+ 	static t_inf	*inf;
  	if (!(inf = malloc(sizeof(t_inf))))
  		return (ERROR);
  	ft_make_list(ac, av, inf);
  	ft_show(inf, "start");
  	ft_sort_a(inf, 0);
-	//ft_is_ascending(inf->a_h);
+ 	ft_show(inf, "end");
+
  	//get_next_line()
  }
-//int			main()
-//{
-//	t_list	*list1;
-//	t_list	*list2;
-//	t_list	*list3;
-//	t_list	*list4;
-//	t_list	*list5;
-//	t_list	*list6;
-
-	
-//	int			i = 1;
-//	list1 = ft_listnew(1);
-//	list2 = ft_listnew(2);
-//	list3 = ft_listnew(3);
-//	list4 = ft_listnew(4);
-//	list5 = ft_listnew(5);
-
-//	ft_listadd_back(&list4, &list3);
-//	ft_listadd_back(&list4, &list5);
-//	ft_listadd_front(&list3, &list2);
-//	ft_listadd_front(&list2, &list1);
-
-//	t_list *temp = list1;
-//	while (temp&& i < 7)
-//	{
-//		printf("now  : %d | ", temp->num);
-//		if (temp->prev)
-//			printf("prev : %d | ", temp->prev->num);
-//		else
-//			printf("prev : %d | ", 0);
-
-//		if (temp->next)
-//			{
-//				printf("next : %d | ", temp->next->num);
-//			}
-//		else
-//			printf("next : %d | ", 0);
-//		printf("\n");
-//		temp = temp->next;
-//		if (temp == list1)
-//			break;
-//		i++;
-//	}
-//	printf("----------\n");
-//	t_list	*lit1;
-//	t_list	*lit2;
-//	t_list	*lit3;
-//	t_list	*lit4;
-//	t_list	*lit5;
-//	t_list	*lit6;
-
-	
-//	lit1 = ft_listnew(6);
-//	lit2 = ft_listnew(7);
-//	lit3 = ft_listnew(8);
-//	lit4 = ft_listnew(9);
-//	lit5 = ft_listnew(0);
-
-//	ft_listadd_back(&lit4, &lit3);
-//	ft_listadd_back(&lit4, &lit5);
-//	ft_listadd_front(&lit3, &lit2);
-//	ft_listadd_front(&lit2, &lit1);
-
-//	// ft_listexcpet(&lit2);
-//	//ft_push_tool(&lit1, &list1);
-//	 ft_swap_tool(&lit1);
-//	//ft_revrotate_tool(&lit1, &lit5);
-//	temp = lit1;
-//	i = 0;
-//	while (temp && i < 7)
-//	{
-//		printf("now  : %d | ", temp->num);
-//		if (temp->prev)
-//			printf("prev : %d | ", temp->prev->num);
-//		else
-//			printf("prev : %d | ", 0);
-
-//		if (temp->next)
-//			{
-//				printf("next : %d | ", temp->next->num);
-//			}
-//		else
-//			printf("next : %d | ", 0);
-//			temp = temp->next;
-//		printf("\n");
-//		if (temp == lit1)
-//			break;
-//		i++;
-//	}
-//}

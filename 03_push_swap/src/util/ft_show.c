@@ -6,7 +6,7 @@
 /*   By: hopark <hopark@student.42seoul.kr>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/04/30 12:09:54 by hopark            #+#    #+#             */
-/*   Updated: 2021/04/30 16:06:37 by hopark           ###   ########.fr       */
+/*   Updated: 2021/05/03 12:22:44 by hopark           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,11 +38,7 @@ int				ft_show(t_inf *inf, char *com)
 	{
 		if (flag1)
 		{
-			//ft_putnbr_fd(tempa->prev->num, 1);
-			//write(1, " ", 1);
 			ft_putnbr_fd(tempa->num, 1);
-			//write(1, " ", 1);
-			//ft_putnbr_fd(tempa->next->num, 1);
 			write(1, " : ", 3);
 			ft_putnbr_fd(tempa->chunk, 1);
 			tempa = tempa->next;
@@ -54,11 +50,7 @@ int				ft_show(t_inf *inf, char *com)
 		write(1, " | ", 3);
 		if (flag2)
 		{
-			//ft_putnbr_fd(tempb->prev->num, 1);
-			//write(1, " ", 1);
 			ft_putnbr_fd(tempb->num, 1);
-			//write(1, " ", 1);
-			//ft_putnbr_fd(tempb->next->num, 1);
 			write(1, " : ", 3);
 			ft_putnbr_fd(tempb->chunk, 1);
 			tempb = tempb->next;
@@ -69,9 +61,11 @@ int				ft_show(t_inf *inf, char *com)
 		{
 			write(1, "    ", 4);
 		}
+
 		write(1, "\n", 1);
 	}
-	write(1,"------------------",19);
+	write(1, "    ", 4);
 	ft_putnbr_fd(cnt, 1);
-	write(1,"------------------\n",20);
+	write(1, "    \n", 5);
+
 }

@@ -6,13 +6,13 @@
 /*   By: hopark <hopark@student.42seoul.kr>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/04/28 18:05:23 by hopark            #+#    #+#             */
-/*   Updated: 2021/04/30 15:35:03 by hopark           ###   ########.fr       */
+/*   Updated: 2021/05/03 15:40:30 by hopark           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "head.h"
 
-t_list			*ft_n_next(t_list *list, int n)
+t_list			*ft_n_next_list(t_list *list, int n)
 {
 	while (n-- && list)
 		list= list->next;
