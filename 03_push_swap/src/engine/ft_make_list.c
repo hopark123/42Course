@@ -6,18 +6,19 @@
 /*   By: hopark <hopark@student.42seoul.kr>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/04/28 18:47:18 by hopark            #+#    #+#             */
-/*   Updated: 2021/04/30 13:12:56 by hopark           ###   ########.fr       */
+/*   Updated: 2021/05/06 16:06:13 by hopark           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "head.h"
 
-void			ft_make_list(int ac, char **av, t_inf *inf)
+void	ft_make_list(int ac, char **av, t_inf *inf)
 {
 	t_list		*old;
 	t_list		*new;
 	int			i;
 	int			num;
+
 	num = ft_atoi(av[1]);
 	old = ft_listnew(num);
 	inf->a_h = old;

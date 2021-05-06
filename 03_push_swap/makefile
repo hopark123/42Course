@@ -6,18 +6,17 @@
 #    By: hopark <hopark@student.42seoul.kr>         +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2021/04/28 18:03:34 by hopark            #+#    #+#              #
-#    Updated: 2021/05/05 18:13:14 by hopark           ###   ########.fr        #
+#    Updated: 2021/05/06 15:17:26 by hopark           ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
 NAME1 = checker
-NAME2 = push_swap
+NAME2 = push_swap2
 
 CC = gcc
 CFLAGS = -Wall -Wextra -Werror
 RM = rm
 RMFLAGS = -f
-
 
 SRC_DIR = src
 INC_DIR = include
@@ -28,7 +27,6 @@ CHECKER_DIR = $(SRC_DIR)/checker
 OBJ_DIR1 = obj1
 OBJ_DIR2 = obj2
 
-
 INCLUDES = $(wildcard $(INC_DIR)/*.h)
 CHECKER = $(wildcard $(CHECKER_DIR)/*.c)
 ENGINE = $(wildcard $(ENGINE_DIR)/*.c)
@@ -38,7 +36,7 @@ UTIL = $(wildcard $(UTIL_DIR)/*.c)
 vpath %.c \
 	$(SRC_DIR) \
 	$(ENGINE_DIR) \
-	$(PUSH_SWAP) \
+	$(PUSH_SWAP_DIR) \
 	$(CHECKER_DIR) \
 	$(UTIL_DIR) \
 
@@ -46,6 +44,7 @@ SRC1 = \
 	$(CHECKER) \
 	$(ENGINE) \
 	$(UTIL) \
+	$(PUSH_SWAP) \
 
 SRC2 = \
 	$(PUSH_SWAP) \
@@ -55,10 +54,11 @@ SRC2 = \
 OBJ1 = $(addprefix $(OBJ_DIR1)/, $(notdir $(SRC1:.c=.o)))
 OBJ2 = $(addprefix $(OBJ_DIR2)/, $(notdir $(SRC2:.c=.o)))
 OBJS = $(OBJ1) $(OBJ2) 
+
 all : $(NAME1)
 
 clean :
-	$(RM) $(RMFLAGS) $(OBJS)
+	$(RM) $(RMFLAGS) $(OBJ1)
 
 fclean : clean
 	$(RM) $(RMFLAGS) $(NAME)
@@ -66,7 +66,7 @@ fclean : clean
 re : fclean all
 
 test : all
-	./checker 5 69 53 3 38 12 32 37 24 89 54 31 55 94 80 33 15 13 23 83 63 78 16 84 30 4 79 57 25 60 10 90 7 44 41 51 87 47 46 71 73 56 61 48 19 96 26 77 42 64 9 66 70 39 91 43 59 93 45 62 86 17 35 72 1 68 29 22 85 67 2 27 14 88 11 28 95 100 82 92 75 58 97 74 6 21 81 49 36 18 65 50 76 52 40 98 20 34 8 99
+	./checker 52 28 21 32 84 4 15 39 45 24 20 99 33 66 57 26 25 79 31 88 58 42 64 5 2 54 36 68 62 55 37 11 40 75 22 89 46 81 10 74 61 51 72 35 49 38 69 29 1 44 30 95 34 19 60 82 70 65 63 87 93 100 56 98 48 92 12 90 53 3 59 47 76 13 8 67 78 96 91 16 14 86 97 43 77 6 7 18 94 50 71 27 83 41 73 85 9 80 23 17
 
 $(OBJ_DIR1)/%.o : %.c | $(OBJ_DIR1)
 	$(CC) -I $(INC_DIR) -c $< -o $@

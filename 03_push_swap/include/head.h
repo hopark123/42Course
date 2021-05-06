@@ -6,7 +6,7 @@
 /*   By: hopark <hopark@student.42seoul.kr>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/04/28 18:06:13 by hopark            #+#    #+#             */
-/*   Updated: 2021/05/05 14:29:00 by hopark           ###   ########.fr       */
+/*   Updated: 2021/05/06 15:50:38 by hopark           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,6 +29,19 @@
 # ifndef OPEN_MAX
 #  define OPEN_MAX	10240
 # endif
+typedef int			t_bool;
+# define TRUE	(1)
+# define FALSE	(0)
+# define NULLPTR	(0)
+
+
+
+
+
+
+
+
+
 
 int		cnt;
 
@@ -61,9 +74,11 @@ typedef struct	s_pivot
 
 
 
-
-
-
+void			ft_back_a(t_inf *inf, float chunk);
+int				ft_cnt_chunk(t_list *list);
+t_pivot			ft_find_pivot(t_list *list);
+int				ft_sort_a(t_inf *inf, float chunk);
+int				ft_sort_b(t_inf *inf, float chunk);
 ///////////////////////////////////
 
 void			ft_action(t_inf *inf, char *com);
@@ -93,7 +108,6 @@ void			ft_listadd_back(t_list **list, t_list **new);
 void			ft_listdelone(t_list **list);
 void			ft_listexcpet(t_list **list);
 void			ft_listclear(t_list **list);
-t_list			*ft_listndup(t_list *list);
 
 int				ft_atoi(const char *nptr);
 int				*ft_bubblesort(int arr[], int size);
@@ -104,6 +118,8 @@ int				ft_min(int n, ...);
 int				ft_strncmp(const char *s1, const char *s2, size_t n);
 void			ft_putchar_fd(char c, int fd);
 void			ft_putnbr_fd(int n, int fd);
+int				ft_numlen(int num);
+t_bool	ft_malloc(void *target, size_t size);
 
 int				ft_strlen(const char *s);
 void			*ft_memcpy(void *dst, const void *src, size_t n);

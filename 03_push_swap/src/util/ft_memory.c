@@ -6,13 +6,13 @@
 /*   By: hopark <hopark@student.42seoul.kr>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/11/10 12:13:54 by hopark            #+#    #+#             */
-/*   Updated: 2021/04/29 16:01:36 by hopark           ###   ########.fr       */
+/*   Updated: 2021/05/06 15:58:10 by hopark           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "head.h"
 
-int					ft_strlen(const char *s)
+int	ft_strlen(const char *s)
 {
 	int				i;
 
@@ -21,7 +21,8 @@ int					ft_strlen(const char *s)
 		i++;
 	return (i);
 }
-void				*ft_memcpy(void *dst, const void *src, size_t n)
+
+void	*ft_memcpy(void *dst, const void *src, size_t n)
 {
 	unsigned char		*s1;
 	const unsigned char	*s2;
@@ -37,7 +38,7 @@ void				*ft_memcpy(void *dst, const void *src, size_t n)
 	return (dst);
 }
 
-char		*ft_strjoin(const char *s1, const char *s2)
+char	*ft_strjoin(const char *s1, const char *s2)
 {
 	size_t		len1;
 	size_t		len2;
@@ -45,7 +46,7 @@ char		*ft_strjoin(const char *s1, const char *s2)
 
 	len1 = ft_strlen(s1);
 	len2 = ft_strlen(s2);
-	if (!(result = malloc(sizeof(char) * (len1 + len2 + 1))))
+	if (!(ft_malloc(&result, sizeof(char) * (len1 + len2 + 1))))
 		return (0);
 	ft_memcpy(result, s1, len1);
 	ft_memcpy(result + len1, s2, len2);
@@ -53,18 +54,18 @@ char		*ft_strjoin(const char *s1, const char *s2)
 	return (result);
 }
 
-char		*ft_strndup(const char *s, size_t len)
+char	*ft_strndup(const char *s, size_t len)
 {
 	char		*temp;
 
-	if (!(temp = malloc(sizeof(char) * (len + 1))))
+	if (!(ft_malloc(&temp, sizeof(char) * (len + 1))))
 		return (0);
 	ft_memcpy(temp, s, len);
 	temp[len] = 0;
 	return (temp);
 }
 
-char		*ft_strchr(const char *s, char c)
+char	*ft_strchr(const char *s, char c)
 {
 	while (*s != c)
 	{

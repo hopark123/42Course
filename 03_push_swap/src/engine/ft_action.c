@@ -6,16 +6,14 @@
 /*   By: hopark <hopark@student.42seoul.kr>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/04/28 18:45:48 by hopark            #+#    #+#             */
-/*   Updated: 2021/05/06 13:06:35 by hopark           ###   ########.fr       */
+/*   Updated: 2021/05/06 16:05:29 by hopark           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "head.h"
 
-
-void			ft_action(t_inf *inf, char *com)
+void	ft_action(t_inf *inf, char *com)
 {
-
 	if (ft_strncmp(com, "sa", 2) || ft_strncmp(com, "ss", 2))
 		ft_swap_tool(&(inf->a_h));
 	if (ft_strncmp(com, "sb", 2) || ft_strncmp(com, "ss", 2))
@@ -23,7 +21,7 @@ void			ft_action(t_inf *inf, char *com)
 	if (ft_strncmp(com, "pa", 2))
 		ft_push_tool(&(inf->a_h), &(inf->b_h));
 	if (ft_strncmp(com, "pb", 2))
-		ft_push_tool(&(inf->b_h) , &(inf->a_h));
+		ft_push_tool(&(inf->b_h), &(inf->a_h));
 	if (ft_strncmp(com, "rra", 3) || ft_strncmp(com, "rrr", 3))
 		ft_revrotate_tool(&inf->a_h, &inf->a_t);
 	if (ft_strncmp(com, "rrb", 3) || ft_strncmp(com, "rrr", 3))
@@ -34,11 +32,10 @@ void			ft_action(t_inf *inf, char *com)
 		ft_rotate_tool(&inf->b_h, &inf->b_t);
 	ft_htsetting(inf);
 	cnt++;
-	//ft_show(inf, com);
-	//system("clear");
+	ft_show(inf, com);
 }
 
-int				ft_swap_tool(t_list **type)
+int	ft_swap_tool(t_list **type)
 {
 	int			temp;
 
@@ -49,7 +46,7 @@ int				ft_swap_tool(t_list **type)
 	(*type)->next->num = temp;
 }
 
-int				ft_push_tool(t_list **dest, t_list **src)
+int	ft_push_tool(t_list **dest, t_list **src)
 {
 	t_list		*temp;
 
@@ -64,31 +61,14 @@ int				ft_push_tool(t_list **dest, t_list **src)
 	ft_listadd_front(dest, &temp);
 }
 
-int				ft_rotate_tool(t_list **head, t_list **tail)
+int	ft_rotate_tool(t_list **head, t_list **tail)
 {
 	(*head) = (*head)->next;
 	(*tail) = (*tail)->next;
 }
 
-int				ft_revrotate_tool(t_list **head, t_list **tail)
+int	ft_revrotate_tool(t_list **head, t_list **tail)
 {
 	(*head) = (*head)->prev;
 	(*tail) = (*tail)->prev;
-}
-
-int				ft_htsetting(t_inf *inf)
-{
-	if (inf->a_h)
-	{
-		inf->a_t = inf->a_h->prev;
-		inf->a_t->next = inf->a_h;
-		inf->a_h->prev = inf->a_t;
-	}
-	if (inf->b_h)
-	{
-		inf->b_t = inf->b_h->prev;
-		inf->b_t->next = inf->b_h;
-		inf->b_h->prev = inf->b_t;
-	}
-
 }

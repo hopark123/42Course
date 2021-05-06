@@ -6,13 +6,13 @@
 /*   By: hopark <hopark@student.42seoul.kr>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/11/10 12:07:14 by hopark            #+#    #+#             */
-/*   Updated: 2021/04/29 16:00:00 by hopark           ###   ########.fr       */
+/*   Updated: 2021/05/06 16:03:09 by hopark           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "head.h"
 
-static int		storejoin(char **store, char *buf, ssize_t readsize)
+static int	storejoin(char **store, char *buf, ssize_t readsize)
 {
 	char		*temp;
 
@@ -30,12 +30,13 @@ static int		storejoin(char **store, char *buf, ssize_t readsize)
 	return (0);
 }
 
-static int		make_line(char **store, char **line)
+static int	make_line(char **store, char **line)
 {
 	char		*ptr;
 	char		*temp;
 
-	if ((ptr = ft_strchr(*store, '\n')))
+	ptr = ft_strchr(*store, '\n');
+	if (ptr)
 	{
 		*line = ft_strndup(*store, ptr - *store);
 		temp = ft_strndup(ptr + 1, ft_strlen(ptr + 1));
@@ -51,7 +52,7 @@ static int		make_line(char **store, char **line)
 	}
 }
 
-int				get_next_line(int fd, char **line)
+int	get_next_line(int fd, char **line)
 {
 	char		*buf;
 	static char	*store[OPEN_MAX];
@@ -59,10 +60,11 @@ int				get_next_line(int fd, char **line)
 
 	if (fd < 0 || fd >= OPEN_MAX || BUFFER_SIZE <= 0 || !line)
 		return (-1);
-	if (!(buf = malloc(sizeof(char) * (BUFFER_SIZE + 1))))
+	if (!(ft_malloc(&buf, sizeof(char) * (BUFFER_SIZE + 1))))
 		return (-1);
-	while ((readsize = read(fd, buf, BUFFER_SIZE)) >= 0)
+	while (readsize >= 0)
 	{
+		readsize = read(fd, buf, BUFFER_SIZE);
 		if (storejoin(&store[fd], buf, readsize) || readsize <= 0)
 			break ;
 	}

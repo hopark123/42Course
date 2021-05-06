@@ -6,79 +6,75 @@
 /*   By: hopark <hopark@student.42seoul.kr>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/04/28 19:09:17 by hopark            #+#    #+#             */
-/*   Updated: 2021/05/05 16:43:13 by hopark           ###   ########.fr       */
+/*   Updated: 2021/05/06 16:20:51 by hopark           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "head.h"
 
-
-void			ft_three_a1(t_inf *inf)
+void	ft_three_a1(t_inf *inf)
 {
-	ft_action(inf, "sa");
-	ft_action(inf, "ra");
-	ft_action(inf, "sa");
-	ft_action(inf, "rra");
-	ft_action(inf, "sa");
+	if (inf->a_h->num > inf->a_h->next->num)
+	{
+		ft_action(inf, "sa");
+		ft_action(inf, "ra");
+		ft_action(inf, "sa");
+		ft_action(inf, "rra");
+		ft_action(inf, "sa");
+	}
+	else if (inf->a_h->num < inf->a_h->next->num)
+	{
+		ft_action(inf, "ra");
+		ft_action(inf, "sa");
+		ft_action(inf, "rra");
+		ft_action(inf, "sa");
+	}
 }
 
-void			ft_three_a2(t_inf *inf)
+void	ft_three_a2(t_inf *inf)
 {
-	ft_action(inf, "ra");
-	ft_action(inf, "sa");
-	ft_action(inf, "rra");
-	ft_action(inf, "sa");
+	if (inf->a_h->num > inf->a_h->next->next->num)
+	{
+		ft_action(inf, "sa");
+		ft_action(inf, "ra");
+		ft_action(inf, "sa");
+		ft_action(inf, "rra");
+	}
+	else if (inf->a_h->num < inf->a_h->next->next->num)
+		ft_action(inf, "sa");
 }
 
-void			ft_three_a3(t_inf *inf)
+void	ft_three_a3(t_inf *inf)
 {
-	ft_action(inf, "sa");
-	ft_action(inf, "ra");
-	ft_action(inf, "sa");
-	ft_action(inf, "rra");
+	if (inf->a_h->next->num > inf->a_h->next->next->num)
+	{
+		ft_action(inf, "ra");
+		ft_action(inf, "sa");
+		ft_action(inf, "rra");
+	}
+	else if (inf->a_h->next->num < inf->a_h->next->next->num)
+		return ;
 }
 
-void			ft_three_a5(t_inf *inf)
+void	ft_three_a(t_inf *inf, float chunk)
 {
-	ft_action(inf, "ra");
-	ft_action(inf, "sa");
-	ft_action(inf, "rra");
-}
-
-void			ft_three_a(t_inf *inf, float chunk)
-{
+	int			min;
 	int			n1;
 	int			n2;
 	int			n3;
-	int			min;
 
 	n1 = inf->a_h->num;
 	n2 = inf->a_h->next->num;
 	n3 = inf->a_h->next->next->num;
-	inf->a_h->chunk = chunk;
-	inf->a_h->next->chunk = chunk;
-	inf->a_h->next->next->chunk = chunk;
-	printf("three a\n");
+	inf->a_h->chunk = -5;
+	inf->a_h->next->chunk = -5;
+	inf->a_h->next->next->chunk = -5;
 	min = ft_min(3, n1, n2, n3);
 	if (min == n3)
-	{
-		if (n1 > n2)
-			ft_three_a1(inf);
-		else if (n1 < n2)
-			ft_three_a2(inf);
-	}
+		ft_three_a1(inf);
 	else if (min == n2)
-	{
-		if (n1 > n3)
-			ft_three_a3(inf);
-		else if (n1 < n3)
-			ft_action(inf, "sa");
-	}
+		ft_three_a2(inf);
 	else if (min == n1)
-	{
-		if (n2 > n3)
-			ft_three_a5(inf);
-		else if (n2 < n3)
-			return ;
-	}
+		ft_three_a3(inf);
+	ft_back_a(inf, chunk);
 }
