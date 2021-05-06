@@ -6,7 +6,7 @@
 /*   By: hopark <hopark@student.42seoul.kr>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/04/12 15:35:56 by hopark            #+#    #+#             */
-/*   Updated: 2021/05/06 12:13:45 by hopark           ###   ########.fr       */
+/*   Updated: 2021/05/06 13:12:37 by hopark           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,7 +49,6 @@ t_pivot			ft_find_pivot(t_list *list)
 		i++;
 	}
 	ft_bubblesort(arr, cnt_chunk);
-
 	i = (int)(cnt_chunk / 3);
 	res.first = arr[cnt_chunk / 3];
 	i = (int)(cnt_chunk / 3 * 2);
@@ -248,11 +247,11 @@ int				ft_sort_b(t_inf *inf, float chunk)
 		while (cnt_chunk--)
 		{
 				printf("# b now : %d pivot : %d %d chunk %f#\n",inf->b_h->num, pivot.first, pivot. second, chunk);
-			if (inf->b_h->num >= pivot.first)
+			if (inf->b_h->num > pivot.first)
 			{
 				inf->b_h->chunk = chunk + 1;
 				ft_action(inf, "pa");
-				if (inf->a_h->num <= pivot.second)
+				if (inf->a_h->num < pivot.second)
 				{
 					inf->a_h->chunk = chunk + 1;
 					ft_action(inf, "ra");
