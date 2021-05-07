@@ -6,7 +6,7 @@
 /*   By: hopark <hopark@student.42seoul.kr>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/04/28 18:06:13 by hopark            #+#    #+#             */
-/*   Updated: 2021/05/06 15:50:38 by hopark           ###   ########.fr       */
+/*   Updated: 2021/05/07 16:32:07 by hopark           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,23 +35,15 @@ typedef int			t_bool;
 # define NULLPTR	(0)
 
 
-
-
-
-
-
-
-
-
-int		cnt;
+int		cnt; //////////////////////////////////////
 
 typedef struct	s_list
 {
 	int				num;
 	float			chunk;
+	char			com;
 	struct s_list	*prev;
 	struct s_list	*next;
-
 }				t_list;
 
 typedef struct	s_inf
@@ -60,6 +52,7 @@ typedef struct	s_inf
 	struct s_list	*a_t;
 	struct s_list	*b_h;
 	struct s_list	*b_t;
+	char			bonus;
 }				t_inf;
 
 typedef struct	s_pivot
@@ -82,6 +75,7 @@ int				ft_sort_b(t_inf *inf, float chunk);
 ///////////////////////////////////
 
 void			ft_action(t_inf *inf, char *com);
+int				ft_action2(t_inf *inf, char *com);
 int				ft_swap_tool(t_list **type);
 int				ft_push_tool(t_list **dest, t_list **src);
 int				ft_rotate_tool(t_list **head, t_list **tail);
@@ -116,8 +110,10 @@ void			ft_free2(char **s, int i);
 int				ft_max(int n, ...);
 int				ft_min(int n, ...);
 int				ft_strncmp(const char *s1, const char *s2, size_t n);
-void			ft_putchar_fd(char c, int fd);
-void			ft_putnbr_fd(int n, int fd);
+void			ft_putchar_fd(char c, int fd, char *color);
+void			ft_putnbr_fd(int n, int fd, char *color);
+void			ft_putnbr_fd2(int n, int fd, char *color);
+
 int				ft_numlen(int num);
 t_bool	ft_malloc(void *target, size_t size);
 
@@ -127,9 +123,12 @@ char			*ft_strjoin(const char *s1, const char *s2);
 char			*ft_strndup(const char *s, size_t len);
 char			*ft_strchr(const char *s, char c);
 int				get_next_line(int fd, char **line);
+void		*ft_memset(void *s, int c, int n);
 
 ///////////////////////////
 int				ft_sort_a(t_inf *inf, float chunk);
 int				ft_sort_b(t_inf *inf, float chunk);
 int				ft_show(t_inf *inf, char *com);
+int				ft_show2(t_inf *inf, char *com);
+
 #endif

@@ -1,38 +1,43 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_action.c                                        :+:      :+:    :+:   */
+/*   ft_action2.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: hopark <hopark@student.42seoul.kr>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/04/28 18:45:48 by hopark            #+#    #+#             */
-/*   Updated: 2021/05/06 16:05:29 by hopark           ###   ########.fr       */
+/*   Updated: 2021/05/07 15:57:33 by hopark           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "head.h"
 
-void	ft_action(t_inf *inf, char *com)
+int	ft_action2(t_inf *inf, char *com)
 {
+	char		*temp;
+	int			res;
+
+	res = -1;
 	if (ft_strncmp(com, "sa", 2) || ft_strncmp(com, "ss", 2))
-		ft_swap_tool(&(inf->a_h));
+		res = ft_swap_tool(&(inf->a_h));
 	if (ft_strncmp(com, "sb", 2) || ft_strncmp(com, "ss", 2))
-		ft_swap_tool(&(inf->b_h));
+		res = ft_swap_tool(&(inf->b_h));
 	if (ft_strncmp(com, "pa", 2))
-		ft_push_tool(&(inf->a_h), &(inf->b_h));
+		res = ft_push_tool(&(inf->a_h), &(inf->b_h));
 	if (ft_strncmp(com, "pb", 2))
-		ft_push_tool(&(inf->b_h), &(inf->a_h));
+		res = ft_push_tool(&(inf->b_h), &(inf->a_h));
 	if (ft_strncmp(com, "rra", 3) || ft_strncmp(com, "rrr", 3))
-		ft_revrotate_tool(&inf->a_h, &inf->a_t);
+		res =ft_revrotate_tool(&inf->a_h, &inf->a_t);
 	if (ft_strncmp(com, "rrb", 3) || ft_strncmp(com, "rrr", 3))
-		ft_revrotate_tool(&inf->b_h, &inf->b_t);
+		res = ft_revrotate_tool(&inf->b_h, &inf->b_t);
 	if (ft_strncmp(com, "ra", 2) || ft_strncmp(com, "rr", 2))
-		ft_rotate_tool(&inf->a_h, &inf->a_t);
+		res = ft_rotate_tool(&inf->a_h, &inf->a_t);
 	if (ft_strncmp(com, "rb", 2) || ft_strncmp(com, "rr", 2))
-		ft_rotate_tool(&inf->b_h, &inf->b_t);
+		res = ft_rotate_tool(&inf->b_h, &inf->b_t);
 	ft_htsetting(inf);
 	cnt++;
-	ft_show(inf, com);
+	temp = com;
+	return (res);
 }
 
 int	ft_swap_tool(t_list **type)
@@ -40,10 +45,11 @@ int	ft_swap_tool(t_list **type)
 	int			temp;
 
 	if (*type == 0 || (*type)->next == 0)
-		return (0);
+		return (SUCESS);
 	temp = (*type)->num;
 	(*type)->num = (*type)->next->num;
 	(*type)->next->num = temp;
+	return (SUCESS);
 }
 
 int	ft_push_tool(t_list **dest, t_list **src)
@@ -51,7 +57,7 @@ int	ft_push_tool(t_list **dest, t_list **src)
 	t_list		*temp;
 
 	if ((*src) == 0)
-		return (0);
+		return (SUCESS);
 	temp = *src;
 	ft_listexcpet(src);
 	if ((*src) == (*src)->next)
@@ -59,16 +65,25 @@ int	ft_push_tool(t_list **dest, t_list **src)
 	else
 		(*src) = (*src)->next;
 	ft_listadd_front(dest, &temp);
+	return (SUCESS);
+
 }
 
 int	ft_rotate_tool(t_list **head, t_list **tail)
 {
+	if	(!head || !tail)
+		return (SUCESS);
 	(*head) = (*head)->next;
 	(*tail) = (*tail)->next;
+	return (SUCESS);
+
 }
 
 int	ft_revrotate_tool(t_list **head, t_list **tail)
 {
+	if	(!head || !tail)
+		return (SUCESS);
 	(*head) = (*head)->prev;
 	(*tail) = (*tail)->prev;
+	return (SUCESS);
 }

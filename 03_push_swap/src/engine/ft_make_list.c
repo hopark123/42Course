@@ -6,7 +6,7 @@
 /*   By: hopark <hopark@student.42seoul.kr>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/04/28 18:47:18 by hopark            #+#    #+#             */
-/*   Updated: 2021/05/06 16:06:13 by hopark           ###   ########.fr       */
+/*   Updated: 2021/05/07 16:48:08 by hopark           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,10 +19,13 @@ void	ft_make_list(int ac, char **av, t_inf *inf)
 	int			i;
 	int			num;
 
-	num = ft_atoi(av[1]);
+	i = 1;
+	if (inf->bonus)
+		i++;
+	num = ft_atoi(av[i]);
 	old = ft_listnew(num);
 	inf->a_h = old;
-	i = 1;
+
 	while (av[++i])
 	{
 		num = ft_atoi(av[i]);
