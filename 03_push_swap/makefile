@@ -6,7 +6,7 @@
 #    By: hopark <hopark@student.42seoul.kr>         +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2021/04/28 18:03:34 by hopark            #+#    #+#              #
-#    Updated: 2021/05/07 16:48:00 by hopark           ###   ########.fr        #
+#    Updated: 2021/05/09 14:10:00 by hopark           ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -68,6 +68,8 @@ test1 : $(NAME1)
 	./checker 2 1 3 4
 test2 : $(NAME2)
 	./push_swap 1 2 4 3 5 7 8 9 10
+test3 : $(NAME1) $(NAME2)
+	./push_swap 2 1 3 5 4 | ./checker 2 1 3 5 4
 
 $(OBJ_DIR1)/%.o : %.c | $(OBJ_DIR1)
 	$(CC) -I $(INC_DIR) -c $< -o $@

@@ -6,7 +6,7 @@
 /*   By: hopark <hopark@student.42seoul.kr>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/04/28 18:45:48 by hopark            #+#    #+#             */
-/*   Updated: 2021/05/07 16:52:38 by hopark           ###   ########.fr       */
+/*   Updated: 2021/05/09 14:16:45 by hopark           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,8 +14,6 @@
 
 void	ft_action(t_inf *inf, char *com)
 {
-	char		*temp;
-	
 	if (ft_strncmp(com, "sa", 2) || ft_strncmp(com, "ss", 2))
 		ft_swap_tool(&(inf->a_h));
 	if (ft_strncmp(com, "sb", 2) || ft_strncmp(com, "ss", 2))
@@ -34,9 +32,8 @@ void	ft_action(t_inf *inf, char *com)
 		ft_rotate_tool(&inf->b_h, &inf->b_t);
 	ft_htsetting(inf);
 	cnt++;
-	//temp = com;
 	write(1, com, ft_strlen(com));
-	write(1, " ", 1);
+	write(1, "\n", 1);
 	if (inf->bonus)
 		ft_show(inf, com);
 }

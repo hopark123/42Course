@@ -6,7 +6,7 @@
 /*   By: hopark <hopark@student.42seoul.kr>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/02/19 12:26:12 by hopark            #+#    #+#             */
-/*   Updated: 2021/05/06 15:36:19 by hopark           ###   ########.fr       */
+/*   Updated: 2021/05/09 13:00:38 by hopark           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,6 +34,28 @@ int	ft_sign(int sign)
 		return (0);
 }
 
+int	ft_is_num(const char *nptr)
+{
+	int			i;
+	int			num;
+
+	i = 0;
+	while (ft_isspace(nptr[i]))
+		i++;
+	if (nptr[i] == '+' || nptr[i] == '-')
+		if (nptr[i] == '-')
+			i++;
+	while (ft_isdigit(nptr[i]))
+	{
+		num = num * 10 + nptr[i] - '0';
+		i++;
+	}
+	if (nptr[i] != 0)
+		return (ERROR);
+	else
+		return (SUCESS);
+}
+
 int	ft_atoi(const char *nptr)
 {
 	int				num;
@@ -56,7 +78,7 @@ int	ft_atoi(const char *nptr)
 		i++;
 	}
 	if (nptr[i] != 0)
-		return (-1);
+		return (ERROR);
 	if (i - cnt >= 20)
 		return (ft_sign(sign));
 	return (num * sign);
