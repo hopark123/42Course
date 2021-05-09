@@ -6,13 +6,13 @@
 /*   By: hopark <hopark@student.42seoul.kr>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/05/03 13:49:54 by hopark            #+#    #+#             */
-/*   Updated: 2021/05/06 15:38:23 by hopark           ###   ########.fr       */
+/*   Updated: 2021/05/09 16:28:47 by hopark           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "head.h"
 
-int	*ft_bubblesort(int arr[], int size)
+void	ft_bubblesort(int arr[], int size)
 {
 	int				i;
 	int				j;

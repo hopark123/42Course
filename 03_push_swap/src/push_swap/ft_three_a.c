@@ -6,7 +6,7 @@
 /*   By: hopark <hopark@student.42seoul.kr>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/04/28 19:09:17 by hopark            #+#    #+#             */
-/*   Updated: 2021/05/06 16:20:51 by hopark           ###   ########.fr       */
+/*   Updated: 2021/05/09 15:49:29 by hopark           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -76,5 +76,4 @@ void	ft_three_a(t_inf *inf, float chunk)
 		ft_three_a2(inf);
 	else if (min == n1)
 		ft_three_a3(inf);
-	ft_back_a(inf, chunk);
 }

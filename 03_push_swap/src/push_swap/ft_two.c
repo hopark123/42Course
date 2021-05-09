@@ -6,7 +6,7 @@
 /*   By: hopark <hopark@student.42seoul.kr>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/04/28 19:59:39 by hopark            #+#    #+#             */
-/*   Updated: 2021/05/06 16:18:06 by hopark           ###   ########.fr       */
+/*   Updated: 2021/05/09 15:49:35 by hopark           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,7 +18,6 @@ void	ft_two_a(t_inf *inf, float chunk)
 		ft_action(inf, "sa");
 	inf->a_h->chunk = -5;
 	inf->a_h->next->chunk = -5;
-	ft_back_a(inf, chunk);
 }
 
 void	ft_two_b(t_inf *inf, float chunk)
