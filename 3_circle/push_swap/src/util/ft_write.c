@@ -37,6 +37,7 @@ void	ft_putnbr_fd(int n, int fd, char *color)
 
 void	ft_putnbr_fd2(int n, int fd, char *color)
 {
-	while (n--)
+	int n2 = n;
+	while (n2--)
 		ft_putchar_fd('x', fd, color);
 }
