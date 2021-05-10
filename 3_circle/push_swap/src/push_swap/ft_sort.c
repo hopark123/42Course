@@ -6,7 +6,7 @@
 /*   By: hopark <hopark@student.42seoul.kr>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/05/09 15:54:59 by hopark            #+#    #+#             */
-/*   Updated: 2021/05/09 16:25:28 by hopark           ###   ########.fr       */
+/*   Updated: 2021/05/10 15:58:09 by hopark           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,9 +15,10 @@
 void	ft_back_a(t_inf *inf, float chunk)
 {
 	float		temp;
+
 	if (inf->a_h->chunk == -5)
 	{
-		if (!inf->b_h|| inf->a_t->chunk > inf->b_h->chunk)
+		if (!inf->b_h || inf->a_t->chunk > inf->b_h->chunk)
 		{
 			temp = inf->a_t->chunk;
 			while (1)
