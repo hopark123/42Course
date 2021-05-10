@@ -6,7 +6,7 @@
 /*   By: hopark <hopark@student.42seoul.kr>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/04/28 18:05:23 by hopark            #+#    #+#             */
-/*   Updated: 2021/05/10 20:18:47 by hopark           ###   ########.fr       */
+/*   Updated: 2021/05/10 21:01:25 by hopark           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -76,9 +76,9 @@ void	ft_listclear(t_list **list)
 	t_list	*temp;
 	t_list	*temp2;
 
-	temp2 = (*list);
 	if (list == 0)
 		return ;
+	temp2 = (*list);
 	while (*list)
 	{
 		if (((*list)->next))
