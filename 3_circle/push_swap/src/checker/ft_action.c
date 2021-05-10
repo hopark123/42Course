@@ -10,7 +10,7 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "head.h"
+#include "checker.h"
 
 int	ft_action_c(t_inf *inf, char *com)
 {

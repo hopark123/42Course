@@ -10,7 +10,7 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "head.h"
+#include "utils.h"
 
 void	ft_putchar_fd(char c, int fd, char *color)
 {

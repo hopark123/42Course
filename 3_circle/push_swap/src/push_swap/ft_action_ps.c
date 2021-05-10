@@ -10,7 +10,7 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "head.h"
+#include "push_swap.h"
 
 void	ft_action(t_inf *inf, char *com)
 {
@@ -31,7 +31,7 @@ void	ft_action(t_inf *inf, char *com)
 	if (ft_strncmp(com, "rb", 2) || ft_strncmp(com, "rr", 2))
 		ft_rotate_tool(&inf->b_h, &inf->b_t);
 	ft_htsetting(inf);
-	cnt++;
+	g_cnt++;
 	write(1, com, ft_strlen(com));
 	write(1, "\n", 1);
 	if (inf->bonus)

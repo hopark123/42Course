@@ -10,7 +10,7 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "head.h"
+#include "engine.h"
 
 int	ft_make_split(int ac, char **av, t_inf *inf)
 {

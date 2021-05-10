@@ -10,7 +10,7 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "head.h"
+#include "push_swap.h"
 
 int	ft_bonus_check(char **av, t_inf *inf)
 {

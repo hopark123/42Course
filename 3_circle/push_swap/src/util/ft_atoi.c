@@ -10,7 +10,7 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "head.h"
+#include "utils.h"
 
 static int	ft_isspace(char c)
 {

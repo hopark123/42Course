@@ -10,7 +10,7 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "head.h"
+#include "utils.h"
 
 t_list	*ft_n_next_list(t_list *list, int n)
 {

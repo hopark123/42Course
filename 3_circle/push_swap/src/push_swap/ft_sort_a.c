@@ -10,7 +10,7 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "head.h"
+#include "push_swap.h"
 
 void	ft_more_a(t_inf *inf, t_pivot pivot, int cnt_chunk, float chunk)
 {

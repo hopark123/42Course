@@ -10,18 +10,18 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "head.h"
+#include "push_swap.h"
 
 void	ft_show_head(t_inf *inf, char *com)
 {
 	if (inf->max <= 100)
 		system("sleep 0.03");
-	 system("clear");
+	system("clear");
 	write(1, "  ", 2);
 	write(1, com, ft_strlen(com));
 	write(1, "\n", 1);
 	write(1, "  ", 2);
-	ft_putnbr_fd(cnt, 1, "\x1b[30m");
+	ft_putnbr_fd(g_cnt, 1, "\x1b[30m");
 	write(1, "\n", 1);
 }
 

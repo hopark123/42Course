@@ -28,7 +28,11 @@ OBJ_DIR1 = obj1
 OBJ_DIR2 = obj2
 
 INCLUDES = $(addprefix $(INC_DIR)/, \
-		head.h \
+		checker.h \
+		engine.h \
+		push_swap.h \
+		type.h \
+		utils.h \
 )
 CHECKER = $(addprefix $(CHECKER_DIR)/, \
 		ft_action.c \
@@ -106,7 +110,7 @@ re : fclean all
 test1 : $(NAME1)
 	./checker 2 1 3 4
 test2 : $(NAME2)
-	./push_swap -c 3 2 1
+	./push_swap -c 12 7 17 9 6 16 18 15 2 11 4 13 8 10 20 14 1 5 19 3
 test3 : $(NAME1) $(NAME2)
 	./push_swap 12 7 17 9 6 16 18 15 2 11 4 13 8 10 20 14 1 5 19 3  | ./checker 12 7 17 9 6 16 18 15 2 11 4 13 8 10 20 14 1 5 19 3 
 

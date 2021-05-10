@@ -10,7 +10,7 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "head.h"
+#include "push_swap.h"
 
 void	ft_two_a(t_inf *inf, float chunk)
 {

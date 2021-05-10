@@ -10,7 +10,7 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "head.h"
+#include "utils.h"
 
 void	ft_bubblesort(int arr[], int size)
 {

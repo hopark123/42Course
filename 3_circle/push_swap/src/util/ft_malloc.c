@@ -10,7 +10,7 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "head.h"
+#include "utils.h"
 
 t_bool	ft_malloc(void *target, size_t size)
 {
@@ -20,5 +20,5 @@ t_bool	ft_malloc(void *target, size_t size)
 	*pt = malloc(size);
 	if (*pt == NULLPTR)
 		return (FALSE);
-	return (TRUE);
+	return (SUCESS);
 }

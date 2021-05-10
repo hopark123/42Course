@@ -10,7 +10,7 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "head.h"
+#include "engine.h"
 
 int	ft_isnew(t_inf *inf, int num)
 {
