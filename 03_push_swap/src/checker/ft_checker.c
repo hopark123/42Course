@@ -16,19 +16,21 @@ void	ft_checker(t_inf *inf)
 {
 	int		res;
 	char	*line;
+	int		i;
 
 	res = SUCESS;
-	while (get_next_line(0, &line) >= 0)
+	while (get_next_line(0, &line) > 0)
 	{
-		if (ft_strlen(line) == 0)
-			break ;
-		if (ft_action_c(inf, line) == -1)
-			res = ERROR;
+		if (ft_strlen(line) == 0 || ft_action_c(inf, line) == -1)
+		{
+			write(1, "Error\n", 6);
+			return ;
+		}
 	}
 	if (ft_is_ascending(inf->a_h) && !inf->b_h && res == SUCESS)
 		write(1, "OK\n", 4);
 	else
-		write(1, "NO\n", 4);
+		write(1, "KO\n", 4);
 }
 
 int	main(int ac, char **av)

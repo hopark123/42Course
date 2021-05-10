@@ -26,7 +26,7 @@ int	ft_action_c(t_inf *inf, char *com)
 	if (ft_strncmp(com, "pb", 2))
 		res = ft_push_tool(&(inf->b_h), &(inf->a_h));
 	if (ft_strncmp(com, "rra", 3) || ft_strncmp(com, "rrr", 3))
-		res =ft_revrotate_tool(&inf->a_h, &inf->a_t);
+		res = ft_revrotate_tool(&inf->a_h, &inf->a_t);
 	if (ft_strncmp(com, "rrb", 3) || ft_strncmp(com, "rrr", 3))
 		res = ft_revrotate_tool(&inf->b_h, &inf->b_t);
 	if (ft_strncmp(com, "ra", 2) || ft_strncmp(com, "rr", 2))
@@ -34,7 +34,6 @@ int	ft_action_c(t_inf *inf, char *com)
 	if (ft_strncmp(com, "rb", 2) || ft_strncmp(com, "rr", 2))
 		res = ft_rotate_tool(&inf->b_h, &inf->b_t);
 	ft_htsetting(inf);
-	cnt++;
 	return (res);
 }
 

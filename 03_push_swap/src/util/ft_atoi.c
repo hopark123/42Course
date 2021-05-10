@@ -38,17 +38,23 @@ int	ft_is_num(const char *nptr)
 {
 	int			i;
 	int			num;
+	int			temp;
+	int			sign;
 
 	i = 0;
-	while (ft_isspace(nptr[i]))
-		i++;
+	num = 0;
+	temp = 0;
+	sign = 1;
 	if (nptr[i] == '+' || nptr[i] == '-')
-		if (nptr[i] == '-')
-			i++;
+		if (nptr[i++] == '-')
+			sign = -1;
 	while (ft_isdigit(nptr[i]))
 	{
+		temp = num;
 		num = num * 10 + nptr[i] - '0';
 		i++;
+		if ((sign != -1 && num < 0) || temp > num && num != INT_MIN)
+			return (ERROR);
 	}
 	if (nptr[i] != 0)
 		return (ERROR);
@@ -66,8 +72,6 @@ int	ft_atoi(const char *nptr)
 	i = 0;
 	sign = 1;
 	num = 0;
-	while (ft_isspace(nptr[i]))
-		i++;
 	if (nptr[i] == '+' || nptr[i] == '-')
 		if (nptr[i++] == '-')
 			sign = -1;
@@ -79,7 +83,5 @@ int	ft_atoi(const char *nptr)
 	}
 	if (nptr[i] != 0)
 		return (ERROR);
-	if (i - cnt >= 20)
-		return (ft_sign(sign));
 	return (num * sign);
 }

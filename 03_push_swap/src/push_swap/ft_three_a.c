@@ -17,6 +17,11 @@ void	ft_three_a1(t_inf *inf)
 	if (inf->a_h->num > inf->a_h->next->num)
 	{
 		ft_action(inf, "sa");
+		if (inf->a_h->next->next == inf->a_t)
+		{
+			ft_action(inf, "rra");
+			return ;
+		}
 		ft_action(inf, "ra");
 		ft_action(inf, "sa");
 		ft_action(inf, "rra");

@@ -81,7 +81,8 @@ void	ft_sort_a(t_inf *inf, float chunk)
 
 void	ft_sort_a2(t_inf *inf, float chunk)
 {
-	ft_back_a(inf, chunk);
+	if (!ft_is_ascending(inf->a_h))
+		ft_back_a(inf, chunk);
 	ft_sorted_excpet(inf);
 	if (!ft_is_ascending(inf->a_h))
 		ft_sort_a(inf, chunk + 2);
