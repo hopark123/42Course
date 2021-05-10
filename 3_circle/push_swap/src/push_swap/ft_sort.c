@@ -16,8 +16,6 @@ void	ft_back_a(t_inf *inf, float chunk)
 {
 	float		temp;
 
-	if (!inf)
-		return ;
 	if (inf->a_h->chunk == -5)
 	{
 		if (!inf->b_h || inf->a_t->chunk > inf->b_h->chunk)

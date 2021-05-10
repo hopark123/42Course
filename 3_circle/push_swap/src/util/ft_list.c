@@ -68,7 +68,10 @@ void	ft_listdelone(t_list **list)
 {
 	if ((*list) == 0)
 		return ;
+	(*list)->next = 0;
+	(*list)->prev = 0;
 	ft_free(*list);
+	(*list) = 0;
 }
 
 void	ft_listclear(t_list **list)
@@ -76,7 +79,7 @@ void	ft_listclear(t_list **list)
 	t_list	*temp;
 	t_list	*temp2;
 
-	if (list == 0)
+	if (list == 0 || (*list) == 0)
 		return ;
 	temp2 = (*list);
 	while (*list)

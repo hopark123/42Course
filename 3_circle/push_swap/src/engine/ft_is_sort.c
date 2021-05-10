@@ -19,6 +19,8 @@ int	ft_is_ascending(t_list *list)
 	if (!list)
 		return (1);
 	temp = list;
+	temp->next = list->next;
+	temp->prev = list->prev;
 	while (temp->next != list)
 	{
 		if (temp->num - temp->next->num > 0)

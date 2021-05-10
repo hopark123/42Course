@@ -6,7 +6,7 @@
 #    By: hopark <hopark@student.42seoul.kr>         +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2021/04/28 18:03:34 by hopark            #+#    #+#              #
-#    Updated: 2021/05/10 21:06:00 by hopark           ###   ########.fr        #
+#    Updated: 2021/05/10 20:39:38 by hopark           ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -14,7 +14,8 @@ NAME1 = checker
 NAME2 = push_swap
 
 CC = gcc
-CFLAGS = -Wall -Wextra -Werror  -g3 -fsanitize=address
+# CFLAGS = -Wall -Wextra -Werror
+CFLAGS = -Wall -Wextra -Werror -g3 -fsanitize=address
 RM = rm
 RMFLAGS = -f
 
@@ -105,7 +106,7 @@ clean :
 	$(RM) $(RMFLAGS) $(OBJS)
 
 fclean : clean
-	$(RM) $(RMFLAGS) $(NAME)
+	$(RM) $(RMFLAGS) $(NAME1) $(NAME2)
 
 re : fclean all
 
