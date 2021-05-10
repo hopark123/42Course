@@ -6,7 +6,7 @@
 /*   By: hopark <hopark@student.42seoul.kr>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/04/12 15:35:56 by hopark            #+#    #+#             */
-/*   Updated: 2021/05/09 17:37:08 by hopark           ###   ########.fr       */
+/*   Updated: 2021/05/10 20:39:06 by hopark           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,9 +43,9 @@ int	main(int ac, char **av)
 		return (ERROR);
 	i += ft_bonus_check(av, inf);
 	if (ac == i + 2)
-		res = ft_make_split(ac, av, inf);
+		res = ft_make_split(av, inf);
 	else
-		res = ft_make_list(ac, av, inf);
+		res = ft_make_list(av, inf);
 	if (res == ERROR)
 	{
 		write(1, "Error", 5);

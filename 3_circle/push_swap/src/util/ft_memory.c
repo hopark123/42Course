@@ -6,7 +6,7 @@
 /*   By: hopark <hopark@student.42seoul.kr>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/11/10 12:13:54 by hopark            #+#    #+#             */
-/*   Updated: 2021/05/06 15:58:10 by hopark           ###   ########.fr       */
+/*   Updated: 2021/05/10 20:43:06 by hopark           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,7 +22,7 @@ int	ft_strlen(const char *s)
 	return (i);
 }
 
-void	*ft_memcpy(void *dst, const void *src, size_t n)
+void	*ft_memcpy(void *dst, const void *src, int n)
 {
 	unsigned char		*s1;
 	const unsigned char	*s2;
@@ -40,9 +40,9 @@ void	*ft_memcpy(void *dst, const void *src, size_t n)
 
 char	*ft_strjoin(const char *s1, const char *s2)
 {
-	size_t		len1;
-	size_t		len2;
-	char		*result;
+	int		len1;
+	int		len2;
+	char	*result;
 
 	len1 = ft_strlen(s1);
 	len2 = ft_strlen(s2);
@@ -54,7 +54,7 @@ char	*ft_strjoin(const char *s1, const char *s2)
 	return (result);
 }
 
-char	*ft_strndup(const char *s, size_t len)
+char	*ft_strndup(const char *s, int len)
 {
 	char		*temp;
 

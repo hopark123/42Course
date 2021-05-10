@@ -6,7 +6,7 @@
 /*   By: hopark <hopark@student.42seoul.kr>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/04/28 18:47:18 by hopark            #+#    #+#             */
-/*   Updated: 2021/05/09 17:46:25 by hopark           ###   ########.fr       */
+/*   Updated: 2021/05/10 20:29:55 by hopark           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,10 +28,8 @@ int	ft_isnew(t_inf *inf, int num)
 	return (ERROR);
 }
 
-int	ft_make_list(int ac, char **av, t_inf *inf)
+int	ft_make_list(char **av, t_inf *inf)
 {
-	t_list		*old;
-	t_list		*new;
 	int			i;
 
 	i = 1;

@@ -6,7 +6,7 @@
 /*   By: hopark <hopark@student.42seoul.kr>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/04/28 19:09:17 by hopark            #+#    #+#             */
-/*   Updated: 2021/05/10 15:13:25 by hopark           ###   ########.fr       */
+/*   Updated: 2021/05/10 20:40:18 by hopark           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -72,7 +72,7 @@ void	ft_three_a3(t_inf *inf)
 		return ;
 }
 
-void	ft_three_a(t_inf *inf, float chunk)
+void	ft_three_a(t_inf *inf)
 {
 	int			min;
 	int			n1;

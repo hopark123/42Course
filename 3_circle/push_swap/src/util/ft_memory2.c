@@ -1,24 +1,25 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_malloc.c                                        :+:      :+:    :+:   */
+/*   ft_memory2.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: hopark <hopark@student.42seoul.kr>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2021/05/06 15:47:42 by hopark            #+#    #+#             */
-/*   Updated: 2021/05/10 20:32:38 by hopark           ###   ########.fr       */
+/*   Created: 2021/05/10 18:20:34 by hopark            #+#    #+#             */
+/*   Updated: 2021/05/10 20:52:45 by hopark           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "utils.h"
 
-t_bool	ft_malloc(void *target, int size)
+int	ft_strlen2(char **s)
 {
-	void	**pt;
+	int				i;
 
-	pt = (void **)target;
-	*pt = malloc(size);
-	if (*pt == NULLPTR)
-		return (FALSE);
-	return (SUCESS);
+	i = 0;
+	if (!s)
+		return (0);
+	while (s[i])
+		i++;
+	return (i);
 }

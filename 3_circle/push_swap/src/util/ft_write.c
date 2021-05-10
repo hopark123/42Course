@@ -6,7 +6,7 @@
 /*   By: hopark <hopark@student.42seoul.kr>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/11/24 21:25:44 by hopark            #+#    #+#             */
-/*   Updated: 2021/05/10 16:25:44 by hopark           ###   ########.fr       */
+/*   Updated: 2021/05/10 18:05:04 by hopark           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,6 +17,18 @@ void	ft_putchar_fd(char c, int fd, char *color)
 	write(1, color, 6);
 	write(fd, &c, 1);
 	write(1, "\x1b[0m", 5);
+}
+
+void	ft_putstr_fd(char *s, int fd, char *color)
+{
+	int		i;
+
+	i = 0;
+	while (i < ft_strlen(s))
+	{
+		ft_putchar_fd(s[i], fd, color);
+		i++;
+	}
 }
 
 void	ft_putnbr_fd(int n, int fd, char *color)

@@ -6,7 +6,7 @@
 /*   By: hopark <hopark@student.42seoul.kr>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/04/28 19:09:17 by hopark            #+#    #+#             */
-/*   Updated: 2021/05/06 16:25:40 by hopark           ###   ########.fr       */
+/*   Updated: 2021/05/10 20:40:54 by hopark           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -59,7 +59,7 @@ void	ft_three_b3(t_inf *inf)
 	}
 }
 
-void	ft_three_b(t_inf *inf, float chunk)
+void	ft_three_b(t_inf *inf)
 {
 	int			n1;
 	int			n2;
@@ -69,9 +69,9 @@ void	ft_three_b(t_inf *inf, float chunk)
 	n1 = inf->b_h->num;
 	n2 = inf->b_h->next->num;
 	n3 = inf->b_h->next->next->num;
-	inf->b_h->chunk = chunk;
-	inf->b_h->next->chunk = chunk;
-	inf->b_h->next->next->chunk = chunk;
+	inf->b_h->chunk = -5;
+	inf->b_h->next->chunk = -5;
+	inf->b_h->next->next->chunk = -5;
 	min = ft_min(3, n1, n2, n3);
 	if (min == n3)
 	{

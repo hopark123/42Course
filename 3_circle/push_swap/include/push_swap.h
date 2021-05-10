@@ -6,7 +6,7 @@
 /*   By: hopark <hopark@student.42seoul.kr>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/05/10 15:57:46 by hopark            #+#    #+#             */
-/*   Updated: 2021/05/10 16:00:25 by hopark           ###   ########.fr       */
+/*   Updated: 2021/05/10 20:40:08 by hopark           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,12 +41,12 @@ void	ft_sorted_excpet(t_inf *inf);
 void	ft_three_a1(t_inf *inf);
 void	ft_three_a2(t_inf *inf);
 void	ft_three_a3(t_inf *inf);
-void	ft_three_a(t_inf *inf, float chunk);
+void	ft_three_a(t_inf *inf);
 void	ft_n_pa(t_inf *inf, int n);
 void	ft_three_b2(t_inf *inf);
 void	ft_three_b3(t_inf *inf);
-void	ft_three_b(t_inf *inf, float chunk);
-void	ft_two_a(t_inf *inf, float chunk);
-void	ft_two_b(t_inf *inf, float chunk);
+void	ft_three_b(t_inf *inf);
+void	ft_two_a(t_inf *inf);
+void	ft_two_b(t_inf *inf);
 
 #endif

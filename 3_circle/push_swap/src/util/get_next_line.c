@@ -6,13 +6,13 @@
 /*   By: hopark <hopark@student.42seoul.kr>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/11/10 12:07:14 by hopark            #+#    #+#             */
-/*   Updated: 2021/05/06 16:03:09 by hopark           ###   ########.fr       */
+/*   Updated: 2021/05/10 20:44:28 by hopark           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "utils.h"
 
-static int	storejoin(char **store, char *buf, ssize_t readsize)
+static int	storejoin(char **store, char *buf, int readsize)
 {
 	char		*temp;
 
@@ -56,8 +56,9 @@ int	get_next_line(int fd, char **line)
 {
 	char		*buf;
 	static char	*store[OPEN_MAX];
-	ssize_t		readsize;
+	int			readsize;
 
+	readsize = 0;
 	if (fd < 0 || fd >= OPEN_MAX || BUFFER_SIZE <= 0 || !line)
 		return (-1);
 	if (!(ft_malloc(&buf, sizeof(char) * (BUFFER_SIZE + 1))))

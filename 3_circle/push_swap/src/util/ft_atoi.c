@@ -6,18 +6,11 @@
 /*   By: hopark <hopark@student.42seoul.kr>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/02/19 12:26:12 by hopark            #+#    #+#             */
-/*   Updated: 2021/05/09 13:00:38 by hopark           ###   ########.fr       */
+/*   Updated: 2021/05/10 20:48:55 by hopark           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "utils.h"
-
-static int	ft_isspace(char c)
-{
-	if ((c >= 9 && c <= 13) || c == ' ')
-		return (1);
-	return (0);
-}
 
 int	ft_isdigit(int c)
 {
@@ -53,7 +46,7 @@ int	ft_is_num(const char *nptr)
 		temp = num;
 		num = num * 10 + nptr[i] - '0';
 		i++;
-		if ((sign != -1 && num < 0) || temp > num && num != INT_MIN)
+		if ((sign != -1 && num < 0) || (temp > num && num != INT_MIN))
 			return (ERROR);
 	}
 	if (nptr[i] != 0)

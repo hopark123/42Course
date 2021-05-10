@@ -6,7 +6,7 @@
 /*   By: hopark <hopark@student.42seoul.kr>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/05/06 13:57:36 by hopark            #+#    #+#             */
-/*   Updated: 2021/05/09 16:28:04 by hopark           ###   ########.fr       */
+/*   Updated: 2021/05/10 20:41:35 by hopark           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -51,9 +51,9 @@ void	ft_sort_b(t_inf *inf, float chunk)
 	if (cnt_chunk > 3)
 		ft_more_b(inf, pivot, cnt_chunk, chunk);
 	else if (cnt_chunk == 3)
-		ft_three_b(inf, -5);
+		ft_three_b(inf);
 	else if (cnt_chunk == 2)
-		ft_two_b(inf, -5);
+		ft_two_b(inf);
 	else
 	{
 		ft_action(inf, "pa");

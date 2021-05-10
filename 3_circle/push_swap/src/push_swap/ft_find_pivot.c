@@ -6,7 +6,7 @@
 /*   By: hopark <hopark@student.42seoul.kr>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/05/06 13:53:56 by hopark            #+#    #+#             */
-/*   Updated: 2021/05/09 14:46:04 by hopark           ###   ########.fr       */
+/*   Updated: 2021/05/10 20:36:17 by hopark           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,6 +19,7 @@ t_pivot	ft_find_pivot(t_list *list)
 	int				*arr;
 	t_pivot			res;
 
+	res.first = 0;
 	i = 0;
 	if (!list)
 		return (res);
@@ -35,5 +36,6 @@ t_pivot	ft_find_pivot(t_list *list)
 	res.first = arr[cnt_chunk / 3];
 	i = (int)(cnt_chunk / 3 * 2);
 	res.second = arr[cnt_chunk / 3 * 2];
+	ft_free(arr);
 	return (res);
 }

@@ -6,7 +6,7 @@
 #    By: hopark <hopark@student.42seoul.kr>         +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2021/04/28 18:03:34 by hopark            #+#    #+#              #
-#    Updated: 2021/05/10 15:56:32 by hopark           ###   ########.fr        #
+#    Updated: 2021/05/10 20:39:38 by hopark           ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -14,7 +14,7 @@ NAME1 = checker
 NAME2 = push_swap
 
 CC = gcc
-CFLAGS = -Wall -Wextra -Werror
+CFLAGS = -Wall -Wextra -Werror -g3 -fsanitize=address
 RM = rm
 RMFLAGS = -f
 
@@ -40,6 +40,7 @@ CHECKER = $(addprefix $(CHECKER_DIR)/, \
 )
 
 ENGINE = $(addprefix $(ENGINE_DIR)/, \
+		ft_exit.c \
 		ft_htsetting.c \
 		ft_is_sort.c \
 		ft_make_list.c \
@@ -69,6 +70,7 @@ UTIL = $(addprefix $(UTIL_DIR)/, \
 		ft_malloc.c \
 		ft_max.c \
 		ft_memory.c \
+		ft_memory2.c \
 		ft_memset.c \
 		ft_numlen.c \
 		ft_split.c \
@@ -110,16 +112,16 @@ re : fclean all
 test1 : $(NAME1)
 	./checker 2 1 3 4
 test2 : $(NAME2)
-	./push_swap -c 24 39 3 27 76 21 75 66 50 64 57 80 45 59 78 69 68 43 37 10 73 48 7 61 8 41 94 91 34 98 40 2 32 82 29 47 65 31 23 38 20 71 53 99 35 52 81 62 46 84 49 77 60 28 14 16 95 15 51 63 88 12 22 33 4 100 9 96 1 25 18 11 72 83 58 56 44 30 67 86 89 74 36 90 93 17 92 79 13 19 87 26 42 85 54 97 70 5 55 6
+	./push_swap -c 24 39 3 27 
 test3 : $(NAME1) $(NAME2)
 	./push_swap 12 7 17 9 6 16 18 15 2 11 4 13 8 10 20 14 1 5 19 3  | ./checker 12 7 17 9 6 16 18 15 2 11 4 13 8 10 20 14 1 5 19 3 
 
 $(OBJ_DIR1)/%.o : %.c | $(OBJ_DIR1)
-	$(CC) -I $(INC_DIR) -c $< -o $@
+	$(CC) $(CFLAGS) -I $(INC_DIR) -c $< -o $@
 	@mkdir -p $(OBJ_DIR1)
 
 $(OBJ_DIR2)/%.o : %.c | $(OBJ_DIR2)
-	$(CC) -I $(INC_DIR) -c $< -o $@
+	$(CC) $(CFLAGS) -I $(INC_DIR) -c $< -o $@
 	@mkdir -p $(OBJ_DIR2)
 
 $(NAME1) : $(INCLUDES) $(OBJ1)

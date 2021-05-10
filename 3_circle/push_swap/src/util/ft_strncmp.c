@@ -6,15 +6,15 @@
 /*   By: hopark <hopark@student.42seoul.kr>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/03/08 14:58:35 by hopark            #+#    #+#             */
-/*   Updated: 2021/05/06 15:59:51 by hopark           ###   ########.fr       */
+/*   Updated: 2021/05/10 20:33:12 by hopark           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "utils.h"
 
-int	ft_strncmp(const char *s1, const char *s2, size_t n)
+int	ft_strncmp(const char *s1, const char *s2, int n)
 {
-	size_t			i;
+	int				i;
 	unsigned char	*c1;
 	unsigned char	*c2;
 
