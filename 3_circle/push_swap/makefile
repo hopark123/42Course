@@ -6,7 +6,7 @@
 #    By: hopark <hopark@student.42seoul.kr>         +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2021/04/28 18:03:34 by hopark            #+#    #+#              #
-#    Updated: 2021/05/10 20:39:38 by hopark           ###   ########.fr        #
+#    Updated: 2021/05/11 15:21:28 by hopark           ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -14,8 +14,8 @@ NAME1 = checker
 NAME2 = push_swap
 
 CC = gcc
-# CFLAGS = -Wall -Wextra -Werror
-CFLAGS = -Wall -Wextra -Werror -g3 -fsanitize=address
+ CFLAGS = -Wall -Wextra -Werror
+#CFLAGS = -Wall -Wextra -Werror -g3 -fsanitize=address
 RM = rm
 RMFLAGS = -f
 
@@ -43,6 +43,7 @@ CHECKER = $(addprefix $(CHECKER_DIR)/, \
 ENGINE = $(addprefix $(ENGINE_DIR)/, \
 		ft_exit.c \
 		ft_htsetting.c \
+		ft_init.c \
 		ft_is_sort.c \
 		ft_make_list.c \
 		ft_make_split.c \
@@ -100,6 +101,8 @@ OBJ1 = $(addprefix $(OBJ_DIR1)/, $(notdir $(SRC1:.c=.o)))
 OBJ2 = $(addprefix $(OBJ_DIR2)/, $(notdir $(SRC2:.c=.o)))
 OBJS = $(OBJ1) $(OBJ2) 
 
+#all : $(NAME2)
+
 all : $(NAME1) $(NAME2)
 
 clean :
@@ -111,9 +114,9 @@ fclean : clean
 re : fclean all
 
 test1 : $(NAME1)
-	./checker 2 1 3 4
+	./checker "2 1 3 4"
 test2 : $(NAME2)
-	./push_swap -c 24 39 3 27 
+	./push_swap -c 24 39 3 27
 test3 : $(NAME1) $(NAME2)
 	./push_swap 12 7 17 9 6 16 18 15 2 11 4 13 8 10 20 14 1 5 19 3  | ./checker 12 7 17 9 6 16 18 15 2 11 4 13 8 10 20 14 1 5 19 3 
 

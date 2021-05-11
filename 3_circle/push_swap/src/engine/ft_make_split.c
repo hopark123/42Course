@@ -6,7 +6,7 @@
 /*   By: hopark <hopark@student.42seoul.kr>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/04/28 18:47:18 by hopark            #+#    #+#             */
-/*   Updated: 2021/05/10 20:49:28 by hopark           ###   ########.fr       */
+/*   Updated: 2021/05/11 15:19:32 by hopark           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,8 +33,10 @@ int	ft_make_split2(t_inf *inf, char **split)
 	t_list		*new;
 	int			i;
 	int			num;
+	int			res;
 
 	i = 0;
+	res = 1;
 	num = ft_atoi(split[i]);
 	if (!ft_is_num(split[i]))
 		return (ERROR);
@@ -42,16 +44,14 @@ int	ft_make_split2(t_inf *inf, char **split)
 	inf->a_h = old;
 	while (split[++i])
 	{
-		if (!ft_is_num(split[i]))
-			return (ERROR);
+		res *= ft_is_num(split[i]);
 		num = ft_atoi(split[i]);
-		if (!ft_isnew(inf, num))
-			return (ERROR);
+		inf->max = ft_max(2, num, inf->max);
+		res *= ft_isnew(inf, num);
 		new = ft_listnew(num);
 		ft_listadd_back(&old, &new);
 		old = new;
-		inf->a_t = new;
 	}
 	ft_htsetting(inf);
-	return (SUCESS);
+	return (res);
 }

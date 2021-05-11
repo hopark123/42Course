@@ -6,7 +6,7 @@
 /*   By: hopark <hopark@student.42seoul.kr>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/02/19 12:26:12 by hopark            #+#    #+#             */
-/*   Updated: 2021/05/10 20:48:55 by hopark           ###   ########.fr       */
+/*   Updated: 2021/05/11 14:33:19 by hopark           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,6 +38,8 @@ int	ft_is_num(const char *nptr)
 	num = 0;
 	temp = 0;
 	sign = 1;
+	if (!nptr)
+		return (ERROR);
 	if (nptr[i] == '+' || nptr[i] == '-')
 		if (nptr[i++] == '-')
 			sign = -1;
@@ -51,8 +53,7 @@ int	ft_is_num(const char *nptr)
 	}
 	if (nptr[i] != 0)
 		return (ERROR);
-	else
-		return (SUCESS);
+	return (SUCESS);
 }
 
 int	ft_atoi(const char *nptr)

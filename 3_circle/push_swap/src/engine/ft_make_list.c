@@ -6,7 +6,7 @@
 /*   By: hopark <hopark@student.42seoul.kr>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/04/28 18:47:18 by hopark            #+#    #+#             */
-/*   Updated: 2021/05/10 20:29:55 by hopark           ###   ########.fr       */
+/*   Updated: 2021/05/11 15:19:36 by hopark           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -60,10 +60,7 @@ int	ft_make_list2(t_inf *inf, char **av, int i)
 		new = ft_listnew(num);
 		ft_listadd_back(&old, &new);
 		old = new;
-		inf->a_t = new;
 	}
-	inf->b_h = 0;
-	inf->b_t = 0;
 	ft_htsetting(inf);
 	return (SUCESS);
 }

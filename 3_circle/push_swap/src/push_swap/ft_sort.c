@@ -6,7 +6,7 @@
 /*   By: hopark <hopark@student.42seoul.kr>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/05/09 15:54:59 by hopark            #+#    #+#             */
-/*   Updated: 2021/05/10 21:05:15 by hopark           ###   ########.fr       */
+/*   Updated: 2021/05/11 15:07:35 by hopark           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,21 +16,24 @@ void	ft_back_a(t_inf *inf, float chunk)
 {
 	float		temp;
 
-	if (inf->a_h->chunk == -5)
+	if (inf->a_h)
 	{
-		if (!inf->b_h || inf->a_t->chunk > inf->b_h->chunk)
+		if (inf->a_h->chunk == -5)
 		{
-			temp = inf->a_t->chunk;
-			while (1)
+			if (!inf->b_h || inf->a_t->chunk > inf->b_h->chunk)
 			{
-				ft_action(inf, "rra");
-				inf->a_h->chunk = temp;
-				if (temp != inf->a_t->chunk)
-					break ;
+				temp = inf->a_t->chunk;
+				while (1)
+				{
+					ft_action(inf, "rra");
+					inf->a_h->chunk = temp;
+					if (temp != inf->a_t->chunk)
+						break ;
+				}
 			}
+			else
+				ft_sort_b(inf, chunk);
 		}
-		else
-			ft_sort_b(inf, chunk);
 	}
 }
 

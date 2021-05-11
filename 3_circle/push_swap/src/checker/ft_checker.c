@@ -6,7 +6,7 @@
 /*   By: hopark <hopark@student.42seoul.kr>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/04/12 15:35:56 by hopark            #+#    #+#             */
-/*   Updated: 2021/05/10 20:30:28 by hopark           ###   ########.fr       */
+/*   Updated: 2021/05/11 15:22:01 by hopark           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,6 +41,7 @@ int	main(int ac, char **av)
 		return (0);
 	if (!ft_malloc(&inf, sizeof(t_inf)))
 		return (ERROR);
+	ft_inf_init(inf);
 	if (ac == 2)
 		res = ft_make_split(av, inf);
 	else

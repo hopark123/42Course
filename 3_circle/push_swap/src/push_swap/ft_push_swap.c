@@ -6,7 +6,7 @@
 /*   By: hopark <hopark@student.42seoul.kr>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/04/12 15:35:56 by hopark            #+#    #+#             */
-/*   Updated: 2021/05/10 20:39:06 by hopark           ###   ########.fr       */
+/*   Updated: 2021/05/11 15:21:44 by hopark           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,6 +41,7 @@ int	main(int ac, char **av)
 		return (0);
 	if (!ft_malloc(&inf, sizeof(t_inf)))
 		return (ERROR);
+	ft_inf_init(inf);
 	i += ft_bonus_check(av, inf);
 	if (ac == i + 2)
 		res = ft_make_split(av, inf);
@@ -48,7 +49,7 @@ int	main(int ac, char **av)
 		res = ft_make_list(av, inf);
 	if (res == ERROR)
 	{
-		write(1, "Error", 5);
+		ft_exit(inf, "Error1\n", 2);
 		return (0);
 	}
 	ft_sort_a(inf, 0);

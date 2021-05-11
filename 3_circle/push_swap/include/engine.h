@@ -6,7 +6,7 @@
 /*   By: hopark <hopark@student.42seoul.kr>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/05/10 15:57:37 by hopark            #+#    #+#             */
-/*   Updated: 2021/05/10 20:30:20 by hopark           ###   ########.fr       */
+/*   Updated: 2021/05/11 15:11:21 by hopark           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,6 +16,7 @@
 # include "utils.h"
 void	ft_exit(t_inf *inf, char *msg, int fd);
 void	ft_htsetting(t_inf *inf);
+void	ft_inf_init(t_inf *inf);
 int		ft_is_ascending(t_list *list);
 int		ft_is_descending(t_list *list);
 int		ft_chunk_is_descending(t_list *list);
