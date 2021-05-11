@@ -6,7 +6,7 @@
 /*   By: hopark <hopark@student.42seoul.kr>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/05/09 15:54:59 by hopark            #+#    #+#             */
-/*   Updated: 2021/05/11 15:07:35 by hopark           ###   ########.fr       */
+/*   Updated: 2021/05/11 16:16:36 by hopark           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,7 +43,7 @@ int	ft_sorted_already(t_inf *inf)
 	{
 		while (inf->b_h)
 			ft_action(inf, "pa");
-		return (SUCESS);
+		return (SUCCESS);
 	}
 	return (ERROR);
 }

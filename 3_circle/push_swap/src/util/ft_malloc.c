@@ -6,7 +6,7 @@
 /*   By: hopark <hopark@student.42seoul.kr>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/05/06 15:47:42 by hopark            #+#    #+#             */
-/*   Updated: 2021/05/10 20:32:38 by hopark           ###   ########.fr       */
+/*   Updated: 2021/05/11 16:16:36 by hopark           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,5 +20,5 @@ t_bool	ft_malloc(void *target, int size)
 	*pt = malloc(size);
 	if (*pt == NULLPTR)
 		return (FALSE);
-	return (SUCESS);
+	return (SUCCESS);
 }

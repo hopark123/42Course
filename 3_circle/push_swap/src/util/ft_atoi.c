@@ -6,7 +6,7 @@
 /*   By: hopark <hopark@student.42seoul.kr>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/02/19 12:26:12 by hopark            #+#    #+#             */
-/*   Updated: 2021/05/11 14:33:19 by hopark           ###   ########.fr       */
+/*   Updated: 2021/05/11 16:16:36 by hopark           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -53,7 +53,7 @@ int	ft_is_num(const char *nptr)
 	}
 	if (nptr[i] != 0)
 		return (ERROR);
-	return (SUCESS);
+	return (SUCCESS);
 }
 
 int	ft_atoi(const char *nptr)

@@ -6,7 +6,7 @@
 /*   By: hopark <hopark@student.42seoul.kr>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/02/09 21:34:11 by hopark            #+#    #+#             */
-/*   Updated: 2021/05/10 20:46:49 by hopark           ###   ########.fr       */
+/*   Updated: 2021/05/11 17:48:45 by hopark           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -58,19 +58,18 @@ char	**ft_split(char const *s, char c)
 
 	i = -1;
 	cnt = ft_count(s, c);
-	if (!ft_malloc(&result, sizeof(char *) * (cnt + 1)) || s == 0)
+	if (!s)
 		return (0);
-	while (i++ < cnt)
+	if (!ft_malloc(&result, sizeof(char *) * (cnt + 1)))
+		return (0);
+	while (++i < cnt)
 	{
 		while (*s && *s == c)
 			s++;
 		len = ft_wordlen(s, c);
 		result[i] = ft_strndup(s, len);
 		if (!(result[i]))
-		{
-			ft_free2(result, i);
-			return (0);
-		}
+			ft_free(result);
 		s += len;
 	}
 	result[cnt] = 0;

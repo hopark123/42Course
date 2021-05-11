@@ -6,7 +6,7 @@
 /*   By: hopark <hopark@student.42seoul.kr>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/11/24 21:25:44 by hopark            #+#    #+#             */
-/*   Updated: 2021/05/11 15:49:43 by hopark           ###   ########.fr       */
+/*   Updated: 2021/05/11 16:18:25 by hopark           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,6 +24,8 @@ void	ft_putstr_fd(char *s, int fd, char *color)
 	int		i;
 
 	i = 0;
+	if (!s)
+		return ;
 	while (i < ft_strlen(s))
 	{
 		ft_putchar_fd(s[i], fd, color);

@@ -6,7 +6,7 @@
 /*   By: hopark <hopark@student.42seoul.kr>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/05/10 15:57:52 by hopark            #+#    #+#             */
-/*   Updated: 2021/05/11 15:40:26 by hopark           ###   ########.fr       */
+/*   Updated: 2021/05/11 16:15:41 by hopark           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,7 +18,7 @@
 # include <limits.h>
 # define TYPE_H
 # define ERROR  0
-# define SUCESS 1
+# define SUCCESS 1
 # define FALSE -1
 # define NULLPTR 0
 typedef int			t_bool;

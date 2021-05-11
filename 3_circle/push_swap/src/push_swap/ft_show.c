@@ -6,7 +6,7 @@
 /*   By: hopark <hopark@student.42seoul.kr>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/04/30 12:09:54 by hopark            #+#    #+#             */
-/*   Updated: 2021/05/11 16:02:00 by hopark           ###   ########.fr       */
+/*   Updated: 2021/05/11 16:02:31 by hopark           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,7 +16,6 @@ void	ft_show_head(t_inf *inf, char *com)
 {
 	if (inf->max <= 200)
 		system("sleep 0.05");
-	inf->a_h = inf->a_h;
 	system("clear");
 	write(1, com, ft_strlen(com));
 	write(1, "\n", 1);

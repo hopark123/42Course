@@ -6,7 +6,7 @@
 /*   By: hopark <hopark@student.42seoul.kr>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/04/28 18:45:48 by hopark            #+#    #+#             */
-/*   Updated: 2021/05/11 13:27:37 by hopark           ###   ########.fr       */
+/*   Updated: 2021/05/11 16:16:36 by hopark           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,11 +43,11 @@ int	ft_swap_tool(t_list **type)
 	int			temp;
 
 	if (*type == 0 || (*type)->next == 0)
-		return (SUCESS);
+		return (SUCCESS);
 	temp = (*type)->num;
 	(*type)->num = (*type)->next->num;
 	(*type)->next->num = temp;
-	return (SUCESS);
+	return (SUCCESS);
 }
 
 int	ft_push_tool(t_list **dest, t_list **src)
@@ -55,7 +55,7 @@ int	ft_push_tool(t_list **dest, t_list **src)
 	t_list		*temp;
 
 	if ((*src) == 0)
-		return (SUCESS);
+		return (SUCCESS);
 	temp = *src;
 	ft_listexcpet(src);
 	if ((*src) == (*src)->next)
@@ -63,23 +63,23 @@ int	ft_push_tool(t_list **dest, t_list **src)
 	else
 		(*src) = (*src)->next;
 	ft_listadd_front(dest, &temp);
-	return (SUCESS);
+	return (SUCCESS);
 }
 
 int	ft_rotate_tool(t_list **head, t_list **tail)
 {
 	if (!(*head) || !(*tail))
-		return (SUCESS);
+		return (SUCCESS);
 	(*head) = (*head)->next;
 	(*tail) = (*tail)->next;
-	return (SUCESS);
+	return (SUCCESS);
 }
 
 int	ft_revrotate_tool(t_list **head, t_list **tail)
 {
 	if (!(*head) || !(*tail))
-		return (SUCESS);
+		return (SUCCESS);
 	(*head) = (*head)->prev;
 	(*tail) = (*tail)->prev;
-	return (SUCESS);
+	return (SUCCESS);
 }

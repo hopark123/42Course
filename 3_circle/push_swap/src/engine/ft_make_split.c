@@ -6,7 +6,7 @@
 /*   By: hopark <hopark@student.42seoul.kr>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/04/28 18:47:18 by hopark            #+#    #+#             */
-/*   Updated: 2021/05/11 15:40:23 by hopark           ###   ########.fr       */
+/*   Updated: 2021/05/11 17:50:15 by hopark           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,12 +17,14 @@ int	ft_make_split(char **av, t_inf *inf)
 	int			i;
 	char		**split;
 
+	split = av;
 	i = 1;
 	if (inf->bonus)
 		i++;
 	split = ft_split(av[i], ' ');
+	i = 0;
 	if (!ft_is_num(split[i]))
-		return (ERROR);
+		ft_free2(split, ft_strlen2(split));
 	if (split)
 		i = ft_make_split2(inf, split);
 	ft_free2(split, ft_strlen2(split));
@@ -39,10 +41,10 @@ int	ft_make_split2(t_inf *inf, char **split)
 
 	i = 0;
 	res = 1;
-	num = ft_atoi(split[i]);
+	num = ft_atoi(split[i++]);
 	old = ft_listnew(num);
 	inf->a_h = old;
-	while (split[++i])
+	while (split[i])
 	{
 		res *= ft_is_num(split[i]);
 		num = ft_atoi(split[i]);
@@ -52,6 +54,7 @@ int	ft_make_split2(t_inf *inf, char **split)
 		new = ft_listnew(num);
 		ft_listadd_back(&old, &new);
 		old = new;
+		i++;
 	}
 	ft_htsetting(inf);
 	return (res);
