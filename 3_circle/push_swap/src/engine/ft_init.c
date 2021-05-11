@@ -6,7 +6,7 @@
 /*   By: hopark <hopark@student.42seoul.kr>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/05/11 15:10:59 by hopark            #+#    #+#             */
-/*   Updated: 2021/05/11 15:11:08 by hopark           ###   ########.fr       */
+/*   Updated: 2021/05/11 15:39:55 by hopark           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,5 +19,6 @@ void	ft_inf_init(t_inf *inf)
 	inf->b_h = 0;
 	inf->a_t = 0;
 	inf->bonus = 0;
-	inf->max = 0;
+	inf->max = INT_MIN;
+	inf->min = INT_MAX;
 }

@@ -6,7 +6,7 @@
 /*   By: hopark <hopark@student.42seoul.kr>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/04/30 12:09:54 by hopark            #+#    #+#             */
-/*   Updated: 2021/05/10 15:03:05 by hopark           ###   ########.fr       */
+/*   Updated: 2021/05/11 16:02:00 by hopark           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,6 +16,7 @@ void	ft_show_head(t_inf *inf, char *com)
 {
 	if (inf->max <= 200)
 		system("sleep 0.05");
+	inf->a_h = inf->a_h;
 	system("clear");
 	write(1, com, ft_strlen(com));
 	write(1, "\n", 1);
@@ -26,38 +27,45 @@ void	ft_show_head(t_inf *inf, char *com)
 void	ft_show_a(t_inf *inf, int *flag1, t_list **tempa, t_color color)
 {
 	int			i;
+	int			k;
 
 	i = 0;
+	k = 0;
+	if (inf->min < 0)
+		k = -1 * inf->min + 1;
 	if ((*flag1))
 	{
 		if ((*tempa)->chunk == -5)
-			ft_putnbr_fd2((*tempa)->num, 1, color.no);
+			ft_putnbr_fd2((*tempa)->num + k, 1, color.yes);
 		else
-			ft_putnbr_fd2((*tempa)->num, 1, color.yes);
+			ft_putnbr_fd2((*tempa)->num + k, 1, color.no);
 		i = (*tempa)->num;
 		while (i++ < inf->max + 3)
-			write(1, "  ", 1);
+			write(1, " ", 1);
 		(*tempa) = (*tempa)->next;
 		if ((*tempa) == inf->a_h)
 			(*flag1) = 0;
 	}
 	else
-		while (i++ < inf->max + 3)
-			write(1, "  ", 1);
+		while (i++ < inf->max + k + 3)
+			write(1, " ", 1);
 }
 
 void	ft_show_b(t_inf *inf, int *flag2, t_list **tempb, t_color color)
 {
+	int			k;
+
+	k = 0;
+	if (inf->min < 0)
+		k = -1 * inf->min + 1;
 	if ((*flag2))
 	{
 		write(1, "  ", 2);
-		ft_putnbr_fd2((*tempb)->num, 1, color.yes);
+		ft_putnbr_fd2((*tempb)->num + k, 1, color.no);
 		(*tempb) = (*tempb)->next;
 		if ((*tempb) == inf->b_h)
 			(*flag2) = 0;
 	}
-	else
-		write(1, "    ", 4);
 }
 
 void	ft_color_init(t_inf *inf, t_color *color)
@@ -66,8 +74,8 @@ void	ft_color_init(t_inf *inf, t_color *color)
 	color->no = "\x1b[30m";
 	if (ft_strchr("c", inf->bonus))
 	{
-		color->yes = "\x1b[31m";
-		color->no = "\x1b[32m";
+		color->yes = "\x1b[32m";
+		color->no = "\x1b[31m";
 	}
 }
 

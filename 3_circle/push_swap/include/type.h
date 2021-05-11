@@ -6,7 +6,7 @@
 /*   By: hopark <hopark@student.42seoul.kr>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/05/10 15:57:52 by hopark            #+#    #+#             */
-/*   Updated: 2021/05/10 20:32:26 by hopark           ###   ########.fr       */
+/*   Updated: 2021/05/11 15:40:26 by hopark           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,6 +48,7 @@ typedef struct s_inf
 	struct s_list	*b_t;
 	char			bonus;
 	int				max;
+	int				min;
 }				t_inf;
 
 typedef struct s_pivot

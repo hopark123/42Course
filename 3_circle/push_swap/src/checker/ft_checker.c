@@ -6,7 +6,7 @@
 /*   By: hopark <hopark@student.42seoul.kr>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/04/12 15:35:56 by hopark            #+#    #+#             */
-/*   Updated: 2021/05/11 15:22:01 by hopark           ###   ########.fr       */
+/*   Updated: 2021/05/11 15:36:44 by hopark           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,7 +22,7 @@ void	ft_checker(t_inf *inf)
 	{
 		if (ft_strlen(line) == 0 || ft_action_c(inf, line) == -1)
 		{
-			ft_exit(inf, "Error3\n", 2);
+			ft_exit(inf, "Error\n", 2);
 			return ;
 		}
 	}
@@ -48,10 +48,10 @@ int	main(int ac, char **av)
 		res = ft_make_list(av, inf);
 	if (res == ERROR)
 	{
-		ft_exit(inf, "Error1\n", 2);
+		ft_exit(inf, "Error\n", 2);
 		return (0);
 	}
 	ft_checker(inf);
-	ft_exit(inf, "Error2\n", 2);
+	ft_exit(inf, "Error\n", 2);
 	return (0);
 }

@@ -6,7 +6,7 @@
 /*   By: hopark <hopark@student.42seoul.kr>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/11/24 21:25:44 by hopark            #+#    #+#             */
-/*   Updated: 2021/05/10 18:05:04 by hopark           ###   ########.fr       */
+/*   Updated: 2021/05/11 15:49:43 by hopark           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,7 +49,7 @@ void	ft_putnbr_fd(int n, int fd, char *color)
 
 void	ft_putnbr_fd2(int n, int fd, char *color)
 {
-	int	n2;
+	int		n2;
 
 	n2 = n;
 	while (n2--)

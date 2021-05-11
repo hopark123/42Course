@@ -6,7 +6,7 @@
 /*   By: hopark <hopark@student.42seoul.kr>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/04/28 18:47:18 by hopark            #+#    #+#             */
-/*   Updated: 2021/05/11 15:19:36 by hopark           ###   ########.fr       */
+/*   Updated: 2021/05/11 15:38:51 by hopark           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -55,6 +55,7 @@ int	ft_make_list2(t_inf *inf, char **av, int i)
 			return (ERROR);
 		num = ft_atoi(av[i]);
 		inf->max = ft_max(2, num, inf->max);
+		inf->min = ft_min(2, num, inf->min);
 		if (!ft_isnew(inf, num))
 			return (ERROR);
 		new = ft_listnew(num);
