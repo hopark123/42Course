@@ -6,7 +6,7 @@
 #    By: hopark <hopark@student.42seoul.kr>         +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2021/04/28 18:03:34 by hopark            #+#    #+#              #
-#    Updated: 2021/05/13 20:05:48 by hopark           ###   ########.fr        #
+#    Updated: 2021/05/13 20:06:58 by hopark           ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -14,8 +14,8 @@ NAME1 = checker
 NAME2 = push_swap
 
 CC = gcc
-CFLAGS = -Wall -Wextra -Werror
-#CFLAGS = -Wall -Wextra -Werror -g3 -fsanitize=address
+#CFLAGS = -Wall -Wextra -Werror
+CFLAGS = -Wall -Wextra -Werror -g3 -fsanitize=address
 RM = rm
 RMFLAGS = -f
 
