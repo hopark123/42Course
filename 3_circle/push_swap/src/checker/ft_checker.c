@@ -6,7 +6,7 @@
 /*   By: hopark <hopark@student.42seoul.kr>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/04/12 15:35:56 by hopark            #+#    #+#             */
-/*   Updated: 2021/05/11 17:50:04 by hopark           ###   ########.fr       */
+/*   Updated: 2021/05/13 14:16:48 by hopark           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -56,7 +56,7 @@ int	main(int ac, char **av)
 		res = ft_make_list(av, inf);
 	if (res == ERROR)
 	{
-		ft_exit(inf, "Error\n", 2);
+		ft_exit(inf, "Error5\n", 2);
 		return (0);
 	}
 	ft_checker(inf);
