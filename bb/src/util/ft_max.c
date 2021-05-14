@@ -1,33 +1,49 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_exit.c                                          :+:      :+:    :+:   */
+/*   ft_max.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: hopark <hopark@student.42seoul.kr>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2021/05/10 17:52:21 by hopark            #+#    #+#             */
-/*   Updated: 2021/05/13 20:03:58 by hopark           ###   ########.fr       */
+/*   Created: 2021/04/28 19:03:06 by hopark            #+#    #+#             */
+/*   Updated: 2021/05/06 15:54:53 by hopark           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "engine.h"
+#include "utils.h"
 
-void	ft_exit(t_inf *inf, char *msg, int fd)
+int	ft_max(int n, ...)
 {
+	int		max;
+	int		new;
+	va_list	ap;
 
-	if (inf->a_h)
+	max = INT_MIN;
+	va_start(ap, n);
+	while (n--)
 	{
-		if (inf->a_t)
-			inf->a_t->next = 0;
-		ft_listclear(&inf->a_h);
+		new = va_arg(ap, int);
+		if (max < new)
+			max = new;
 	}
-	if (inf->b_h)
+	va_end(ap);
+	return (max);
+}
+
+int	ft_min(int n, ...)
+{
+	int				min;
+	int				new;
+	va_list			ap;
+
+	min = INT_MAX;
+	va_start(ap, n);
+	while (n--)
 	{
-		if (inf->b_t)
-			inf->b_t->next = 0;
-		ft_listclear(&inf->b_h);
+		new = va_arg(ap, int);
+		if (min > new)
+			min = new;
 	}
-	ft_putstr_fd(msg, fd, 0);
-	ft_free(inf);
-	exit(0);
+	va_end(ap);
+	return (min);
 }

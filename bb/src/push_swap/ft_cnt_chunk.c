@@ -1,33 +1,32 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_exit.c                                          :+:      :+:    :+:   */
+/*   ft_cnt_chunk.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: hopark <hopark@student.42seoul.kr>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2021/05/10 17:52:21 by hopark            #+#    #+#             */
-/*   Updated: 2021/05/13 20:03:58 by hopark           ###   ########.fr       */
+/*   Created: 2021/05/06 13:53:04 by hopark            #+#    #+#             */
+/*   Updated: 2021/05/06 16:27:34 by hopark           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "engine.h"
+#include "push_swap.h"
 
-void	ft_exit(t_inf *inf, char *msg, int fd)
+int	ft_cnt_chunk(t_list *list)
 {
+	int			cnt;
+	t_list		*temp;
 
-	if (inf->a_h)
+	cnt = 0;
+	if (!list)
+		return (0);
+	temp = list;
+	while (list->chunk == temp->chunk)
 	{
-		if (inf->a_t)
-			inf->a_t->next = 0;
-		ft_listclear(&inf->a_h);
+		cnt++;
+		temp = temp->next;
+		if (temp == list)
+			return (cnt);
 	}
-	if (inf->b_h)
-	{
-		if (inf->b_t)
-			inf->b_t->next = 0;
-		ft_listclear(&inf->b_h);
-	}
-	ft_putstr_fd(msg, fd, 0);
-	ft_free(inf);
-	exit(0);
+	return (cnt);
 }

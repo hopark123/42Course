@@ -1,33 +1,26 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_exit.c                                          :+:      :+:    :+:   */
+/*   ft_numlen.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: hopark <hopark@student.42seoul.kr>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2021/05/10 17:52:21 by hopark            #+#    #+#             */
-/*   Updated: 2021/05/13 20:03:58 by hopark           ###   ########.fr       */
+/*   Created: 2021/05/06 15:08:54 by hopark            #+#    #+#             */
+/*   Updated: 2021/05/06 15:59:28 by hopark           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "engine.h"
+#include "utils.h"
 
-void	ft_exit(t_inf *inf, char *msg, int fd)
+int	ft_numlen(int num)
 {
+	int		i;
 
-	if (inf->a_h)
+	i = 1;
+	while (num)
 	{
-		if (inf->a_t)
-			inf->a_t->next = 0;
-		ft_listclear(&inf->a_h);
+		num /= 10;
+		i++;
 	}
-	if (inf->b_h)
-	{
-		if (inf->b_t)
-			inf->b_t->next = 0;
-		ft_listclear(&inf->b_h);
-	}
-	ft_putstr_fd(msg, fd, 0);
-	ft_free(inf);
-	exit(0);
+	return (i);
 }

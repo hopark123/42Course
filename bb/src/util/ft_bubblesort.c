@@ -1,33 +1,37 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_exit.c                                          :+:      :+:    :+:   */
+/*   ft_bubblesort.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: hopark <hopark@student.42seoul.kr>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2021/05/10 17:52:21 by hopark            #+#    #+#             */
-/*   Updated: 2021/05/13 20:03:58 by hopark           ###   ########.fr       */
+/*   Created: 2021/05/03 13:49:54 by hopark            #+#    #+#             */
+/*   Updated: 2021/05/09 16:28:47 by hopark           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "engine.h"
+#include "utils.h"
 
-void	ft_exit(t_inf *inf, char *msg, int fd)
+void	ft_bubblesort(int arr[], int size)
 {
+	int				i;
+	int				j;
+	int				temp;
 
-	if (inf->a_h)
+	i = 0;
+	while (i < size)
 	{
-		if (inf->a_t)
-			inf->a_t->next = 0;
-		ft_listclear(&inf->a_h);
+		j = i;
+		while (j < size)
+		{
+			if (arr[i] > arr[j])
+			{
+				temp = arr[i];
+				arr[i] = arr[j];
+				arr[j] = temp;
+			}
+			j++;
+		}
+		i++;
 	}
-	if (inf->b_h)
-	{
-		if (inf->b_t)
-			inf->b_t->next = 0;
-		ft_listclear(&inf->b_h);
-	}
-	ft_putstr_fd(msg, fd, 0);
-	ft_free(inf);
-	exit(0);
 }

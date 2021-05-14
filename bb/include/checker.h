@@ -1,33 +1,25 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_exit.c                                          :+:      :+:    :+:   */
+/*   checker.h                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: hopark <hopark@student.42seoul.kr>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2021/05/10 17:52:21 by hopark            #+#    #+#             */
-/*   Updated: 2021/05/13 20:03:58 by hopark           ###   ########.fr       */
+/*   Created: 2021/05/10 15:57:27 by hopark            #+#    #+#             */
+/*   Updated: 2021/05/11 15:21:57 by hopark           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "engine.h"
+#ifndef CHECKER_H
+# define CHECKER_H
+# include "type.h"
+# include "utils.h"
+# include "engine.h"
+int		ft_action_c(t_inf *inf, char *com);
+int		ft_swap_tool(t_list **type);
+int		ft_push_tool(t_list **dest, t_list **src);
+int		ft_rotate_tool(t_list **head, t_list **tail);
+int		ft_revrotate_tool(t_list **head, t_list **tail);
+void	ft_checker(t_inf *inf);
 
-void	ft_exit(t_inf *inf, char *msg, int fd)
-{
-
-	if (inf->a_h)
-	{
-		if (inf->a_t)
-			inf->a_t->next = 0;
-		ft_listclear(&inf->a_h);
-	}
-	if (inf->b_h)
-	{
-		if (inf->b_t)
-			inf->b_t->next = 0;
-		ft_listclear(&inf->b_h);
-	}
-	ft_putstr_fd(msg, fd, 0);
-	ft_free(inf);
-	exit(0);
-}
+#endif

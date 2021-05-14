@@ -1,33 +1,30 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_exit.c                                          :+:      :+:    :+:   */
+/*   ft_list2.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: hopark <hopark@student.42seoul.kr>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2021/05/10 17:52:21 by hopark            #+#    #+#             */
-/*   Updated: 2021/05/13 20:03:58 by hopark           ###   ########.fr       */
+/*   Created: 2021/05/06 15:51:46 by hopark            #+#    #+#             */
+/*   Updated: 2021/05/10 20:31:22 by hopark           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "engine.h"
+#include "utils.h"
 
-void	ft_exit(t_inf *inf, char *msg, int fd)
+t_list	*ft_n_next_list(t_list *list, int n)
 {
+	while (n-- && list)
+		list = list->next;
+	return (list);
+}
 
-	if (inf->a_h)
-	{
-		if (inf->a_t)
-			inf->a_t->next = 0;
-		ft_listclear(&inf->a_h);
-	}
-	if (inf->b_h)
-	{
-		if (inf->b_t)
-			inf->b_t->next = 0;
-		ft_listclear(&inf->b_h);
-	}
-	ft_putstr_fd(msg, fd, 0);
-	ft_free(inf);
-	exit(0);
+void	ft_listexcpet(t_list **list)
+{
+	if ((*list) == 0)
+		return ;
+	if (((*list)->next))
+		((*list)->next)->prev = (*list)->prev;
+	if ((*list)->prev)
+		((*list)->prev)->next = (*list)->next;
 }

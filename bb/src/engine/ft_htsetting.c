@@ -1,33 +1,29 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_exit.c                                          :+:      :+:    :+:   */
+/*   ft_htsetting.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: hopark <hopark@student.42seoul.kr>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2021/05/10 17:52:21 by hopark            #+#    #+#             */
-/*   Updated: 2021/05/13 20:03:58 by hopark           ###   ########.fr       */
+/*   Created: 2021/05/06 16:05:09 by hopark            #+#    #+#             */
+/*   Updated: 2021/05/11 15:20:04 by hopark           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "engine.h"
 
-void	ft_exit(t_inf *inf, char *msg, int fd)
+void	ft_htsetting(t_inf *inf)
 {
-
 	if (inf->a_h)
 	{
-		if (inf->a_t)
-			inf->a_t->next = 0;
-		ft_listclear(&inf->a_h);
+		inf->a_t = inf->a_h->prev;
+		inf->a_t->next = inf->a_h;
+		inf->a_h->prev = inf->a_t;
 	}
 	if (inf->b_h)
 	{
-		if (inf->b_t)
-			inf->b_t->next = 0;
-		ft_listclear(&inf->b_h);
+		inf->b_t = inf->b_h->prev;
+		inf->b_t->next = inf->b_h;
+		inf->b_h->prev = inf->b_t;
 	}
-	ft_putstr_fd(msg, fd, 0);
-	ft_free(inf);
-	exit(0);
 }
