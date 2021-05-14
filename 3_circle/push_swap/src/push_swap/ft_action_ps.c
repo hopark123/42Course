@@ -6,7 +6,7 @@
 /*   By: hopark <hopark@student.42seoul.kr>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/04/28 18:45:48 by hopark            #+#    #+#             */
-/*   Updated: 2021/05/11 16:16:36 by hopark           ###   ########.fr       */
+/*   Updated: 2021/05/13 20:37:55 by hopark           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,13 +32,13 @@ void	ft_action(t_inf *inf, char *com)
 		ft_rotate_tool(&inf->b_h, &inf->b_t);
 	ft_htsetting(inf);
 	g_cnt++;
-	if (inf->bonus)
-		ft_show(inf, com);
-	else
-	{
+	//if (inf->bonus)
+	//	ft_show(inf, com);
+	//else
+	//{
 		write(1, com, ft_strlen(com));
 		write(1, "\n", 1);
-	}
+	//}
 }
 
 int	ft_swap_tool(t_list **type)

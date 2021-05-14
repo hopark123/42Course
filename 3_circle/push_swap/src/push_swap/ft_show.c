@@ -6,7 +6,7 @@
 /*   By: hopark <hopark@student.42seoul.kr>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/04/30 12:09:54 by hopark            #+#    #+#             */
-/*   Updated: 2021/05/11 16:02:31 by hopark           ###   ########.fr       */
+/*   Updated: 2021/05/13 20:39:15 by hopark           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -71,6 +71,7 @@ void	ft_color_init(t_inf *inf, t_color *color)
 {
 	color->yes = "\x1b[30m";
 	color->no = "\x1b[30m";
+	inf->a_h = inf->a_h;
 	if (ft_strchr("c", inf->bonus))
 	{
 		color->yes = "\x1b[32m";

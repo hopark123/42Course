@@ -6,7 +6,7 @@
 /*   By: hopark <hopark@student.42seoul.kr>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/04/12 15:35:56 by hopark            #+#    #+#             */
-/*   Updated: 2021/05/13 19:54:13 by hopark           ###   ########.fr       */
+/*   Updated: 2021/05/13 20:39:56 by hopark           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,7 +43,6 @@ int	main(int ac, char **av)
 		return (0);
 	}
 	ft_inf_init(inf);
-	i += ft_bonus_check(av, inf);
 	if (ac == i + 2)
 		res = ft_make_split(av, inf);
 	else
