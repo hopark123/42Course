@@ -14,6 +14,7 @@
 
 void	ft_exit(t_inf *inf, char *msg, int fd)
 {
+
 	if (inf->a_h)
 	{
 		if (inf->a_t)
@@ -27,6 +28,7 @@ void	ft_exit(t_inf *inf, char *msg, int fd)
 		ft_listclear(&inf->b_h);
 	}
 	ft_putstr_fd(msg, fd, 0);
-	//ft_free(inf);
-	//exit(0);
+
+	ft_free(inf);
+	exit(0);
 }

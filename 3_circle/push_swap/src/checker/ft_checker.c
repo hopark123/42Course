@@ -27,7 +27,7 @@ void	ft_checker(t_inf *inf)
 			return ;
 		}
 	}
-	free(line);
+	ft_free(line);
 	if (ft_is_ascending(inf->a_h) && !inf->b_h && res == SUCCESS)
 		ft_exit(inf, "OK\n", 1);
 	else
