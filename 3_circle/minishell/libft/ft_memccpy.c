@@ -1,32 +1,33 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_strnstr.c                                       :+:      :+:    :+:   */
+/*   ft_memccpy.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: hopark <hopark@student.42seoul.kr>         +#+  +:+       +#+        */
+/*   By: suhong <suhong@student.42seoul.kr>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2020/09/28 14:12:01 by hopark            #+#    #+#             */
-/*   Updated: 2020/10/15 13:31:51 by hopark           ###   ########.fr       */
+/*   Created: 2020/09/29 21:05:05 by suhong            #+#    #+#             */
+/*   Updated: 2021/05/06 23:12:34 by suhong           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
 
-char		*ft_strnstr(const char *big, const char *little, size_t len)
+void	*ft_memccpy(void *dest, const void *src, int c, size_t n)
 {
-	size_t		i;
-	size_t		llen;
+	unsigned char	*d;
+	unsigned char	*s;
+	unsigned char	c_tmp;
+	size_t			i;
 
-	if (*little == 0)
-		return ((char *)big);
-	llen = ft_strlen(little);
+	d = (unsigned char *)dest;
+	s = (unsigned char *)src;
+	c_tmp = c;
 	i = 0;
-	if (*big == 0)
-		return (0);
-	while (i + llen <= len)
+	while (i < n)
 	{
-		if (ft_strncmp(big + i, little, llen) == 0)
-			return ((char *)big + i);
+		d[i] = s[i];
+		if (s[i] == c_tmp)
+			return (&d[i + 1]);
 		i++;
 	}
 	return (0);

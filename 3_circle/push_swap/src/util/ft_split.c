@@ -6,7 +6,7 @@
 /*   By: hopark <hopark@student.42seoul.kr>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/02/09 21:34:11 by hopark            #+#    #+#             */
-/*   Updated: 2021/05/11 17:48:45 by hopark           ###   ########.fr       */
+/*   Updated: 2021/05/18 17:02:40 by hopark           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -68,8 +68,6 @@ char	**ft_split(char const *s, char c)
 			s++;
 		len = ft_wordlen(s, c);
 		result[i] = ft_strndup(s, len);
-		if (!(result[i]))
-			ft_free(result);
 		s += len;
 	}
 	result[cnt] = 0;

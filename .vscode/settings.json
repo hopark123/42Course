@@ -35,6 +35,10 @@
 		"utility": "c",
 		"stdarg.h": "c",
 		"ft_printf.h": "c",
-		"ostream": "c"
+		"ostream": "c",
+		"errno.h": "c",
+		"term.h": "c",
+		"type.h": "c",
+		"types.h": "c"
 	}
 }

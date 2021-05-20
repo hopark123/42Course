@@ -1,32 +1,25 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_exit.c                                          :+:      :+:    :+:   */
+/*   ft_built.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: hopark <hopark@student.42seoul.kr>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2021/05/10 17:52:21 by hopark            #+#    #+#             */
-/*   Updated: 2021/05/14 13:20:02 by hopark           ###   ########.fr       */
+/*   Created: 2021/05/18 15:35:09 by hopark            #+#    #+#             */
+/*   Updated: 2021/05/19 14:10:28 by hopark           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "engine.h"
+#include "head.h"
 
-void	ft_exit(t_inf *inf, char *msg, int fd)
+t_built	*ft_builtnup(t_list *list)
 {
-	if (inf->a_h)
-	{
-		if (inf->a_t)
-			inf->a_t->next = 0;
-		ft_listclear(&inf->a_h);
-	}
-	if (inf->b_h)
-	{
-		if (inf->b_t)
-			inf->b_t->next = 0;
-		ft_listclear(&inf->b_h);
-	}
-	ft_putstr_fd(msg, fd, 0);
-	ft_free(inf);
-	exit(0);
+	t_built		*res;
+
+	if (!ft_malloc(&res, sizeof(t_built)))
+		return (ERROR);
+	res->command = list;
+	res->next = 0;
+	res->prev = 0;
+	return (res);
 }

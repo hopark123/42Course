@@ -1,32 +1,40 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_exit.c                                          :+:      :+:    :+:   */
+/*   ft_strncmp3.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: hopark <hopark@student.42seoul.kr>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2021/05/10 17:52:21 by hopark            #+#    #+#             */
-/*   Updated: 2021/05/14 13:20:02 by hopark           ###   ########.fr       */
+/*   Created: 2020/09/28 23:17:58 by suhong            #+#    #+#             */
+/*   Updated: 2021/05/20 12:40:06 by hopark           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "engine.h"
+#include "head.h"
 
-void	ft_exit(t_inf *inf, char *msg, int fd)
+int	ft_strncmp3(const char *s1, const char *s2, size_t n)
 {
-	if (inf->a_h)
+	size_t			i;
+	unsigned char	*f;
+	unsigned char	*b;
+
+	i = 0;
+	f = (unsigned char *)s1;
+	b = (unsigned char *)s2;
+	while (i < n && f[i] != '\0' && b[i] != '\0')
 	{
-		if (inf->a_t)
-			inf->a_t->next = 0;
-		ft_listclear(&inf->a_h);
+		if (f[i] > b[i])
+			return (1);
+		if (b[i] > f[i])
+			return (-1);
+		i++;
 	}
-	if (inf->b_h)
+	if (i < n)
 	{
-		if (inf->b_t)
-			inf->b_t->next = 0;
-		ft_listclear(&inf->b_h);
+		if (f[i] != '\0')
+			return (1);
+		if (b[i] != '\0')
+			return (-1);
 	}
-	ft_putstr_fd(msg, fd, 0);
-	ft_free(inf);
-	exit(0);
+	return (0);
 }

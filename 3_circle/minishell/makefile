@@ -6,20 +6,24 @@
 #    By: hopark <hopark@student.42seoul.kr>         +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2021/04/28 18:03:34 by hopark            #+#    #+#              #
-#    Updated: 2021/05/13 20:04:35 by hopark           ###   ########.fr        #
+#    Updated: 2021/05/20 12:53:19 by hopark           ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
 NAME = minishell
+NAME2 = echo
+NAME3 = cd
 
 CC = gcc
-CFLAGS = -Wall -Wextra -Werror
+CFLAGS = -O2
+#CFLAGS = -Wall -Wextra -Werror
 #CFLAGS = -Wall -Wextra -Werror -g3 -fsanitize=address
 RM = rm
 RMFLAGS = -f
 SRC_DIR = src
 INC_DIR = include
 ENGINE_DIR = $(SRC_DIR)/engine
+UTIL_DIR = $(SRC_DIR)/util
 PASSING_DIR = $(SRC_DIR)/passing
 UTIL_DIR = $(SRC_DIR)/util
 OBJ_DIR = obj
@@ -33,11 +37,13 @@ vpath %.c \
 	$(SRC_DIR) \
 	$(UTIL_DIR) \
 	$(PASSING_DIR)\
+	$(ENGINE_DIR) \
 
 SRC = \
 	$(ENGINE) \
-	$(PASSING_DIR)\
 	$(UTIL) \
+	$(PASSING)\
+	main2.c
 
 OBJ = $(addprefix $(OBJ_DIR)/, $(notdir $(SRC:.c=.o)))
 
@@ -49,15 +55,15 @@ clean :
 fclean : clean
 	$(RM) $(RMFLAGS) $(NAME)
 
-re : fclean all bonus
+re : fclean all
 
 test : $(NAME)
 	./minishell
 $(OBJ_DIR)/%.o : %.c | $(OBJ_DIR)
-	$(CC) $(CFLAGS) -I $(INC_DIR) -c $< -o $@
+	@$(CC) $(CFLAGS) -I $(INC_DIR) -c $< -o $@
 	@mkdir -p $(OBJ_DIR)
 
 $(NAME) : $(INCLUDES) $(OBJ)
-		$(CC) $(CFLAGS) -o $(NAME) $(OBJ)
+	@$(CC) $(CFLAGS) -o $(NAME) $(OBJ)
 
 .PHONY: all clean fclean re test\

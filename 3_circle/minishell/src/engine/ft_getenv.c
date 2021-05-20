@@ -1,32 +1,32 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_exit.c                                          :+:      :+:    :+:   */
+/*   ft_getenv.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: hopark <hopark@student.42seoul.kr>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2021/05/10 17:52:21 by hopark            #+#    #+#             */
-/*   Updated: 2021/05/14 13:20:02 by hopark           ###   ########.fr       */
+/*   Created: 2021/05/17 17:24:08 by hopark            #+#    #+#             */
+/*   Updated: 2021/05/20 12:49:06 by hopark           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "engine.h"
+#include "head.h"
 
-void	ft_exit(t_inf *inf, char *msg, int fd)
+char	*ft_getenv(t_list *list, const char *varname, int varlen)
 {
-	if (inf->a_h)
+	t_list	*env;
+	char	*res;
+
+	res = 0;
+	env = list;
+	while (env)
 	{
-		if (inf->a_t)
-			inf->a_t->next = 0;
-		ft_listclear(&inf->a_h);
+		if (ft_strncmp(env->id, (char *)varname, varlen))
+		{
+			res = ft_strndup(env->str, ft_strlen(env->str));
+			break ;
+		}
+		env = env->next;
 	}
-	if (inf->b_h)
-	{
-		if (inf->b_t)
-			inf->b_t->next = 0;
-		ft_listclear(&inf->b_h);
-	}
-	ft_putstr_fd(msg, fd, 0);
-	ft_free(inf);
-	exit(0);
+	return (res);
 }

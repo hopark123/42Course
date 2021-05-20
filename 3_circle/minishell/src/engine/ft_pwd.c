@@ -1,32 +1,24 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_exit.c                                          :+:      :+:    :+:   */
+/*   ft_pwd.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: hopark <hopark@student.42seoul.kr>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2021/05/10 17:52:21 by hopark            #+#    #+#             */
-/*   Updated: 2021/05/14 13:20:02 by hopark           ###   ########.fr       */
+/*   Created: 2021/05/19 21:23:24 by hopark            #+#    #+#             */
+/*   Updated: 2021/05/20 12:49:07 by hopark           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "engine.h"
+#include "head.h"
 
-void	ft_exit(t_inf *inf, char *msg, int fd)
+int	ft_pwd(t_built *built)
 {
-	if (inf->a_h)
-	{
-		if (inf->a_t)
-			inf->a_t->next = 0;
-		ft_listclear(&inf->a_h);
-	}
-	if (inf->b_h)
-	{
-		if (inf->b_t)
-			inf->b_t->next = 0;
-		ft_listclear(&inf->b_h);
-	}
-	ft_putstr_fd(msg, fd, 0);
-	ft_free(inf);
-	exit(0);
+	char	*cwd;
+
+	cwd = getcwd(0, BUFFER_SIZE);
+	ft_putstr_fd(cwd, 1, 0);
+	ft_putchar_fd('\n', 1, 0);
+	ft_free(cwd);
+	return (SUCCESS);
 }
