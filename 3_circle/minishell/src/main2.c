@@ -6,13 +6,13 @@
 /*   By: hopark <hopark@student.42seoul.kr>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/05/18 15:34:44 by hopark            #+#    #+#             */
-/*   Updated: 2021/05/20 13:50:36 by hopark           ###   ########.fr       */
+/*   Updated: 2021/05/21 16:47:39 by hopark           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "head.h"
+햣#include "head.h"
 
-void	test_passing(t_built *built)
+void	test_print_passing(t_built *built)
 {
 	t_list	*temp_l;
 
@@ -94,9 +94,12 @@ int	main(int ac, char **av, char **envp)
 			ft_envswap(temp_b, env_list);
 			ft_del_quotes(temp_b);
 			ft_del_blank(temp_b);
+			ft_del_blank2(temp_b);
+			ft_listjoin(temp_b);
+			test_print_passing(temp_b);
 			ft_parsing(temp_b, env_list);
-			test_passing(temp_b);
 			temp_b = temp_b->next;
 		}
 	}
+	ft_free(built);
 }

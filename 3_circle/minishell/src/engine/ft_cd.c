@@ -6,7 +6,7 @@
 /*   By: hopark <hopark@student.42seoul.kr>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/05/19 19:06:01 by hopark            #+#    #+#             */
-/*   Updated: 2021/05/20 13:30:00 by hopark           ###   ########.fr       */
+/*   Updated: 2021/05/21 16:07:14 by hopark           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,45 +15,44 @@
 int	ft_cd(t_built *built, t_list *env_list)
 {
 	t_list	*list;
-	char	*cwd;
 	char	*temp;
+	char	*dest;
 	int		res;
-	int		i;
+	int		flag;
 
-	list = built->command;
-	if (list->next && list->next->next && (*list->next->next->str) != '~')
+	flag = 1;
+	if (built->command->next->next)
 	{
-		list = list->next->next;
-		cwd = getcwd(0, BUFFER_SIZE);
-		if ('/' != *(list->str))
+		list = built->command->next->next;
+		if (*(list->str) == '/' && flag)
+			temp = 0;
+		else if (*(list->str) == '~' || !flag)
+			flag = 0;
+		else
 		{
-			temp = ft_strjoin(cwd, "/");
-			free(cwd);
-			cwd = temp;
+			temp = getcwd(0, BUFFER_SIZE);
+			dest = ft_strjoin(temp, "/");
+			ft_free(temp);
+			temp = dest;
 		}
-		while ((*list->str) == '.')
-		{
-			temp = ft_strjoin(cwd, ".");
-			free(cwd);
-			cwd = temp;
-			list = list->next;
-		}
-		temp = ft_strjoin(cwd, list->str);
-		free(cwd);
-		cwd = temp;
-												//printf("\n**|%s|**\n",cwd);
 	}
-	else 
+	else
+		flag = 0;
+	if (flag)
 	{
-		cwd = ft_getenv(env_list, "HOME", 4);
-												//printf("\n@@|%s|@@\n",cwd);
+		dest = ft_strjoin(temp, list->str);
+		ft_free(temp);
+		ft_free(list->str);
 	}
-	res = chdir(cwd);
-	free(cwd);
-								//write(1, ">>>>cwd{",9);
-								//cwd = getcwd(0, BUFFER_SIZE);
-								//ft_putstr_fd(cwd, 1, 0);
-								//write(1, "}\n",2);
-								//// errno 처리 필요
+	else
+	{
+		temp = ft_getenv(env_list, "HOME", 4);
+		dest = ft_strndup(temp, ft_strlen(temp));
+	}
+	res = chdir(dest);
+	write(1, "{",1);
+	ft_putstr_fd(dest, 1, 0);
+	write(1, "}\n",2);
+	free(dest);
 	return (res);
 }
