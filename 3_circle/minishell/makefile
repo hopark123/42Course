@@ -6,7 +6,7 @@
 #    By: hopark <hopark@student.42seoul.kr>         +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2021/04/28 18:03:34 by hopark            #+#    #+#              #
-#    Updated: 2021/05/13 20:04:35 by hopark           ###   ########.fr        #
+#    Updated: 2021/05/14 15:02:07 by hopark           ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -36,8 +36,9 @@ vpath %.c \
 
 SRC = \
 	$(ENGINE) \
-	$(PASSING_DIR)\
 	$(UTIL) \
+	$(PASSING)\
+	main.c
 
 OBJ = $(addprefix $(OBJ_DIR)/, $(notdir $(SRC:.c=.o)))
 
@@ -49,15 +50,15 @@ clean :
 fclean : clean
 	$(RM) $(RMFLAGS) $(NAME)
 
-re : fclean all bonus
+re : fclean all
 
 test : $(NAME)
 	./minishell
 $(OBJ_DIR)/%.o : %.c | $(OBJ_DIR)
-	$(CC) $(CFLAGS) -I $(INC_DIR) -c $< -o $@
+	@$(CC) $(CFLAGS) -I $(INC_DIR) -c $< -o $@
 	@mkdir -p $(OBJ_DIR)
 
 $(NAME) : $(INCLUDES) $(OBJ)
-		$(CC) $(CFLAGS) -o $(NAME) $(OBJ)
+	@$(CC) $(CFLAGS) -o $(NAME) $(OBJ)
 
 .PHONY: all clean fclean re test\
