@@ -21,7 +21,6 @@ def find_city(stat):
 		print("Unknown state")
 
 def main():
-
 	if (len(sys.argv) != 2):
 		return
 	else:
