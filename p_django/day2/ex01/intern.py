@@ -23,30 +23,15 @@ class Inter:
 
 
 def main():
-	try:
-		none = Inter()
-	except Exception as e:
-		print('1 case 예외가 발생했습니다.', e)
-	try:
-		Mark = Inter("Mark")
-	except Exception as e:
-		print('2 case 예외가 발생했습니다.', e)
-	try:
-		print(none)
-	except Exception as e:
-		print('3 case 예외가 발생했습니다.', e)
-	try:
-		print(Mark)
-	except Exception as e:
-		print('4 case 예외가 발생했습니다.', e)
-	try:
-		print(Mark.make_coffee())
-	except Exception as e:
-		print('5 case 예외가 발생했습니다.', e)
+	none = Inter()
+	Mark = Inter("Mark")
+	print(none)
+	print(Mark)
+	print(Mark.make_coffee())
 	try:
 		none.work()
 	except Exception as e:
-		print('6 case 예외가 발생했습니다.', e)
+		print(e)
 
 if __name__ == '__main__':
 	main()

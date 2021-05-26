@@ -1,5 +1,3 @@
-#!/usr/bin/python3
-
 class HotBeverage :
 	def __init__(self) -> None:
 		self.price = 0.30
@@ -26,6 +24,7 @@ class Tea(HotBeverage) :
 		self.name = "tea"
 	def description(self):
 		return super().description()
+	#굳이 ? super().__init__()
 
 class Chocolate(HotBeverage) :
 	def __init__(self) -> None:

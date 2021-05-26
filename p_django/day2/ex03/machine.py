@@ -31,8 +31,6 @@ class CoffeeMachine:
 	def repair(self):
 		self.cnt = 10
 
-
-
 def main():
 	kind = [Coffee, Tea, Chocolate, Cappuccino]
 	coffeeMachine = CoffeeMachine()
