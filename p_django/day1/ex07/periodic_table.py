@@ -1,3 +1,5 @@
+#!/usr/bin/python3
+
 def ft_tr(f, r):
 	f.write("			<tr>\n")
 	i = 0
@@ -24,7 +26,6 @@ def ft_td(f, lst, flag) :
 		f.write("						<li>" + "mol : " + lst[8].strip() + "</li>\n")
 		f.write("						<li>" +  "electron<br>[" +lst[10].strip() + "]" + "</li>\n")
 		f.write("					</ul>\n")
-		print(lst)
 	f.write("				</td>\n")
 
 def ft_table(f, r):
@@ -55,7 +56,7 @@ def ft_body(f, r):
 def ft_all(f, r):
 	f.write("<!DOCTYPE html>\n")
 	f.write("<html lang=\"en\">\n")
-	ft_haed(f, r)
+	ft_haed(f)
 	ft_body(f, r)
 	f.write("</html>\n")
 
