@@ -1,0 +1,15 @@
+name : hot beverage
+price: 0.30
+description: Just some hot water in a cup.
+name : coffee
+price: 0.40
+description: A coffee, to stay awake.
+name : tea
+price: 0.30
+description: Just some hot water in a cup.
+name : chocolate
+price: 0.50
+description: Chocolate, sweet chocolate...
+name : cappuccino
+price: 0.45
+description: Un po’ di Italia nella sua tazza!

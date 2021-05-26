@@ -1,0 +1,17 @@
+<!DOCTYPE html>
+<html lang="en">
+	<head>
+		<title>{title}</title>
+	</head>
+	<body>
+		<h1>{title}</h1>
+		<p>
+			Q : Who are you?<br><br>
+			A : My surname is [ {surname} ] and my name is [ {name} ]. <br><br>
+			Q : How old are you?<br><br>
+			A : I'm [ {age} ] years old.<br><br>
+			Q : What's your profession?<br><br>
+			A : I'm [ {profession} ].
+		</p>
+	</body>
+</html>

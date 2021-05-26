@@ -8,13 +8,13 @@ def ft_tr(f, r):
 		line = ",".join(line.split(':'))
 		lst = line.split(',')
 		while int(lst[2]) != i :
-			ft_td(f, r, 0, 0)
+			ft_td(f, 0, 0)
 			i += 1
-		ft_td(f, r, lst, 1)
+		ft_td(f, lst, 1)
 		i += 1
 	f.write("			</tr>\n")
 
-def ft_td(f, r, lst, flag) :
+def ft_td(f, lst, flag) :
 	f.write("				<td>\n")
 	if (flag == 1) :
 		f.write("					<h4>" + lst[0].strip() + "</h4>" + "\n")
@@ -29,10 +29,10 @@ def ft_td(f, r, lst, flag) :
 
 def ft_table(f, r):
 	f.write("		<table>\n")
-	[ft_tr(f, r) for i in range(7)]
+	[ft_tr(f, r) for _ in range(7)]
 	f.write("		</table>\n")
 
-def ft_haed(f, r):
+def ft_haed(f):
 	f.write("	<head>\n")
 	f.write("		<title>ex07</title>\n")
 	f.write("		<style>\n")
@@ -68,9 +68,3 @@ def main():
 
 if __name__ == '__main__':
 	main()
-#def number(f, r):
-#	r = open("numbers.txt", 'r')
-#	line = r.readline(f, r)
-#	for i in line.split(','):
-#		print(i.strip())
-#	r.close(f, r)
