@@ -1,3 +1,5 @@
+#!/usr/bin/python3
+
 def number():
 	r = open("numbers.txt", 'r')
 	line = r.readline()

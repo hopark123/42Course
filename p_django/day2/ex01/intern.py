@@ -1,3 +1,5 @@
+#!/usr/bin/python3
+
 class Inter:
 	def __init__(self, Name=None) -> None:
 		if Name is None:
@@ -13,12 +15,11 @@ class Inter:
 		raise Exception("I’m just an intern, I can’t do that...")
 
 	def make_coffee(self):
-		return (Coffee())
+		return (self.Coffee())
 
-
-class Coffee:
-	def __str__(self):
-		return "This is the worst coffee you ever tasted."
+	class Coffee:
+		def __str__(self):
+			return "This is the worst coffee you ever tasted."
 
 
 def main():
@@ -46,8 +47,6 @@ def main():
 		none.work()
 	except Exception as e:
 		print('6 case 예외가 발생했습니다.', e)
-	# TODO: try expect 이렇게 다 해줘야 하는거 아닌지?
-
 
 if __name__ == '__main__':
 	main()

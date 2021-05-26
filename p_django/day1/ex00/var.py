@@ -1,3 +1,5 @@
+#!/usr/bin/python3
+
 def my_var():
     print("42 has a type " + str(type(42)))
     print("42 has a type " + str(type("42")))

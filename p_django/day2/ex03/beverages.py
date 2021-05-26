@@ -1,3 +1,5 @@
+#!/usr/bin/python3
+
 class HotBeverage :
 	def __init__(self) -> None:
 		self.price = 0.30
@@ -11,7 +13,6 @@ class HotBeverage :
 			"description : {description}"
 		)
 		return tempplate.format(name = self.name, price = self.price, description = self.description())
-	#TODO: format으로 하는게 dry?
 class Coffee(HotBeverage) :
 	def __init__(self) -> None:
 		self.name = "coffee"
@@ -25,8 +26,6 @@ class Tea(HotBeverage) :
 		self.name = "tea"
 	def description(self):
 		return super().description()
-	#TODO: price 설정?
-	#굳이 ? super().__init__()
 
 class Chocolate(HotBeverage) :
 	def __init__(self) -> None:

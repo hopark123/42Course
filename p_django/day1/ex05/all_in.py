@@ -1,6 +1,6 @@
+#!/usr/bin/python3
+
 import sys
-
-
 
 def check_argv(str):
 	states = {

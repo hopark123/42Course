@@ -1,6 +1,6 @@
+#!/usr/bin/python3
+
 import sys
-
-
 
 def find_city(stat):
 	states = {
