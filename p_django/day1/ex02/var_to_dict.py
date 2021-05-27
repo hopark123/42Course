@@ -36,7 +36,6 @@ def main():
 	('Burton', '1939')
 ]
 	printt(ft_dictionary(d))
-	printt()
 
 if __name__ == '__main__':
 	main()

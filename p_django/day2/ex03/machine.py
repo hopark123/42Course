@@ -10,7 +10,6 @@ class CoffeeMachine:
 			self.price = 0.90
 		def description(self):
 			return "An empty cup?! Gimme my money back!"
-
 	class BrokenMachineException(Exception):
 		def __init__(self) -> None:
 			super().__init__("This coffee machine has to be repaired.")
@@ -19,7 +18,7 @@ class CoffeeMachine:
 		self.cnt = 10
 
 	def serve(self, kind: HotBeverage) -> HotBeverage():
-		if (self.cnt < 0):
+		if (self.cnt <= 1):
 			raise CoffeeMachine.BrokenMachineException()
 		else:
 			if (random.randrange(1, 10) == 1):
@@ -34,12 +33,12 @@ class CoffeeMachine:
 def main():
 	kind = [Coffee, Tea, Chocolate, Cappuccino]
 	coffeeMachine = CoffeeMachine()
-	for _ in range(50):
+	for _ in range(10):
 		try:
 			print(coffeeMachine.serve(random.choice(kind)))
 		except CoffeeMachine.BrokenMachineException as e:
-			print("test", e)
 			coffeeMachine.repair()
+			print(e)
 
 
 if __name__ == '__main__':
