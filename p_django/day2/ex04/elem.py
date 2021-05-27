@@ -13,14 +13,14 @@ class Text(str):
 		"""
 		return super().__str__().replace('<', '&lt;').replace('>', '&gt;').replace('"', '&quot;').replace('\n', '\n<br />\n')
 
-
 class Elem:
 	"""
 	Elem will permit us to represent our HTML elements.
 	"""
+	@staticmethod
 	class ValidationError(Exception):
 		def __init__(self) -> None:
-			super().__init__("ValidationError")
+			super().__init__("incorrect behaviour.")
 
 	def __init__(self, tag:str='div', attr:dict={}, content=None, tag_type:str='double'):
 		"""
@@ -30,12 +30,8 @@ class Elem:
 		self.tag = tag
 		self.attr = attr
 		self.content = []
-		if not self.check_type(content) and content is not None:
-			raise self.ValidationError
-		if type(content) == list:
-			self.content = content
-		elif content is not None:
-			self.content.append(content)
+		if content is not None:
+			self.add_content(content)
 		if (tag_type != 'double' and tag_type != 'simple') :
 			raise self.ValidationError
 		self.tag_type = tag_type
@@ -105,9 +101,8 @@ class Elem:
 												for elem in content])))
 
 def main() :
-    print(Elem(tag = "html", content = [Elem(tag = "head", content = Elem(tag = "title", content = Text("\"Hello ground!\""))),
-    Elem(tag = "body", content = [Elem(tag="h1", content=Text("\"Oh no, not again!\"")),
-    Elem(tag="img", attr={"src" : "http://i.imgur.com/pfp3T.jpg"}, tag_type ="simple")])]))
-
+	# print(Elem(tag = "html", content = [Elem(tag = "head", content = Elem(tag = "title", content = Text("\"Hello ground!\""))),
+	# Elem(tag = "body", content = [Elem(tag="h1", content=Text("\"Oh no, not again!\"")),
+	# Elem(tag="img", attr={"src" : "http://i.imgur.com/pfp3T.jpg"}, tag_type ="simple")])]))
 if __name__ == '__main__':
 	main()
