@@ -85,7 +85,6 @@ class Elem:
 		if len(result.strip()) == 0:
 			return ''
 		return result
-
 	def add_content(self, content):
 		if not Elem.check_type(content):
 			raise Elem.ValidationError
