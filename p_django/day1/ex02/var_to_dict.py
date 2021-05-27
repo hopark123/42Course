@@ -7,9 +7,6 @@ def ft_dictionary(d):
 			dic[i[1]] += " " + i[0]
 		else:
 			dic[i[1]] = i[0]
-	return dic
-
-def printt(dic):
 	[print(key, ":", value) for key, value in dic.items()]
 
 def main():
@@ -35,7 +32,7 @@ def main():
 	('Thompson', '1949'),
 	('Burton', '1939')
 ]
-	printt(ft_dictionary(d))
+	ft_dictionary(d)
 
 if __name__ == '__main__':
 	main()

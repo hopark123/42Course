@@ -8,7 +8,7 @@ def main():
 		return print("not invaild argv")
 	path = sys.argv[1]
 	if re.match("^.+\\.template$", path) is None :
-		return print("put *.template file")
+		return print("put [*.template] file")
 	if os.path.isfile(path) == False :
 		return print("not exist file")
 	f = open(path, mode="r", encoding='utf-8')

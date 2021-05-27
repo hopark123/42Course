@@ -11,14 +11,14 @@ class Inter:
 	def __str__(self) -> str:
 		return self.Name
 
-	def work(self):
+	def work(self) -> str:
 		raise Exception("I’m just an intern, I can’t do that...")
 
-	def make_coffee(self):
+	def make_coffee(self) -> Coffee():
 		return (self.Coffee())
 
 	class Coffee:
-		def __str__(self):
+		def __str__(self) -> str:
 			return "This is the worst coffee you ever tasted."
 
 
