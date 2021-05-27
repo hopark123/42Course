@@ -22,12 +22,11 @@ class Elem:
 		def __init__(self) -> None:
 			super().__init__("ValidationError")
 
-	def __init__(self, tag='div', attr={}, content=None, tag_type='double'):
+	def __init__(self, tag:str='div', attr:dict={}, content=None, tag_type:str='double'):
 		"""
 		__init__() method.
 		Obviously.
 		"""
-		[...]
 		self.tag = tag
 		self.attr = attr
 		self.content = []
@@ -37,12 +36,9 @@ class Elem:
 			self.content = content
 		elif content is not None:
 			self.content.append(content)
-
-		# self.content = []
-			# self.add_content(content)
+		if (tag_type != 'double' and tag_type != 'simple') :
+			raise self.ValidationError
 		self.tag_type = tag_type
-		# if type(content) is list :
-			# print(content)
 
 	def __str__(self):
 		"""
@@ -54,7 +50,6 @@ class Elem:
 		attr = self.__make_attr()
 		result = ''
 		if self.tag_type == 'double':
-			[...]
 			result += "<{tag}{attr}>>".format(tag=self.tag, attr=attr)
 			result += "{content}</{tag}>".format(content=self.__make_content(), tag=self.tag)
 		elif self.tag_type == 'simple':
@@ -110,9 +105,10 @@ class Elem:
 												isinstance(elem, Elem)
 												for elem in content])))
 
+def main() :
+    print(Elem(tag = "html", content = [Elem(tag = "head", content = Elem(tag = "title", content = Text("\"Hello ground!\""))),
+    Elem(tag = "body", content = [Elem(tag="h1", content=Text("\"Oh no, not again!\"")),
+    Elem(tag="img", attr={"src" : "http://i.imgur.com/pfp3T.jpg"}, tag_type ="simple")])]))
 
 if __name__ == '__main__':
-	try:
-		Elem(content=1)
-	except Exception as e:
-		assert type(e) == Elem.ValidationError
+	main()
