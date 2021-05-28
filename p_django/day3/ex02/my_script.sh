@@ -16,5 +16,5 @@ python -m pip --version
 pip install --upgrade pip
 
 # pip install
-python -m pip install -q -I requests dewiki
+python -m pip install -q -I requests dewiki json
 

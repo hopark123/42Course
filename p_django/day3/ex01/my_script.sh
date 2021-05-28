@@ -12,11 +12,11 @@ source $VEN_DIR/bin/activate
 # python version
 python -m pip --version
 
-# pip install
-python -m pip install -q git+$PATH_PY_URL -I --log $LOG_FILE
-
 # pip upgrade
 pip install --upgrade pip
+
+# path install
+python -m pip install -q git+$PATH_PY_URL -I --log $LOG_FILE
 
 # start progam
 python3 my_program.py
