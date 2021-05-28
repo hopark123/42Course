@@ -4,11 +4,6 @@ import requests
 import json
 import dewiki
 import sys
-	
-# a = get(url, param)
-# data = json(a)
-# data[action][pages][prop]
-# 	[0][*]
 
 class my_wiki():
 
@@ -28,17 +23,15 @@ class my_wiki():
 		if isinstance(search, str) and not search.strip() is None:
 			self.filename = "_".join(search.split()) + ".wiki"
 			self.PARAM['page'] = search.lower().strip()
-			# self.PARAM['gpssearch'] = search.lower().strip()
 		else :
 			raise my_wiki.wiki_Exception("You must specify something to search")
 	
 	def search(self) :
-		res = requests.get(url = self.URL, params = self.PARAM)
-		my_wiki.wiki_Exception(res.raise_for_status())
+		res_html = requests.get(url = self.URL, params = self.PARAM)
+		my_wiki.wiki_Exception(res_html.raise_for_status()) // do!
 		return res.json()
 
 	def get_text(self, data) -> str:
-		print(data["parse"])
 		return dewiki.from_string(data["parse"]["wikitext"]["*"])
 
 	def make_file(self) :
@@ -54,10 +47,10 @@ def main() :
 			wiki = my_wiki(sys.argv[1])
 		except Exception as e :
 			print(e)
-		# try :
-		wiki.make_file()
-		# except Exception as e :
-			# print(e)
+		try :
+			wiki.make_file()
+		except Exception as e :
+			print(e)
 
 
 if __name__ == '__main__':

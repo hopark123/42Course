@@ -1,7 +1,6 @@
 #!/bin/bash
 
 PYTHON_PATH="/usr/bin/python3"
-PATH_PY_URL="https://github.com/jaraco/path.git"
 VEN_DIR="local_lib"
 LOG_FILE="pip_install.log"
 
@@ -16,5 +15,5 @@ python -m pip --version
 pip install --upgrade pip
 
 # pip install
-python -m pip install -q -I requests dewiki json
+python -m pip install -q -I requests dewiki
 
