@@ -16,3 +16,8 @@ pip install --upgrade pip
 # pip install
 python -m pip install -q -I requests BeautifulSoup4 parser-libraries
 
+# make requirement.txt
+pip freeze > requirement.txt
+
+# start road program
+python ./roads_to_philosophy.py philosophy

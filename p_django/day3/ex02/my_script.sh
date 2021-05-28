@@ -17,3 +17,8 @@ pip install --upgrade pip
 # pip install
 python -m pip install -q -I requests dewiki
 
+# make requirement.txt
+pip freeze > requirement.txt
+
+# start request program
+python ./request_wikipedia.py coffee

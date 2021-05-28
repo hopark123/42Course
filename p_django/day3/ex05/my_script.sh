@@ -18,3 +18,12 @@ python -m pip install -q -I django psycopg2-binary
 
 # make requirement.txt
 pip freeze > requirement.txt
+
+###########server 
+DJANGO_DIR="/mysite/"
+
+django-admin startproject $DJANGO_DIR
+python3 ./$DJANGO_DIR/manage.py runserver
+python3 ./$DJANGO_DIR/manage.py startapp 
+
+# http://127.0.0.1:8000/hello/
