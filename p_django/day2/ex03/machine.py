@@ -28,7 +28,6 @@ class CoffeeMachine:
 				return self.EmptyCup()
 			else:
 				return kind()
-
 	def repair(self):
 		self.cnt = 10
 

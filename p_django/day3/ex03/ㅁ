@@ -1,0 +1,20 @@
+Legend has it that if you start from any Wikipedia article, that you click on the first link in this article introduction that neither in italic nor between brackets, and repeat the process ad lib, you will always end up on the article about Philosopy.x
+Well, this is not a legend! (please, look astounded). As can testify this ... Wikipedia article.
+But since you only believe what you see with your own eyes, you must create a program that tests this phenomenon listing and counting all the articles between your request and the wikipedia article: the roads to philosophy.
+This program must be named roads_to_philosophy.py and behave as follows:
+• The program must take a string in parameter that is a word or a group of words matching only one Wikipedia search.
+• The program must request an English Wikipedia URL identical to a standard search on a browser. In other words: you cannot use the site’s API.
+10
+• It must parse the html page thanks to the BeautifulSoup library to:
+◦ Find the eventual redirection and take it into account in the roads to philosophy. Beware, it’s not a URL redirection.
+◦ Find the main title of the page and add it to the roads to philosophy.
+◦ Find (if it exists) the first link of the introduction’s paragraph leading to another Wikipedia article. Rather than ignoring what’s in italic or between brackets, the program must carefully ignore the links that don’t direct to a new article, like the ones leading to the help section of Wikipédia.
+• The program must start again from step 2 starting from the link obtained during the previous step until getting to one of those occurrences:
+◦ The link leads to the philosophy page. If so, it must print the visited articles as well as the total count of these articles in the following format <number> roads from <request> to philosophy on the standard output.
+◦ The page didn’t include any valid link. The program must display: It leads to a dead end !.
+◦ The link leads to a page that’s already been visited, which means the program is about to loop indefinitely. If so, the displayed message must be: It leads to an infinite loop !
+• At this stage, after displaying the necessary messages on the standard output, the program must quit properly.
+If, anytime during the execution of the program, an error like a a connection, server, parameter, request error or any other kind of error occurs, the program must quit properly with a relevant error message.
+Like the previous exercise, you must provide a requirement.txt file with your program to facilitate the libraries install. 
+The Wikipedia community often updates the articles. 
+It is highly probable that between the creation of this subject and the day you take it, the roads to philosophy have changed and the accuvio example is not a dead end anymore.
