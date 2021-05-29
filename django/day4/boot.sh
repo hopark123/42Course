@@ -1,4 +1,4 @@
-!/bin/bash
+#!/bin/bash
 
 PYTHON_PATH="/usr/bin/python3"
 VEN_DIR="django_venv"
@@ -7,8 +7,18 @@ VEN_DIR="django_venv"
 $PYTHON_PATH -m venv $VEN_DIR
 source $VEN_DIR/bin/activate
 
-###########server 
-admin_DIR="mysite"
-django-admin startproject d04
-# python3 manage.py runserver
-# python3 manage.py startapp pools
+# python version
+python -m pip --version
+
+# pip upgrade
+pip install --upgrade pip
+
+# pip install 
+python -m pip install -q -I django psycopg2-binary
+
+# make requirement.txt
+pip freeze > requirement.txt
+
+# sever start
+python manage.py migrate
+python3 manage.py runserver

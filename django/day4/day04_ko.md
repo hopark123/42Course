@@ -154,19 +154,24 @@ _요약: 파이썬 다 했으니까, 쟝고!_
 
 - **제목** : "Ex01: Django, framework web."
 
-  **URL** : /ex01/django
+  **URL** : /ex01/        django
 
   **설명** : 이 페이지에서는, 쟝고와 그 역사에 대해서 소개하세요.
 
+
+
+
 - **제목** : "Ex01: Display process of a static page."
 
-  **URL** : /ex01/display
+  **URL** : /ex01/         dsplay
 
   **설명** : 이 페이지에서는, 정적 웹페이지의 모습이 간단한 템플릿에서 실제로 보여질 때까지, 요청 (request) 에서 응답 (answer) 에 이르기까지의 과정을 설명합니다.
 
+
+
 - **제목** : "Ex01: Template engine."
 
-  **URL** : /ex01/templates
+  **URL** : /ex01/        templates
 
   **설명** : 이 페이지에서는, 쟝고의 기본 템플릿 엔진의 기능을 다음 요소들의 기능과 함께 설명해야 합니다 :
 
@@ -174,6 +179,8 @@ _요약: 파이썬 다 했으니까, 쟝고!_
   - `for ... in` 루프
   - `if` 제어 구조
   - 전달된 컨텍스트 변수들의 표시
+
+
 
 _Don't repeat yourself_ 철칙은 쟝고의 철학의 일부이기도 합니다. 이것을 존중하기 위해, 위의 요구 페이지들을 `base.html` 템플릿을 이용해 만들어 보세요.
 
