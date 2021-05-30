@@ -1,9 +1,7 @@
-from django.urls import path
-
-from . import views
+from django.conf.urls import url
+from ex02 import views
 
 urlpatterns = [
-    path('django', views.django, name='django'),
-    path('display', views.display, name='display'),
-    path('templates', views.templates, name='templates'),
+    url(r'^$', views.main, name='ex02'),
+    url(r'^post', views.post, name='post'),
 ]
