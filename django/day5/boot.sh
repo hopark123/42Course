@@ -14,8 +14,9 @@ python -m pip --version
 pip install --upgrade pip
 
 # pip install 
-python -m pip install -q -I django psycopg2-binary python-form
+python -m pip install -q -I django psycopg2-binary python-formls psycopg2-binary
 
+brew install PostgreSQL
 # make requirement.txt
 pip freeze > requirement.txt
 

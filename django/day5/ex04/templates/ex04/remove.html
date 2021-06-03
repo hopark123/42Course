@@ -9,7 +9,7 @@
         {% csrf_token %}
         {{ form }}
         {% for elem in data %}
-            <option value="{{elem.0}}">{{elem.1}}</option>
+            <option value="{{elem.0}}"/>
         {% endfor %}
         <button type="submit">Remove</button>
     </form>

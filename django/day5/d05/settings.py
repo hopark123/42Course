@@ -42,7 +42,7 @@ INSTALLED_APPS = [
     'ex02.apps.Ex02Config',
     'ex03.apps.Ex03Config',
     'ex04.apps.Ex04Config',
-    # 'ex05.apps.Ex05Config',
+    'ex05.apps.Ex05Config',
     # 'ex06.apps.Ex06Config',
     # 'ex07.apps.Ex07Config',
     # 'ex08.apps.Ex08Config',

@@ -22,13 +22,13 @@ class Remove(View):
         try:
             curs.execute("""SELECT * FROM ex04_movies""")
             response = curs.fetchall()
+            context = {'form' : RemoveForm(choices=((movie[0], movie[0]) for movie in response))}
         except Exception as e:
             res += str(e)
         finally:
             if curs and not curs.closed:
                 curs.close()
         if response :
-            context = {'form' : RemoveForm(choices=((movie[0], movie[0]) for movie in response))}
             return render(request, self.template, context)
         else:
             return HttpResponse(res, "No data available")
@@ -39,21 +39,22 @@ class Remove(View):
         try:
             curs.execute("""SELECT * FROM ex04_movies""")
             response = curs.fetchall()
+            choices=((movie[0], movie[0]) for movie in response)
         except Exception as e:
             res += str(e)
-        finally:
-            if curs and not curs.closed:
-                print("@")
-                curs.close()
-        if response :
-            choices=((movie[0], movie[0]) for movie in response)
-            movie = RemoveForm(choices, request.POST)
+        data = RemoveForm(choices, request.POST)
+        DELETE_SQL = f"""
+            DELETE FROM ex04_movies WHERE title = %s
+            """
+        if data.is_valid() == True:
             try:
-                curs.execute("""DELETE FROM ex04_movies WHERE title = data.cleaned_data['title']""")
+                with self.connection.cursor() as curs:
+                    curs.execute(DELETE_SQL, [data.cleaned_data['title']])
                 self.connection.commit()
             except Exception as e:
                 res += str(e)
             finally:
+                self.connection.commit()
                 if curs and not curs.closed:
                     print("#")
                     curs.close()
