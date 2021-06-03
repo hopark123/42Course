@@ -3,8 +3,6 @@ from django.views import View
 from django.http import HttpRequest, HttpResponse
 import psycopg2
 
-TABLE_NAME = "ex04_movies"
-
 class Init(View):
     connection = psycopg2.connect(
         database=settings.DATABASES['default']['NAME'],
@@ -28,6 +26,9 @@ class Init(View):
             ret = "OK"
             self.connection.commit()
             return HttpResponse(ret)
-        except psycopg2.Error as e:
+        except Exception.Error as e:
             ret = str(e)
+        finally:
+            if cursor and not cursor.closed:
+                cursor.close()
         return HttpResponse(ret)

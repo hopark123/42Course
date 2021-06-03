@@ -14,7 +14,7 @@ class Display(View):
         except Exception as e :
             return HttpResponse("No data available")
         if response :
-            return render(request, 'self.template', {'data' : response})
+            return render(request, self.template, {'data' : response})
         else :
             return HttpResponse("No data available")
 

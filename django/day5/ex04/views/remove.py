@@ -56,7 +56,6 @@ class Remove(View):
             finally:
                 self.connection.commit()
                 if curs and not curs.closed:
-                    print("#")
                     curs.close()
         print(res)
         return redirect(request.path)

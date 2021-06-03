@@ -63,8 +63,8 @@ data = [
         },
     ]
 
-class Populate(View):
-    def get(request) :
+class Populate( View):
+    def get(self, request) :
         res = ""
         for movie in data:
             try :
@@ -74,3 +74,4 @@ class Populate(View):
             except Exception as e :
                 res += str(e) + "<br>"
         return HttpResponse(res)
+

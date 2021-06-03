@@ -14,7 +14,7 @@ python -m pip --version
 pip install --upgrade pip
 
 # pip install 
-python -m pip install -q -I django psycopg2-binary python-formls psycopg2-binary
+python -m pip install -q -I django psycopg2-binary psycopg2-binary
 
 brew install PostgreSQL
 # make requirement.txt
@@ -27,4 +27,13 @@ pip freeze > requirement.txt
 # python3 manage.py runserver
 # python3 manage.py makemigrations
 # python3 manage.py migrate
+
+
+#error
+# pip install --upgrade --force-reinstall Django
+
+
+# migrations del
+# find . -path "*/migrations/*.py" -not -name "__init__.py" -delete
+# find . -path "*/migrations/*.pyc"  -delete
 
