@@ -14,12 +14,16 @@ python -m pip --version
 pip install --upgrade pip
 
 # pip install 
-python -m pip install -q -I django psycopg2-binary
+python -m pip install -q -I django psycopg2-binary python-form
 
 # make requirement.txt
 pip freeze > requirement.txt
 
 # sever start
-# python3 manage.py migrate
+# django-admin startproject d05
+# cd d05
+# python3 manage.py startapp ex00
 # python3 manage.py runserver
-# django-admin startproject day05
+# python3 manage.py makemigrations
+# python3 manage.py migrate
+
