@@ -1,0 +1,1 @@
+/Users/hopark/.brew/Cellar/postgresql/13.3/bin/postgres "-D" "djangotraining"
