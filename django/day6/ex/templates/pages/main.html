@@ -1,5 +1,12 @@
 {% extends 'base.html' %} {% load static %}
 {% block title %}<title>MainPage</title>{% endblock title%}
 {% block content %}
-<br>ANONMYMOUS_USERS : {{user.username}}
+
+{% if messages %}
+	{% for message in messages %}
+		{{ message.tags }} <br>
+		{{ message.message }}
+	{% endfor %}
+
+{% endif %}
 {% endblock content%}

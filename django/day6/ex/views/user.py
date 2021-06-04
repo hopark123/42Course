@@ -1,9 +1,20 @@
-from random import choice
-from django.shortcuts import render, redirect
-from django.conf import settings
-from django.http import HttpResponse
+from django import db
 from django.views import View
+from django.shortcuts import render
+from ..forms import TipForm
+from ..models import TipModel
 
-def User(request) :
-    return render(request, 'pages/main.html')
 
+class User(View):
+    template_name = "pages/main.html"
+
+    def get(self, request):
+        try:
+            tips = TipModel.objects.all().order_by('-date')
+        except db.DatabaseError as e:
+            tips = []
+        context = {
+            'tipform': TipForm(),
+            'tips': tips
+        }
+        return render(request, self.template_name, context)

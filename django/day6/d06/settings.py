@@ -41,7 +41,6 @@ INSTALLED_APPS = [
     'crispy_forms',
 ]
 
-CRISPY_TEMPLATE_PACK = 'bootstrap4'
 
 MIDDLEWARE = [
     'django.middleware.security.SecurityMiddleware',
@@ -139,5 +138,6 @@ ANONMYMOUS_USERS = [
     'Grace',
     'Ava',
 ]
+AUTH_USER_MODEL = 'auth.User'
 
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'

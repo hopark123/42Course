@@ -1,20 +1,18 @@
-{% extends 'base.html' %} {% load static %}
-{% block title %}<title>MainPage</title>{% endblock title%}
-{% block content %}
-{% load crispy_forms_tags %}
-<div class="container py-5"
+{% extends "base.html" %}
+
+{% block content %} 
+
+{% load crispy_forms_tags %}         
+
+<!--Register--> 
+<div class="container py-5">
 	<h1>Register</h1>
-	<form methhod="POST">
+	<form method="POST">
 		{% csrf_token %}
-		{{ register_form|crispy}}
+		{{ register_form|crispy }}                    
 		<button class="btn btn-primary" type="submit">Register</button>
 	</form>
-	<p class="text-center">If you already have an account, <a href={% url 'login' %}>login</a> insted.</p>
+	<p class="text-center">If you already have an account, <a href="{% url 'login' %}"</a> instead.</p>
 </div>
-{% if messages %}
-	{% for message in messages %}
-		{{ message.tags }} <br>
-		{{ message.message }}
-	{% endfor %}
-{% endif %}
-{% endblock content%}
+
+{% endblock %}
