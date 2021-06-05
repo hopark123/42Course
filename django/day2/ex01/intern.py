@@ -6,7 +6,7 @@ class Inter:
 			self.Name = "My name? I’m nobody, an intern, I have no name."
 		else:
 			self.Name = Name
-	# self.Name = "My name? I’m nobody, an intern, I have no name." if Name is None else Name ?? 이렇게하면 오류안나는데 그 이유가 무엇인가
+	# self.Name = "My name? I’m nobody, an intern, I have no name." if Name is None else Name ??
 
 	def __str__(self) -> str:
 		return self.Name
@@ -14,7 +14,7 @@ class Inter:
 	def work(self) -> str:
 		raise Exception("I’m just an intern, I can’t do that...")
 
-	def make_coffee(self) -> Coffee():
+	def make_coffee(self):
 		return (self.Coffee())
 
 	class Coffee:

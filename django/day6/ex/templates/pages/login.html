@@ -12,10 +12,4 @@
 	</p class="text-center">Dont' have an account? <a href={% url 'register' %}>Create an account</a>
 </div>
 <br><br>
-{% if messages %}
-	{% for message in messages %}
-		{{ message.tags }} <br>
-		{{ message.message }}
-	{% endfor %}
-{% endif %}
 {% endblock content%}

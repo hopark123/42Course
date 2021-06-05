@@ -9,25 +9,10 @@
 	<body>
 		{% include 'nav.html' %}
 		{% block content%}{% endblock %}
-		{% include 'messages.html' %}
 		<hr>
-		{% if user.is_authenticated %}
-		<form method="POST" action="{% url 'tip' %}" class="form">
-			{% csrf_token %}
-			<input type="hidden" value="{{tip.author}}" name="tip.author">
-			댓글 작성 : <input type="text" name="content"></input>
-			<button data-dismiss="modal" type="submit">작성</button>
-		</form>
-		{%endif%}
+		{% include 'tip.html' %}
 		<br>
-		{% for tip in tips %}
-			<div class="tip">
-				<div class="date">{{ tip.date }}</div>
-				<strong>{{ tip.author }}</strong>
-				<p>{{ tip.content|linebreaks }}</p>
-			</div>
-		{% empty %}
-			<p>No comments here</p>
-		{% endfor %}
+		<br>
+		{% include 'messages.html' %}
 	</body>
 </html>
