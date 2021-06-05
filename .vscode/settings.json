@@ -40,5 +40,6 @@
 		"term.h": "c",
 		"type.h": "c",
 		"types.h": "c"
-	}
+	},
+	"git.ignoreLimitWarning": true
 }
