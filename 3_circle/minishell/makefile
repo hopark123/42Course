@@ -3,10 +3,10 @@
 #                                                         :::      ::::::::    #
 #    makefile                                           :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: hopark <hopark@student.42seoul.kr>         +#+  +:+       +#+         #
+#    By: suhong <suhong@student.42seoul.kr>         +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
-#    Created: 2021/04/28 18:03:34 by hopark            #+#    #+#              #
-#    Updated: 2021/05/20 20:58:52 by hopark           ###   ########.fr        #
+#    Created: 2021/05/20 21:22:58 by suhong            #+#    #+#              #
+#    Updated: 2021/05/20 21:23:24 by suhong           ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -44,7 +44,7 @@ SRC = \
 	$(ENGINE) \
 	$(UTIL) \
 	$(PASSING)\
-	main2.c
+	main1.c
 
 OBJ = $(addprefix $(OBJ_DIR)/, $(notdir $(SRC:.c=.o)))
 
