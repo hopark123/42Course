@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_cd.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: hopark <hopark@student.42seoul.kr>         +#+  +:+       +#+        */
+/*   By: hjpark <hjpark@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/05/19 19:06:01 by hopark            #+#    #+#             */
-/*   Updated: 2021/05/21 16:07:14 by hopark           ###   ########.fr       */
+/*   Updated: 2021/06/17 11:10:02 by hjpark           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,9 +50,9 @@ int	ft_cd(t_built *built, t_list *env_list)
 		dest = ft_strndup(temp, ft_strlen(temp));
 	}
 	res = chdir(dest);
-	write(1, "{",1);
+	write(1, "{", 1);
 	ft_putstr_fd(dest, 1, 0);
-	write(1, "}\n",2);
+	write(1, "}\n", 2);
 	free(dest);
 	return (res);
 }

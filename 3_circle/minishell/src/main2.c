@@ -3,14 +3,14 @@
 /*                                                        :::      ::::::::   */
 /*   main2.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: hopark <hopark@student.42seoul.kr>         +#+  +:+       +#+        */
+/*   By: hjpark <hjpark@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/05/18 15:34:44 by hopark            #+#    #+#             */
-/*   Updated: 2021/05/21 16:47:39 by hopark           ###   ########.fr       */
+/*   Updated: 2021/06/14 09:30:36 by hjpark           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-햣#include "head.h"
+#include "head.h"
 
 void	test_print_passing(t_built *built)
 {
