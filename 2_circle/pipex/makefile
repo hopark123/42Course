@@ -6,7 +6,7 @@
 #    By: hjpark <hjpark@student.42.fr>              +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2021/06/22 14:12:16 by hjpark            #+#    #+#              #
-#    Updated: 2021/07/14 19:22:08 by hjpark           ###   ########.fr        #
+#    Updated: 2021/07/14 20:18:16 by hjpark           ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -27,10 +27,6 @@ PARSING_DIR = $(SRC_DIR)/parsing
 UTIL_DIR = $(SRC_DIR)/util
 OBJ_DIR = obj
 
-ENGINE = $(wildcard $(ENGINE_DIR)/*.c)
-PASSING = $(wildcard $(PASSING_DIR)/*.c)
-UTIL = $(wildcard $(UTIL_DIR)/*.c)
-
 INCLUDE = $(addprefix $(INC_DIR)/, \
 	head.h \
 	parsing.h \
@@ -46,9 +42,28 @@ vpath %.c \
 
 SRC = \
 	$(ENGINE) \
-	$(PASSING) \
 	$(UTIL) \
-	$(wildcard $(SRC_DIR)/*.c)
+	pipex.c \
+
+ENGINE = $(addprefix $(ENGINE_DIR)/, \
+	ft_execve.c \
+	ft_find_user.c \
+	ft_redirect.c \
+	ft_run_pipex.c \
+)
+
+UTIL = $(addprefix $(UTIL_DIR)/, \
+	ft_close.c \
+	ft_debug.c \
+	ft_free.c \
+	ft_list.c \
+	ft_malloc.c \
+	ft_split.c \
+	ft_string.c \
+	ft_string2.c \
+	ft_write.c \
+	get_next_line.c \
+)
 
 OBJ = $(addprefix $(OBJ_DIR)/, $(notdir $(SRC:.c=.o)))
 
@@ -65,7 +80,7 @@ re : fclean all
 test : $(NAME)
 	 ./pipex infile "./checker 2 1 3" "cat -e" "cat -e" "cat -e" test1
 test2 : $(NAME)
-	 ./pipex here_doc pp "cat -e" "grep a" test2
+	 ./pipex here_doc pp "cat -e" "grep a" "sort" test2
 
 $(OBJ_DIR)/%.o : %.c | $(OBJ_DIR)
 	@mkdir -p $(OBJ_DIR)

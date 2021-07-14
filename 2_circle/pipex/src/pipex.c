@@ -6,7 +6,7 @@
 /*   By: hjpark <hjpark@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/07/13 16:14:09 by hjpark            #+#    #+#             */
-/*   Updated: 2021/07/14 19:23:19 by hjpark           ###   ########.fr       */
+/*   Updated: 2021/07/14 19:57:10 by hjpark           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,6 +15,7 @@
 static void	ft_init_pipex(t_pipex *pipex, int argc, char **argv, char**envp)
 {
 	int		i;
+	char	*str;
 	t_list	*temp;
 
 	i = 2;
@@ -30,7 +31,8 @@ static void	ft_init_pipex(t_pipex *pipex, int argc, char **argv, char**envp)
 		ft_redirect(pipex, argc, argv);
 	while (i < argc - 1)
 	{
-		temp = ft_listnew(argv[i]);
+		str = ft_strndup(argv[i], ft_strlen(argv[i]));
+		temp = ft_listnew(str);
 		ft_listadd_tail(&(pipex->cmd), &temp);
 		i++;
 	}
@@ -38,6 +40,9 @@ static void	ft_init_pipex(t_pipex *pipex, int argc, char **argv, char**envp)
 
 static void	ft_end_pipex(t_pipex *pipex)
 {
+	t_list		*temp;
+
+	temp = pipex->cmd;
 	ft_listclear(&(pipex->cmd));
 	ft_free(pipex->home);
 }

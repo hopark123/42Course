@@ -103,6 +103,8 @@ Pipex
 III.1 예시
 
      $> ./pipex infile ``ls -l'' ``wc -l'' outfile
+     $> ./pipex infile "ls -l" "wc -l" outfile
+
 
 `< infile ls -l | wc -l > outfile`의 결과와 동일해야 합니다.
 

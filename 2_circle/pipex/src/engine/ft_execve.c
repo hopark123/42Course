@@ -6,7 +6,7 @@
 /*   By: hjpark <hjpark@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/07/13 19:49:58 by hjpark            #+#    #+#             */
-/*   Updated: 2021/07/14 19:04:46 by hjpark           ###   ########.fr       */
+/*   Updated: 2021/07/14 20:04:28 by hjpark           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -85,14 +85,25 @@ static char	**change_content(char **str, char *home)
 	return (str);
 }
 
+static void	ft_parents(t_pipex *pipex, int *t_pip, int pid)
+{
+	int		status;
+
+	status = 0;
+	waitpid(pid, &status, WUNTRACED);
+	while (!WIFEXITED(status) && !WIFSIGNALED(status))
+		waitpid(pid, &status, WUNTRACED);
+	ft_close(pipex->pip[0]);
+	ft_close(t_pip[1]);
+	pipex->pip[0] = t_pip[0];
+}
+
 int	ft_execve(t_pipex *pipex, int *t_pip, int index)
 {
 	int		pid;
 	char	**argv;
 	t_list	*temp;
-	int		status;
 
-	status = 0;
 	pid = fork();
 	temp = ft_list_next(pipex->cmd, index);
 	argv = ft_split(temp->str, ' ');
@@ -109,14 +120,7 @@ int	ft_execve(t_pipex *pipex, int *t_pip, int index)
 			return (ERROR);
 	}
 	else
-	{
-		waitpid(pid, &status, WUNTRACED);
-		while (!WIFEXITED(status) && !WIFSIGNALED(status))
-			waitpid(pid, &status, WUNTRACED);
-		ft_close(pipex->pip[0]);
-		ft_close(t_pip[1]);
-		ft_free2(argv);
-		pipex->pip[0] = t_pip[0];
-	}
+		ft_parents(pipex, t_pip, pid);
+	ft_free2(argv);
 	return (0);
 }
