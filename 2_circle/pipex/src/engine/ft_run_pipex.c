@@ -1,49 +1,40 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_make_pipe.c                                     :+:      :+:    :+:   */
+/*   ft_run_pipex.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: hjpark <hjpark@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2021/07/13 17:20:31 by hjpark            #+#    #+#             */
-/*   Updated: 2021/07/13 18:40:42 by hjpark           ###   ########.fr       */
+/*   Created: 2021/07/14 18:52:14 by hjpark            #+#    #+#             */
+/*   Updated: 2021/07/14 19:07:02 by hjpark           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "head.h"
 
-static void	*ft_free_pip(int **pip, int index)
+int	ft_run_pipex(t_pipex *pipex)
 {
+	t_list	*t_cmd;
 	int		i;
+	int		pip_in[2];
+	char	*line;
 
+	t_cmd = pipex->cmd;
 	i = 0;
-	if (index < 0)
-		index = 0;
-	while (i < index)
+	while (t_cmd)
 	{
-		ft_free(pip[i]);
+		pipe(pip_in);
+		ft_execve(pipex, pip_in, i);
+		t_cmd = t_cmd->next;
 		i++;
 	}
-	ft_free(pip);
+	while (get_next_line(pipex->pip[0], &line) > 0)
+	{
+		ft_putstr_fd(line, pipex->out, 0);
+		ft_putstr_fd("\n", pipex->out, 0);
+		ft_free(line);
+	}
+	ft_close(pipex->pip[0]);
+	ft_close(pipex->out);
 	return (0);
-}
-
-int	**ft_make_pipe(int cnt)
-{
-	int		**pip;
-	int		i;
-	int		temp;
-
-	i = 0;
-	if (!ft_malloc(&pip, sizeof(int *) * cnt))
-		return (ERROR);
-	while (i < cnt)
-	{
-		if (!ft_malloc(&pip[i], sizeof(int) * 2))
-			return (ft_free_pip(pip, i - 1));
-		if (pipe(pip[i]) == -1)
-			return (ft_free_pip(pip, i));
-		i++;
-	}
-	return (pip);
 }

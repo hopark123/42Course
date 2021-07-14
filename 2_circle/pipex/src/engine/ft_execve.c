@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   main.c                                             :+:      :+:    :+:   */
+/*   ft_execve.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: hjpark <hjpark@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2021/07/13 16:14:09 by hjpark            #+#    #+#             */
-/*   Updated: 2021/07/13 19:40:37 by hjpark           ###   ########.fr       */
+/*   Created: 2021/07/13 19:49:58 by hjpark            #+#    #+#             */
+/*   Updated: 2021/07/14 19:04:46 by hjpark           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -85,12 +85,14 @@ static char	**change_content(char **str, char *home)
 	return (str);
 }
 
-int	ft_execve(t_pipex *pipex, int index)
+int	ft_execve(t_pipex *pipex, int *t_pip, int index)
 {
 	int		pid;
 	char	**argv;
 	t_list	*temp;
+	int		status;
 
+	status = 0;
 	pid = fork();
 	temp = ft_list_next(pipex->cmd, index);
 	argv = ft_split(temp->str, ' ');
@@ -99,62 +101,22 @@ int	ft_execve(t_pipex *pipex, int index)
 		return (ERROR);
 	else if (pid == 0)
 	{
-		dup2(pipex->fd[index][0], STDIN_FILENO);
-		test_str("execve", argv[0]);
+		dup2(pipex->pip[0], STDIN_FILENO);
+		ft_close(pipex->pip[0]);
+		dup2(t_pip[1], STDOUT_FILENO);
+		ft_close(t_pip[1]);
 		if (execve(argv[0], argv, pipex->envp) < 0)
 			return (ERROR);
 	}
 	else
 	{
-		dup2(pipex->fd[index][1], STDOUT_FILENO);
+		waitpid(pid, &status, WUNTRACED);
+		while (!WIFEXITED(status) && !WIFSIGNALED(status))
+			waitpid(pid, &status, WUNTRACED);
+		ft_close(pipex->pip[0]);
+		ft_close(t_pip[1]);
+		ft_free2(argv);
+		pipex->pip[0] = t_pip[0];
 	}
-	return (0);
-}
-
-int	ft_run_pipex(t_pipex *pipex)
-{
-	t_list	*t_cmd;
-	int		i;
-
-	t_cmd = pipex->cmd;
-	i = 0;
-	while (t_cmd)
-	{
-		ft_execve(pipex, i);
-		t_cmd = t_cmd->next;
-		i++;
-	}
-	return (0);
-}
-
-int	main(int argc, char **argv, char **envp)
-{
-	int		i;
-	t_list	*temp;
-	t_pipex	pipex;
-
-	if (argc < 5)
-		return (ERROR);
-	pipex.envp = envp;
-	if (ft_strncmp(argv[1], "here_doc", 8))
-	{
-		ft_init_heredoc(argc, argv);
-		pipex.fd = ft_make_pipe(argc - 4);
-		i = 3;
-	}
-	else
-	{
-		ft_init_pipe(argc, argv);
-		pipex.fd = ft_make_pipe(argc - 3);
-		i = 2;
-	}
-	while (i < argc - 1)
-	{
-		temp = ft_listnew(argv[i]);
-		ft_listadd_tail(&(pipex.cmd), &temp);
-		i++;
-	}
-	pipex.home = ft_find_user(envp);
-	ft_run_pipex(&pipex);
 	return (0);
 }
