@@ -6,7 +6,7 @@
 #    By: hjpark <hjpark@student.42.fr>              +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2021/06/22 14:12:16 by hjpark            #+#    #+#              #
-#    Updated: 2021/07/14 20:18:16 by hjpark           ###   ########.fr        #
+#    Updated: 2021/07/18 12:06:25 by hjpark           ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -76,6 +76,8 @@ fclean : clean
 	$(RM) $(RMFLAGS) $(NAME) test1 test2
 
 re : fclean all
+
+bonus : re
 
 test : $(NAME)
 	 ./pipex infile "./checker 2 1 3" "cat -e" "cat -e" "cat -e" test1
