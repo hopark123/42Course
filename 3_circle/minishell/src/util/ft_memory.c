@@ -3,14 +3,14 @@
 /*                                                        :::      ::::::::   */
 /*   ft_memory.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: hopark <hopark@student.42seoul.kr>         +#+  +:+       +#+        */
+/*   By: suhong <suhong@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/05/18 15:34:54 by hopark            #+#    #+#             */
-/*   Updated: 2021/05/20 12:57:46 by hopark           ###   ########.fr       */
+/*   Updated: 2021/07/06 03:03:26 by suhong           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "head.h"
+#include "util.h"
 
 int	ft_strlen(const char *s)
 {
@@ -28,14 +28,17 @@ void	*ft_memcpy(void *dst, const void *src, int n)
 {
 	unsigned char		*s1;
 	const unsigned char	*s2;
+	int					i;
 
-	if (!dst && !src)
+	i = 0;
+	if ((!dst && !src) || n <= 0)
 		return (0);
 	s1 = dst;
 	s2 = src;
 	while (n-- > 0)
 	{
-		*s1++ = *s2++;
+		s1[i] = s2[i];
+		i++;
 	}
 	return (dst);
 }
@@ -67,8 +70,10 @@ char	*ft_strndup(const char *s, int len)
 	return (temp);
 }
 
-char	*ft_strchr(const char *s, char c)
+char	*ft_strchr2(const char *s, char c)
 {
+	if (c == 0)
+		return (0);
 	while (*s != c)
 	{
 		if (*s == 0)

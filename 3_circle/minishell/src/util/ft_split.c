@@ -3,14 +3,14 @@
 /*                                                        :::      ::::::::   */
 /*   ft_split.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: hopark <hopark@student.42seoul.kr>         +#+  +:+       +#+        */
+/*   By: hjpark <hjpark@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/05/18 15:34:50 by hopark            #+#    #+#             */
-/*   Updated: 2021/05/18 15:35:51 by hopark           ###   ########.fr       */
+/*   Updated: 2021/07/05 19:43:19 by hjpark           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "head.h"
+#include "util.h"
 
 static void	*free_malloc(char **dest, int i)
 {

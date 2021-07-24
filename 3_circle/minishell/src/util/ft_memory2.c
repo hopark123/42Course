@@ -3,14 +3,14 @@
 /*                                                        :::      ::::::::   */
 /*   ft_memory2.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: hopark <hopark@student.42seoul.kr>         +#+  +:+       +#+        */
+/*   By: hjpark <hjpark@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/05/18 15:34:52 by hopark            #+#    #+#             */
-/*   Updated: 2021/05/20 14:12:05 by hopark           ###   ########.fr       */
+/*   Updated: 2021/07/05 03:08:45 by hjpark           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "head.h"
+#include "util.h"
 
 int	ft_strncmp(const char *s1, const char *s2, int n)
 {
@@ -18,11 +18,11 @@ int	ft_strncmp(const char *s1, const char *s2, int n)
 	unsigned char	*c1;
 	unsigned char	*c2;
 
+	if (n == 0 || !s1 || !s2)
+		return (0);
 	c1 = (unsigned char *)s1;
 	c2 = (unsigned char *)s2;
 	i = 0;
-	if (n == 0 || !s1 || !s2)
-		return (0);
 	if (ft_strlen(s1) != n)
 		return (0);
 	while (i < n)
@@ -102,4 +102,16 @@ char	*ft_substr(char const *s, unsigned int start, size_t len)
 	}
 	p[i] = '\0';
 	return (p);
+}
+
+int	ft_strlen2(char **s)
+{
+	int				i;
+
+	if (!s)
+		return (0);
+	i = 0;
+	while (s[i])
+		i++;
+	return (i);
 }
