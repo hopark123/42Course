@@ -6,7 +6,7 @@
 /*   By: hjpark <hjpark@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/07/22 15:08:33 by hjpark            #+#    #+#             */
-/*   Updated: 2021/07/23 19:25:29 by hjpark           ###   ########.fr       */
+/*   Updated: 2021/07/31 16:34:20 by hjpark           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,16 +20,15 @@ void	*ft_check_death(void *arg)
 
 	philo = (t_philo *)arg;
 	info = philo->info;
-	while (info->alive)
+	while (info->alive && philo->cnt_eat < info->must_eat)
 	{
 		time = ft_get_time();
 		if (time - philo->last_eat > info->time_die)
 		{
-			ft_printf(info, time, philo->index, "died");
+			ft_printf(info, philo->index, "died");
 			info->alive = 0;
 			philo->alive = 0;
 		}
-		usleep(1000);
 	}
 	exit(0);
 }

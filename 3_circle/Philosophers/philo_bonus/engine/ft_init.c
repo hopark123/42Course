@@ -6,7 +6,7 @@
 /*   By: hjpark <hjpark@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/07/25 13:25:13 by hjpark            #+#    #+#             */
-/*   Updated: 2021/07/30 18:59:56 by hjpark           ###   ########.fr       */
+/*   Updated: 2021/07/31 16:31:12 by hjpark           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,12 +21,14 @@ static int	init_info2(t_info *info)
 	info->sem = sem_open(sem_name, O_CREAT | O_EXCL, 0644, info->num);
 	ft_free(sem_name);
 	sem_name = ft_strndup("alive", 5);
+	sem_unlink(sem_name);
 	info->alive = sem_open(sem_name, O_CREAT | O_EXCL, 0644, 0);
 	ft_free(sem_name);
 	sem_name = ft_strndup("print", 5);
 	sem_unlink(sem_name);
 	info->print_s = sem_open(sem_name, O_CREAT | O_EXCL, 0644, 1);
 	ft_free(sem_name);
+	return (SUCCESS);
 }
 
 static int	check_argv(char **av)
@@ -62,7 +64,7 @@ int	init_info(t_info *info, int ac, char **av)
 	if (ac == 6)
 		info->must_eat = (int)ft_atoi(av[5]);
 	else
-		info->must_eat = -1;
+		info->must_eat = INT_MAX;
 	if (!ft_malloc(&info->philo, sizeof(t_philo *) * info->num))
 		return (ERROR);
 	if (!ft_malloc(&info->pids, sizeof(int) * info->num))

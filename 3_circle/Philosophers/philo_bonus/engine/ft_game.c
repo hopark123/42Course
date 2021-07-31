@@ -6,7 +6,7 @@
 /*   By: hjpark <hjpark@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/07/30 17:58:55 by hjpark            #+#    #+#             */
-/*   Updated: 2021/07/30 18:26:45 by hjpark           ###   ########.fr       */
+/*   Updated: 2021/07/31 16:03:16 by hjpark           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,7 +19,8 @@ static int	ft_think(t_info *info, t_philo *philo)
 
 	time = ft_get_time();
 	res = 0;
-	if (philo->full == 2 && time - philo->last_eat >= info->time_eat + info->time_sleep)
+	if (philo->full == 2 && time - philo->last_eat \
+						>= info->time_eat + info->time_sleep)
 	{
 		philo->full = 0;
 		philo->cnt_eat++;
@@ -85,5 +86,28 @@ void	*ft_game(t_philo *philo)
 			ft_sleep(info, philo);
 		else if (ft_think(info, philo))
 			break ;
+	}
+	return (0);
+}
+
+void	ft_philo_bonus(t_info *info)
+{
+	int		i;
+	t_philo	*philo;
+
+	i = 0;
+	while (i < info->num)
+	{
+		philo = ft_init_philo(info, i);
+		if (philo == ERROR)
+			return ;
+		info->philo[i] = philo;
+		info->pids[i] = fork();
+		if (!info->pids[i])
+		{
+			ft_game(philo);
+			exit(0);
+		}
+		i++;
 	}
 }

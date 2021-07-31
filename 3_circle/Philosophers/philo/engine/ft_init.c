@@ -6,7 +6,7 @@
 /*   By: hjpark <hjpark@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/07/25 13:25:13 by hjpark            #+#    #+#             */
-/*   Updated: 2021/07/25 13:44:00 by hjpark           ###   ########.fr       */
+/*   Updated: 2021/07/31 16:30:47 by hjpark           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -74,7 +74,7 @@ int	init_info(t_info *info, int ac, char **av)
 	if (ac == 6)
 		info->must_eat = (int)ft_atoi(av[5]);
 	else
-		info->must_eat = -1;
+		info->must_eat = INT_MAX;
 	return (init_info2(info));
 }
 
