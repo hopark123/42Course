@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   utils.h                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: hopark <hopark@student.42seoul.kr>         +#+  +:+       +#+        */
+/*   By: hjpark <hjpark@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/04/28 19:59:39 by hopark            #+#    #+#             */
-/*   Updated: 2021/05/11 13:52:24 by hopark           ###   ########.fr       */
+/*   Updated: 2021/07/14 18:42:51 by hjpark           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,9 +41,9 @@ void		*ft_memset(void *s, int c, int n);
 int			ft_numlen(int num);
 char		**ft_split(char const *s, char c);
 int			ft_strncmp(const char *s1, const char *s2, int n);
-void		ft_putchar_fd(char c, int fd, char *color);
-void		ft_putstr_fd(char *s, int fd, char *color);
-void		ft_putnbr_fd(int n, int fd, char *color);
+int			ft_putchar_fd(char c, int fd, char *color);
+int			ft_putstr_fd(char *s, int fd, char *color);
+int			ft_putnbr_fd(int n, int fd, char *color);
 void		ft_putnbr_fd2(int n, int fd, char *color);
 int			get_next_line(int fd, char **line);
 

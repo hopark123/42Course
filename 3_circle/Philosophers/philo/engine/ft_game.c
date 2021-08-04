@@ -6,7 +6,7 @@
 /*   By: hjpark <hjpark@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/07/22 15:07:26 by hjpark            #+#    #+#             */
-/*   Updated: 2021/07/31 16:26:58 by hjpark           ###   ########.fr       */
+/*   Updated: 2021/07/31 18:29:55 by hjpark           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,7 +22,7 @@ static void	ft_eat(t_info *info, t_philo *philo)
 		ft_printf(info, philo->index, "is eating");
 		philo->last_eat = res;
 		philo->full = 1;
-		ft_usleep((info->time_eat - 5));
+		ft_usleep((info->time_eat));
 	}
 }
 
@@ -36,7 +36,7 @@ static void	ft_sleep(t_info *info, t_philo *philo)
 		ft_printf(info, philo->index, "is sleeping");
 		ft_drop_fork(info, philo);
 		philo->full = 2;
-		ft_usleep(info->time_sleep - 5);
+		ft_usleep(info->time_sleep);
 	}
 }
 

@@ -6,7 +6,7 @@
 #    By: hjpark <hjpark@student.42.fr>              +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2021/06/22 14:12:16 by hjpark            #+#    #+#              #
-#    Updated: 2021/07/31 16:21:29 by hjpark           ###   ########.fr        #
+#    Updated: 2021/08/04 16:49:51 by hjpark           ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -56,24 +56,24 @@ UTIL = $(addprefix $(UTIL_DIR)/, \
 		ft_usleep.c \
 		ft_write.c \
 )
-
 OBJ = $(addprefix $(OBJ_DIR)/, $(notdir $(SRC:.c=.o)))
 
 all : $(NAME)
 
 clean :
-	$(RM) $(RMFLAGS) $(OBJ)
+	@$(RM) $(RMFLAGS) $(OBJ)
 
 fclean : clean
-	$(RM) $(RMFLAGS) $(NAME)
+	@$(RM) $(RMFLAGS) $(NAME)
 
 re : fclean all
 
 test : $(NAME)
 	 ./philo_bonus 4 410 200 200 200
 
-$(OBJ_DIR)/%.o : %.c | $(OBJ_DIR)
+$(OBJ_DIR) :
 	@mkdir -p $(OBJ_DIR)
+$(OBJ_DIR)/%.o : %.c | $(OBJ_DIR)
 	@$(CC) $(CFLAGS) -I $(INC_DIR) -c $< -o $@
 
 $(NAME) : $(INCLUDES) $(OBJ)

@@ -6,7 +6,7 @@
 #    By: hjpark <hjpark@student.42.fr>              +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2021/06/22 14:12:16 by hjpark            #+#    #+#              #
-#    Updated: 2021/07/31 16:23:51 by hjpark           ###   ########.fr        #
+#    Updated: 2021/08/04 16:48:10 by hjpark           ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -71,9 +71,9 @@ re : fclean all
 
 test : $(NAME)
 	 ./philo 4 410 200 200 200
-
-$(OBJ_DIR)/%.o : %.c | $(OBJ_DIR)
+$(OBJ_DIR) :
 	@mkdir -p $(OBJ_DIR)
+$(OBJ_DIR)/%.o : %.c | $(OBJ_DIR)
 	@$(CC) $(CFLAGS) -I $(INC_DIR) -c $< -o $@
 
 $(NAME) : $(INCLUDES) $(OBJ)

@@ -6,7 +6,7 @@
 /*   By: hjpark <hjpark@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/07/25 13:49:03 by hjpark            #+#    #+#             */
-/*   Updated: 2021/07/30 14:45:43 by hjpark           ###   ########.fr       */
+/*   Updated: 2021/08/04 17:10:10 by hjpark           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,6 +19,6 @@ void	ft_usleep(long time)
 	end = time + ft_get_time();
 	while (end >= ft_get_time())
 	{
-		usleep(5);
+		usleep(100);
 	}
 }

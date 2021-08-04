@@ -6,7 +6,7 @@
 /*   By: hjpark <hjpark@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/07/25 13:25:13 by hjpark            #+#    #+#             */
-/*   Updated: 2021/07/31 16:31:12 by hjpark           ###   ########.fr       */
+/*   Updated: 2021/08/04 17:20:20 by hjpark           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,7 +38,7 @@ static int	check_argv(char **av)
 
 	i = 1;
 	j = 0;
-	while (av[i][j])
+	while (av[i])
 	{
 		j = 0;
 		while (av[i][j])
@@ -61,6 +61,8 @@ int	init_info(t_info *info, int ac, char **av)
 	info->time_die = ft_atoi(av[2]);
 	info->time_eat = ft_atoi(av[3]);
 	info->time_sleep = ft_atoi(av[4]);
+	if (!info->num)
+		return (ERROR);
 	if (ac == 6)
 		info->must_eat = (int)ft_atoi(av[5]);
 	else

@@ -6,7 +6,7 @@
 /*   By: hjpark <hjpark@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/07/30 17:58:00 by hjpark            #+#    #+#             */
-/*   Updated: 2021/07/30 17:58:35 by hjpark           ###   ########.fr       */
+/*   Updated: 2021/07/31 16:58:28 by hjpark           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,8 +21,8 @@ void	*ft_try_fork(void *arg)
 	info = philo->info;
 	sem_wait(info->sem);
 	sem_wait(info->sem);
-	ft_printf(info, ft_get_time(), philo->index, "has taken fork1");
-	ft_printf(info, ft_get_time(), philo->index, "has taken fork2");
+	ft_printf(info, ft_get_time(), philo->index, "has taken fork");
+	ft_printf(info, ft_get_time(), philo->index, "has taken fork");
 	philo->fork = 1;
 	philo->check = 0;
 	return (0);
