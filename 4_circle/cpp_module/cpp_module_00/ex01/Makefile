@@ -19,16 +19,19 @@ SRC = $(addprefix $(SRC_DIR)/, \
 )
 
 OBJ = $(addprefix $(OBJ_DIR)/, $(notdir $(SRC:.cpp=.o)))
+
+all : $(NAME)
+
 $(OBJ_DIR) :
 	@mkdir -p $(OBJ_DIR)
 
 $(OBJ_DIR)/%.o : %.cpp $(INC) | $(OBJ_DIR)
 	@$(CC) $(CFLAGS) -I $(INC_DIR) -c $< -o $@
 
-$(NAME) :$(OBJ)
+
+$(NAME) : $(OBJ) $(INC)
 	@$(CC) $(CFLAGS) -o $(NAME) $(OBJ)
 
-all : $(NAME)
 
 clean :
 	$(RM) $(RMFLAGS) $(OBJ)
