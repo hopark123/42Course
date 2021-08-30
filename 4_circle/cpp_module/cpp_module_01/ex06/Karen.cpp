@@ -24,8 +24,6 @@ void	Karen::complain(std::string level)
 {
 	std::string arr[4] = {"DEBUG", "INFO", "WARNING", "ERROR"};
 
-	// void	(Karen::*fp[4])(void) = {&Karen::debug, &Karen::info, &Karen::warning, &Karen::error};
-
 	int i = 0;
 	while(i < 4 && level != arr[i])
 		i++;
