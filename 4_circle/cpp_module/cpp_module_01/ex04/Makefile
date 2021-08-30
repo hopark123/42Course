@@ -1,9 +1,8 @@
-NAME = Zombie
+NAME = Replace
 CC = clang++
 CFLAGS = -std=c++03 -Wall -Wextra -Werror
 RM = rm
 RMFLAGS = -f
-
 OBJ_DIR = obj
 
 INC_DIR = include
@@ -13,13 +12,9 @@ OBJ_DIR = obj
 vpath %.cpp $(SRC_DIR)
 
 INC = $(addprefix $(INC_DIR)/, \
-		Zombie.hpp \
 )
 
 SRC = $(addprefix $(SRC_DIR)/, \
-		newZombie.cpp \
-		Zombie.cpp \
-		randomChump.cpp \
 		main.cpp \
 )
 
@@ -35,7 +30,7 @@ fclean :
 	rm -rf $(OBJ_DIR)
 
 test :$(NAME)
-	./Zombie
+	./Replace "test.txt" "in" "out"
 
 re : fclean all
 

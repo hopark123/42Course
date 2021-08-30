@@ -1,4 +1,4 @@
-NAME = Zombie
+NAME = Weapon
 CC = clang++
 CFLAGS = -std=c++03 -Wall -Wextra -Werror
 RM = rm
@@ -13,13 +13,15 @@ OBJ_DIR = obj
 vpath %.cpp $(SRC_DIR)
 
 INC = $(addprefix $(INC_DIR)/, \
-		Zombie.hpp \
+		Weapon.hpp \
+		HumanA.hpp \
+		HumanB.hpp \
 )
 
 SRC = $(addprefix $(SRC_DIR)/, \
-		newZombie.cpp \
-		Zombie.cpp \
-		randomChump.cpp \
+		Weapon.cpp \
+		HumanA.cpp \
+		HumanB.cpp \
 		main.cpp \
 )
 
@@ -35,7 +37,7 @@ fclean :
 	rm -rf $(OBJ_DIR)
 
 test :$(NAME)
-	./Zombie
+	./Weapon
 
 re : fclean all
 
