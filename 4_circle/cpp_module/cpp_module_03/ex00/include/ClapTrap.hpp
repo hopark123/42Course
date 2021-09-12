@@ -17,7 +17,7 @@ public:
 
 	ClapTrap &operator=(const ClapTrap &other);
 private:
-	std::string name;
+	std::string	name;
 	unsigned int	Hit_Points;
 	unsigned int	Energy_Points;
 	unsigned int	Attack_Damages;
