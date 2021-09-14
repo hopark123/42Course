@@ -1,4 +1,4 @@
-NAME = Brain
+NAME = Animal
 CC = clang++
 CFLAGS = -std=c++03 -Wall -Wextra -Werror
 RM = rm
@@ -39,7 +39,7 @@ fclean :
 	rm -rf $(OBJ_DIR)
 
 test :$(NAME)
-	leaks --atExit -- ./Brain
+	./Animal
 
 re : fclean all
 

@@ -1,4 +1,4 @@
-NAME = Brain
+NAME = AMateria
 CC = clang++
 CFLAGS = -std=c++03 -Wall -Wextra -Werror
 RM = rm
@@ -13,18 +13,22 @@ OBJ_DIR = obj
 vpath %.cpp $(SRC_DIR)
 
 INC = $(addprefix $(INC_DIR)/, \
-		Animal.hpp \
-		Cat.hpp \
-		Dog.hpp \
-		Brain.hpp \
+		AMateria.hpp \
+		Character.hpp \
+		Cure.hpp \
+		Ice.hpp \
+		ICharacter.hpp \
+		IMateriaSource.hpp \
+		MateriaSource.hpp \
 )
 
 SRC = $(addprefix $(SRC_DIR)/, \
-		Animal.cpp \
-		Cat.cpp \
-		Dog.cpp \
-		Brain.cpp \
+		AMateria.cpp \
+		Character.cpp \
+		Cure.cpp \
+		Ice.cpp \
 		main.cpp \
+		MateriaSource.cpp \
 )
 
 OBJ = $(addprefix $(OBJ_DIR)/, $(notdir $(SRC:.cpp=.o)))
@@ -39,7 +43,7 @@ fclean :
 	rm -rf $(OBJ_DIR)
 
 test :$(NAME)
-	leaks --atExit -- ./Brain
+	./AMateria
 
 re : fclean all
 

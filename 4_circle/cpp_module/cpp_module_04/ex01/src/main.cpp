@@ -2,43 +2,33 @@
 #include "Animal.hpp"
 #include "Cat.hpp"
 #include "Dog.hpp"
-#include "WrongAnimal.hpp"
-#include "WrongCat.hpp"
 #include "Brain.hpp"
 
 int main()
 {
-    int i = 2;
-    const Animal *animal[i];
+	int i = 10;
+	Animal *animals[10];
 
-    for(int j = 0 ; j < i/2 ; j++)
-        animal[j] = new Dog();
-    for(int j = i/2 ; j < i ; j++)
-        animal[j] = new Cat();
-    
-    for(int j = 0 ; j < i ; j++ )
-        delete animal[j];
+	for(int j = 0; j < i/2; j++)
+		animals[j] = new Dog();
+	for(int j = i/2; j < i; j++)
+		animals[j] = new Cat();
+	for(int j = 0; j < i; j++)
+		animals[j]->makeSound();
+	for(int j = 0; j < i; j++)
+		delete animals[j];
+	std::cout << "*******************" << std::endl;
 
-    std::cout << "*******************\n";
+	Dog dog;
+	Dog dog2(dog);
 
-    Dog dog;
-    dog.setIdea(0, "Dog idea 0 from dog");
-    dog.setIdea(5, "Dog idea 5 from dog");
-    std::cout << dog.getIdea(5) << "--\n";
+	dog.setIdea(5, "5 Dog idea");
+	dog2.setIdea(5, "change dog2 idea");
+	dog.getIdea(5);
+	dog2.getIdea(5);
 
-    Dog dog2(dog);
-    std::cout << dog2.getIdea(5) << "----\n";
-    std::cout << dog.getIdea(5) << "--\n";
-
-    std::cout << "*******************\n";
-
-    Cat cat;
-    cat.setIdea(0, "cat idea 0 from cat");
-    cat.setIdea(5, "cat idea 5 from cat");
-    std::cout << cat.getIdea(5) << "--\n";
-
-    Cat cat2(cat);
-    std::cout << cat2.getIdea(5) << "----\n";
-    std::cout << cat.getIdea(5) << "--\n";
-    return 0;
+	Cat cat;
+	cat.setIdea(5, "5 Cat idea");
+	dog.getIdea(5);
+	cat.getIdea(5);
 }
