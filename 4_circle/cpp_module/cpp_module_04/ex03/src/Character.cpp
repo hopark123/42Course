@@ -39,7 +39,6 @@ void	Character::equip(AMateria *m){
 		if (this->materia[i] == NULL)
 		{
 			this->materia[i] = m;
-			// std::cout<< m->getType() <<" " << std::endl;
 			break;
 		}
 	}
