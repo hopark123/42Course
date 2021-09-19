@@ -6,7 +6,7 @@ int main()
 	FragTrap Black("black");
 	FragTrap White(Black);
 
-	std::cout << "--------construcotr-----" << std::endl;
+	std::cout << "--------constructor-----" << std::endl;
 	Black.beRepaired(30);
 	Black.attack("Red");
 	Black.takeDamage(40);

@@ -2,9 +2,9 @@
 
 int main()
 {
-	ClapTrap GREEN;
+	// ClapTrap GREEN;
 	ClapTrap Black("black");
-	ClapTrap White(Black);
+	// ClapTrap White(Black);
 
 	std::cout << "--------constructor-----" << std::endl;
 	Black.beRepaired(30);

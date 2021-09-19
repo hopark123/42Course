@@ -8,7 +8,6 @@ FragTrap::FragTrap(void) : ClapTrap(){
 }
 
 FragTrap::FragTrap(const std::string name_) : ClapTrap(name_) {
-	this->name = name_;
 	this->Hit_Points = 100;
 	this->Energy_Points = 100;
 	this->Attack_Damages = 30;

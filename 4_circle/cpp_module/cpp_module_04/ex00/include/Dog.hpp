@@ -9,7 +9,7 @@ public :
 	Dog(void);
 	Dog(const Dog &other);
 	Dog &operator=(const Dog &other);
-	virtual ~Dog(void);
+	~Dog(void);
 
 	void makeSound(void) const;
 private :

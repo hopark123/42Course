@@ -10,7 +10,7 @@ public :
 	Cat(void);
 	Cat(const Cat &other);
 	Cat &operator=(const Cat &other);
-	virtual ~Cat(void);
+	~Cat(void);
 
 	void	makeSound(void) const;
 	Brain	*getBrain(void) const;

@@ -8,8 +8,7 @@ DiamondTrap::DiamondTrap() : ClapTrap("Default_clap_name"), ScavTrap("Default_cl
 	this->Attack_Damages = FragTrap::Attack_Damages;
 }
 
-DiamondTrap::DiamondTrap(std::string const &name_) : ClapTrap(name_ + "_clap_name"), ScavTrap(name_ + "_clap_name"), FragTrap(name_ + "_clap_name")
-{
+DiamondTrap::DiamondTrap(std::string const &name_) : ClapTrap(name_ + "_clap_name"), ScavTrap(name_ + "_clap_name"), FragTrap(name_ + "_clap_name"){
 	this->name = name_;
 	this->Hit_Points = FragTrap::Hit_Points;
 	this->Energy_Points = ScavTrap::Energy_Points;
@@ -17,8 +16,7 @@ DiamondTrap::DiamondTrap(std::string const &name_) : ClapTrap(name_ + "_clap_nam
 	std::cout << "DiamondTrap : " << this->name << " Constructor called"  << std::endl;
 }
 
-DiamondTrap::DiamondTrap(DiamondTrap &other)
-{
+DiamondTrap::DiamondTrap(DiamondTrap &other){
 	*this = other;
 }
 

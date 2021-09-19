@@ -1,18 +1,19 @@
 #ifndef WRONGCAT_HPP
 # define WRONGCAT_HPP
 
-# include "Animal.hpp"
+# include "WrongAnimal.hpp"
 
-class	WrongCat : public Animal
+class	WrongCat : public WrongAnimal
 {
 public :
 	WrongCat(void);
 	WrongCat(const WrongCat &other);
 	WrongCat &operator=(const WrongCat &other);
-	virtual ~WrongCat(void);
+	~WrongCat(void);
 
 	void makeSound(void) const;
 private :
+
 };
 
 #endif

@@ -15,7 +15,7 @@ Cat &Cat::operator=(const Cat &other){
 }
 
 Cat::~Cat(void){
-	std::cout << "Destructor called" << std::endl;
+	std::cout << "Cat Destructor called" << std::endl;
 }
 
 void	Cat::makeSound(void) const{

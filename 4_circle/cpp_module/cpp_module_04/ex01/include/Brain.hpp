@@ -8,7 +8,7 @@ public:
 	Brain(void);
 	Brain(const Brain &other);
 	Brain	&operator=(const Brain &other);
-	virtual ~Brain(void);
+	~Brain(void);
 
 	std::string	const getIdea(int index) const;
 	void	setIdea(int index, std::string idea);
