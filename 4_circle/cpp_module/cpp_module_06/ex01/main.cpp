@@ -7,9 +7,7 @@ int main(void){
 
 	
 	uintptr_t mid = serialize(data);
-
 	Data *out = deserialize(mid);
-
 	std::cout << "str : " << out->str << std::endl;
 	std::cout << "num : " << out->num << std::endl;
 	delete data;

@@ -84,6 +84,7 @@ double Convert::toDouble(void) const{
 	}
 	return (d);
 }
+
 std::ostream &operator<<(std::ostream &os, const Convert &obj){
 	os << "char : ";
 	try {

@@ -9,7 +9,6 @@ int main(int argc, char *argv[])
 		return (1);
 	}
 	Convert conv(argv[1]);
-
 	std::cout << conv;
 	return (0);
 }
