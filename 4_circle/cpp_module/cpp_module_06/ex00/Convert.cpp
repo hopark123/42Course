@@ -36,6 +36,8 @@ char	Convert::toChar(void) const{
 
 	try {
 		c = std::stoi(this->_value);
+		if (c < 0 || c > 255)
+			throw Convert::ImpossibleException();
 	}
 	catch(...) {
 		throw Convert::ImpossibleException();
