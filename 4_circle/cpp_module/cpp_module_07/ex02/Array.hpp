@@ -60,17 +60,17 @@ public :
 
 	T &operator[](unsigned int i){
 		if (i < 0 || i >= this->_size)
-			throw std::out_of_range("out of range");
+			throw Array::OutofRangeException();
 		return _Arr[i];
 	}
 
-
-	T	*getArr() const{
-		return (this->_Arr);
-	}
-	unsigned int	size() const {
-		return (this->_size);
-	}
+	T	*getArr() const{return (this->_Arr);}
+	unsigned int	size() const {return (this->_size);}
+	class OutofRangeException : public std::exception {
+		virtual const char *what() const throw(){
+				return "Out of Range";
+		}
+	};
 
 private :
 	T *_Arr;

@@ -18,6 +18,14 @@ int main(void)
 	std::cout << "----------" << std::endl;
 	for (int i = 0; i < 5; i++)
 		std::cout << "arrary2 : " << array2[i] << std::endl;
+	std::cout << "------out of range test-------" << std::endl;
+	try {
+		for (int i = 0; i < 8; i++)
+			std::cout << "arrary2 : " << array2[i] << std::endl;
+	}
+	catch (const std::exception &e){
+		std::cout << "** excpection **" <<  e.what() << std::endl;
+	}
 
 	return (0);
 }
