@@ -17,6 +17,7 @@ INC = $(addprefix $(INC_DIR)/, \
 )
 
 SRC = $(addprefix $(SRC_DIR)/, \
+		mutantstack.cpp \
 		main.cpp \
 )
 
