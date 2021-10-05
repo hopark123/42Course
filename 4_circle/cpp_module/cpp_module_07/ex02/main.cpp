@@ -26,6 +26,8 @@ int main(void)
 	catch (const std::exception &e){
 		std::cout << "** excpection **" <<  e.what() << std::endl;
 	}
-
+	Array<const int> arr(4);
+	
+	std::cout << arr[2] << std::endl;
 	return (0);
 }

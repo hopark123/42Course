@@ -4,8 +4,6 @@ CFLAGS = -std=c++03 -Wall -Wextra -Werror
 RM = rm
 RMFLAGS = -f
 
-OBJ_DIR = obj
-
 INC_DIR = .
 SRC_DIR = .
 OBJ_DIR = obj
