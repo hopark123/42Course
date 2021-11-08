@@ -3,6 +3,7 @@
 
 namespace ft
 {
+//enable_if
 template <bool, typename T = void>
 struct enable_if {};
 
@@ -11,6 +12,7 @@ struct enable_if<true, T> {
 typedef T type;
 };
 
+//is_integral
 template <typename T>
 struct is_integral { static const bool value = false; };
 template <>
@@ -36,4 +38,5 @@ struct is_integral<unsigned long> { static const bool value = true; };
 template <>
 struct is_integral<unsigned long long> { static const bool value = true; };
 }
+
 #endif
