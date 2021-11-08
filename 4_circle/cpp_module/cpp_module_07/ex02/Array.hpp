@@ -26,7 +26,7 @@ public :
 			std::cout << "bad_alloc : " << e.what() << std::endl;
 		}
 	}
-	Array(const Array &other){
+	Array(Array &other){
 		(*this) = other;
 	}
 	Array	&operator=(const Array &other){
@@ -66,6 +66,8 @@ public :
 
 	T	*getArr() const{return (this->_Arr);}
 	unsigned int	size() const {return (this->_size);}
+
+
 	class OutofRangeException : public std::exception {
 		virtual const char *what() const throw(){
 				return "Out of Range";

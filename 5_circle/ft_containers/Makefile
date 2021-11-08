@@ -1,25 +1,21 @@
-NAME = Bureaucrat
+NAME = container
 CC = clang++
 CFLAGS = -std=c++03 -Wall -Wextra -Werror
 RM = rm
 RMFLAGS = -f
 
-INC_DIR = .
-SRC_DIR = .
+OBJ_DIR = obj
+
+INC_DIR = include
+SRC_DIR = src
 OBJ_DIR = obj
 
 vpath %.cpp $(SRC_DIR)
 
-INC = $(addprefix $(INC_DIR)/, \
-		Bureaucrat.hpp \
-)
+INC = $(wildcard $(INC_DIR)/*.hpp)
+SRC = $(wildcard $(SRC_DIR)/*.cpp)
 
-SRC = $(addprefix $(SRC_DIR)/, \
-		Bureaucrat.cpp \
-		main.cpp \
-)
-
-OBJ = $(addprefix $(OBJ_DIR)/, $(notdir $(SRC:.cpp=.o)))
+OBJ = $(wildcard $(OBJ_DIR)/*.cpp, $(notdir $(SRC:.cpp=.o)))
 
 all : $(NAME)
 
@@ -31,12 +27,12 @@ fclean :
 	rm -rf $(OBJ_DIR)
 
 test :$(NAME)
-	./Bureaucrat
+	./container
 
 re : fclean all
 
 
-OBJ = $(addprefix $(OBJ_DIR)/, $(notdir $(SRC:.cpp=.o)))
+OBJ = $(wildcard $(OBJ_DIR)/, $(notdir $(SRC:.cpp=.o)))
 $(OBJ_DIR) :
 	@mkdir -p $(OBJ_DIR)
 $(OBJ_DIR)/%.o : %.cpp $(INC) | $(OBJ_DIR)

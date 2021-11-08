@@ -20,8 +20,7 @@ MutantStack<T> &MutantStack<T>::operator=(MutantStack<T> const &other){
 }
 
 template<typename T>
-typename MutantStack<T>::iterator MutantStack<T>::begin(void)
-{
+typename MutantStack<T>::iterator MutantStack<T>::begin(void){
 	return (this->c.begin());
 }
 

@@ -36,3 +36,8 @@ int main(void){
 		std::cout << e.what() << std::endl;
 	}
 }
+
+
+int a;
+int b = 3; b(3);
+int c(b);
