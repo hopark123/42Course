@@ -2,12 +2,20 @@
 #include <iostream>
 #include "Vector.hpp"
 #include "Vector_Iterator.hpp"
+#include "Tree.hpp"
 #include <vector>
 #include <map>
 #include <string.h>
 int main()
 {
-	// std::vector<int> A;
+	ft::Tree<int> *Tree;
+	ft::Tree<int>::Node	*Node;
+	int		a = 3;
+
+	std::cout << Tree->begin() << std::endl;
+	Tree->insert(Node, a);
+	std::vector<int> A;
+	Tree->print(Tree->begin());
 
 	// A.push_back(10);
 	// A.push_back(11);
@@ -53,25 +61,36 @@ int main()
 	// it = C.begin();
 	// std::cout << *it << "\n" << *(++it) << std::endl;
 ///////////////////////////map//////////////
-	std::map<std::string, int> A;
-	A.insert(std::make_pair("f", 10));
-	A.insert(std::make_pair("d", 11));
-	A.insert(std::make_pair("e", 12));
-	A.insert(std::make_pair("b", 13));
-	A.insert(std::make_pair("a", 14));
-	std::map<std::string, int>::iterator it = A.begin();
+	// std::map<std::string, int> A;
+	// A.insert(std::make_pair("f", 10));
+	// A.insert(std::make_pair("d", 11));
+	// A.insert(std::make_pair("e", 12));
+	// A.insert(std::make_pair("b", 13));
+	// A.insert(std::make_pair("a", 14));
+	// std::map<std::string, int>::iterator it = A.begin();
 	// std::cout << it->first << std::endl;
-	it++;
+	// std::cout << it->first << std::endl;
+	// it++;
+	// std::cout << it->first << std::endl;
+	// it++;
+	// std::map<std::string, int>::iterator ita = A.end();
+	
+	
 	// std::cout << it->first << std::endl;
 	// it++;
 	// std::cout << it->first << std::endl;
 	// it++;
-	std::map<std::string, int>::iterator ita = A.end();
-	
-	
-	std::cout << ita->first << std::endl;
-	ita++;
-	std::cout << ita->first << std::endl;
+	// std::cout << it->first << std::endl;
+	// it++;
+	// std::cout << it->first << std::endl;
+	// it++;
+	// std::cout << it->first << std::endl;
+	// it++;
+	// std::cout << it->first << std::endl;
+	// it++;
+	// std::cout << it->first << std::endl;
+	// it++;
+	// std::cout << it->first << std::endl;
 
 }
 
