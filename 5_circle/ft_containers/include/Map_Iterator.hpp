@@ -36,8 +36,7 @@ class MapIterator {
 		}
 		~MapIterator() {}
 		_Self const &operator=(const _Self &other){
-			if (this != &other)
-			{
+			if (this != &other){
 				this->_node = other._node;
 				this->_last = other._last;
 				this->_com = other._com;

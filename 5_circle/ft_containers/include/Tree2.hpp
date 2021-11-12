@@ -22,6 +22,7 @@ class Tree
 			Node *left;
 			Node *right;
 
+			Node() : _value(0), parent(nullptr), left(nullptr), right(nullptr) {}
 			Node(const_reference value = value_type()) : _value(value), parent(nullptr), left(nullptr), right(nullptr){}
 			Node(const Node &other) :_value(other.value), parent(nullptr), left(nullptr), right(nullptr) {}
 		};
@@ -53,6 +54,7 @@ class Tree
 			tmp = this->_root;
 			while (tmp->right)
 				tmp = tmp->right;
+			tmp->right = this->_end;
 			this->_end->parent = tmp;
 		}
 
@@ -99,7 +101,7 @@ class Tree
 				(*dest)->right->parent = *dest;
 			}
 		}
-		node_ptr	erase_node(node_ptr node) {
+		node_ptr	erase_node(node_ptr node, node_ptr) {
 			if (!node)
 				return (node);
 			node_ptr ret = node;

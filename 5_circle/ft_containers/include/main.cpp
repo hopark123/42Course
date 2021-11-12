@@ -3,94 +3,53 @@
 #include "Vector.hpp"
 #include "Vector_Iterator.hpp"
 #include "Tree.hpp"
+
 #include <vector>
 #include <map>
 #include <string.h>
+#include <tree.hpp>
+// <template T>
+// class less
+// {
+// 	if ()
+// }
 int main()
 {
-	ft::Tree<int> *Tree;
-	ft::Tree<int>::Node	*Node;
-	int		a = 3;
+	std::
+// 	ft::Tree<int> *Tree;
+// 	// int	a = 3;
 
-	std::cout << Tree->begin() << std::endl;
-	Tree->insert(Node, a);
-	std::vector<int> A;
-	Tree->print(Tree->begin());
+// 	ft::Tree<int>::Node	node1(1);
+// 	ft::Tree<int>::Node	node2(2);
+// 	ft::Tree<int>::Node	node3(3);
+// 	ft::Tree<int>::Node	node4(4);
+// 	ft::Tree<int>::Node	node5(5);
+// 	ft::Tree<int>::Node	node6(6);
+// 	ft::Tree<int>::Node	node7(7);
+// 	ft::Tree<int>::Node	node8(8);
+// 	ft::Tree<int>::Node	node9(9);
+// 	ft::Tree<int>::Node	node10(10);
+// 	ft::Tree<int>::Node	node11(11);
 
-	// A.push_back(10);
-	// A.push_back(11);
-	// A.push_back(12);
-	// A.push_back(13);
-	// A.push_back(14);
+// 	ft::Tree<int>::node_ptr ptr;
+// 	// Tree->copy_node(&ptr, ptr, ptr);
 
-	// std::vector<int>::iterator it;
-	// std::vector<int>::const_iterator cit;
-
-	// it = A.begin();
-	// cit = A.begin();
-
-	// it + 3 ;
-	// std::cout << *(it + 3) << "\n+\n" << *(++it) << std::endl;
-	// // it[3] += 3;
-	// cit[3];
-	// std::cout<< (it - cit) << std::endl;
-	// // std::cout<< it[3] << std::endl;
-	// std::cout<< cit[3] << std::endl;
-	// ft::VectorIterator<int>	it;
-	// ft::VectorIterator<>	it;
-	// std::vector<int> A;
-	// std::vector<int>::iterator it_A;
-	// std::vector<int>::iterator it_B;
-	// std::vector<int>::const_iterator cit_A;
-
-
-	// cit_A = A.begin();
-	// it_A = A.begin();
-
-	// ft::Vector<int> C;
-	// ft::Vector<int>::iterator it;
-	// ft::Vector<int>::const_iterator cit;
-
-	
-
-	// C.push_back(3);
-	// C.push_back(1321312);
-	// C.pop_back();
-	// C.push_back(4);
-
-	// it = C.begin();
-	// std::cout << *it << "\n" << *(++it) << std::endl;
-///////////////////////////map//////////////
-	// std::map<std::string, int> A;
-	// A.insert(std::make_pair("f", 10));
-	// A.insert(std::make_pair("d", 11));
-	// A.insert(std::make_pair("e", 12));
-	// A.insert(std::make_pair("b", 13));
-	// A.insert(std::make_pair("a", 14));
-	// std::map<std::string, int>::iterator it = A.begin();
-	// std::cout << it->first << std::endl;
-	// std::cout << it->first << std::endl;
-	// it++;
-	// std::cout << it->first << std::endl;
-	// it++;
-	// std::map<std::string, int>::iterator ita = A.end();
-	
-	
-	// std::cout << it->first << std::endl;
-	// it++;
-	// std::cout << it->first << std::endl;
-	// it++;
-	// std::cout << it->first << std::endl;
-	// it++;
-	// std::cout << it->first << std::endl;
-	// it++;
-	// std::cout << it->first << std::endl;
-	// it++;
-	// std::cout << it->first << std::endl;
-	// it++;
-	// std::cout << it->first << std::endl;
-	// it++;
-	// std::cout << it->first << std::endl;
+// 	ptr = &node2;
+// 	Tree->insert_node(&node5, &node3);
+// 	Tree->insert_node(&node5, &node2);
+// 	Tree->insert_node(&node5, &node7);
+// 	Tree->insert_node(&node5, &node4);
+// 	Tree->insert_node(&node5, &node1);
+// 	Tree->insert_node(&node5, &node9);
+// 	Tree->insert_node(&node5, &node6);
+// 	Tree->insert_node(&node5, &node8);
+// 	Tree->insert_node(&node5, &node10);
+// 	Tree->insert_node(&node5, &node11);
+// 	Tree->print(&node5);
+// 	// std::cout << Tree->_root->_data <<std::endl;
+// 	Tree->erase_node(&node5, &node4);
+// 	std::cout << "\n" << std::endl;
+// 	Tree->print(&node5);
 
 }
 
