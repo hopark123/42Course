@@ -11,7 +11,7 @@ class Map{
 	public :
 		typedef	Key											key_type;
 		typedef	T											mapped_type;
-		typedef	std::pair<const key_type, mapped_type>		value_type;
+		typedef	std::pair<const Key_type, mapped_type>		value_type; //todo
 		typedef	Compare										key_compare;
 		typedef	Alloc										allocator_type;
 		
@@ -20,10 +20,10 @@ class Map{
 		typedef	T*											pointer;
 		typedef	const T*									const_pointer;
 		
-		typedef	MapIterator<Key, T, Compare, Node>			iterator;
-		typedef	MapIterator<Key, const T, Compare, Node>	const_iterator;
-		typedef	MapRevIterator<Key, T, Compare, Node>		reverse_iterator;
-		typedef	MapRevIterator<Key, const T, Compare, Node>	const_reverse_iterator;
+		typedef	MapIterator<Key, T>			iterator;
+		typedef	MapIterator<Key, const T>	const_iterator;
+		// typedef	MapRevIterator<Key, T, Compare>		reverse_iterator;
+		// typedef	MapRevIterator<Key, const T, Compare>	const_reverse_iterator;
 
 		typedef	std::ptrdiff_t								difference_type;
 		typedef	size_t										size_type;
@@ -31,8 +31,8 @@ class Map{
 		class	value_compare {
 			friend class Map;
 			protected :
-				key_compare		_com;
-				value_compare(key_compare com) : com(com) {};
+				Key_compare		_com;
+				value_compare(Key_compare com) : com(com) {};
 			public :
 				typedef bool	result_type;
 				typedef value_tpye		first_argument_type;
@@ -42,19 +42,11 @@ class Map{
 					return _com(x.first, y.first);
 				}
 		}
-	private :
-		struct Node {
-			std::pair<const Key, T>	content;
-			Node*					parent;
-			Node*					left;
-			Node*					right;
-		};
 
-		Node*					_root;
-		Node*					_last;
-		key_compare				_com;
-		size_type				_size;
-
+		private :
+			typedef	Tree<value_type, value_compare>			_tree_type;
+			typedef	Map<Key, T, Compare>					_Self;
+			_tree_type										_tree;
 };
 
 }

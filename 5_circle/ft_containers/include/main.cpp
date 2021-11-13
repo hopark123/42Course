@@ -7,7 +7,6 @@
 #include <vector>
 #include <map>
 #include <string.h>
-#include <tree.hpp>
 // <template T>
 // class less
 // {
@@ -15,7 +14,6 @@
 // }
 int main()
 {
-	std::
 // 	ft::Tree<int> *Tree;
 // 	// int	a = 3;
 

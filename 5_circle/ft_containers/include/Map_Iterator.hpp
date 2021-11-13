@@ -4,16 +4,16 @@
 # include <iostream>
 # include "ft_stl.hpp"
 # include "Map.hpp"
-
+# include "Tree.hpp"
+# include "Tree_Iterator.hpp"
 
 namespace ft{
-template < class Key, class T, class Compare, typename Node, bool B >
+template < class Key, class T>
 class MapIterator {
 	public :
 		typedef Key										key_type;
 		typedef T										mapped_type;
 		typedef std::pair<const key_type, mapped_type>	value_type;
-		typedef Compare									key_compare;
 		typedef std::ptrdiff_t							difference_type;
 		typedef size_t									size_type;
 
@@ -23,13 +23,11 @@ class MapIterator {
 		typedef const T*								const_pointer;
 		typedef Node*									node_ptr;
 	private :
-		typedef MapIterator<Key, T, Compare, Node, B>	_Self;
+		typedef MapIterator<Key, T>	_Self;
 		node_ptr										_node;
-		node_ptr										_last;
-		key_compare										_com;
 
 	public :
-		MapIterator(node_ptr node = 0, node_ptr last = 0; const key_compare& com = key_compare()) : _node(node), _last(last), _com(com) {}
+		MapIterator(node_ptr node = 0) : _node(node), _last(last){}
 		MapIterator(const _Self &other){
 			if (this != &other)
 				*this = other;
@@ -38,8 +36,6 @@ class MapIterator {
 		_Self const &operator=(const _Self &other){
 			if (this != &other){
 				this->_node = other._node;
-				this->_last = other._last;
-				this->_com = other._com;
 			}
 			return (*this);
 		}

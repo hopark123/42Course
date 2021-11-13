@@ -25,7 +25,7 @@ class VectorIterator
 		VectorIterator(_Self const &other) : _p(other._p) {}
 		~VectorIterator() {}
 
-		_Self const &operator=(const _Self &other){
+		_Self const &operator=(_Self const &other){
 			if (this != &other)
 				this->_p = other._p;
 			return (*this);
@@ -46,7 +46,7 @@ class VectorIterator
 			++(this->_p);
 			return (*this);
 		}
-		const _Self operator++(int){ // postfix increment
+		_Self const operator++(int){ // postfix increment
 			_Self temp(this);
 			++(this->_p);
 			return (temp);
@@ -55,7 +55,7 @@ class VectorIterator
 			--(this->_p);
 			return (*this);
 		}
-		const _Self operator--(int){ // postfix decrement
+		_Self const operator--(int){ // postfix decrement
 			_Self temp(*this);
 			--(this->_p);
 			return (temp);
@@ -126,7 +126,7 @@ class VectorRevIterator
 		VectorRevIterator(_Self const &other) : _p(other._p) {}
 		~VectorRevIterator() {}
 
-		_Self const &operator=(const _Self &other){
+		_Self const &operator=(_Self const &other){
 			if (this != &other)
 				this->_p = other._p;
 			return (*this);
@@ -147,7 +147,7 @@ class VectorRevIterator
 			--(this->_p);
 			return (*this);
 		}
-		const _Self operator++(int){ // postfix increment
+		_Self const operator++(int){ // postfix increment
 			_Self temp(this);
 			--(this->_p);
 			return (temp);
@@ -156,7 +156,7 @@ class VectorRevIterator
 			++(this->_p);
 			return (*this);
 		}
-		const _Self operator--(int){ // postfix decrement
+		_Self const operator--(int){ // postfix decrement
 			_Self temp(this);
 			++(this->_p);
 			return (temp);

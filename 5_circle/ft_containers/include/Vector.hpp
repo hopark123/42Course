@@ -39,13 +39,13 @@ class Vector {
 		Vector(iterator first, iterator last) : _arr(NULL), _len(0), _cap(0){
 			this->insert(this->begin(), first, last);
 		}
-		Vector(const _Self &other) : _arr(NULL), _len(0), _cap(0){
+		Vector(_Self const &other) : _arr(NULL), _len(0), _cap(0){
 			this->insert(this->begin(), other.begin(), other.end());
 		}
 		~Vector(){
 			this->clear();
 		}
-		_Self const &operator=(const _Self &other){
+		_Self const &operator=(_Self const &other){
 			this->clear();
 			this->insert(this->begin(), other.begin(), other.end());
 		}
@@ -213,7 +213,7 @@ class Vector {
 		return (first);
 		}
 		void	swap(_Self &other){
-			std::swap(this->_arr, other._arr);
+			std::swap(this->_arr, other._arr); //todo
 			std::swap(this->_len, other._len);
 			std::swap(this->_cap, other._cap);
 		}

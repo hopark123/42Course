@@ -2,6 +2,7 @@
 # define _TREE_
 
 #include <iostream>
+#include "Tree_Iterator.hpp"
 
 namespace ft
 {
@@ -26,12 +27,18 @@ class Tree
 			Node(const Node &other) : _data(other._data), parent(nullptr), left(nullptr), right(nullptr) {}
 		};
 		typedef	Node*		node_ptr;
-	// protected : //todo
+
+		typedef	TreeIterator<T>			iterator;
+		typedef	TreeIterator<const T>		const_iterator;
+
+	//todo
+	// protected :
 	public :
 		node_ptr	_root;
 		node_ptr	_begin;
 		node_ptr	_end;	// dummpy node
 		Compare		_compare;
+		typedef	Tree<T, compare>	_Self;
 	
 		void		iosolate(node_ptr node) {
 			if (!node)
@@ -70,7 +77,7 @@ class Tree
 				return (find_node(target, node->right));
 		}
 		void	insert_node(node_ptr node, node_ptr target) {
-			if (!node || !traget)
+			if (!node || !target)
 				return ;
 			if (this->_compare(target->_data, node->_data)){
 				if (node->left)
@@ -144,29 +151,29 @@ class Tree
 		}
 	public :
 		Tree() {
-			make_bound();
+			this->make_bound();
 		}
-		Tree(Compare const &comp) : this->_compare(comp){
-			make_bound();
+		Tree(Compare const &comp) : _compare(comp) {
+			this->make_bound();
 		}
-		Tree(Tree const &other) {
+		Tree(const _Self &other) {
 			if (*this != other)
 				*this = other;
 		}
-		virtual	Tree() {
+		virtual	~Tree() {
 			this->make_empty();
 			delete this->_end;
 		}
-		Tree	&operator=(const Tree &other) {
+		_Self	&operator=(const _Self &other) {
 			if (this != other) {
 				if (this->_root != this->_end)
-					this->make_empty()
+					this->make_empty();
 				this->_compare = other.compare;
 				this->_copy(other);
 				return (*this);
 			}
 		}
-		void	copy(const Tree &other) {
+		void	copy(const _Self &other) {
 			if (other._root == other.end)
 				return ;
 			this->_root = new Node(*(other._root));
@@ -198,6 +205,74 @@ class Tree
 			this->insert_node(hint, newNode);
 		}
 
+		template<typename TP> //일단 뭐든지 다 받겠다
+		node_ptr	find(TP const &target) {
+			return (this->find_node(this->_root, target));
+		}
+		template<typename TP> //일단 뭐든지 다 받겠다
+		node_ptr	find(node_ptr hint, TP const &target) {
+			if (!hint)
+				return (this->find(target));
+			else 
+				return(this->find_node(hint, target));
+		}
+		node_ptr	erase(node_ptr node) {
+			if (this->_end->parent)
+				this->_end->parent->right = nullptr;
+			node_ptr next = this->erase_node(this->_root, node);
+			this->repair_tree();
+			return (next);
+		}
+		template<typename TP>
+		size_type	erase(TP const &key) {
+			node_ptr target = nullptr;
+			size_type	cnt = 0;
+			if (this->_end->parent)
+				this->_end->parent->right = nullptr;
+			while ((target = this->find_node(key))) {
+				this->erase_node(key);
+				cnt++;
+			}
+			this->repair_tree();
+			return (cnt);
+		}
+		
+		Compare	key_compare(void) {
+			return (this->_compare);
+		}
+		node_ptr	begin(void) const {
+			return (this->_begin);
+		}
+		node_ptr	end(void) const {
+			return (this->end);
+		}
+
+		void	make_empty(void) {
+			this->distory_node(this->_root);
+			this->_end->parent = nullptr;
+			this->_end->left = nullptr;
+			this->_end->right = nullptr;
+			this->_begin = this->_end;
+			this->_root = this->_end;
+		}
+
+		// void swap()  todo
+
+		iterator	begin() {
+			return (iterator(this->_root));
+		}
+		const_iterator	begin() const {
+			return (const_iterator(this->_root))
+		}
+
+		// [const] rbegin
+		iterator	end() {
+			return (iterator(this->_end));
+		}
+		const_iterator	end() const {
+			return (const_iterator(this->_end))
+		}
+		// [const] rend
 
 
 
