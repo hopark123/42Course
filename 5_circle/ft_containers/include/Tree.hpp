@@ -12,33 +12,26 @@ class Tree
 	public :
 		typedef T			value_type;
 		typedef size_t		size_type;
+		typedef ptrdiff_t	difference_type;
 		typedef T&			reference;
 		typedef T*			pointer;
 		typedef const T&	const_reference;
 		typedef const T*	const_pointer;
-		struct Node
-		{
-			value_type		_data;
-			Node*			parent;
-			Node*			left;
-			Node*			right;
 
-			Node(const_reference data = value_type()) : _data(data), parent(nullptr), left(nullptr), right(nullptr) {}
-			Node(const Node &other) : _data(other._data), parent(nullptr), left(nullptr), right(nullptr) {}
-		};
-		typedef	Node*		node_ptr;
+		typedef	Node<T>*		node_ptr;
 
-		typedef	TreeIterator<T>			iterator;
+		typedef	TreeIterator<T>				iterator;
 		typedef	TreeIterator<const T>		const_iterator;
 
-	//todo
-	// protected :
-	public :
+	// todo
+	protected :
+	// public :
 		node_ptr	_root;
 		node_ptr	_begin;
 		node_ptr	_end;	// dummpy node
 		Compare		_compare;
-		typedef	Tree<T, compare>	_Self;
+		size_type	_len;
+		typedef	Tree<T, Compare>	_Self;
 	
 		void		iosolate(node_ptr node) {
 			if (!node)
@@ -48,7 +41,7 @@ class Tree
 			node->right = nullptr;
 		}
 		void		make_bound(void) {
-			this->_root = new Node();
+			this->_root = new Node<value_type>();
 			this->_begin = this->_root;
 			this->_end = this->_root;
 		}
@@ -61,20 +54,20 @@ class Tree
 			while (tmp->right)
 				tmp = tmp->right;
 			tmp->right = this->_end;
-			this->_end->parent = tmp->right;
+			this->_end->parent = tmp;
 		}
 
-		node_ptr	find_node(node_ptr node, value_type &target) {
-			if (node == this->end || !node)
+		node_ptr	find_node(node_ptr node, const value_type &target) {
+			if (node == this->end().as_node() || !node)
 				return (nullptr);
 			bool left = this->_compare(target, node->_data);
 			bool right = this->_compare(node->_data, target);
 			if (!left && !right)
 				return (node);
 			else if (left)
-				return (find_node(target, node->left));
+				return (find_node(node->left, target));
 			else //  if (right)
-				return (find_node(target, node->right));
+				return (find_node(node->right, target));
 		}
 		void	insert_node(node_ptr node, node_ptr target) {
 			if (!node || !target)
@@ -92,11 +85,12 @@ class Tree
 					node->right = target;
 			}
 			target->parent = node;
+			this->_len++;
 		}
 		void	copy_node(node_ptr *dest, node_ptr target, node_ptr end) {
 			if (!target)
 				return ;
-			*dest = new Node(*target);
+			*dest = new Node<value_type>(*target);
 			if (target->left) {
 				copy_node(&((*dest)->left), target->left, end);
 				(*dest)->left->parent = (*dest);
@@ -140,6 +134,7 @@ class Tree
 					tmp->_data.value_type::~value_type();
 				}
 			}
+			this->_len--;
 			return (root);
 		}
 		void	distory_node(node_ptr node) {
@@ -150,10 +145,10 @@ class Tree
 			delete node;
 		}
 	public :
-		Tree() {
+		Tree() : _len(0) {
 			this->make_bound();
 		}
-		Tree(Compare const &comp) : _compare(comp) {
+		Tree(Compare const &comp = Compare()) : _compare(comp), _len(0) {
 			this->make_bound();
 		}
 		Tree(const _Self &other) {
@@ -161,13 +156,13 @@ class Tree
 				*this = other;
 		}
 		virtual	~Tree() {
-			this->make_empty();
+			this->clear();
 			delete this->_end;
 		}
 		_Self	&operator=(const _Self &other) {
 			if (this != other) {
 				if (this->_root != this->_end)
-					this->make_empty();
+					this->clear();
 				this->_compare = other.compare;
 				this->_copy(other);
 				return (*this);
@@ -176,7 +171,7 @@ class Tree
 		void	copy(const _Self &other) {
 			if (other._root == other.end)
 				return ;
-			this->_root = new Node(*(other._root));
+			this->_root = new Node<value_type>(*(other._root));
 			if (other._root->left) {
 				copy_node (&*this->_root->left, other._root->left, other._end);
 				this->_root->left->parent = this->_root;
@@ -185,11 +180,12 @@ class Tree
 				copy_node (&*this->_root->right, other._root->right, other._end);
 				this->_root->right->parent = this->_root;
 			}
+			this->_len = other._len;
 			this->repair_tree();
 		}
 
 		node_ptr	insert(const_reference val){
-			node_ptr newNode = new Node(val);
+			node_ptr newNode = new Node<value_type>(val);
 			if (this->_root == this->_end)
 				this->_root = newNode;
 			else {
@@ -201,7 +197,7 @@ class Tree
 			return (newNode);
 		}
 		node_ptr	insert(node_ptr hint, const_reference val) {
-			node_ptr newNode = new Node(val);
+			node_ptr newNode = new Node<value_type>(val);
 			this->insert_node(hint, newNode);
 		}
 
@@ -240,42 +236,50 @@ class Tree
 		Compare	key_compare(void) {
 			return (this->_compare);
 		}
-		node_ptr	begin(void) const {
-			return (this->_begin);
-		}
-		node_ptr	end(void) const {
-			return (this->end);
-		}
+		// node_ptr	begin(void) const {
+		// 	return (this->_begin);
+		// }
+		// node_ptr	end(void) const {
+		// 	return (this->end);
+		// }
 
-		void	make_empty(void) {
+		void	clear(void) {
 			this->distory_node(this->_root);
 			this->_end->parent = nullptr;
 			this->_end->left = nullptr;
 			this->_end->right = nullptr;
 			this->_begin = this->_end;
 			this->_root = this->_end;
+			this->_len = 0;
 		}
 
 		// void swap()  todo
 
-		iterator	begin() {
+		iterator	begin(void) {
 			return (iterator(this->_root));
 		}
-		const_iterator	begin() const {
-			return (const_iterator(this->_root))
+		const_iterator	begin(void) const {
+			return (iterator(this->_root));
 		}
 
 		// [const] rbegin
-		iterator	end() {
+		iterator	end(void) {
 			return (iterator(this->_end));
 		}
-		const_iterator	end() const {
-			return (const_iterator(this->_end))
+		const_iterator	end(void) const {
+			return (iterator(this->_end));
 		}
 		// [const] rend
 
-
-
+		bool	is_empty() {
+			return (this->_len == 0);
+		}
+		size_t	get_size() {
+			return (this->_len);
+		}
+		size_t	max_size() {
+			return (std::numeric_limits<difference_type>::max() / sizeof(value_type));
+		}
 		void	print(node_ptr node)
 		{
 			if (!node)

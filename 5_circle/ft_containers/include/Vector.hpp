@@ -213,9 +213,9 @@ class Vector {
 		return (first);
 		}
 		void	swap(_Self &other){
-			std::swap(this->_arr, other._arr); //todo
-			std::swap(this->_len, other._len);
-			std::swap(this->_cap, other._cap);
+			swap(this->_arr, other._arr); //todo
+			swap(this->_len, other._len);
+			swap(this->_cap, other._cap);
 		}
 		void	clear(void){
 			this->erase(this->begin(), this->end());

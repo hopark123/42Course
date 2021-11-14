@@ -36,10 +36,10 @@ class VectorIterator
 		const_reference	&operator*(void) const{
 			return (*(this->_p));
 		}
-		pointer		&operator->(void){
+		pointer		operator->(void){
 			return (this->_p);
 		}
-		const_pointer		&operator->(void) const{
+		const_pointer		operator->(void) const{
 			return (this->_p);
 		}
 		_Self &operator++(void){ // prefix increment

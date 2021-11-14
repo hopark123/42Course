@@ -1,5 +1,5 @@
 #ifndef _TREE_ITERATOR_
-# define _TREE_ITERATPR_
+# define _TREE_ITERATOR_
 
 #include <iostream>
 #include "Tree.hpp"
@@ -8,35 +8,34 @@
 //todo reverse
 namespace	ft {
 
-template< typename T>
+template< typename T >
 class TreeIterator {
 	public :
-		typedef T			value_type;
-		typedef T&			reference;
-		typedef T*			pointer;
-		typedef const T&	const_reference;
-		typedef const T*	const_pointer;
+		typedef T				value_type;
+		typedef T&				reference;
+		typedef T*				pointer;
+		typedef const T&		const_reference;
+		typedef const T*		const_pointer;
 		
-		typedef Node			node_type;
-		typedef Node*			node_ptr;
+		typedef Node<T>			node_type;
+		typedef Node<T>*		node_ptr;
 		
-		typedef std::ptrdiff_t				difference_type;
+		typedef std::ptrdiff_t	difference_type;
 
 	private :
 		node_ptr					_p;
 		typedef	TreeIterator<T>	_Self;
-
-		void		prev {
+		void		prev() {
 			if (this->_p->left)
 			{
-				this->_p = this->_p->left
+				this->_p = this->_p->left;
 				while (this->_p->right)
 					this->_p = this->_p->right;
 			}
 			else
 				this->_p = this->_p->parent;
 		}
-		void		next {
+		void		next() {
 			if (this->_p->right){
 				this->_p = this->_p->right;
 				while (this->_p->left)
@@ -54,26 +53,27 @@ class TreeIterator {
 	public :
 		TreeIterator() : _p(nullptr) {}
 		TreeIterator(node_ptr p) : _p(p) {}
-		TreeIterator(_Self const &other) : _p(other.p) {}
+		TreeIterator(_Self const &other) : _p(other._p) {}
 		virtual ~TreeIterator(){}
 
-		node_ptr	ptr(void) const {
-			return (this->_p)
+		node_ptr	as_node(void) const {
+			return (this->_p);
 		}
 		_Self	const &operator=(_Self const &other) {
 			this->_p = other._p;
+			return (*this);
 		}
 		reference	operator*(void) {
-			return (this->_p->value);
+			return (this->_p->_data);
 		}
 		const_reference	operator*(void) const {
-			return (this->_p->value);
+			return (this->_p->_data);
 		}
-		pointer		&operator->(void) {
-			return (&(this->_p->value));
+		pointer		operator->(void) {
+			return (&(this->_p->_data));
 		}
-		const_pointer	&operator->(void) const{
-			return (&(this->_p->value));
+		const_pointer	operator->(void) const{
+			return (&(this->_p->_data));
 		}
 		_Self	&operator++(void) {
 			this->next();
@@ -111,6 +111,7 @@ class TreeIterator {
 			this->_p += -value;
 		}
 		_Self	operator-(int value)	const {
+			_Self temp(*this);
 			temp -= value;
 			return (temp);
 		}

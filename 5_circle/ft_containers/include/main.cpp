@@ -3,10 +3,12 @@
 #include "Vector.hpp"
 #include "Vector_Iterator.hpp"
 #include "Tree.hpp"
-
+#include "Map.hpp"
+#include "ft_stl.hpp"
 #include <vector>
 #include <map>
 #include <string.h>
+
 // <template T>
 // class less
 // {
@@ -14,8 +16,24 @@
 // }
 int main()
 {
-// 	ft::Tree<int> *Tree;
-// 	// int	a = 3;
+	int a = 3;
+	int b = 4;
+	ft::Pair<int, int> c = ft::make_pair<int, int>(a, b);
+	ft::Pair<int, int> d = ft::make_pair<int, int>(5, 6);
+
+
+	ft::Map<int, int> ma;
+	std::map<int, int> f;
+
+	ma.insert(c);
+	ma.insert(d);
+
+	ft::Map<int,int>::iterator it;
+	it = ma.begin();
+	it++;
+	std::cout << it->first << std::endl;
+	ma.clear();
+
 
 // 	ft::Tree<int>::Node	node1(1);
 // 	ft::Tree<int>::Node	node2(2);
