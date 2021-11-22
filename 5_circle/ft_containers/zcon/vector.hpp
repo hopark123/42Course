@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   vector.hpp                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: kyuhkim <kyuhkim@student.42.fr>            +#+  +:+       +#+        */
+/*   By: hjpark <hjpark@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/10/13 00:46:49 by kyuhkim           #+#    #+#             */
-/*   Updated: 2021/11/04 03:11:43 by kyuhkim          ###   ########.fr       */
+/*   Updated: 2021/11/14 18:38:21 by hjpark           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,7 @@
 #ifndef __VECTOR__
 #define __VECTOR__
 
-#include "vector_iterator.hpp"
+#include "Vector_iterator.hpp"
 #include "reverse_iterator.hpp"
 #include <cstring>
 

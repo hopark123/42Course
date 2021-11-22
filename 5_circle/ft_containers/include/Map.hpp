@@ -13,7 +13,7 @@ class Map{
 		typedef	Pair<const key_type, mapped_type>			value_type;
 		typedef	Compare										key_compare;
 		typedef	Alloc										allocator_type;
-		typedef	Node<value_type>*										node_ptr;
+		typedef	Node<value_type>*							node_ptr;
 		
 		typedef	T&											refrence;
 		typedef	const T&									const_reference;
@@ -54,9 +54,9 @@ class Map{
 		Map(InputIt first, InputIt last, const key_compare com = key_compare()) {
 			this->insert(first, last);
 		}
-		Map(_Self const &other) : _tree(other._tree) {}
+		Map(const _Self &other) : _tree(other._tree) {}
 		~Map() {}
-		_Self const &operator=(_Self const &other) {
+		const _Self &operator=(const _Self &other) {
 			this->_tree = other._tree;
 			return (*this);
 		}
@@ -90,7 +90,7 @@ class Map{
 			return (this->_tree.insert(make_pair(target, mapped_type()))->_data.second);
 		}
 
-
+	///// todo :: tree에 compare을 넘겨줘야하지 않나??
 		Pair<iterator,bool> insert (const value_type& val) {
 			node_ptr	temp = this->_tree.find(val);
 			if (temp)
@@ -104,10 +104,10 @@ class Map{
 				return (iterator(temp));
 			return (iterator(this->_tree.insert(position.as_node(), val)));
 		}
-		template <class InputIterator>
-		void insert (InputIterator first, InputIterator last) {
+		template <class InputIt>
+		void insert (InputIt first, InputIt last) {
 			while (first != last)
-				this->_insert(*first++);
+				this->_insert(*(first++));
 		}
 		void erase (iterator position) {
 			this->_tree.erase(position.as_node());
@@ -127,13 +127,12 @@ class Map{
 				}
 			}
 		}
-		void swap (_Self &x) {
-			swap(this->_tree, x._tree);
-		}
 		void	clear() {
 			this->_tree.clear();
 		}
-
+		void swap (_Self &x) {
+			ft::swap(this->_tree, x._tree);
+		}
 		key_compare key_comp() const {
 			return (this->_tree._compare);
 		}

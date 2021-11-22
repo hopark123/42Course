@@ -3,7 +3,7 @@
 
 #include <iostream>
 #include "ft_stl.hpp"
-#include "Vector.hpp"
+#include "vector.hpp"
 
 namespace ft {
 template<typename T>

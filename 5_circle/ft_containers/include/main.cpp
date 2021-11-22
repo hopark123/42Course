@@ -1,9 +1,8 @@
-#include "Vector.hpp"
 #include <iostream>
-#include "Vector.hpp"
-#include "Vector_Iterator.hpp"
-#include "Tree.hpp"
-#include "Map.hpp"
+#include "vector.hpp"
+#include "vector_Iterator.hpp"
+#include "tree.hpp"
+#include "map.hpp"
 #include "ft_stl.hpp"
 #include <vector>
 #include <map>
