@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   test.cpp                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: kyuhkim <kyuhkim@student.42.fr>            +#+  +:+       +#+        */
+/*   By: hjpark <hjpark@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/11/03 22:07:22 by kyuhkim           #+#    #+#             */
-/*   Updated: 2021/11/07 22:38:29 by kyuhkim          ###   ########.fr       */
+/*   Updated: 2021/11/29 16:45:51 by hjpark           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -75,25 +75,25 @@ int		main(void)
 int main(void) {
 	
 	ft::map<int, ft::vector<int> > ftMap1;
-	ft::vector<int> ftVector1;
-	ft::vector<int> ftVector2;
-	ft::vector<int> ftVector3;
-	ft::vector<int> ftVector4;
-	ft::vector<int> ftVector5;
-	ft::vector<int> ftVector6;
-	ft::vector<int> ftVector7;
-	ft::vector<int> ftVector8;
-	ft::vector<int> ftVector9;
+	ft::vector<int> ftvector1;
+	ft::vector<int> ftvector2;
+	ft::vector<int> ftvector3;
+	ft::vector<int> ftvector4;
+	ft::vector<int> ftvector5;
+	ft::vector<int> ftvector6;
+	ft::vector<int> ftvector7;
+	ft::vector<int> ftvector8;
+	ft::vector<int> ftvector9;
 
-	ftMap1.insert(ft::pair<int, ft::vector<int> >(4, ftVector4));
-	ftMap1.insert(ft::pair<int, ft::vector<int> >(6, ftVector6));
-	ftMap1.insert(ft::pair<int, ft::vector<int> >(8, ftVector8));
-	ftMap1.insert(ft::pair<int, ft::vector<int> >(3, ftVector3));
-	ftMap1.insert(ft::pair<int, ft::vector<int> >(7, ftVector7));
-	ftMap1.insert(ft::pair<int, ft::vector<int> >(5, ftVector5));
-	ftMap1.insert(ft::pair<int, ft::vector<int> >(2, ftVector2));
-	ftMap1.insert(ft::pair<int, ft::vector<int> >(9, ftVector9));
-	ftMap1.insert(ft::pair<int, ft::vector<int> >(1, ftVector1));
+	ftMap1.insert(ft::pair<int, ft::vector<int> >(4, ftvector4));
+	ftMap1.insert(ft::pair<int, ft::vector<int> >(6, ftvector6));
+	ftMap1.insert(ft::pair<int, ft::vector<int> >(8, ftvector8));
+	ftMap1.insert(ft::pair<int, ft::vector<int> >(3, ftvector3));
+	ftMap1.insert(ft::pair<int, ft::vector<int> >(7, ftvector7));
+	ftMap1.insert(ft::pair<int, ft::vector<int> >(5, ftvector5));
+	ftMap1.insert(ft::pair<int, ft::vector<int> >(2, ftvector2));
+	ftMap1.insert(ft::pair<int, ft::vector<int> >(9, ftvector9));
+	ftMap1.insert(ft::pair<int, ft::vector<int> >(1, ftvector1));
 
 	std::cout << ftMap1[1].capacity() << std::endl;
 

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   iterator_traits.hpp                                :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: kyuhkim <kyuhkim@student.42.fr>            +#+  +:+       +#+        */
+/*   By: hjpark <hjpark@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/10/13 20:46:32 by kyuhkim           #+#    #+#             */
-/*   Updated: 2021/10/28 14:53:18 by kyuhkim          ###   ########.fr       */
+/*   Updated: 2021/11/29 13:53:24 by hjpark           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,11 +37,14 @@ namespace ft {
 /* define: iterator traits */
 	template <typename _Iterator>
 	struct iterator_traits {
-		typedef 	typename _Iterator::iterator_category	iterator_category;
-		typedef 	typename _Iterator::value_type			value_type;
-		typedef 	typename _Iterator::difference_type		difference_type;
-		typedef 	typename _Iterator::pointer				pointer;
-		typedef 	typename _Iterator::reference			reference;
+		typedef typename _Iterator::iterator_category	iterator_category;
+		typedef typename _Iterator::value_type			value_type;
+		typedef typename _Iterator::difference_type		difference_type;
+		typedef typename _Iterator::reference			reference;
+		typedef typename _Iterator::pointer				pointer;
+		typedef typename _Iterator::const_reference		const_reference;
+		typedef typename _Iterator::const_pointer		const_pointer;
+
 	};
 
 	template <typename _T>

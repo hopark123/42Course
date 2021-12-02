@@ -6,7 +6,7 @@
 /*   By: hjpark <hjpark@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/10/20 03:58:11 by kyuhkim           #+#    #+#             */
-/*   Updated: 2021/11/14 18:38:23 by hjpark           ###   ########.fr       */
+/*   Updated: 2021/11/29 21:12:54 by hjpark           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,6 +29,7 @@ namespace ft {
 			typedef		typename iterator_traits<_T>::difference_type	difference_type;
 			typedef		typename iterator_traits<_T>::pointer			pointer;
 			typedef		typename iterator_traits<_T>::reference			reference;
+
 
 		protected:
 			_T

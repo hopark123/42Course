@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   vector.hpp                                         :+:      :+:    :+:   */
+/*   Vector.hpp                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: hjpark <hjpark@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/10/13 00:46:49 by kyuhkim           #+#    #+#             */
-/*   Updated: 2021/11/14 18:38:21 by hjpark           ###   ########.fr       */
+/*   Updated: 2021/11/30 17:28:07 by hjpark           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -292,20 +292,20 @@ namespace ft {
 			insert (iterator _position, _InputIterator _first, _InputIterator _last, typename ft::enable_if<!ft::is_integral<_InputIterator>::value>::type* = 0) {
 				difference_type distance = ft::distance(_first, _last);
 				size_type newSize = (size() + distance) < capacity() ? capacity() : (size() + distance);
-				vector newVector (false, newSize);
+				vector newvector (false, newSize);
 				iterator iter = begin();
 
 				while (iter != _position) {
-					newVector.push_back(*iter++);
+					newvector.push_back(*iter++);
 				}
 				while (_first != _last) {
-					newVector.push_back(*_first++);
+					newvector.push_back(*_first++);
 				}
 				while (iter != end()) {
-					newVector.push_back(*iter++);
+					newvector.push_back(*iter++);
 				}
 
-				swap (newVector);
+				swap (newvector);
 			}
 
 			iterator
