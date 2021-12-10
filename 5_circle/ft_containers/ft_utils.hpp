@@ -84,6 +84,31 @@ struct pair {
 	}
 	~pair() {}
 };
+template <typename T1, typename T2>
+bool operator==(const pair<T1, T2> &lhs, const pair<T1, T2> &rhs) {
+	return (lhs.first == rhs.first && lhs.second == rhs.second);
+}
+
+template <typename T1, typename T2>
+bool operator<(const pair<T1, T2> &lhs, const pair<T1, T2> &rhs) {
+	return (lhs.first < rhs.first && lhs.second < rhs.second);
+}
+
+template <typename T1, typename T2>
+bool operator!=(const pair<T1, T2> &lhs, const pair<T1, T2> &rhs) {
+	return (!(lhs == rhs));
+}
+
+template <typename T1, typename T2>
+bool operator<=(const pair<T1, T2> &lhs, const pair<T1, T2> &rhs) {
+	return (!(lhs > rhs));
+}
+
+template <typename T1, typename T2>
+bool operator>(const pair<T1, T2> &lhs, const pair<T1, T2> &rhs) {
+	return (rhs < lhs);
+}
+
 template<typename T1, typename T2>
 pair<T1, T2> make_pair(T1 first, T2 second) {
 	return (pair<T1, T2>(first, second));
@@ -106,12 +131,25 @@ void swap (T &lhs, T &rhs) {
 	rhs = tmp;
 }
 //lexicographical_compare
+
 template<class It1, class It2>
 bool lexicographical_compare(It1 first1, It1 last1, It2 first2, It2 last2)
 {
 	for ( ; (first1 != last1) && (first2 != last2); ++first1, (void) ++first2 ) {
 		if (*first1 < *first2) return true;
 		if (*first2 < *first1) return false;
+	}
+	return (first1 == last1) && (first2 != last2);
+}
+
+template<class It1, class It2, class Compare>
+bool lexicographical_compare(It1 first1, It1 last1, It2 first2, It2 last2, Compare comp)
+{
+	for ( ; (first1 != last1) && (first2 != last2); ++first1, (void) ++first2 ) {
+		if (comp(*first1,*first2))
+			return true;
+		if (comp(*first2,*first1))
+			return false;
 	}
 	return (first1 == last1) && (first2 != last2);
 }
@@ -142,7 +180,7 @@ typename IteratorTraits<It>::difference_type distance(It first, It last)
 	typename IteratorTraits<It>::difference_type dist = 0;
 	for (; first != last; ++first)
 		dist++;
-	return dist;
+	return (dist);
 }
 
 }

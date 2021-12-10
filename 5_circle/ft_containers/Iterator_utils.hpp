@@ -8,6 +8,8 @@
 //todo enable
 namespace ft 
 {
+// struct pair{
+// };
 
 // Iterator tags
 struct InputIteratorTag {};
@@ -56,34 +58,31 @@ class reverse_iteartor {
 		typedef typename IteratorTraits<It>::pointer			pointer;
 		typedef typename IteratorTraits<It>::iterator_category	iterator_category;
 	private :
-		It							_base;
+		It									_base;
 		typedef reverse_iteartor<It>		_Self;
 	
 	public :
 		reverse_iteartor() : _base(nullptr) {};
-		reverse_iteartor(It inbase) : _base(inbase) {}
+		reverse_iteartor(It base) : _base(base) {}
 		reverse_iteartor(const _Self &other) : _base(other._base) {}
 		template <typename U>
-		reverse_iteartor(const reverse_iteartor<U> &it, typename std::enable_if<!std::is_integral<U>::value>::type* = 0) : _base(it.pos()) {}
+		reverse_iteartor(const reverse_iteartor<U> &it, typename std::enable_if<!std::is_integral<U>::value>::type* = 0) : _base(it.base()) {}
 		~reverse_iteartor() {}
 		operator reverse_iteartor<const It> () const { return (reverse_iteartor<const It>(this->_base)); } // const 치환
 		template <typename U>
 		_Self &operator=(const reverse_iteartor<U> &other) {
 			if (*this != other)
-				this->_base = other.pos();
+				this->_base = other.base();
 			return (*this);
 		}
 		_Self &operator=(const _Self &other) {
 			if (*this != other)
-			{
-				// this->_base = iteraotr(other.pos());
 				this->_base = other._base;
-			}
 			return (*this);
 		}
 		reference	operator*(void) const {
-			It temp = this->pos();
-				return *(--temp);
+			It temp = this->base();
+				return *(temp);
 		}
 		pointer	operator->(void) {
 			return (&operator*());
@@ -117,11 +116,9 @@ class reverse_iteartor {
 		_Self operator+(difference_type value) const{
 			_Self temp(*this);
 			temp += value;
-			// std::cout << "here [" << *temp._base <<"]" << std::endl;
 			return (temp);
 		}
 		_Self operator-(difference_type value) const{
-			// std::cout << "rev -" << std::endl;
 			_Self temp(*this);
 			temp -= value;
 			return (temp);
@@ -151,38 +148,33 @@ class reverse_iteartor {
 			return (this->_base <= other._base);
 		}
 		It base(void) const {
-			// std::cout << "this??????" << std::endl;
-			return (this->_base);
-		}
-		It pos(void) const {
-			// std::cout << "this??????" << std::endl;
 			return (this->_base);
 		}
 };
 
 template <typename It1, typename It2>
 bool operator==(const reverse_iteartor<It1>& it1, const reverse_iteartor<It2>& it2) {
-	return (it1.pos() == it2.pos());
+	return (it1.base() == it2.base());
 }
 template <typename It1, typename It2>
 bool operator!=(const reverse_iteartor<It1>& it1, const reverse_iteartor<It2>& it2) {
-	return (it1.pos() != it2.pos());
+	return (it1.base() != it2.base());
 }
 template <typename It1, typename It2>
 bool operator>=(const reverse_iteartor<It1>& it1, const reverse_iteartor<It2>& it2) {
-	return (it1.pos() <= it2.pos());
+	return (it1.base() <= it2.base());
 }
 template <typename It1, typename It2>
 bool operator>(const reverse_iteartor<It1>& it1, const reverse_iteartor<It2>& it2) {
-	return (it1.pos() < it2.pos());
+	return (it1.base() < it2.base());
 }
 template <typename It1, typename It2>
 bool operator<=(const reverse_iteartor<It1>& it1, const reverse_iteartor<It2>& it2) {
-	return (it1.pos() >= it2.pos());
+	return (it1.base() >= it2.base());
 }
 template <typename It1, typename It2>
 bool operator<(const reverse_iteartor<It1>& it1, const reverse_iteartor<It2>& it2) {
-	return (it1.pos() > it2.pos());
+	return (it1.base() > it2.base());
 }
 
 

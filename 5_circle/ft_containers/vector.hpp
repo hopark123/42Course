@@ -66,7 +66,6 @@ class vector {
 			return (const_iterator(this->_arr + this->_len));
 		}
 		reverse_iterator	rbegin(void) {
-			// std::cout << "this->end : " << *(this->end()) << *(this->end() - 1)<<std::endl;
 			return (reverse_iterator(this->end()));
 		}
 		const_reverse_iterator	rbegin(void) const{
@@ -255,13 +254,13 @@ class vector {
 		}
 };
 template<typename T>
-bool operator==(vector<T> const &lhs, vector<T> const &rhs) {
+bool operator==(const vector<T> &lhs, const vector<T> &rhs) {
 	if (lhs.size() != rhs.size() || lhs.capacity() != lhs.capacity())
 		return (false);
 	return equal(lhs.begin(), lhs.end(), rhs.begin());
 }
 template<typename T>
-bool operator!=(vector<T> const &lhs, vector<T> const &rhs) {
+bool operator!=(const vector<T> &lhs, const vector<T> &rhs) {
 	return (!(lhs == rhs));
 }
 template <typename T>

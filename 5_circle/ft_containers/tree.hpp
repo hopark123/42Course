@@ -7,9 +7,8 @@
 
 namespace ft
 {
-template <typename T, class Compare = ft::less<T> >
-class tree
-{
+template <typename T, class Compare = ft::less<T>, typename Alloc = std::allocator<T> >
+class tree {
 	public :
 		typedef T							value_type;
 		typedef size_t						size_type;
@@ -18,20 +17,21 @@ class tree
 		typedef T*							pointer;
 		typedef const T&					const_reference;
 		typedef const T*					const_pointer;
-
+		typedef Alloc						alloc_type;
+		typedef	Node<T>						node;
 		typedef	Node<T>*					node_ptr;
 
-		typedef	treeIterator<T>						iterator;
-		typedef	treeIterator<const T>				const_iterator;
+		typedef	treeIterator<T, node>						iterator;
+		typedef	treeIterator<const T, const node>			const_iterator;
 		typedef reverse_iteartor<iterator>			reverse_iterator;
 		typedef reverse_iteartor<const_iterator>	const_reverse_iterator;
 	protected :
-		node_ptr	_root;
-		node_ptr	_begin;
-		node_ptr	_end;	// dummpy node
-		Compare		_compare;
-		size_type	_len;
-		typedef	tree<T, Compare>	_Self;
+		node_ptr									_root;
+		node_ptr									_begin;
+		node_ptr									_end;	// dummpy node
+		Compare										_compare;
+		size_type									_len;
+		typedef	tree<T, Compare>					_Self;
 
 		void	iosolate(node_ptr node) {
 			if (!node)
@@ -50,23 +50,33 @@ class tree
 			while (temp->left)
 				temp = temp->left;
 			this->_begin = temp;
+			// this->_begin->right = nullptr;
+			temp = this->_root;
 			while (temp->right)
 				temp = temp->right;
 			temp->right = this->_end;
 			this->_end->parent = temp;
-		}
 
-		node_ptr	find_node(node_ptr node, const value_type &target) {
+		}
+		template< typename TP>
+		node_ptr	find_node(node_ptr node, const TP &target) const 	{
 			if (node == this->end().as_node() || !node)
+			{
 				return (nullptr);
+			}
+			// std::cout << "find_nodeA data["<< node->_data.first <<"]" << std::endl;
+			// std::cout << "target["<< &target <<"]" << std::endl;
 			bool left = this->_compare(target, node->_data);
+			// std::cout << "find_nodeD" << std::endl;
 			bool right = this->_compare(node->_data, target);
+			// std::cout << "find_nodeF" << std::endl;
 			if (!left && !right)
 				return (node);
 			else if (left)
 				return (find_node(node->left, target));
 			else // if (right)
 				return (find_node(node->right, target));
+				
 		}
 		void	insert_node(node_ptr node, node_ptr target) {
 			if (!node || !target)
@@ -83,15 +93,16 @@ class tree
 				else
 					node->right = target;
 			}
-			target->parent = node;
 			this->_len++;
+			target->parent = node;
+			return ;
 		}
 		void	copy_node(node_ptr *dest, node_ptr target, node_ptr end) {
 			if (!target)
 				return ;
 			*dest = new Node<value_type>(*target);
 			if (target->left) {
-				copy_node(&((*dest)->left, target->left, end));
+				copy_node(&((*dest)->left), target->left, end);
 				(*dest)->left->parent = (*dest);
 			}
 			if (target->right && target->right != end) {
@@ -102,6 +113,8 @@ class tree
 		node_ptr	erase_node(node_ptr root, node_ptr node) {
 			if (!root || !node)
 				return (nullptr);
+					// std::cout << "@@@@@@A" << std::endl;
+
 			bool left = this->_compare(node->_data, root->_data);
 			bool right = this->_compare(root->_data, node->_data);
 			if (left)
@@ -116,6 +129,7 @@ class tree
 					root->_data.value_type::~value_type();
 					new (&(root->_data)) value_type(candidate->_data);
 					root->left = erase_node(root->left, candidate);
+					// this->_len++;
 				}
 				else {
 					node_ptr temp;
@@ -125,10 +139,12 @@ class tree
 					else if (root->left == nullptr)
 						root = root->right;
 					temp->_data.value_type::~value_type();
+					this->_len--;
 				}
-				this->_len--;
 				return (root);
 			}
+			// std::cout <<"hereB" << std::endl;
+			return (root);
 		}
 		void	distory_node(node_ptr node) {
 			if (!node || node == this->_end)
@@ -140,35 +156,46 @@ class tree
 
 
 	public :
-		tree(void) : _len(0) { this->make_boubd();}
-		tree(Compare const &comp = Compare()) : _compare(comp), _len(0) {this->make_bound();}
-		tree(const _Self &other) {
-			if (*this != other)
-				*this = other;
+		tree(const Compare com) : _compare(com), _len(0) {this->make_bound();}
+		tree(const _Self &other) : _compare(other._compare) {
+			// if (*this != other)
+			*this = other;
+			
 		}
 		virtual ~tree(void) {
 			this->clear();
 			delete this->_end;
 		}
-		_Self	&operator=(const _Self &other) {
-			if (this != other) {
+		template <typename U, typename K>
+		_Self &operator=(const tree<U, K> &other) {
+			if (*this != other) {
 				if (this->_root != this->_end)
 					this->clear();
-				this->_compare = other.compare;
-				this->_copy(other);
+				this->_compare = other._compare;
+				this->copy(other);
 				return (*this);
 			}
 		}
+		const _Self	&operator=(const _Self &other) {
+			// if (*this != other) {
+				if (this->_root != this->_end)
+					this->clear();
+				this->copy(other);
+				return (*this);
+			// }
+		}
+
 		void	copy(const _Self &other) {
-			if (other._root == other.end)
+			this->_compare = other._compare;
+			if (other._root == other.end_node())
 				return ;
 			this->_root = new Node<value_type>(*(other._root));
 			if (other._root->left) {
-				copy_node (&((*this)->_root->left), other._root->right, other._end);
+				this->copy_node(&(this->_root->left), other._root->left, other.end_node());
 				this->_root->left->parent = this->_root;
 			}
 			if (other._root->right) {
-				copy_node (&((*this)->_root->left), other._root->right, other.end);
+				this->copy_node(&(this->_root->right), other._root->right, other.end_node());
 				this->_root->right->parent = this->_root;
 			}
 			this->_len = other._len;
@@ -178,46 +205,61 @@ class tree
 		node_ptr	insert(const_reference val) {
 			node_ptr	newNode = new Node<value_type>(val);
 			if (this->_root == this->_end)
+			{
 				this->_root = newNode;
+				this->_len++;
+			}
 			else {
 				if (this->_end->parent)
 					this->_end->parent->right = nullptr;
 				this->insert_node(this->_root, newNode);
+				// std::cout << "newNoew [" << newNode->_data.first <<"][" << newNode->_data.second << "]" << std::endl;
 			}
 			this->repair_tree();
 			return (newNode);
 		}
 		node_ptr	insert(node_ptr hint, const_reference val) {
 			node_ptr	newNode = new Node<value_type>(val);
-			this->insert(hint, newNode);
+			this->insert_node(hint, newNode);
+			return (newNode);
 		}
 
+
+/*
+candidate function not viable:
+'this' argument has type 'const ft::map<int, std::string>::tree_type'
+(aka 'const tree<pair<const int, std::string>, ft::map<int, std::string>::value_compare>'),
+but method is not marked const
+*/
 		template<typename TP>
-		node_ptr	find(TP const &target) {
-			return (this->find_node(this->_root, target));
+		node_ptr	find(const TP &key) const {
+			return (this->find_node(this->_root, key));
 		}
 		template<typename TP>
-		node_ptr	find(node_ptr hint, TP const &target) {
+		node_ptr	find(node_ptr hint, TP const &key) {
 			if (!hint)
-				return (this->find(target));
+				return (this->find(key));
 			else
-				return (this->find_node(hint, target));
+				return (this->find_node(hint, key));
 		}
 		node_ptr	erase(node_ptr node) {
 			if (this->_end->parent)
 				this->_end->parent->right = nullptr;
 			node_ptr next = this->erase_node(this->_root, node);
+			this->_root = next;
+			// std::cout << "erase end" << std::endl;
 			this->repair_tree();
+			// std::cout << "erase end#" << std::endl;
 			return (next);
 		}
 		template<typename TP>
-		size_type	erase(TP const &key) {
+		size_type	erase(TP &key) {
 			node_ptr target = nullptr;
 			size_type	cnt = 0;
 			if (this->_end->parent)
 				this->_end->parent->right = nullptr;
-			while ((target = this->find_node(key))) {
-				this->earse_node(key);
+			while ((target = this->find_node(this->_root, key))) {
+				this->_root = this->erase_node(this->_root, key);
 				cnt++;
 			}
 			this->repair_tree();
@@ -226,13 +268,6 @@ class tree
 		const Compare &key_compare(void) const {
 			return (this->_compare);
 		}
-		// node_ptr	begin(void) const {
-		// 	return (this->_begin);
-		// }
-		// node_ptr	end(void) const {
-		// 	return (this->end);
-		// }
-
 		void	clear(void) {
 			this->distory_node(this->_root);
 			this->_end->parent = nullptr;
@@ -249,12 +284,18 @@ class tree
 			ft::swap(this->_compare, other._compare);
 			ft::swap(this->_len, other._len);
 		}
-		//todo
+		node_ptr	begin_node(void) const {
+			return (this->_begin);
+		}
+		node_ptr	end_node(void) const {
+			return (this->_end);
+		}
+
 		iterator	begin(void) {
-			return (iterator(this->_root));
+			return (iterator(this->_begin));
 		}
 		const_iterator	begin(void) const {
-			return (const_iterator(this->_root));
+			return (const_iterator(this->_begin));
 		}
 		iterator	end(void) {
 			return (iterator(this->_end));
@@ -269,10 +310,10 @@ class tree
 			return (const_reverse_iterator(this->_end));
 		}
 		reverse_iterator	rend(void) {
-			return (reverse_iterator(this->_root));
+			return (reverse_iterator(this->_begin));
 		}
 		const_iterator	rend(void) const {
-			return (revserseconst_iterator(this->_root));
+			return (revserseconst_iterator(this->_begin));
 		}
 		bool	is_empty(void) const {
 			return (this->_len == 0);
@@ -281,22 +322,29 @@ class tree
 			return (this->_len);
 		}
 		size_type	max_size(void) const {
-			return (std::numeric_limits<difference_type>::max() / sizeof(value_type));
-		}
-		void	print(node_ptr node)
-		{
-			if (!node)
-				return ;
-			print(node->left);
-			// if (node->left)
-			// 	std::cout << node->left->_data << "|";
-			std::cout << node->_data;
-			// if (node->right)
-			// 	std::cout << "|" << node->right->_data;
-			std::cout << std::endl;
-			print(node->right);
+			return (std::numeric_limits<difference_type>::max() / ((sizeof(value_type)) + sizeof(pointer)));
 		}
 };
+
+// template<typename T, typename C>
+// bool operator==(const tree<T, C> &lhs, const tree<T, C>  &rhs) {
+// 	if (lhs.get_size() != rhs.get_size())
+// 		return (false);
+// 	return equal(lhs.begin(), lhs.end(), rhs.begin());
+// }
+// template<typename T, typename C>
+// bool operator!=(const tree<T, C> &lhs, const tree<T, C> &rhs) {
+// 	return (!(lhs == rhs));
+// }
+
+
+// template <typename T>
+// void swap(tree<T> &lhs, tree<T> &rhs){
+// 	rhs.swap(lhs);
+// }
 }
 
 #endif
+
+
+
