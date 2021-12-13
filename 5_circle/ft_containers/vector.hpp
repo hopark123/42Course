@@ -239,8 +239,7 @@ class vector {
 		void	clear(void) {
 			this->erase(this->begin(), this->end());
 		}
-		reference operator[](difference_type n) const
-		{
+		reference operator[](difference_type n) const {
 			return *(*this + n);
 		}
 		void	debug(void) {

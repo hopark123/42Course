@@ -32,13 +32,14 @@ class map {
 			public :
 				key_compare		_com;
 				// value_compare() : _com(key_compare()){}
-				value_compare(key_compare com) : _com(com) {}
+				value_compare(key_compare com = ft::less<Key>()) : _com(com) {
+					this->_com = com;
+				}
 				value_compare(const value_compare &com) : _com(com._com) {}
 				// value_compare &operator=(const value_compare &o);
 				typedef bool			result_type;
 				typedef value_type		first_argument_type;
 				typedef	value_type		second_argument_type;
-				// value_compare(vzalue_compare &other) : _com(other._com) {}
 				bool operator() (const value_type& x, const value_type& y) const {
 					return _com(x.first, y.first);
 				}
@@ -50,7 +51,7 @@ class map {
 		typedef reverse_iteartor<iterator>			reverse_iterator;
 		typedef reverse_iteartor<const_iterator>	const_reverse_iterator;
 
-	private :
+	public :
 		typedef	tree<value_type, value_compare, Alloc>		tree_type;
 		tree_type											_tree;
 		typedef	map<Key, T, Compare, Alloc>					_Self;
@@ -156,7 +157,7 @@ class map {
 			this->_tree.clear();
 		}
 		void	swap(_Self &other) {
-			ft::swap(this->_tree, other._tree);
+			this->_tree.swap(other._tree);
 		}
 		key_compare	key_comp(void) const {
 			return (this->_tree.key_compare()._com);
@@ -228,6 +229,10 @@ class map {
 		pair<const_iterator,const_iterator>	equal_range (const key_type& k) const {
 			return (pair<const_iterator, const_iterator>(this->lower_bound(k), this->upper_bound(k)));
 		}
+
+		void	print(void) {
+			return (this->_tree.print(this->_tree._root));
+		}
 };
 
 template <typename Key, typename T, typename Compare >
@@ -263,7 +268,7 @@ bool operator>(const map<Key, T, Compare> &lhs, const map<Key, T, Compare> &rhs)
 
 template <typename Key, typename T, typename Compare >
 bool operator<=(const map<Key, T, Compare> &lhs, const map<Key, T, Compare> &rhs) {
-	return (!(lhs > rhs));
+	return (!(rlhs < lhs));
 }
 }
 

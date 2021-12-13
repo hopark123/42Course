@@ -25,7 +25,7 @@ class tree {
 		typedef	treeIterator<const T, const node>			const_iterator;
 		typedef reverse_iteartor<iterator>			reverse_iterator;
 		typedef reverse_iteartor<const_iterator>	const_reverse_iterator;
-	protected :
+	public :
 		node_ptr									_root;
 		node_ptr									_begin;
 		node_ptr									_end;	// dummpy node
@@ -50,7 +50,6 @@ class tree {
 			while (temp->left)
 				temp = temp->left;
 			this->_begin = temp;
-			// this->_begin->right = nullptr;
 			temp = this->_root;
 			while (temp->right)
 				temp = temp->right;
@@ -64,12 +63,8 @@ class tree {
 			{
 				return (nullptr);
 			}
-			// std::cout << "find_nodeA data["<< node->_data.first <<"]" << std::endl;
-			// std::cout << "target["<< &target <<"]" << std::endl;
 			bool left = this->_compare(target, node->_data);
-			// std::cout << "find_nodeD" << std::endl;
 			bool right = this->_compare(node->_data, target);
-			// std::cout << "find_nodeF" << std::endl;
 			if (!left && !right)
 				return (node);
 			else if (left)
@@ -113,8 +108,6 @@ class tree {
 		node_ptr	erase_node(node_ptr root, node_ptr node) {
 			if (!root || !node)
 				return (nullptr);
-					// std::cout << "@@@@@@A" << std::endl;
-
 			bool left = this->_compare(node->_data, root->_data);
 			bool right = this->_compare(root->_data, node->_data);
 			if (left)
@@ -129,25 +122,43 @@ class tree {
 					root->_data.value_type::~value_type();
 					new (&(root->_data)) value_type(candidate->_data);
 					root->left = erase_node(root->left, candidate);
-					// this->_len++;
 				}
 				else {
+					
 					node_ptr temp;
 					temp = root;
-					if (root->right == nullptr)
+					if (root->right == nullptr && root->left)
+					{
+std::cout << "=============================kkkq" << std::endl;
 						root = root->left;
+					}
 					else if (root->left == nullptr)
+					{
+std::cout << "=============================kkkw" << std::endl;
+
 						root = root->right;
+					}
+					else
+					{
+std::cout << "=============================kkek" << std::endl;
+
+						root = nullptr;
+					}
 					temp->_data.value_type::~value_type();
+					// delte temp;
+					// temp::~value_type();
+
 					this->_len--;
+					// root = nullptr;
 				}
 				return (root);
 			}
-			// std::cout <<"hereB" << std::endl;
 			return (root);
 		}
 		void	distory_node(node_ptr node) {
-			if (!node || node == this->_end)
+			if (!node)
+				return ;
+			if (node == this->_end)
 				return ;
 			distory_node(node->left);
 			distory_node(node->right);
@@ -181,6 +192,7 @@ class tree {
 				if (this->_root != this->_end)
 					this->clear();
 				this->copy(other);
+				this->repair_tree();
 				return (*this);
 			// }
 		}
@@ -213,24 +225,27 @@ class tree {
 				if (this->_end->parent)
 					this->_end->parent->right = nullptr;
 				this->insert_node(this->_root, newNode);
-				// std::cout << "newNoew [" << newNode->_data.first <<"][" << newNode->_data.second << "]" << std::endl;
 			}
 			this->repair_tree();
 			return (newNode);
 		}
 		node_ptr	insert(node_ptr hint, const_reference val) {
+			(void) hint;
 			node_ptr	newNode = new Node<value_type>(val);
-			this->insert_node(hint, newNode);
+			if (this->_root == this->_end)
+			{
+				this->_root = newNode;
+				this->_len++;
+			}
+			else {
+				if (this->_end->parent)
+				this->_end->parent->right = nullptr;
+				this->insert_node(this->_root, newNode);
+			}
+			this->repair_tree();
 			return (newNode);
 		}
 
-
-/*
-candidate function not viable:
-'this' argument has type 'const ft::map<int, std::string>::tree_type'
-(aka 'const tree<pair<const int, std::string>, ft::map<int, std::string>::value_compare>'),
-but method is not marked const
-*/
 		template<typename TP>
 		node_ptr	find(const TP &key) const {
 			return (this->find_node(this->_root, key));
@@ -269,6 +284,9 @@ but method is not marked const
 			return (this->_compare);
 		}
 		void	clear(void) {
+			if (this->_end->parent)
+				this->_end->parent->right = nullptr;
+			// print(this->_root);
 			this->distory_node(this->_root);
 			this->_end->parent = nullptr;
 			this->_end->left = nullptr;
@@ -323,6 +341,16 @@ but method is not marked const
 		}
 		size_type	max_size(void) const {
 			return (std::numeric_limits<difference_type>::max() / ((sizeof(value_type)) + sizeof(pointer)));
+		}
+
+
+		void		print(node_ptr node) {
+			if (!node)
+				return ;
+			print(node->left);
+			std::cout << "debug [" << node->_data.first << "][" << node->_data.second <<"]"<< std::endl;
+			print(node->right);
+
 		}
 };
 

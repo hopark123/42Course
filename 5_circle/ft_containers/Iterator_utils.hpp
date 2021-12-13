@@ -82,7 +82,7 @@ class reverse_iteartor {
 		}
 		reference	operator*(void) const {
 			It temp = this->base();
-				return *(temp);
+				return *(--temp);
 		}
 		pointer	operator->(void) {
 			return (&operator*());

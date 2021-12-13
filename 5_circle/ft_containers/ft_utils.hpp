@@ -126,16 +126,19 @@ struct less {
 // swap
 template <typename T>
 void swap (T &lhs, T &rhs) {
+	// std::cout << "swap A" << std::endl;
 	T tmp(lhs);
+	// std::cout << "swap B" << std::endl;
 	lhs = rhs;
 	rhs = tmp;
+
 }
 //lexicographical_compare
 
 template<class It1, class It2>
 bool lexicographical_compare(It1 first1, It1 last1, It2 first2, It2 last2)
 {
-	for ( ; (first1 != last1) && (first2 != last2); ++first1, (void) ++first2 ) {
+	for ( ; (first1 != last1) && (first2 != last2); ++first1, ++first2 ) {
 		if (*first1 < *first2) return true;
 		if (*first2 < *first1) return false;
 	}
@@ -145,13 +148,25 @@ bool lexicographical_compare(It1 first1, It1 last1, It2 first2, It2 last2)
 template<class It1, class It2, class Compare>
 bool lexicographical_compare(It1 first1, It1 last1, It2 first2, It2 last2, Compare comp)
 {
-	for ( ; (first1 != last1) && (first2 != last2); ++first1, (void) ++first2 ) {
+	for ( ; (first1 != last1) && (first2 != last2); ++first1, ++first2 ) {
 		if (comp(*first1,*first2))
 			return true;
 		if (comp(*first2,*first1))
 			return false;
+		if (comp._com(first1->second, first2->second))
+		{
+			// std::cout<<"\n[" << first1->first << first1->second <<"][ " << first2->second << "aa" << std::endl;
+			return true;
+		}
+		if(comp._com(first2->second, first1->second))
+		{
+			// std::cout << "\nbb" << std::endl;
+			return false;
+		}
+			// std::cout<<"\n[" << first1->first << first1->second <<"][ " << first2->second << "aa" << std::endl;
+		
 	}
-	return (first1 == last1) && (first2 != last2);
+	return ((first1 == last1) && (first2 != last2));
 }
 
 // equal
