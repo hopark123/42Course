@@ -84,7 +84,7 @@ class reverse_iteartor {
 			It temp = this->base();
 				return *(--temp);
 		}
-		pointer	operator->(void) {
+		pointer	operator->(void) const {
 			return (&operator*());
 		}
 		_Self &operator++(void) {
@@ -124,7 +124,7 @@ class reverse_iteartor {
 			return (temp);
 		}
 		reference operator[](difference_type value) {
-			return (*(this->_base - value));
+			return (*(this->_base - 1 - value));
 		}
 		difference_type operator-(_Self const &other) const {
 			return (other._base - this->_base);

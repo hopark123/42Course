@@ -17,30 +17,35 @@ class treeIterator {
 		typedef const T*		const_pointer;
 		
 		typedef Node			node_type;
-		typedef Node*		node_ptr;
+		typedef Node*			node_ptr;
 		typedef std::ptrdiff_t	difference_type;
 		typedef RandomAccessIteratorTag	iterator_category;
 	
 	private :
 		node_ptr				_p;
-		// node_ptr				_end;
 		typedef	treeIterator<T, Node>	_Self;
 		
 		void	prev(void) {
+			// std::cout << "//inprev [" << _p->_data.first << "]\\\\" <<std::endl;
 			if (this->_p->left)
 			{
 				this->_p = this->_p->left;
 				while (this->_p->right)
 					this->_p = this->_p->right;
 			}
-			else
+			else {
+				node_ptr temp = this->_p;
 				this->_p = this->_p->parent;
-
+				while (this->_p->right !=temp) {
+					temp = this->_p;
+					this->_p = this->_p->parent;
+				}
+			}
+			// std::cout << "\\\\outprev [" << _p->_data.first << "]//" <<std::endl;
 		}
 		void	next(void) {
 			if (this->_p->right) {
 				this->_p = this->_p->right;
-				// std::cout << "here" << this->_p->_data.first<< std::endl;
 				while (this->_p->left)
 					this->_p = this->_p->left;
 			}
@@ -98,8 +103,8 @@ class treeIterator {
 		pointer	operator->(void) const {
 			return (&(this->_p->_data));
 		}
-		// const_pointer	operator->(void){
-		// 	return (&(this->_p->_data));
+		// const_pointer	operator->(void) const {
+		// 	return ((this->_p->_data));
 		// }
 		_Self	&operator++(void) {
 			this->next();
@@ -116,7 +121,9 @@ class treeIterator {
 		}
 		const _Self	operator--(int) {
 			_Self	temp(*this);
+			// std::cout << "operator+-[" <<this->base()->_data.first << "]" << std::endl;
 			this->prev();
+			// std::cout << "operator--[" <<this->base()->_data.first << "]"  << std::endl;
 			return (temp);
 		}
 		_Self	&operator+=(int value) {
@@ -158,6 +165,10 @@ class treeIterator {
 		}
 		bool operator>=(const _Self  &other) const {
 			return (this->_p >= other._p);
+		}
+
+		node_ptr		base(void){
+			return (this->_p);
 		}
 };
 

@@ -59,8 +59,6 @@ class map {
 		map(const key_compare &com = key_compare()) : _tree(value_compare(com)) {}
 		template<typename InputIt>
 		map(InputIt first, InputIt last, const key_compare &com = key_compare()) :  _tree(value_compare(com)) {
-			// value_compare temp(com);
-			// _tree = temp;
 			this->insert(first, last);
 		}
 		map(const _Self &other) : _tree(other._tree) {}
@@ -125,14 +123,11 @@ class map {
 		}
 		template <typename InputIt>
 		void	insert(InputIt first, InputIt last) {
-			while (first != last && first.operator->())
-			{
-				this->insert(*(first));
-				first++;
+			while (first != last && first.operator->()){
+				this->insert(*(first++));
 			}
 		}
 		void	erase(iterator position) {
-			// std::cout << "erase pos : [" << position->first <<"]" << "[" << position->second <<"]" << std::endl;
 			this->_tree.erase(position.as_node());
 		}
 		size_type	erase(const key_type &k) {
@@ -140,7 +135,7 @@ class map {
 			if (position == _tree.end())
 				return (0);
 			this->_tree.erase(position.as_node());
-			return (1)	;
+			return (1);
 		}
 		void	erase(iterator first, iterator last) {
 			if (first == this->begin() && last == this->end())
@@ -181,7 +176,6 @@ class map {
 		}
 
 		size_type	count(const key_type &k) const {
-			// value_type target = ft::make_pair(k, mapped_type());
 			if (this->find(k)!= this->end())
 				return (1);
 			return (0);
@@ -231,7 +225,10 @@ class map {
 		}
 
 		void	print(void) {
-			return (this->_tree.print(this->_tree._root));
+			std::cout << "/==========="<< this->_tree._root->_data.first << "===========\\" << std::endl;
+			this->_tree.print(this->_tree._root);
+			std::cout << "\\======================/" << std::endl;
+			return ;
 		}
 };
 
@@ -268,7 +265,7 @@ bool operator>(const map<Key, T, Compare> &lhs, const map<Key, T, Compare> &rhs)
 
 template <typename Key, typename T, typename Compare >
 bool operator<=(const map<Key, T, Compare> &lhs, const map<Key, T, Compare> &rhs) {
-	return (!(rlhs < lhs));
+	return (!(rhs < lhs));
 }
 }
 

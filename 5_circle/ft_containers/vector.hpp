@@ -60,16 +60,18 @@ class vector {
 			return (const_iterator(this->_arr));
 		}
 		iterator end(void) {
+			// std::cout << "here" <<std::endl;
 			return (iterator(this->_arr + this->_len));
 		}
 		const_iterator end(void) const {
+			// std::cout << "hereA" <<std::endl;
 			return (const_iterator(this->_arr + this->_len));
 		}
 		reverse_iterator	rbegin(void) {
-			return (reverse_iterator(this->end()));
+			return (reverse_iterator(this->_arr + this->_len));
 		}
 		const_reverse_iterator	rbegin(void) const{
-			return (const_reverse_iterator(this->end()));
+			return (const_reverse_iterator(this->_arr + this->_len));
 		}
 		reverse_iterator rend(void) {
 			return (reverse_iterator(this->_arr));
@@ -88,8 +90,7 @@ class vector {
 			this->_cap = n;
 			if (n > this->_cap)
 				this->reserve(n);
-			else if (n >= this->_len)
-			{
+			else if (n >= this->_len){
 				this->insert(this->end(), n -this->_len, value);
 			}
 			else
@@ -263,7 +264,7 @@ bool operator!=(const vector<T> &lhs, const vector<T> &rhs) {
 	return (!(lhs == rhs));
 }
 template <typename T>
-bool operator<(const vector<T> &lhs, const vector<T> &rhs){
+bool operator<(const vector<T> &lhs, const vector<T> &rhs) {
 	return lexicographical_compare(lhs.begin(), lhs.end(), rhs.begin(), rhs.end());
 }
 template <typename T>

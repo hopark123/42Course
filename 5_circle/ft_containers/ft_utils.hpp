@@ -8,23 +8,27 @@ namespace ft
 
 // Node
 template <typename T>
-struct Node
+struct Node // redblack node 
 {
 	T		_data;
+	int		_color;
 	Node	*parent;
 	Node	*left;
 	Node	*right;
 
-	Node(const T& data = T()) : _data(data), parent(nullptr), left(nullptr), right(nullptr) {}
-	Node(const Node &other) : _data(other._data), parent(nullptr), left(nullptr), right(nullptr) {}
+	Node(const T& data = T()) : _data(data), _color(1) , parent(nullptr), left(nullptr), right(nullptr){}
+	Node(const Node &other) : _data(other._data), _color(other._color), parent(nullptr), left(nullptr), right(nullptr) {
+	}
+	void	swap_node (const Node &other) {
+		swap(this->_data, other._data);
+	}
 };
 
 // enable_if
 template <bool, typename T = void>
 struct enable_if {};
 template <typename T>
-struct enable_if<true, T>
-{
+struct enable_if<true, T> {
 	typedef T type;
 };
 
@@ -126,12 +130,9 @@ struct less {
 // swap
 template <typename T>
 void swap (T &lhs, T &rhs) {
-	// std::cout << "swap A" << std::endl;
 	T tmp(lhs);
-	// std::cout << "swap B" << std::endl;
 	lhs = rhs;
 	rhs = tmp;
-
 }
 //lexicographical_compare
 
