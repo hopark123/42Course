@@ -473,6 +473,7 @@ class tree {
 			this->_compare = other._compare;
 			if (other._root == other.end_node())
 				return ;
+			this->make_bound();
 			this->_root = new Node<value_type>(*(other._root));
 			if (other._root->left) {
 				this->copy_node(&(this->_root->left), other._root->left, other.end_node());
