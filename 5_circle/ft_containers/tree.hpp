@@ -233,6 +233,7 @@ class tree {
 					this->recoloring(node);
 				else
 					this->restructuring(node, false);
+				}
 			}
 			return (true);
 		}
@@ -240,20 +241,7 @@ class tree {
 		bool	restructuring(node_ptr node, bool right) {
 			if (right) {
 				if (this->_compare(node->parent->_data, node->_data)) {
-					if (node->parent->parent->parent) {
-						if (this->_compare(node->parent->parent->parent->_data, node->parent->parent->_data))
-							node->parent->parent->parent->right = node->parent;
-						else
-							node->parent->parent->parent->left = node->parent;
-					}
-					else
-						this->_root = node->parent;
-					node->parent->parent->right = node->parent->left;
-					if (node->parent->parent->right)
-						node->parent->parent->right->parent = node->parent->parent;
-					node->parent->left = node->parent->parent;
-					node->parent->parent = node->parent->parent->parent;
-					node->parent->left->parent = node->parent;
+					rotate_left(node->parent->parent);
 					node->parent->_color = 0;
 					node->parent->left->_color = 1;
 				}
@@ -280,20 +268,7 @@ class tree {
 			}
 			else {
 				if (!this->_compare(node->parent->_data, node->_data)) {
-					if (node->parent->parent->parent) {
-						if (this->_compare(node->parent->parent->parent->_data, node->parent->parent->_data))
-							node->parent->parent->parent->right = node->parent;
-						else
-							node->parent->parent->parent->left = node->parent;
-					}
-					else
-						this->_root = node->parent;
-					node->parent->parent->left = node->parent->right;
-					if (node->parent->parent->left)
-						node->parent->parent->left->parent = node->parent->parent;
-					node->parent->right = node->parent->parent;
-					node->parent->parent = node->parent->parent->parent;
-					node->parent->right->parent = node->parent;
+					rotate_right(node->parent->parent);
 					node->parent->_color = 0;
 					node->parent->right->_color = 1;
 				}
@@ -596,6 +571,13 @@ class tree {
 				std::cout << "\tright" << node->right->_data.first;
 			if (node->parent)
 				std::cout << "\tparent" << node->parent->_data.first;
+			// std::cout << this->_len<<"debug(" << node->_color << ")[" << node->_data << "][" << node->_data <<"]";
+			// if (node->left)
+			// 	std::cout << "\tleft" << node->left->_data;
+			// if (node->right)
+			// 	std::cout << "\tright" << node->right->_data;
+			// if (node->parent)
+			// 	std::cout << "\tparent" << node->parent->_data;
 			std::cout << std::endl;
 			print(node->right);
 		}
