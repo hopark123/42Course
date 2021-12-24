@@ -5,11 +5,8 @@
 # include <iostream>
 # include "ft_utils.hpp"
 
-//todo enable
 namespace ft 
 {
-// struct pair{
-// };
 
 // Iterator tags
 struct InputIteratorTag {};
@@ -182,11 +179,5 @@ template <typename It>
 reverse_iteartor<It> operator+(typename reverse_iteartor<It>::difference_type n, const reverse_iteartor<It> &it) {
 	return (reverse_iteartor<It>(it + n));
 }
-// template <typename It>
-// reverse_iteartor<It> operator-(typename reverse_iteartor<It>::difference_type n, const reverse_iteartor<It> &it) {
-// 	return (reverse_iteartor<It>(it - n));
-// }
-
-
 }
 #endif

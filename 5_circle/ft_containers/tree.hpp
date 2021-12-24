@@ -31,6 +31,7 @@ class tree {
 		node_ptr									_end;	// dummpy node
 		Compare										_compare;
 		size_type									_len;
+		Alloc										_alloc;
 		typedef	tree<T, Compare>					_Self;
 
 		void	iosolate(node_ptr node) {
@@ -72,12 +73,9 @@ class tree {
 				
 		}
 
-		void	rotate_right(node_ptr node, bool left) {
-			(void)left;
-			if (!node) {
-				// std::cout << "Rrotate empty" << std::endl;
+		void	rotate_right(node_ptr node) {
+			if (!node)
 				return ;
-			}
 			if (!node->left)
 				return ;
 			if (node->parent) {
@@ -95,13 +93,10 @@ class tree {
 			node->left = node->parent->right;
 			node->parent->right = node;
 		}
-		void	rotate_left(node_ptr node, bool left)
+		void	rotate_left(node_ptr node)
 		{
-			(void)left;
-			if (!node) {
-				// std::cout << "Lrotate empty" << std::endl;
+			if (!node)
 				return ;
-			}
 			if (!node->right)
 				return ;
 			if (node->parent) {
@@ -118,20 +113,16 @@ class tree {
 			node->parent = node->right;
 			node->right = node->parent->left;
 			node->parent->left = node;
-
 		}
 
 
 		void	insert_node(node_ptr node, node_ptr target) {
-			/////////////////
 			if (!node || !target)
 				return ;
-
 			if (this->_compare(target->_data, node->_data)) {
 				if (node->left)
 					return (this->insert_node(node->left, target));
-				else
-				{
+				else {
 					node->left = target;
 					checkrb_insert(target);
 				}
@@ -139,8 +130,7 @@ class tree {
 			else {
 				if (node->right)
 					return (this->insert_node(node->right, target));
-				else
-				{
+				else {
 					node->right = target;
 					checkrb_insert(target);
 				}
@@ -168,16 +158,13 @@ class tree {
 				return (nullptr);
 			bool left = this->_compare(node->_data, root->_data);
 			bool right = this->_compare(root->_data, node->_data);
-			if (left)
-			{
+			if (left) {
 				temp = erase_node(root->left, node);
 				root->left = temp;
 				if (temp)
 					temp->parent = root;
 			}
-			else if (right)
-			{
-			// std::cout << "erase node" << std::endl;
+			else if (right) {
 				temp = erase_node(root->right, node);
 				root->right = temp;
 				if (temp)
@@ -188,8 +175,7 @@ class tree {
 					node_ptr	candidate = root->left;
 					while (candidate->right != nullptr)
 						candidate = candidate->right;
-					if (root->_color == 0)
-					{
+					if (root->_color == 0) {
 						candidate->_color = 0;
 						root->_data.value_type::~value_type();
 					}
@@ -334,51 +320,37 @@ class tree {
 			}
 			return (true);
 		}
-		bool	recoloring(node_ptr node) {
-			// std::cout << "recoloring " << node->_data.first << std::endl;
+		void	recoloring(node_ptr node) {
 			if (!node->parent)
-				return (false);
+				return ;
 			if (!node->parent->parent)
-				return (false);
+				return ;
 			node->parent->parent->left->_color = 0;
 			node->parent->parent->right->_color = 0;
-			if (node->parent->parent)
-			{
+			if (node->parent->parent) {
 				node->parent->parent->_color = 1;
 				checkrb_insert(node->parent->parent);
 			}
-			return false;
+			return ;
 		}
-		bool	checkrb_delete(node_ptr node, bool left) {
-			// std::cout << "/in check rbdeleteA\\[" << node->_data.first<<"]" << left << std::endl;
-			// print(this->_root);
-			// std::cout << "\\in check rbdeleteB/" << std::endl;
+		void	checkrb_delete(node_ptr node, bool left) {
 			this->_root->_color = 0;
 			if ((left && !node->right) || (!left && !node->left))
-				return (true);
-			if (left && node->right->_color == 1 && (node->right->right || node->right->left)) {
-				rotate_left(node, true);
-			}
-			else if (!left && node->left->_color == 1  && (node->left->right || node->left->left)) {
-				rotate_right(node, true);
-			}
+				return ;
+			if (left && node->right->_color == 1 && (node->right->right || node->right->left))
+				rotate_left(node);
+			else if (!left && node->left->_color == 1  && (node->left->right || node->left->left))
+				rotate_right(node);
 			node->_color = 1;
 			if (node->parent)
 				node->parent->_color = 0;
-			// print(this->_root);
 			if (left) {
 				if (node->right&& node->right->right && node->right->right->_color == 1)
-				{
 					case1(node, left);
-				}
 				else if (node->left && node->left->_color == 1)
-				{
 					case2(node, left);
-				}
 				else
-				{
 					case3(node, left);
-				}
 			}
 			else {
 				if (node->left->right && node->left->right->_color == 1)
@@ -388,54 +360,37 @@ class tree {
 				else
 					case3(node, left);
 			}
-			return (true);
+			return ;
 		}
 		void	case1(node_ptr node, bool left) {
-			// std::cout << "case1  [" << node->_data.first  << "]" << left << std::endl;
 			if (left)
-				rotate_right(node->right, true);
+				rotate_right(node->right);
 			else
-				rotate_left(node->left, true); 
-			// std::cout << "/case1 end\\" << std::endl;
-			// print(this->_root);
-			// std::cout << "\\case1 end/" << std::endl;
+				rotate_left(node->left); 
 			case2(node, left);
 		}
 		void	case2(node_ptr node, bool left) {
-			// std::cout << "case2 [" << node->_data.first << "]" << left << std::endl;
 			if (left) {
 				node->right->_color = node->_color;
 				node->_color = 0;
 				if (node->right->right)
 					node->right->right->_color = 0;
-				rotate_left(node, true); 
+				rotate_left(node); 
 			}
 			else {
 				node->left->_color = node->_color;
 				node->_color = 0;
 				if (node->left->left)
 					node->left->left->_color = 0;
-				rotate_right(node, true);
+				rotate_right(node);
 			}
-
-			// std::cout << "/case2 end\\" << std::endl;
-			// print(this->_root);
-			// std::cout << "\\case2 end/" << std::endl;
-
 		}
 		void	case3(node_ptr node, bool left) {
-			// std::cout << "case3 [" << node->_data.first <<"]"<< left << std::endl;
-			// print_one(node);
 			node->_color = 0;
 			if (left)
-			{
 				node->right->_color = 1;
-			}
 			else
 				node->left->_color = 1;
-			// std::cout << "/case3 end\\" << std::endl;
-			// print(this->_root);
-			// std::cout << "\\case3 end/" << std::endl;
 		}
 
 	public :
@@ -459,16 +414,11 @@ class tree {
 			}
 		}
 		const _Self	&operator=(const _Self &other) {
-
-			// if (*this != other) {
-				if (this->_root != this->_end)
-				{
-					this->clear();
-				}
-				this->copy(other);
-				this->repair_tree();
-				return (*this);
-			// }
+			if (this->_root != this->_end)
+				this->clear();
+			this->copy(other);
+			this->repair_tree();
+			return (*this);
 		}
 
 		void	copy(const _Self &other) {
@@ -508,8 +458,7 @@ class tree {
 		node_ptr	insert(node_ptr hint, const_reference val) {
 			(void) hint;
 			node_ptr	newNode = new Node<value_type>(val);
-			if (this->_root == this->_end)
-			{
+			if (this->_root == this->_end) {
 				newNode->_color = 0;
 				this->_root = newNode;
 				this->_len++;
@@ -553,7 +502,6 @@ class tree {
 			node_ptr next = this->erase_node(this->_root, node);
 			this->_root = next;
 			this->checkrb_delete(del_parent, left);
-			// std::cout << "erase node" << std::endl;
 			this->repair_tree();
 			return (next);
 		}
@@ -579,13 +527,8 @@ class tree {
 		}
 		void	clear(void) {
 			if (this->_end->parent)
-			// {
-			// 	std::cout << "hereA" << std::endl;
 				this->_end->parent->right = nullptr;
-			// 	std::cout << "hereB" << std::endl;
-			// }
 			this->distory_node(this->_root);
-
 			this->_end->parent = nullptr;
 			this->_end->left = nullptr;
 			this->_end->right = nullptr;
@@ -669,23 +612,6 @@ class tree {
 			std::cout << "@@@@@@@@@@" << std::endl;
 		}
 };
-
-// template<typename T, typename C>
-// bool operator==(const tree<T, C> &lhs, const tree<T, C>  &rhs) {
-// 	if (lhs.get_size() != rhs.get_size())
-// 		return (false);
-// 	return equal(lhs.begin(), lhs.end(), rhs.begin());
-// }
-// template<typename T, typename C>
-// bool operator!=(const tree<T, C> &lhs, const tree<T, C> &rhs) {
-// 	return (!(lhs == rhs));
-// }
-
-
-// template <typename T>
-// void swap(tree<T> &lhs, tree<T> &rhs){
-// 	rhs.swap(lhs);
-// }
 }
 
 #endif

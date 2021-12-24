@@ -131,10 +131,10 @@ class set
 			this->_tree.clear();
 		}
 		key_compare key_comp() const {
-			return (this->_tree._compare);
+			return (this->_tree.key_compare());
 		}
 		value_compare value_comp(void) const{
-			return (this->_tree._compare);
+			return (this->_tree.key_compare());
 		}
 
 		iterator find(const key_type &k) {

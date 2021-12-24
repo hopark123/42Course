@@ -26,9 +26,7 @@ class treeIterator {
 		typedef	treeIterator<T, Node>	_Self;
 		
 		void	prev(void) {
-			// std::cout << "//inprev [" << _p->_data.first << "]\\\\" <<std::endl;
-			if (this->_p->left)
-			{
+			if (this->_p->left) {
 				this->_p = this->_p->left;
 				while (this->_p->right)
 					this->_p = this->_p->right;
@@ -41,7 +39,6 @@ class treeIterator {
 					this->_p = this->_p->parent;
 				}
 			}
-			// std::cout << "\\\\outprev [" << _p->_data.first << "]//" <<std::endl;
 		}
 		void	next(void) {
 			if (this->_p->right) {
@@ -60,25 +57,9 @@ class treeIterator {
 		}
 	public :
 		treeIterator(void) : _p(nullptr) {}
-		treeIterator(node_ptr p) : _p(p) {
-			// node_ptr temp = this->_p;
-			// while (temp->right)
-			// 	temp = temp->right;
-			// this->_end = temp->right;
-			}
-		treeIterator(const _Self  &other) : _p(other._p) {
-			// node_ptr temp = this->_p;
-			// while (temp->right)
-			// 	temp = temp->right;
-			// this->_end = temp->right;
-		}
-		// template <typename U, typename K>
-		// treeIterator(const treeIterator<U, K> &it, typename ft::enable_if<!ft::is_integral<U>::value>::type* = 0) : _p(it._p) {}
+		treeIterator(node_ptr p) : _p(p) { }
+		treeIterator(const _Self  &other) : _p(other._p) {}
 		operator treeIterator<const T, const Node> () const {return (treeIterator<const T, const Node>(this->_p)); } // const 치환
-		// template <typename U>
-		// treeIterator(U &it) {
-		// 	this->_p = it;
-		// }
 		template <typename U, typename K>
 		_Self &operator=(const treeIterator<U, K> &other) {
 			if (*this != other)
@@ -86,7 +67,6 @@ class treeIterator {
 			return (*this);
 		}
 		virtual ~treeIterator(void) {}
-
 		node_ptr	as_node(void){
 			return (this->_p);
 		}
@@ -97,15 +77,9 @@ class treeIterator {
 		reference operator*(void) const {
 			return (this->_p->_data);
 		}
-		// const_reference	operator*(void) const {
-		// 	return (this->_p->_data);
-		// }
 		pointer	operator->(void) const {
 			return (&(this->_p->_data));
 		}
-		// const_pointer	operator->(void) const {
-		// 	return ((this->_p->_data));
-		// }
 		_Self	&operator++(void) {
 			this->next();
 			return (*this);
@@ -121,9 +95,7 @@ class treeIterator {
 		}
 		const _Self	operator--(int) {
 			_Self	temp(*this);
-			// std::cout << "operator+-[" <<this->base()->_data.first << "]" << std::endl;
 			this->prev();
-			// std::cout << "operator--[" <<this->base()->_data.first << "]"  << std::endl;
 			return (temp);
 		}
 		_Self	&operator+=(int value) {

@@ -155,17 +155,9 @@ bool lexicographical_compare(It1 first1, It1 last1, It2 first2, It2 last2, Compa
 		if (comp(*first2,*first1))
 			return false;
 		if (comp._com(first1->second, first2->second))
-		{
-			// std::cout<<"\n[" << first1->first << first1->second <<"][ " << first2->second << "aa" << std::endl;
 			return true;
-		}
 		if(comp._com(first2->second, first1->second))
-		{
-			// std::cout << "\nbb" << std::endl;
 			return false;
-		}
-			// std::cout<<"\n[" << first1->first << first1->second <<"][ " << first2->second << "aa" << std::endl;
-		
 	}
 	return ((first1 == last1) && (first2 != last2));
 }

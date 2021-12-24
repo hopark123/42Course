@@ -31,12 +31,10 @@ class map {
 			friend class map;
 			public :
 				key_compare		_com;
-				// value_compare() : _com(key_compare()){}
 				value_compare(key_compare com = ft::less<Key>()) : _com(com) {
 					this->_com = com;
 				}
 				value_compare(const value_compare &com) : _com(com._com) {}
-				// value_compare &operator=(const value_compare &o);
 				typedef bool			result_type;
 				typedef value_type		first_argument_type;
 				typedef	value_type		second_argument_type;
@@ -51,7 +49,7 @@ class map {
 		typedef reverse_iteartor<iterator>			reverse_iterator;
 		typedef reverse_iteartor<const_iterator>	const_reverse_iterator;
 
-	public :
+	private :
 		typedef	tree<value_type, value_compare, Alloc>		tree_type;
 		tree_type											_tree;
 		typedef	map<Key, T, Compare, Alloc>					_Self;

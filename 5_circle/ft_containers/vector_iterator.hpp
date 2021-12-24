@@ -67,12 +67,10 @@ class vectorIterator {
 		}
 		_Self operator+(difference_type value) const{
 			_Self temp(*this);
-			// std::cout << "vetoer? +" << value << std::endl;
 			temp += value;
 			return (temp);
 		}
 		_Self operator-(difference_type value) const{
-			// std::cout << "vetoer -" << std::endl;
 			_Self temp(*this);
 			temp -= value;
 			return (temp);
@@ -136,10 +134,6 @@ template <typename It>
 vectorIterator<It> operator+(typename vectorIterator<It>::difference_type n, const vectorIterator<It> &it) {
 	return (vectorIterator<It>(it + n));
 }
-// template <typename It>
-// vectorIterator<It> operator-(typename vectorIterator<It>::difference_type n, const vectorIterator<It> &it) {
-// 	return (vectorIterator<It>(it - n));
-// }
 }
 #endif
 

@@ -60,11 +60,9 @@ class vector {
 			return (const_iterator(this->_arr));
 		}
 		iterator end(void) {
-			// std::cout << "here" <<std::endl;
 			return (iterator(this->_arr + this->_len));
 		}
 		const_iterator end(void) const {
-			// std::cout << "hereA" <<std::endl;
 			return (const_iterator(this->_arr + this->_len));
 		}
 		reverse_iterator	rbegin(void) {
@@ -163,10 +161,6 @@ class vector {
 		void	pop_back(void) {
 			erase(this->end() - 1);
 		}
-		// iterator	insert(iterator pos, const value_type &value) {
-		// 	insert (pos, 1, value);
-		// 	return (pos);
-		// }
 		iterator	insert(iterator pos, const value_type &value) {
 			size_type	index = pos - this->_arr;
 			this->reserve(this->_len + 1);
@@ -176,7 +170,6 @@ class vector {
 				alloc.destroy(&(this->_arr[i]));
 			}
 			alloc.construct(&(this->_arr[index]), value);
-			// *pos = value;
 			pos = iterator(&this->_arr[index]);
 			this->_len += 1;
 			return (pos);
@@ -193,8 +186,6 @@ class vector {
 			}
 			for (size_type i = (size_type)index; i < (size_type)index + n; i++) {
 				alloc.construct(&(this->_arr[i]), value);
-				// if (pos.base() != NULL && n == 1)
-					// pos[i - index] = value;
 			}
 			this->_len += n;
 		}
