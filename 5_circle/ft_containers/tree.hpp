@@ -233,7 +233,6 @@ class tree {
 					this->recoloring(node);
 				else
 					this->restructuring(node, false);
-				}
 			}
 			return (true);
 		}
