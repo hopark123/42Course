@@ -25,8 +25,7 @@ class tree {
 		typedef	treeIterator<const T, const node >			const_iterator;
 		typedef reverse_iteartor<iterator>			reverse_iterator;
 		typedef reverse_iteartor<const_iterator>	const_reverse_iterator;
-	// private :
-	public :
+	private :
 		node_ptr									_root;
 		node_ptr									_begin;
 		node_ptr									_end;	// dummpy node
@@ -442,8 +441,8 @@ class tree {
 	public :
 		tree(const Compare com) : _compare(com), _len(0) {this->make_bound();}
 		tree(const _Self &other) : _compare(other._compare) {
+			this->make_bound();
 			*this = other;
-			
 		}
 		virtual ~tree(void) {
 			this->clear();
@@ -460,9 +459,12 @@ class tree {
 			}
 		}
 		const _Self	&operator=(const _Self &other) {
+
 			// if (*this != other) {
 				if (this->_root != this->_end)
+				{
 					this->clear();
+				}
 				this->copy(other);
 				this->repair_tree();
 				return (*this);
@@ -471,9 +473,9 @@ class tree {
 
 		void	copy(const _Self &other) {
 			this->_compare = other._compare;
+			this->make_bound();
 			if (other._root == other.end_node())
 				return ;
-			this->make_bound();
 			this->_root = new Node<value_type>(*(other._root));
 			if (other._root->left) {
 				this->copy_node(&(this->_root->left), other._root->left, other.end_node());
@@ -567,8 +569,6 @@ class tree {
 				bool left;
 				left = this->_compare(target->_data, target->parent->_data);
 				this->checkrb_delete(del_parent, left);
-				std::cout << "erase key" << std::endl;
-
 				cnt++;
 			}
 			this->repair_tree();
@@ -579,9 +579,13 @@ class tree {
 		}
 		void	clear(void) {
 			if (this->_end->parent)
+			// {
+			// 	std::cout << "hereA" << std::endl;
 				this->_end->parent->right = nullptr;
-			// print(this->_root);
+			// 	std::cout << "hereB" << std::endl;
+			// }
 			this->distory_node(this->_root);
+
 			this->_end->parent = nullptr;
 			this->_end->left = nullptr;
 			this->_end->right = nullptr;
