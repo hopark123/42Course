@@ -22,7 +22,6 @@ class map {
 		typedef	const T&									const_reference;
 		typedef	T*											pointer;
 		typedef	const T*									const_pointer;
-		
 
 
 		typedef	std::ptrdiff_t								difference_type;
@@ -187,6 +186,7 @@ class map {
 			}
 			return (this->end());
 		}
+
 		const_iterator lower_bound (const key_type& k) const {
 			const_iterator it = this->begin();
 			while (it != this->end()) {
