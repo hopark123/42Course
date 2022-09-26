@@ -15,5 +15,5 @@
 | 03     | [minishell](./3_circle/minishell)                                               | C           | `cstring parsing` `pipe` `process` `fork` `bash shell` `file descriptor` `signal`  `termios`  `termcap` `terminal`  `environment variable`                                                   |
 | 03     | [philosophers](./3_circle/Philosophers)                                         | C           | `process` `thread` `mutex` `semaphore` `deadlock` `dining philosophers problem`                                        |
 | 04     | [cub3d](./4_circle/cub3d)                                                       | C           | `ray-casting` `OpenGL` `DDA algorithm` `dfs algorthm` `bitmap file format`                                             |
-| 04     | [CPP Module](./4_circle/cpp_module)                                             | C++         | |
-| 05     | [ft_containers](./5_circle/ft_containers)                                       | C++         |  |
+| 04     | [CPP Module](./4_circle/cpp_module)                                             | C++         | `Object-Oriented Programming`, `constructor`, `destructor`|
+| 05     | [ft_containers](./5_circle/ft_containers)                                       | C++         |  `C++ STL container`|
